@@ -1,0 +1,113 @@
+﻿@model ViewModelBuilder
+@{
+    //ViewBag.Title = Model.ViewTitle;
+    //ViewData["ActiveTabId"] = "log";
+}
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceDocument" class="table table-sm table-bordered"></table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    
+
+    $(document).ready(function () {
+
+        let $table = $('#@(Model.TableName)');
+
+        $table.DataTable({
+            sDom: "<'row'<'col-sm-12'tr>>" +
+                //"<'row'<'col-sm-12 col-md-3 '<'#operation'>><'col-sm-12 col-md-9'l>>" +
+                "<'row mt-3'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            processing: true,
+            serverSide: true,
+            filter: true,
+            searchDelay: 1500,
+            ajax: {
+                url: $table.data('action-table'),
+                type: "POST",
+                datatype: "json",
+                dataSrc: function (json) {
+                    return json.data;
+                }
+            },
+            initComplete: function () {
+
+
+            },
+            columnDefs: [
+                {
+                    data: "id",
+                    targets: 0,
+                    title: '',
+                    visible: false,
+                    orderable: false
+                },
+                {
+                    data: "operationName",
+                    targets: 1,
+                    title: 'Наименование',
+                    orderable: false
+                },
+                {
+                    data: "dateStart",
+                    targets: 2,
+                    title: 'Дата',
+                    orderable: false
+                },
+                {
+                    data: "timeStart",
+                    targets: 3,
+                    title: 'Время',
+                    orderable: false
+                },
+                {
+                    name: "operation",
+                    targets: 4,
+                    title: '',
+                    visible: false,
+                    orderable: false,
+                    render: function (data, type, row) {
+                        return "";
+                    }
+                },
+            ]
+        });
+        $table.on("reload", () => {
+            $table.DataTable().ajax.reload(null, false);
+        });
+        $table.on('draw.dt', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl, {
+                    boundary: document.body
+                });
+            });
+        });
+    });
+
+    //const EmployeesBtn = (data, count) => {
+    //    const params = JSON.stringify(data);
+    //    return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="view">
+    //                                    <div class="position-relative d-inline-block me-2"><i class="bx bx-user"></i>
+    //                                    <span class="badge rounded-pill bg-danger text-white badge-notifications">${count}</span></div></a>`;
+    //}
+    //const EditBtn = (data) => {
+    //    const params = JSON.stringify(data);
+    //    return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="edit" data-bs-toggle="tooltip" title="Изменить" class="btn btn-sm btn-icon text-body">
+    //                                    <i class="bx bx-edit"></i></a>`;
+    //}
+    //const DeleteBtn = (data) => {
+    //    const params = JSON.stringify(data);
+    //    return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger">
+    //                                    <i class="bx bx-trash"></i></a>`;
+    //}
+
+</script>
+

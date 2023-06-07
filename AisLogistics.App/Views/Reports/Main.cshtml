@@ -1,0 +1,56 @@
+﻿@model ViewModelBuilder
+@{
+    ViewBag.Title = Model.ViewTitle;
+    string url = ViewBag.Url +"/Page";
+}
+
+@*<link rel="stylesheet" href="~/assets/css/reports.css" asp-append-version="true" />*@
+
+<style>
+    .breadcrumb-item.active {
+        background-color: transparent !important;
+    }
+
+    .tab-content-report {
+        flex-shrink: 1;
+        border: 1px solid #d4d8dd;
+    }
+
+    .tab-content-backgroud {
+        background: #fff;
+    }
+
+    .padding-content {
+        padding: 1.375rem;
+    }
+</style>
+
+<section id="content-report">
+    <div class="nav-align-left">
+        <partial name="_NavLeft" model="Model.Model"/>
+        <div class="shadow-none w-100 ms-3">
+            <div class="card w-100 mb-3" id="navs-tabs-default">
+                <div class="card-body">
+                    @{
+                        await Html.RenderPartialAsync(url, ViewBag.NavId as string);
+                    }
+                    <hr>
+                    <div class="row">
+                        <div class="col-12 text-end">
+                            <button id="reportPrint" data-report-print="ReportDataPrint" type="button" class="btn btn-danger d-none" disabled>Печать</button>
+                            <a href="" id="reportDownload" data-report-upload="ReportDataDownLoad" type="button" class="btn btn-success d-none" target="_blank" disabled>Выгрузить</a>
+                            <button id="reportSubmit" type="submit" class="btn btn-primary">Cформировать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="reportContent">
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script src="~/assets/js/pages/reports.js" asp-append-version="true" type="text/javascript"></script>
+}

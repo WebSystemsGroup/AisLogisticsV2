@@ -1,0 +1,160 @@
+﻿@model ViewModelBuilder
+@{
+    //ViewBag.Title = Model.ViewTitle;
+    //ViewData["ActiveTabId"] = "log";
+}
+
+<div class="table-responsive">
+    <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceDocument" class="table table-sm table-bordered"></table>
+</div>
+
+
+<!-- table -->
+@*<section id="content-datatable">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                @if (Model.IsVisibleTitle)
+                {
+                    <div class="card-header">
+                        <h4 class="card-title">@Model.ViewTitle</h4>
+                    </div>
+                }
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            @if (Model.IsVisibleDescription)
+                            {
+                                <p class="card-text">
+                                    @Model.ViewDescription
+                                </p>
+                            }
+                        </div>
+                          <div class="col-md-2 text-md-end">
+                        <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
+                        <i class="bx bx-plus"></i> Добавить
+                        </button>
+                        </div>
+                    </div>
+                    <navtabs-top>
+                        <nav-tab id="automatic" target="@Url.Action("Automatics", "Systems")">Меню</nav-tab>
+                        <nav-tab id="log" target="@Url.Action("AutomaticsLogs", "Systems")">Данные</nav-tab>
+                    </navtabs-top>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@
+<!--/ table -->
+@*@section Scripts
+    {*@
+    <script>
+        const $table = $('#@(Model.TableName)'),
+            isCanAdd = $table.is('[data-action-add]'),
+            isCanEdit = $table.is('[data-action-edit]'),
+            isCanRemove = $table.is('[data-action-remove]');
+
+        $(document).ready(function () {
+            $table.DataTable({
+                sDom: "<'row'<'col-sm-12 col-md-3 '<'#operation'>><'col-sm-12 col-md-9'l>>" +
+                    "<'row mt-3'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                processing: true,
+                serverSide: true,
+                filter: true,
+                searchDelay: 1500,
+                ajax: {
+                    url: $table.data('action-table'),
+                    type: "POST",
+                    datatype: "json",
+                    dataSrc: function (json) {
+                        return json.data;
+                    }
+                },
+                initComplete: function () {
+                    var operationColumn = this.api().column(4);
+
+                    var $operation = $('#operation');
+                    $operation.html('<label class="form-label" for="selectOperation">Операции</label>');
+                    var $procedureSelect = $('<select id="selectOperation" class="form-select"><option selected value="">ВСЕ</option>@Html.Raw(ViewBag.Operation)</select>')
+                        .appendTo($operation)
+                        .select2({
+                            language: "ru",
+                        })
+                        .on('change', function () {
+                            operationColumn.search($(this).val()).draw();
+                        });
+                },
+                columnDefs: [
+                    {
+                        data: "id",
+                        targets: 0,
+                        title: '',
+                        visible: false,
+                        orderable: false
+                    },
+                    {
+                        data: "operationName",
+                        targets: 1,
+                        title: 'Наименование',
+                        orderable: false
+                    },
+                    {
+                        data: "dateStart",
+                        targets: 2,
+                        title: 'Дата',
+                        orderable: false
+                    },
+                    {
+                        data: "timeStart",
+                        targets: 3,
+                        title: 'Время',
+                        orderable: false
+                    },
+                    {
+                        name: "operation",
+                        targets: 4,
+                        title: '',
+                        visible: false,
+                        orderable: false,
+                        render: function (data, type, row) {
+                            return "";
+                        }
+                    },
+                ]
+            });
+            $table.on("reload", () => {
+                $table.DataTable().ajax.reload(null, false);
+            });
+            $table.on('draw.dt', function () {
+                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl, {
+                        boundary: document.body
+                    });
+                });
+            });
+        });
+
+        const EmployeesBtn = (data, count) => {
+            const params = JSON.stringify(data);
+            return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="view">
+                                    <div class="position-relative d-inline-block me-2"><i class="bx bx-user"></i>
+                                    <span class="badge rounded-pill bg-danger text-white badge-notifications">${count}</span></div></a>`;
+        }
+        const EditBtn = (data) => {
+            const params = JSON.stringify(data);
+            return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="edit" data-bs-toggle="tooltip" title="Изменить" class="btn btn-sm btn-icon text-body">
+                                    <i class="bx bx-edit"></i></a>`;
+        }
+        const DeleteBtn = (data) => {
+            const params = JSON.stringify(data);
+            return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger">
+                                    <i class="bx bx-trash"></i></a>`;
+        }
+
+    </script>
+@*}*@
+

@@ -1,0 +1,25 @@
+﻿@using System.Text;
+@using AisLogistics.App.ViewModels.Statistics
+
+
+@model StatisticsNavViewRequestModel
+@{
+    ViewData["ActiveTabId"] = Model.NavId;
+}
+
+<style>
+    .active-color {
+        color: #5a8dee !important;
+    }
+</style>
+
+
+<ul class="nav nav-tabs tabs-line border-end" role="tablist">
+    @foreach(var item in Model.Statistics) {
+        <li class="nav-item">
+            <a id="@item.Id.ToString()" href="javascript:void(0);" class="nav-link" data-bs-target="#navs-tabs-default" data-url="@item.Path"  role="tab">@item.Name</a>
+        </li>
+    }
+</ul>
+
+

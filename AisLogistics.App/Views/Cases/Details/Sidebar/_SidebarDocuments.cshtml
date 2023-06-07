@@ -1,0 +1,180 @@
+﻿@model ViewModelBuilder
+@{
+    var items = Model.Model as List<CaseServiceDocumentsDto>;
+    string[] needsShortList = new string[] { "ОБЯЗ", "НЕОБ", "НАЛ" };
+    string[] needsStyleList = new string[] { "text-danger", "text-success", "text-warning" };
+    string[] typeShortList = new string[] { "ОРИГ", "КОП", };
+    string[] typeStyleList = new string[] { "text-primary", "text-default" };
+}
+
+<!-- Detailed case Header starts -->
+@*<div class="case-detail-header">
+    <div class="case-header-left d-flex align-items-center">
+        <a href="#" class="" data-bs-toggle="tooltip" title="Назад">
+            <span class="go-back action-icon me-1">
+                <i class="bx bx-chevron-left bx-md"></i>
+            </span>
+        </a>
+        <h4 class="case-subject mb-0">@Model.ViewTitle</h4>
+    </div>
+    <div class="case-header-right ms-2 ps-1">
+        <ul class="list-inline m-0">
+            <li class="list-inline-item">
+                <span data-bs-toggle="tooltip" title="Добавить">
+                    <button type="button" class="btn btn-icon dropdown-toggle hide-arrow rounded-pill" data-bs-toggle="dropdown" data-trigger="hover">
+                        <span class="action-icon favorite">
+                        <i class="bx bx-plus bx-md"></i>
+                    </span></button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a asp-action="ServiceDocumentAddModal" asp-route-id="@ViewBag.Id"  asp-route-fileAddType="Desktop" class="dropdown-item" data-btn-type="modal">
+                                <i class="bx pe-2 bx-upload"></i>Загрузить
+                            </a>
+                        </li>  <li>
+                            <a asp-action="ServiceDocumentAddModal" asp-route-id="@ViewBag.Id" asp-route-fileAddType="Scan" class="dropdown-item" data-btn-type="modal">
+                                <i class="bx pe-2 bx-scan"></i>Сканировать
+                            </a>
+                        </li>
+                    </ul>
+                </span>
+                 <a asp-action="ServiceDocumentAddModal" asp-route-id="@ViewBag.Id" data-bs-toggle="tooltip" title="Добавить" data-btn-type="modal">
+                    <span class="action-icon favorite">
+                        <i class="bx bx-plus bx-md"></i>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+*@
+<!-- Detailed case Header ends -->
+<!-- Detailed case Content starts -->
+
+<div class="case-app-details overflow-auto">
+    <div class="case-scroll-area ps">
+        <div class="mail-message-wrapper active" id="Docs">
+            <div class="accordion" id="accordionWithIcon">
+                @if (items.Any())
+                {
+                    @foreach (var item in items.OrderBy(o => o.DocumentNeedId).ThenBy(t => t.DocumentName))
+                    {
+                        <div class="accordion-item active border-bottom shadow-none rounded-0 pb-3 pt-3">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="accordion-header mb-2 d-flex align-items-center">
+                                        <input id="document_isCheck" data-document-id="@item.Id" class="form-check-input" type="checkbox" @(item.IsCheck ? "checked" : "") />
+                                        <button type="button" class="accordion-button pb-0 pt-0 collapsed" data-bs-toggle="collapse" data-bs-target="#doc_@item.Id" aria-expanded="false">
+                                            @item.DocumentName
+                                        </button>
+                                    </div>
+                                    <span class="fs-6 px-5">
+                                        <small class="success">@typeShortList[item.DocumentTypeId]</small>
+                                        <small class="danger">@needsShortList[item.DocumentNeedId]</small>
+                                        <small>@item.DocumentCopyCount</small>
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-auto align-items-start justify-content-center me-3">
+                                    <a asp-action="ServiceDocumentAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Desktop" title="Загрузить" class="text-muted mb-2 d-block" data-btn-type="modal" role="button">
+                                        <i class="bx bx-upload me-2"></i>
+                                        Загрузить
+                                    </a>
+                                    <a asp-action="ServiceDocumentAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Scan" title="Сканировать" class="text-muted d-block" data-btn-type="modal" role="button">
+                                        <i class="bx bx-upc-scan me-2"></i>
+                                        Сканировать
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div id="doc_@item.Id" class="accordion-collapse collapse">
+                                <div class="d-flex mt-3">
+                                    <div class="accordion-body d-flex flex-column pt-0">
+                                        @if (item.Files.Any())
+                                        {
+                                            @foreach (var file in item.Files)
+                                            {
+
+                                                <div class="d-flex" data-action-remove="@Model.RemoveMethodAction">
+                                                    <a href="javascript:void(0);" class="btn btn-sm btn-icon d-flex me-3" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                                                       title="<div>@file.EmployeeAdd.Name</div><div>@file.EmployeeAdd.Job</div><div>@(file.Size/1024) КБ</div><div>@file.DateAdd.ToShortDateString()</div>">
+                                                        <i class="bx bx-info-circle text-muted"></i>
+                                                    </a>
+                                                    @if (file.IsViewing)
+                                                    {
+                                                        <a asp-action="DownloadFileCase" asp-route-id="@file.Id" class="text-muted me-3" data-bs-toggle="tooltip" title="Просмотр">
+                                                            <i class="bx bx-filetype-@(file.Extension.Substring(1)) me-1"></i>
+                                                            @($"{file.Name}{file.Extension}")
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a asp-action="DownloadFileCase" asp-route-id="@file.Id" class="text-muted me-3" data-bs-toggle="tooltip" title="Скачать">
+                                                            <i class="bx bx-filetype-@(file.Extension.Substring(1)) me-1"></i>
+                                                            @($"{file.Name}{file.Extension}")
+                                                        </a>
+                                                    }
+                                                    
+                                                    <a asp-action="ServiceDocumentRemove" asp-route-id="@file.Id" asp-route-type="@DocumentType.ServiceDocument" class="text-muted remove-file" data-bs-toggle="tooltip" title="Удалить">
+                                                        <i class="bx bx-trash-fill me-1"></i>
+                                                    </a>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="text-center text-muted small">Нет данных</div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detailed case Content ends -->
+<script>
+
+    $(document).on('click', "#document_isCheck", function () {
+        let th = $(this);
+        let value = th.prop('checked');
+        $.ajax({
+            url: "/Cases/ServiceDocumentIsCheckSave",
+            type: "POST",
+            data: { documentId: th.attr("data-document-id"), isCheck: value },
+            beforeSend: function () {
+                th.attr("disabled", "disabled")
+            },
+            success: function (responce) {
+                if (!responce) {
+                    toastr['error']('Запрос не выполнен', 'Ошибка', {
+                        closeButton: true,
+                        tapToDismiss: false,
+                        rtl: isRtl
+                    });
+                    th.prop('checked', !value);
+                }
+            },
+            complete: function () {
+                th.removeAttr("disabled")
+            }
+        });
+    });
+
+
+    $(function () {
+
+
+
+        const $dynamicGallery = document.getElementById('accordionWithIcon');
+        $dynamicGallery.addEventListener('lgBeforeOpen', (event) => {
+            $('[data-bs-toggle="tooltip"], .tooltip').tooltip("hide");
+        });
+        const dynamicGallery = lightGallery($dynamicGallery, {
+            selector: '.viewing-file'
+        });
+    });
+</script>

@@ -1,0 +1,135 @@
+﻿@using AisLogistics.App.Models.Enums
+@model AisLogistics.App.Models.DTO.Notifications.EmployeeNotificationDto
+@{
+    var notificationsDetails = new Dictionary<NotificationType, (string Title, string Description)>()
+    {
+        { NotificationType.NewCase, new ("Обращение","У Вас новое обращение") },
+        { NotificationType.NewComment, new ("Комментарий","У Вас новый комментарий") },
+        { NotificationType.SmevRequest, new ("СМЭВ", "Поступил ответ СМЭВ") }
+    };
+
+    var count = Model.NewServicesAlert.Count + Model.NewServicesAlert.Count + Model.SmevResponseAlert.Count;
+}
+<div class="col-sm-2 col-2 header_notification">
+    <a class="me-3 dropdown-toggle hidden-arrow"
+       href="javascript:void(0);"
+       data-bs-toggle="dropdown"
+       data-bs-auto-close="outside"
+       aria-expanded="false">
+        <img src="~/img/notification.svg" alt="">
+        @if (count > 0)
+        {
+            <span class="badge rounded-pill badge-notification bg-danger">@count</span>
+
+        }
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuNotification">
+
+        <li class="dropdown-header d-flex align-items-center justify-content-between">
+            <h5>Уведомления</h5>
+            <a href="" class="dropdown-notifications-all" data-bs-toggle="tooltip" data-bs-placement="top" title="Удалить все"><i class="bi bi-trash fs-4"></i></a>
+        </li>
+
+        <li class="dropdown-notifications-list">
+            <ul class="list-group list-group-flush">
+                @if (count > 0)
+                {
+                    foreach (var item in Model.SmevResponseAlert)
+                    {
+                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read" data-notification="@item.Id">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-3">
+                                    <div class="avatar">
+                                        <span class="avatar-initial bg-label-primary rounded-circle w-75 h-75">
+                                            <i class="bi bi-globe"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">@notificationsDetails[NotificationType.SmevRequest].Title</h6>
+                                    <p class="mb-0">@notificationsDetails[NotificationType.SmevRequest].Description</p>
+                                    <span class="mb-0 d-block">@item.ApplicantName</span>
+                                    <span class="mb-0 d-block">Запрос: @item.SmevName</span>
+                                    <p class="mb-0">
+                                        <a asp-controller="Cases" asp-action="Details" asp-route-id="@item.CaseId">@item.CaseId</a>
+                                    </p>
+                                    <small class="text-muted" data-bs-toggle="tooltip" title="@item.DateSmevResponse" data-timeago="@item.DateSmevResponse"></small>
+                                </div>
+                                <div class="dropdown-notifications-actions flex-shrink-0">
+
+                                    <a href="javascript:void(0)" class="dropdown-notifications-archive" data-bs-toggle="tooltip" title="Удалить">
+                                        <i class="bi bi-x fs-5"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+
+
+                    foreach (var item in Model.NewServicesAlert)
+                    {
+                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read" data-notification="@item.Id">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-3">
+                                    <div class="avatar">
+                                        <span class="avatar-initial bg-label-primary rounded-circle w-75 h-75">
+                                            <i class="bi bi-globe"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">@notificationsDetails[NotificationType.NewCase].Title</h6>
+                                    <p class="mb-0">@notificationsDetails[NotificationType.NewCase].Description</p>
+                                    <p class="mb-0">
+                                        <a asp-controller="Cases" asp-action="Details" asp-route-id="@item.CaseId">@item.CaseId</a>
+                                    </p>
+                                    <small class="text-muted" data-bs-toggle="tooltip" title="@item.DateAddStage" data-timeago="@item.DateAddStage"></small>
+                                </div>
+                                <div class="dropdown-notifications-actions flex-shrink-0">
+                                    <a href="javascript:void(0)" class="dropdown-notifications-archive" data-bs-toggle="tooltip" title="Удалить">
+                                        <i class="bi bi-x fs-5"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    foreach (var item in Model.CommentsAlert)
+                    {
+                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read" data-notification="@item.Id">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-3">
+                                    <div class="avatar">
+                                        <span class="avatar-initial bg-label-primary rounded-circle w-75 h-75">
+                                            <i class="bi bi-globe"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">@notificationsDetails[NotificationType.NewComment].Title</h6>
+                                    <p class="mb-0">@notificationsDetails[NotificationType.NewComment].Description</p>
+                                    <p class="mb-0">
+                                        <a asp-controller="Cases" asp-action="Details" asp-route-id="@item.CaseId">@item.CaseId</a>
+                                    </p>
+                                    <small class="text-muted" data-bs-toggle="tooltip" title="@item.DateAddComment" data-timeago="@item.DateAddComment"></small>
+                                </div>
+                                <div class="dropdown-notifications-actions flex-shrink-0">
+                                    <a href="javascript:void(0)" class="dropdown-notifications-archive" data-bs-toggle="tooltip" title="Удалить">
+                                        <i class="bi bi-x fs-5"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li>
+                        <p class="small text-muted py-5 mb-0 text-center">Нет новых уведомлений.</p>
+                    </li>
+                }
+            </ul>
+        </li>
+    </ul>
+</div>
+<script src="~/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="~/assets/js/pages/notifications-details.js"></script>

@@ -1,0 +1,67 @@
+﻿table tr {
+    cursor: pointer;
+}
+
+.case-check-column {
+    width: 0.1em;
+    max-width: 0.1em;
+}
+
+.case-dateAdd-column {
+    width: 0.6em;
+    max-width: 0.6em;
+} 
+.case-customer-column {
+    width: 2.8em;
+    max-width: 2.8em;
+}
+.case-services-column {
+    width: 3.8em;
+    max-width: 3.8em;
+}
+.case-offices-column {
+    width: 3.5em;
+    max-width: 3.5em;
+}
+.case-currentEmployee-column {
+    width: 1.2em;
+    max-width: 1.2em;
+}
+.case-status-column {
+    width: 1em;
+    max-width: 1em;
+}
+.case-stage-column {
+    width: 0.6em;
+    max-width: 0.6em;
+}
+
+.padding-left-1 {
+    padding-left: .625rem !important;
+}
+
+.padding-right-1 {
+    padding-right: .625rem !important;
+ 
+}
+
+.card-body label {
+    text-transform: none;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+    letter-spacing: 0.035em !important;
+    color: #172359 !important;
+}
+.block {
+    background: #FFFFFF;
+    box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
+    border-radius: 2.59753px;
+}
+.name {
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+    letter-spacing: 0.035em !important;
+    color: #172359 !important;
+}

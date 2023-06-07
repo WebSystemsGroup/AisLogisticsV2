@@ -1,0 +1,11 @@
+﻿@model List<AisLogistics.App.Models.DTO.Automatics.AutomaticsLogsDto>
+
+
+<div>
+    @foreach(var item in Model)
+    {
+        <div>
+            <div>@item.DateStart.ToString()</div>
+        </div>
+    }
+</div>

@@ -1,0 +1,106 @@
+﻿@using SmevRouter
+@model AisLogistics.App.ViewModels.Cases.SmevCreateResponseModel
+@{
+    var applicant = Model.GetApplicant();
+    var request = new GetFnsZadorgRequestData
+            {
+                Inn = applicant.Inn,
+                DateData = DateTime.Today
+            };
+}
+
+<div class="row g-3">
+    <div class="col-12 col-lg-10 mx-auto">
+        <div class="divider text-start">
+            <div class="divider-text fs-5 fw-semibold">Персональные данные</div>
+        </div>
+    </div>
+</div>
+<div class="row g-3">
+    <div class="col-12 col-lg-8 mx-auto">
+        <div class="row mb-3">
+            <div class="col-4 mx-auto">
+                <label class="form-label" asp-for="@request.ApplicantType">Тип заявителя</label>
+                <select class="form-select" asp-for="@request.ApplicantType">
+                    <option value="Fl">ФЛ</option>
+                    <option value="Ul">ЮЛ</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-4 mx-auto">
+                <label class="form-label" asp-for="@request.Inn">ИНН</label>
+                <input type="text" class="form-control" placeholder="ИНН" asp-for="@request.Inn">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-4 mx-auto">
+                <label class="form-label" asp-for="@request.DateData">Дата, на которую запрашиваются сведения</label>
+                <div class="input-group input-group-merge">
+                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                    <input asp-for="@request.DateData" type="text" class="form-control pickadate" placeholder="Дата, на которую запрашиваются сведения">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function ShowErrorInputs() {
+    }
+
+    var formContent = document.getElementById("smev-data-form-content"),
+        smevForm = {
+            fields: {
+                inn: formContent.querySelector("#request_Inn"),
+                applicantType: formContent.querySelector("#request_ApplicantType")
+            },
+            init: () => {
+                /* init validation */
+                SmevDataFormValidation.addField(smevForm.fields.inn.getAttribute('name'),
+                    {
+                        validators: {
+                            notEmpty: {}
+                        }
+                    });
+
+                /* init select2 */
+                $(smevForm.fields.applicantType).select2({
+                    dropdownParent: $("#mainModal"),
+                    minimumResultsForSearch: Infinity
+                });
+
+                $(smevForm.fields.applicantType).on('change',
+                    () => {
+                        switch (smevForm.fields.applicantType.value) {
+                            case 'Fl':
+                                $(smevForm.fields.inn).inputmask("999999999999");
+                                $(smevForm.fields.inn).val("@request.Inn");
+                                break;
+                            case "Ul":
+                                $(smevForm.fields.inn).inputmask("9999999999");
+                                break;
+                        }
+                    });
+
+                /* init datepicker */
+                $(".pickadate").datepicker({
+                    language: "ru",
+                    autoclose: true
+                });
+
+                /* init inputmask */
+                $(".pickadate").inputmask("99.99.9999",
+                    {
+                        clearIncomplete: true,
+                        showMaskOnHover: false
+                    });
+                $(smevForm.fields.inn).inputmask("999999999999",
+                    {
+                        clearIncomplete: true,
+                        showMaskOnHover: false
+                    });
+            }
+        };
+
+</script>

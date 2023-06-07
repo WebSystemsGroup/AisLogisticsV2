@@ -1,0 +1,69 @@
+﻿@model ViewModelBuilder
+@{
+    var items = Model.Model as List<CaseServiceBlank>;
+}
+
+@if (items.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-sm">
+            <tbody class="table-border-bottom-1">
+                @foreach (var item in items)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="DownloadBlank" asp-controller="Cases" asp-route-id="@item.Id" asp-route-serviceId="@item.ServiceId" target="_blank" class="d-flex pb-2 pt-2">
+                                <i class="bx bx-filetype-@item.Expansion.Substring(1) me-4"></i>
+                                <p class="m-0">@item.Name@item.Expansion</p>
+                                <small class="text-muted">@item.Comment</small>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="col-12">
+        <div class="alert alert-primary" role="alert">
+            <h6 class="alert-heading mb-1">Нет бланков</h6>
+        </div>
+    </div>
+}
+<script>
+    //$(function () {
+    //    $(".select2").select2({
+    //        dropdownParent: $("#blancs")
+    //    });
+    //    window.Helpers.initCustomOptionCheck();
+    //    FormValidation.formValidation(document.getElementById('blancs'),
+    //        {
+    //            plugins: {
+    //                trigger: new FormValidation.plugins.Trigger(),
+    //                submitButton: new FormValidation.plugins.SubmitButton(),
+    //                bootstrap5: new FormValidation.plugins.Bootstrap5(),
+    //                autoFocus: new FormValidation.plugins.AutoFocus()
+    //            }
+    //        }).on('core.form.valid', function () {
+    //            var $form = $("#sendingForm");
+    //            $.ajax({
+    //                type: $form.attr('method'),
+    //                url: $form.attr('action'),
+    //                data: $form.serialize(),
+    //                dataType: 'json',
+    //                beforeSend: () => {
+    //                    $form.spinnerBtn("start");
+    //                },
+    //                complete: () => {
+    //                    document.location.reload();
+    //                    //$table.DataTable().ajax.reload(null, false);
+    //                    //$form.spinnerBtn("stop");
+    //                    //$("#mainModal").modal('hide');
+    //                }
+    //            });
+    //            return false;
+    //        });
+    //})
+</script>

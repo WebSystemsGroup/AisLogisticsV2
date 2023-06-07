@@ -1,0 +1,238 @@
+﻿<aside id="layout-menu" class="layout-menu-horizontal menu-horizontal menu flex-grow-0 bg-menu-theme">
+    <div class="w-100 h-100 mx-4 d-flex align-items-center">
+        <ul class="menu-inner">
+            <!-- Home -->
+           @* <li class="menu-item">
+                <a href="/" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div>Главная</div>
+                </a>
+            </li>*@
+
+            <!-- Cases -->
+            <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link menu-toggle">
+                    <i class="menu-icon bx bx-box"></i>
+                    <div>Услуги</div>
+                </a>
+
+                <ul class="menu-sub">
+                    @if (User.HasClaim(AccessKeyNames.DataCase, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="Index" asp-controller="Cases" class="menu-link">
+                                <i class="menu-icon bx bx-folder"></i>
+                                <div>Реестр</div>
+                            </a>
+                        </li>
+                    }
+                    @if (User.HasClaim(AccessKeyNames.DataCaseIssued, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="CasesIssued" asp-controller="Cases" class="menu-link">
+                                <i class="menu-icon bx bx-folder"></i>
+                                <div>Реестр выдачи</div>
+                            </a>
+                        </li>
+                    }
+                     @if (User.HasClaim(AccessKeyNames.DataCaseIssued, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="CasesReestrSmev" asp-controller="Cases" class="menu-link">
+                                <i class="menu-icon bx bx-folder"></i>
+                                <div>Реестр СМЭВ</div>
+                            </a>
+                        </li>
+                    }
+                    @if (User.HasClaim(AccessKeyNames.DataCaseReestr, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="Index" asp-controller="ReestrTransferDocuments" class="menu-link">
+                                <i class="menu-icon bx bx-folder"></i>
+                                <div>Реестр передачи документов</div>
+                            </a>
+                        </li>
+                    }
+                   @* @if (User.HasClaim(AccessKeyNames.DataCase, AccessKeyValues.Add))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="CreatePhysical" asp-controller="Cases" class="menu-link">
+                                <i class="menu-icon bx bx-folder-plus"></i>
+                                <div>Новая услуга (Физ.лица)</div>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a asp-action="CreateLegal" asp-controller="Cases" class="menu-link">
+                                <i class="menu-icon bx bx-folder-plus"></i>
+                                <div>Новая услуга (Юр.лица)</div>
+                            </a>
+                        </li>
+                    }*@
+                    <li class="menu-item border-top">
+                        <a asp-action="Index" asp-controller="Archive" class="menu-link">
+                            <i class="menu-icon bx bx-hourglass"></i>
+                            <div>Архив</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Reports -->
+            <li class="menu-item">
+                <a asp-action="Index" asp-controller="Reports" class="menu-link">
+                    <i class="menu-icon bx bxs-report"></i>
+                    <div>Отчеты</div>
+                </a>
+
+                @*<ul class="menu-sub">
+                    <li class="menu-item">
+                        <a asp-action="Index" asp-controller="Reports" class="menu-link">
+                            <i class="menu-icon bx bx-message"></i>
+                            <div>Отчеты</div>
+                        </a>
+                    </li>
+                </ul>*@
+            </li>
+
+            <!-- Reference -->
+            <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link menu-toggle">
+                    <i class="menu-icon bx bx-book"></i>
+                    <div>Справочники</div>
+                </a>
+
+                <ul class="menu-sub">
+                    @if (User.HasClaim(AccessKeyNames.ReferenceEmployee, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="Employees" asp-controller="Reference" class="menu-link">
+                                <i class="menu-icon bx bxs-user-account"></i>
+                                <div>Сотрудники</div>
+                            </a>
+                        </li>
+                    }
+
+                    @if (User.HasClaim(AccessKeyNames.ReferenceOffice, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="Offices" asp-controller="Reference" class="menu-link">
+                                <i class="menu-icon bx bx-buildings"></i>
+                                <div>Офисы</div>
+                            </a>
+                        </li>
+                    }
+
+                    @if (User.HasClaim(AccessKeyNames.ReferenceRole, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="RolesExecutor" asp-controller="Reference" class="menu-link">
+                                <i class="menu-icon bx bx-lock-open"></i>
+                                <div>Роли исполнителя</div>
+                            </a>
+                        </li>
+                    }
+
+                    @if (User.HasClaim(AccessKeyNames.ReferenceService, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="Services" asp-controller="Reference" class="menu-link">
+                                <i class="menu-icon bx bx-folder"></i>
+                                <div>Услуги</div>
+                            </a>
+                        </li>
+                    }
+
+                    @if (User.HasClaim(AccessKeyNames.ReferenceLivingSituation, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="LivingSituation" asp-controller="Reference" class="menu-link">
+                                <i class="menu-icon bx bx-bookmark-heart"></i>
+                                <div>Жизненным ситуации</div>
+                            </a>
+                        </li>
+                    }
+
+                    @if (User.HasClaim(AccessKeyNames.ReferenceDocument, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="Documents" asp-controller="Reference" class="menu-link">
+                                <i class="menu-icon bx bx-file"></i>
+                                <div>Документы</div>
+                            </a>
+                        </li>
+                    }
+
+                    @if (User.HasClaim(AccessKeyNames.ReferenceCalendar, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="Calendar" asp-controller="Reference" class="menu-link">
+                                <i class="menu-icon bx bx-calendar"></i>
+                                <div>Календарь</div>
+                            </a>
+                        </li>
+                    }
+
+                   @* <li class="menu-item">
+                        <a asp-action="ServicesFiles" asp-controller="Reference" class="menu-link">
+                            <i class="menu-icon bx bx-file-blank"></i>
+                            <div>Файлы</div>
+                        </a>
+                    </li>*@
+
+                    <li class="menu-item">
+                        <a asp-action="SmevServices" asp-controller="Reference" class="menu-link">
+                            <i class="menu-icon bx bx-globe"></i>
+                            <div>СМЭВ</div>
+                        </a>
+                    </li>
+
+                    @if (User.HasClaim(AccessKeyNames.ReferenceFTP, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="FTP" asp-controller="Reference" class="menu-link">
+                                <i class="menu-icon bx bx-hdd"></i>
+                                <div>FTP</div>
+                            </a>
+                        </li>
+                    }
+
+                    @if (User.HasClaim(AccessKeyNames.ReferenceInformation, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="Information" asp-controller="Reference" class="menu-link">
+                                <i class="menu-icon bx bx-info-circle"></i>
+                                <div>Информация</div>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+            
+            <!-- System -->
+            <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link menu-toggle">
+                    <i class="menu-icon bx bx-cog"></i>
+                    <div>Система</div>
+                </a>
+
+                <ul class="menu-sub">
+                    @if (User.HasClaim(AccessKeyNames.ReferenceRole, AccessKeyValues.View))
+                    {
+                        <li class="menu-item">
+                            <a asp-action="Roles" asp-controller="Reference" class="menu-link">
+                                <i class="menu-icon bx bx-lock-open"></i>
+                                <div>Роли доступа</div>
+                            </a>
+                        </li>
+                    }
+                    <li class="menu-item">
+                        <a asp-action="SMS" asp-controller="Reference" class="menu-link">
+                            <i class="menu-icon bx bx-message"></i>
+                            <div>СМС</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</aside>

@@ -1,0 +1,22 @@
+﻿@model string
+@{
+    string Id = ViewContext.RouteData.Values["Id"]?.ToString();
+    ViewData["ActiveTabId"] = Model;
+}
+
+<navtabs-left>
+    <nav-tab id="details" target="@Url.Action("ServiceDetails", "Reference", new { id = Id })">Общие сведения</nav-tab>
+    <nav-tab id="procedures" target="@Url.Action("ServiceProcedures", "Reference", new { id = Id })">Процедуры</nav-tab>
+    <nav-tab id="customers" target="@Url.Action("ServiceCustomers", "Reference", new { id = Id })">Получатели</nav-tab>
+    <nav-tab id="documents" target="@Url.Action("ServiceDocuments", "Reference", new { id = Id })">Документы</nav-tab>
+    <nav-tab id="results" target="@Url.Action("ServiceDocumentsResults", "Reference", new { id = Id })">Результаты</nav-tab>
+    <nav-tab id="smev" target="@Url.Action("ServiceSmev", "Reference", new { id = Id })">СМЭВ</nav-tab>
+    <nav-tab id="tariffs" target="@Url.Action("ServiceTariffs", "Reference", new { id = Id })">Тарифы</nav-tab>
+    <nav-tab id="stages" target="@Url.Action("ServiceStages", "Reference", new { id = Id })">Этапы</nav-tab>
+    <nav-tab id="blancs" target="@Url.Action("BlancsFiles", "Reference", new { id = Id })">Бланки</nav-tab>
+    <nav-tab id="files" target="@Url.Action("ServiceFiles", "Reference", new { id = Id })">Файлы</nav-tab>
+    <nav-tab id="waysget" target="@Url.Action("ServiceWaysGet", "Reference", new { id = Id, wt = (int)ServiceWayGetType.ForService })">Способы обращения</nav-tab>
+    <nav-tab id="reasons" target="@Url.Action("ServiceReasons", "Reference", new { id = Id, rt = (int)ServiceReasonType.Accept })">Основания</nav-tab>
+    <nav-tab id="qualities" target="@Url.Action("ServiceQualityTypes", "Reference", new { id = Id })">Способы оценки</nav-tab>
+    <nav-tab id="activities" target="@Url.Action("ServiceActivities", "Reference", new { id = Id })">Активность</nav-tab>
+</navtabs-left>

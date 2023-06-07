@@ -1,0 +1,11 @@
+﻿@using AisLogistics.App.Extensions
+@{
+    string Id = ViewContext.RouteData.Values["Id"]?.ToString();
+    int reasonType = Convert.ToInt32(ViewContext.RouteData.Values["rt"]);
+    ViewData["ActiveTabId"] = ((ServiceReasonType)reasonType).ToString();
+}
+<navtabs-top>
+    <nav-tab id="@ServiceReasonType.Accept" target="@Url.Action("ServiceReasons", "Reference", new { id = Id , rt = (int)ServiceReasonType.Accept })">@Html.Raw(ServiceReasonType.Accept.GetDisplayName())</nav-tab>
+    <nav-tab id="@ServiceReasonType.Provide" target="@Url.Action("ServiceReasons", "Reference", new { id = Id , rt = (int)ServiceReasonType.Provide })">@Html.Raw(ServiceReasonType.Provide.GetDisplayName())</nav-tab>
+    <nav-tab id="@ServiceReasonType.Suspend" target="@Url.Action("ServiceReasons", "Reference", new { id = Id , rt = (int)ServiceReasonType.Suspend })">@Html.Raw(ServiceReasonType.Suspend.GetDisplayName())</nav-tab>
+</navtabs-top>

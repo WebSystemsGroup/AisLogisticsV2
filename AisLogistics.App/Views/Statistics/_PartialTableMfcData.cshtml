@@ -1,0 +1,60 @@
+﻿@using AisLogistics.App.ViewModels.Statistics
+@using AisLogistics.App.Models.Statistics
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model StatisticsViewResponseModel
+@{
+    var data = Model.Model as List<StatisticsMfcDataResponse>;
+}
+<div class="table-responsive">
+    @if (data.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th rowspan="2">Наименование</th>
+                    <th colspan="2">Принято</th>
+                    <th rowspan="2">Выдано</th>
+                    <th rowspan="2">Консультация</th>
+                    <th rowspan="2">ИТОГО</th>
+                    <th rowspan="2">Отказ</th>
+                    <th colspan="2">Просрочено</th>
+                    <th colspan="2">Госзадание</th>
+                </tr>
+                <tr>
+                    <th>Кол-во</th>
+                    <th>Пошлина (руб.)</th>
+                    <th>Кол-во</th>
+                    <th>Процент</th>
+                    <th>Кол-во</th>
+                    <th>Процент</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in data.OrderByDescending(o => o.ALLCount))
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.ReceivedCount</td>
+                        <td>@item.ReceivedStateSum</td>
+                        <td>@item.IssuedCount</td>
+                        <td>@item.ConsultationCount</td>
+                        <td>@item.ALLCount</td>
+                        <td>@item.RefusalCount</td>
+                        <td>@item.ExpiredCount</td>
+                        <td>@item.ExpiredPercentCount</td>
+                        <td>@item.ServiceStateTaskCount</td>
+                        <td>@item.ServiceStateTaskPercentCount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <page-link page-model="Model.Pagination" page-action="PartialMfcData"></page-link>
+    }
+    else
+    {
+        <div class="alert alert-primary" role="alert">
+            <h6 class="alert-heading mb-1">Нет данных</h6>
+            <span>Данные за указанный период не найдены</span>
+        </div>
+    }
+</div>

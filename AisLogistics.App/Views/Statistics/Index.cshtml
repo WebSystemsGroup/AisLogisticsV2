@@ -1,0 +1,51 @@
+﻿@model ViewModelBuilder
+@{
+    ViewBag.Title = Model.ViewTitle;
+}
+
+<link rel="stylesheet" href="~/assets/vendor/libs/c3/c3.css" asp-append-version="true" />
+
+<style>
+
+</style>
+
+<section id="content-report">
+    <div class="nav-align-left">
+        <partial name="_NavLeft" model=@Model.Model />
+        <div class="shadow-none w-100 my-auto ms-3">
+            <div class="w-100 mb-3" id="navs-tabs-default">
+                <h3 class="text-center">Выберите статистику</h3>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts
+{
+    <script src="~/assets/vendor/libs/d3/d3.js"></script>
+    <script src="~/assets/vendor/libs/c3/c3.js"></script>
+   @* <script src="~/assets/js/pages/statistics.js"></script>*@
+    <script>
+        $('.nav-link ').click(function () {
+            $('.nav-link ').removeClass('active active-color');
+            $(this).addClass('active active-color');
+            let url = $(this).data('url');
+            console.log(1231, url);
+            $.ajax({
+                url: '/Statistics/' + url,
+                type: 'POST',
+                beforeSend: () => {
+                    $.pageBlock();
+                },
+                complete: () => {
+                    $.unblockUI();
+                },
+                success: function (content) {
+                    $('#navs-tabs-default').empty();
+                    $('#navs-tabs-default').html(content);
+                }
+            });
+        });
+    </script>
+}
+
+

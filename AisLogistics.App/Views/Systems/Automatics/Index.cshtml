@@ -1,0 +1,151 @@
+﻿@model ViewModelBuilder
+@{
+    ViewBag.Title = Model.ViewTitle;
+    ViewData["ActiveTabId"] = "automatic";
+}
+
+<!-- table -->
+<section id="content-datatable">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                @if (Model.IsVisibleTitle)
+                {
+                    <div class="card-header">
+                        <h4 class="card-title">@Model.ViewTitle</h4>
+                    </div>
+                }
+
+                <div class="card-body">
+                    @*<div class="row">
+                        <div class="col-md-10">
+                            @if (Model.IsVisibleDescription)
+                            {
+                                <p class="card-text">
+                                    @Model.ViewDescription
+                                </p>
+                            }
+                        </div>
+                          <div class="col-md-2 text-md-end">
+                        <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
+                        <i class="bx bx-plus"></i> Добавить
+                        </button>
+                        </div>
+                    </div>*@
+                    @*<navtabs-top>
+                        <nav-tab id="automatic" target="@Url.Action("Automatics", "Systems")">Меню</nav-tab>
+                        <nav-tab id="log" target="@Url.Action("AutomaticsLogs", "Systems")">Данные</nav-tab>
+                    </navtabs-top>*@
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="table-responsive">
+                                <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceDocument" class="table table-sm table-bordered"></table>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div id="automaticLog_Wrapper">
+                                <h3 class="text-center">Выберите Показатель</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ table -->
+@section Scripts
+{
+    <script>
+        const $table = $('#@(Model.TableName)'),
+            isCanAdd = $table.is('[data-action-add]'),
+            isCanEdit = $table.is('[data-action-edit]'),
+            isCanRemove = $table.is('[data-action-remove]');
+
+        $(document).ready(function () {
+            $table.DataTable({
+                sDom: /*"<'row'<'col-sm-12 col-md-6 'f><'col-sm-12 col-md-6'l>>" +*/
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                processing: true,
+                serverSide: true,
+                filter: true,
+                searchDelay: 1500,
+                ajax: {
+                    url: $table.data('action-table'),
+                    type: "POST",
+                    datatype: "json",
+                    dataSrc: function (json) {
+                        //console.log(json.rParam1);
+                        return json.data;
+                    }
+                },
+                columnDefs: [
+                    {
+                        data: "id",
+                        targets: 0,
+                        title: '',
+                        orderable: false
+                    },
+                    {
+                        data: "operationName",
+                        targets: 1,
+                        title: 'Наименование',
+                        orderable: false
+                    },
+                ]
+            }).on('click', 'tbody tr', function (e) { automaticLogs(e) });
+            $table.on("reload", () => {
+                $table.DataTable().ajax.reload(null, false);
+            });
+            $table.on('draw.dt', function () {
+                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl, {
+                        boundary: document.body
+                    });
+                });
+            });
+
+            function automaticLogs(e) {
+                let th = e.currentTarget;
+                let id = $(th).find('[data-reestr-id]').data('reestr-id');
+                $.ajax({
+                    url: '/Systems/AutomaticsLogs',
+                    type: 'POST',
+                    //data: { id: id },
+                    beforeSend: () => {
+                        $.pageBlock();
+                    },
+                    complete: () => {
+                        $.unblockUI();
+                    },
+                    success: function (content) {
+                        $('#automaticLog_Wrapper').empty();
+                        $('#automaticLog_Wrapper').html(content);
+                    }
+                });
+            }
+
+        });
+
+        const EmployeesBtn = (data, count) => {
+            const params = JSON.stringify(data);
+            return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="view">
+                            <div class="position-relative d-inline-block me-2"><i class="bx bx-user"></i>
+                            <span class="badge rounded-pill bg-danger text-white badge-notifications">${count}</span></div></a>`;
+        }
+        const EditBtn = (data) => {
+            const params = JSON.stringify(data);
+            return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="edit" data-bs-toggle="tooltip" title="Изменить" class="btn btn-sm btn-icon text-body">
+                            <i class="bx bx-edit"></i></a>`;
+        }
+        const DeleteBtn = (data) => {
+            const params = JSON.stringify(data);
+            return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger">
+                            <i class="bx bx-trash"></i></a>`;
+        }
+    
+    </script>
+}

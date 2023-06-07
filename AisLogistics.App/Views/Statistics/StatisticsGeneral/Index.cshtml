@@ -1,0 +1,310 @@
+﻿@model AisLogistics.App.Models.Statistics.StatisticsGeneralResponse;
+<div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <h3 class="mb-2">Сегодня</h3>
+            <div class="card">
+                <div class="card-body border border-2">
+                    <div class="d-flex justify-content-between">
+                        <div class="text-center border-start w-100">
+                            <h5>@Model.Info.ReceivedCount</h5>
+                            <span>Принято</span>
+                        </div>
+                        <div class="text-center border-start border-end w-100">
+                            <h5>@Model.Info.IssuedCount</h5>
+                            <span>Выдано</span>
+                        </div>
+                        <div class="text-center border-start border-end w-100">
+                            <h5>@Model.Info.ConsultationCount</h5>
+                            <span>Консультация</span>
+                        </div>
+                        <div class="text-center border-start border-end w-100">
+                            <h5>@Model.Info.ExecutionCount</h5>
+                            <span>На Исполнение</span>
+                        </div>
+                        <div class="text-center border-start border-end w-100">
+                            <h5>@Model.Info.ExpiredCount</h5>
+                            <span>Просрочено</span>
+                        </div>
+                        <div class="text-center border-star border-end w-100">
+                            <h5>@Model.Info.SmevRequestCount</h5>
+                            <span>СМЭВ отправлено</span>
+                        </div>
+                        <div class="text-center border-start border-end w-100">
+                            <h5>@Model.Info.SmevResponseCount</h5>
+                            <span>СМЭВ получено</span>
+                        </div>
+                        <div class="text-center border-start border-end w-100">
+                            <h5>@Model.Info.ServiceStateTaskCount %</h5>
+                            <span>Гос задание</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <h3 class="mb-2">Динамика по услугам</h3>
+            <div class="card h-100">
+                <div class="card-body border border-2">
+                    <div class="row">
+                        <div class="col-12">
+                            <form id="statisticsForm" asp-action="StatisticsGeneralGraphic" asp-controller="Statistics" method="get" role="form">
+                                <div class="row">
+                                    <div class="form-group col-sm-3">
+                                        <label for="stageId" class="form-label">Показатель</label>
+                                        <select id="stageId" name="stageId" class="form-select">
+                                            <option value="">Все</option>
+                                            <option data-type="1" value="1">Принято</option>
+                                            <option data-type="1" value="7">Выдано</option>
+                                            <option data-type="1" value="34">Консультация</option>
+                                            <option data-type="2" class="d-none" value="1">Принято</option>
+                                            <option data-type="2" class="d-none" value="29">Выдано</option>
+                                            <option data-type="2" class="d-none" value="25">Консультация</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="form-label">Период</label>
+                                                <div class="input-group w-100" id="date-type">
+                                                    <input type="radio" name="periodTypeId" id="statisticsTypeDay" class="btn-check" value="1" checked>
+                                                    <label class="btn btn-outline-primary w-50" for="statisticsTypeDay">День</label>
+                                                    <input type="radio" name="periodTypeId" id="statisticsTypeYear" class="btn-check" value="2">
+                                                    <label class="btn btn-outline-primary w-50" for="statisticsTypeYear">Год</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3" id="yearWrapper" style="display:none">
+                                                <label for="yearId" class="form-label">Год</label>
+                                                <select id="yearId" name="yearId" class="form-select select2-nosearch" disabled>
+                                                    <option value="2023">2023</option>
+                                                    <option value="2022">2022</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-3 d-flex align-items-end justify-content-end">
+                                        <button id="statisticsSubmit" type="submit" class="btn btn-primary d-none" data-edizm="Количество" data-names="Все">Cформировать</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="chart">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <h3 class="mb-2">ТОП</h3>
+            <div class="card h-100">
+                <div class="card-body border border-2">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="fs-6 text-black">Филиалы</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var item in Model.Top.OfficesList) 
+                                    {
+                                       <tr>
+                                            <th>@item</th>
+                                       </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="fs-6 text-black">Поставщики</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Top.ProvidersList)
+                                    {
+                                        <tr>
+                                            <th>@item</th>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="fs-6 text-black">Услуги</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Top.ServicesList)
+                                    {
+                                        <tr>
+                                            <th>@item</th>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var sendingForm = $('#statisticsForm'),
+        btnSubmit = $('#statisticsSubmit'),
+        datePeriod = $('#date-range'),
+        providers = $('#providerId'),
+        mfc = $('#mfcId'),
+        employees = $('#employeeId'),
+        services = $('#serviceId'),
+        smev = $('#smevId'),
+        smevRequest = $('#smevRequestId'),
+        statisticsTypeDay = $('#statisticsTypeDay'),
+        statisticsTypeYear = $('#statisticsTypeYear'),
+        year = $('#yearId'),
+        stage = $('#stageId');
+
+    $(document).ready(function () {
+
+        $('select.select2-search').select2({});
+
+        $('select.select2-nosearch').select2({
+            minimumResultsForSearch: Infinity
+        });
+
+        $('select.select2-tags').select2({
+            tags: true
+        });
+
+        if (datePeriod.length) {
+            datePeriod.datepicker({
+                language: "ru",
+                endDate: '-1d',
+                toggleActive: true
+            });
+        }
+
+        if (statisticsTypeDay.length) {
+            statisticsTypeDay.change(function (e) {
+                if (year.length) {
+                    $('#yearWrapper').hide();
+                    year.prop('disabled', true);
+                }
+                if (stage.length) {
+                    stage.find("[data-type='1']").removeClass('d-none');
+                    stage.find("[data-type='2']").addClass('d-none');
+                }
+                if (btnSubmit.length) {
+                    btnSubmit.click();
+                }
+            });
+        }
+        if (statisticsTypeYear.length) {
+            statisticsTypeYear.change(function (e) {
+                if (year.length) {
+                    year.prop('disabled', false);
+                    $('#yearWrapper').show();
+                }
+                if (stage.length) {
+                    stage.find("[data-type='1']").addClass('d-none');
+                    stage.find("[data-type='2']").removeClass('d-none');
+                }
+                if (btnSubmit.length) {
+                    btnSubmit.click();
+                }
+            });
+        }
+
+        if (stage.length) {
+            stage.change(function () {
+                let name = $(this).find("option:selected").text();
+                if (btnSubmit.length) {
+                    btnSubmit.attr("data-names", name);
+                    btnSubmit.click();
+                }
+            });
+        }
+
+        if (year.length) {
+            year.change(function () {
+                if (btnSubmit.length) {
+                    btnSubmit.click();
+                }
+            });
+        }
+
+        btnSubmit.on('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            let formData = sendingForm.serialize();
+            let $type_chart = 'line',
+                $edizm = $(this).attr("data-edizm"),
+                $names = $(this).attr("data-names");
+
+            $.ajax({
+                type: sendingForm.attr('method'),
+                url: sendingForm.attr('action'),
+                data: formData,
+                beforeSend: () => {
+                    btnSubmit.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+                    btnSubmit.prop('disabled', true);
+                },
+                success: function (dataJson) {
+                    $('#graphic').addClass('show');
+                    GenerateChart(dataJson, $type_chart, $names, $edizm, false);
+                },
+                complete: () => {
+                    btnSubmit.prop('disabled', false);
+                    btnSubmit.html('Cформировать')
+                }
+            });
+        })
+
+        function GenerateChart(data, type_chart, names, edizm, transform) {
+            if (transform != true) {
+                chart = c3.generate({
+                    bindto: '#chart',
+                    size: { height: 600 },
+                    zoom: { enabled: true },
+                    data: {
+                        json: data,
+                        type: type_chart,
+                        labels: true,
+                        names: { 'value': names },
+                        keys: { x: 'name', value: ['value'] },
+                    },
+                    axis: {
+                        x: {
+                            type: 'category', tick: { rotate: 90, multiline: false }, label: { text: 'Период', position: 'outer-right' }
+                        },
+                        y: { label: { text: edizm, position: 'outer-top' } }
+                    },
+                    grid: { x: { show: true }, y: { show: true } }
+                });
+            }
+            else {
+                chart.transform(type_chart);
+            }
+        }
+
+        if (btnSubmit.length) {
+            btnSubmit.click();
+        }
+    });
+</script>

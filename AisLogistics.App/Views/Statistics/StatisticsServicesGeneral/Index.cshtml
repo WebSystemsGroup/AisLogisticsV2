@@ -1,0 +1,282 @@
+﻿@model AisLogistics.App.Models.Statistics.StatisticsServiceGeneralResponse;
+
+<style>
+    .h-94 {
+        height: 94%;
+    }
+</style>
+
+<div>
+    <div class="row mb-3">
+        <div class="col-8">
+            <h3 class="mb-2">Сегодня</h3>
+            <div class="card">
+                <div class="card-body border border-2">
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <form id="statisticsForm" asp-action="StatisticsServicesGeneralGraphic" asp-controller="Statistics" method="get" role="form">
+                                <div class="row">
+                                    <div class="form-group col-sm-3">
+                                        <label for="serviceTypeId" class="form-label">Показатель</label>
+                                        <select id="serviceTypeId" name="serviceTypeId" class="form-select">
+                                            <option value="1">Тип услуги</option>
+                                            <option value="2">Тип получателя</option>
+                                            <option value="3">Тип взаимодействия</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="form-label">Период</label>
+                                                <div class="input-group w-100" id="date-type">
+                                                    <input type="radio" name="periodTypeId" id="statisticsTypeDay" class="btn-check" value="1" checked>
+                                                    <label class="btn btn-outline-primary w-50" for="statisticsTypeDay">День</label>
+                                                    <input type="radio" name="periodTypeId" id="statisticsTypeYear" class="btn-check" value="2">
+                                                    <label class="btn btn-outline-primary w-50" for="statisticsTypeYear">Год</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3" id="yearWrapper" style="display:none">
+                                                <label for="yearId" class="form-label">Год</label>
+                                                <select id="yearId" name="yearId" class="form-select select2-nosearch" disabled>
+                                                    <option value="2023">2023</option>
+                                                    <option value="2022">2022</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-3 d-flex align-items-end justify-content-end">
+                                        <button id="statisticsSubmit" type="submit" class="btn btn-primary d-none" data-edizm="Количество" data-names="Все">Cформировать</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="chart">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <h3 class="mb-2">Количество услуг</h3>
+            <div class="card h-94">
+                <div class="card-body border border-2">
+                    <div class="">
+                        <div class="d-flex justify-content-between">
+                            <p>Сегодня</p>
+                            <h5>@Model.Info.CountDay</h5>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p>В этом месяце</p>
+                            <h5>@Model.Info.CountMonth</h5>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p>В этом квартале</p>
+                            <h5>@Model.Info.CountQuarter</h5>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p>В этом году</p>
+                            <h5>@Model.Info.CountYear</h5>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p>На исполнение</p>
+                            <h5>@Model.Info.CountExecution</h5>
+
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p>Просроченные</p>
+                            <h5>@Model.Info.CountExpired</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-4">
+            <h3 class="mb-2">Тип услуги</h3>
+            <div class="card">
+                <div class="card-body border border-2">
+                    <div id="chartServiceType">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <h3 class="mb-2">Тип получателя</h3>
+            <div class="card">
+                <div class="card-body border border-2">
+                    <div id="chartCustomerType">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <h3 class="mb-2">Способ взаимодействия</h3>
+            <div class="card">
+                <div class="card-body border border-2">
+                    <div id="chartInteractionType">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var sendingForm = $('#statisticsForm'),
+        btnSubmit = $('#statisticsSubmit'),
+        serviceType = $('#serviceTypeId'),
+        statisticsTypeDay = $('#statisticsTypeDay'),
+        statisticsTypeYear = $('#statisticsTypeYear'),
+        year = $('#yearId'),
+        chartServiceType = $('#chartServiceType'),
+        chartCustomerType = $('#chartCustomerType'),
+        chartInteractionType = $('#chartInteractionType');
+
+        $(document).ready(function () {
+
+        if (chartServiceType.length) {
+            $.ajax({
+                type: 'Get',
+                url: '/Statistics/StatisticsServicesGeneralServiceType',
+                success: function (dataJson) {
+                    GenerateChartPie(dataJson, '#chartServiceType');
+                },
+              
+            });
+        }
+        if (chartCustomerType.length) {
+            $.ajax({
+                type: 'Get',
+                url: '/Statistics/StatisticsServicesGeneralCustomerType',
+                success: function (dataJson) {
+                    GenerateChartPie(dataJson, '#chartCustomerType');
+                },
+
+            });
+        }
+        if (chartInteractionType.length) {
+            $.ajax({
+                type: 'Get',
+                url: '/Statistics/StatisticsServicesGeneralInteractionType',
+                success: function (dataJson) {
+                    GenerateChartPie(dataJson, '#chartInteractionType');
+                },
+
+            });
+        }
+
+        if (serviceType.length) {
+            serviceType.change(function () {
+                if (btnSubmit.length) {
+                    btnSubmit.click();
+                }
+            });
+        }
+
+        if (statisticsTypeDay.length) {
+            statisticsTypeDay.change(function (e) {
+                if (year.length) {
+                    $('#yearWrapper').hide();
+                    year.prop('disabled', true);
+                }
+                if (btnSubmit.length) {
+                    btnSubmit.click();
+                }
+            });
+        }
+        if (statisticsTypeYear.length) {
+            statisticsTypeYear.change(function (e) {
+                if (year.length) {
+                    year.prop('disabled', false);
+                    $('#yearWrapper').show();
+                }
+                if (btnSubmit.length) {
+                    btnSubmit.click();
+                }
+            });
+        }
+
+        if (year.length) {
+            year.change(function () {
+                console.log('asdasda');
+                if (btnSubmit.length) {
+                    btnSubmit.click();
+                }
+            });
+        }
+
+        btnSubmit.on('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            let formData = sendingForm.serialize();
+            let $type_chart = 'line',
+                $edizm = $(this).attr("data-edizm"),
+                $names = $(this).attr("data-names");
+
+            $.ajax({
+                type: sendingForm.attr('method'),
+                url: sendingForm.attr('action'),
+                data: formData,
+                beforeSend: () => {
+                    btnSubmit.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+                    btnSubmit.prop('disabled', true);
+                },
+                success: function (dataJson) {
+                    $('#graphic').addClass('show');
+                    GenerateChart(dataJson, $type_chart, $names, $edizm, false);
+                },
+                complete: () => {
+                    btnSubmit.prop('disabled', false);
+                    btnSubmit.html('Cформировать')
+                }
+            });
+        })
+
+        if (btnSubmit.length) {
+            btnSubmit.click();
+        }
+
+        function GenerateChartPie(data, wrapper_chart) {
+            chart = c3.generate({
+                bindto: wrapper_chart,
+                data: {
+                    type: 'pie',
+                    json: data,
+                }
+            });
+        };
+        function GenerateChart(data, type_chart, names, edizm, transform) {
+            if (transform != true) {
+                chart = c3.generate({
+                    bindto: '#chart',
+                    size: { height: 400 },
+                    zoom: { enabled: true },
+                    data: {
+                        json: data,
+                        type: type_chart,
+                        labels: true,
+                        x: 'date'
+                        //names: { 'value': names },
+                        //keys: { x: 'name', value: ['value'] },
+                    },
+                    axis: {
+                        x: {
+                            type: 'category', tick: { rotate: 90, multiline: false }, label: { text: 'Период', position: 'outer-right' }
+                        },
+                        y: { label: { text: edizm, position: 'outer-top' } }
+                    },
+                    grid: { x: { show: true }, y: { show: true } }
+                });
+            }
+            else {
+                chart.transform(type_chart);
+            }
+        }
+    });
+</script>
+

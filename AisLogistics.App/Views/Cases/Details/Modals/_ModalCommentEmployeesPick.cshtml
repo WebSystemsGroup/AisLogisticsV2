@@ -1,0 +1,56 @@
+﻿@model List<AisLogistics.App.Models.DTO.References.EmployeesOfficesJoinDto>
+@{
+    var offices = Model.GroupBy(g => g.SOfficesId).Select(group => group.OrderBy(o => o.OfficeName));
+}
+<form action="#" id="sendingForm" method="post" role="form">
+    <fieldset>
+        <div class="row">
+            <div class="col-12 mb-4">
+                <label for="employeesId" class="form-label">Сотрудники</label>
+                <select id="employeesId" name="employeesId" class="select2 form-select form-select-lg" multiple="multiple" data-allow-clear="true">
+                    @foreach (var office in offices)
+                    {
+                        <optgroup label="@office.First().OfficeName">
+                            @foreach (var employee in office.OrderBy(o => o.EmployeeName))
+                            {
+                                <option value="@employee.SEmployeesId" data-value-job="@employee.JobPositionName">@employee.EmployeeName</option>
+                            }
+                        </optgroup>
+                    }
+                </select>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<script>
+    $(function () {
+        $("#sendingForm .select2").select2({
+            dropdownParent: $("#mainModal"),
+            placeholder: "Выберите сотрудников",
+            templateResult: (state) => {
+                if (!state.id) {
+                    return state.text;
+                }
+                let job = $(state.element).data("value-job");
+
+                var $state = $(`<div class="mb-n1">${state.text}</div><small class="text-muted">${job}</small>`);
+                return $state;
+            }
+        }).val(employeesPicker.get()).trigger('change');
+        FormValidation.formValidation(document.getElementById('sendingForm'),
+            {
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    submitButton: new FormValidation.plugins.SubmitButton(),
+                    bootstrap5: new FormValidation.plugins.Bootstrap5(),
+                    autoFocus: new FormValidation.plugins.AutoFocus()
+                }
+            }).on('core.form.valid', function () {
+                let employeesId = $("#employeesId").val();
+                employeesPicker.set(employeesId);
+                $("#mainModal").modal('hide');
+                return false;
+            });
+    })
+</script>

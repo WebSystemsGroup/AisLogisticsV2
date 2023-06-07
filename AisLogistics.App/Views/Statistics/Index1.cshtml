@@ -1,0 +1,1045 @@
+﻿@using AisLogistics.App.Models.Statistics
+@using AisLogistics.App.ViewModels.SelectListViewModel
+@model ViewModelBuilder
+@{
+    ViewBag.Title = Model.ViewTitle;
+    var responseData = Model.Model as StatisticsResponse;
+    var days = DateTime.Now.DayOfYear - 1;
+}
+<link rel="stylesheet" href="~/assets/vendor/libs/c3/c3.css" asp-append-version="true" />
+<style>
+    .nav-link.active2 {
+        color: #5a8dee !important;
+    }
+
+    .scrollspy-wrapper {
+        height: 49rem;
+        /*position: relative;
+        overflow-y: scroll;*/
+    }
+</style>
+
+<section>
+    <div class="row">
+        <div class="col-2">
+            <nav id="statistics" class="navbar flex-column align-items-stretch p-3 pt-0">
+                <a class="nav-link" href="#iteminfototay">Данные на сегодня</a>
+                <a class="nav-link" href="#itemservicegraphic">Динамика по услугам</a>
+                <a class="nav-link" href="#itemmfc">Данные по филиалам</a>
+                <a class="nav-link" href="#itememployee">Данные по сотрудникам</a>
+                <a class="nav-link" href="#itemprovider">Данные по ОИВ</a>
+                <a class="nav-link" href="#itemservice">Данные по услугам</a>
+                <a class="nav-link" href="#itemcustomertype">Данные по типу заявителя</a>
+                <a class="nav-link" href="#itemservicetype">Данные по типу услуги</a>
+                <a class="nav-link" href="#iteminteractiontype">Данные по способу взаимодействия</a>
+                <a class="nav-link" href="#itemsmevgraphic">Динамика по запросам в СМЭВ</a>
+                <a class="nav-link" href="#itemsmev">Данные по запросам в СМЭВ</a>
+                <a class="nav-link" href="#itemsmev_mfc">Данные по запросам в СМЭВ в разрезе филиалов</a>
+                <a class="nav-link" href="#itemsmevemployee">Данные по запросам в СМЭВ в разрезе сотрудников</a>
+            </nav>
+        </div>
+        <div class="col-10 px-0">
+            <div id="scrollspy-wrapper" class="scrollspy-wrapper" data-bs-spy="scroll" data-bs-target="#statistics" data-bs-offset="0" tabindex="0">
+                <div class="me-3">
+                    <div id="iteminfototay" class="mb-3 item-wrapper">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-2">Данные на сегодня</h4>
+                                <div class="card">
+                                    <div class="card-body border border-2">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="text-center border-start w-100">
+                                                <h5>@responseData?.InfoForTotay?.ReceivedCount</h5>
+                                                <span>Принято</span>
+                                            </div>
+                                            <div class="text-center border-start border-end w-100">
+                                                <h5>@responseData?.InfoForTotay?.IssuedCount</h5>
+                                                <span>Выдано</span>
+                                            </div>
+                                            <div class="text-center border-start border-end w-100">
+                                                <h5>@responseData?.InfoForTotay?.ConsultationCount</h5>
+                                                <span>Консультация</span>
+                                            </div>
+                                            <div class="text-center border-start border-end w-100">
+                                                <h5>@responseData?.InfoForTotay?.ExecutionCount</h5>
+                                                <span>На Исполнение</span>
+                                            </div>
+                                            <div class="text-center border-start border-end w-100">
+                                                <h5>@responseData?.InfoForTotay?.ExpiredCount</h5>
+                                                <span>Просрочено</span>
+                                            </div>
+                                            <div class="text-center border-star border-end w-100">
+                                                <h5>@responseData?.InfoForTotay?.SmevRequestCount</h5>
+                                                <span>СМЭВ отправлено</span>
+                                            </div>
+                                            <div class="text-center border-start border-end w-100">
+                                                <h5>@responseData?.InfoForTotay?.SmevResponseCount</h5>
+                                                <span>СМЭВ получено</span>
+                                            </div>
+                                            <div class="text-center border-start border-end w-100">
+                                                <h5>@responseData?.InfoForTotay?.ServiceStateTaskCount %</h5>
+                                                <span>Гос задание</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="itemservicegraphic" class="mb-3 item-wrapper">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-2">Динамика по услугам</h4>
+                                <div class="card">
+                                    <div class="card-body border border-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form id="statisticsForm" asp-action="StatisticsGeneralGraphic" asp-controller="Statistics" method="get" role="form">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-3">
+                                                            <label  class="form-label">Филиал</label>
+                                                            <select name="mfcId" class="form-select select select2-search" data-all="true" disabled data-mfc></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label  class="form-label">Сотрудник</label>
+                                                            <select name="employeeId" class="form-select select select2-search" disabled data-employee></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label  class="form-label">ОИВ</label>
+                                                            <select name="providerId" class="form-select select select2-search" disabled data-provider></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label  class="form-label">Услуга</label>
+                                                            <select name="serviceId" class="form-select select select2-search" disabled data-services></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label  class="form-label">Тип заявителя</label>
+                                                            <select name="customerTypeId" class="form-select select select2-search" disabled data-customer-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label  class="form-label">Тип услуги</label>
+                                                            <select name="serviceTypeId" class="form-select select select2-search" disabled data-service-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label  class="form-label">Способ взаимодействия</label>
+                                                            <select name="interactionTypeId" class="form-select select select2-search" disabled data-interaction-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label for="stageId" class="form-label">Показатель</label>
+                                                            <select  name="stageId" class="form-select select select2-search" data-stage>
+                                                                <option value="">Все(Принято+Выдано+Консультация)</option>
+                                                                <option value="1">Принято</option>
+                                                                <option value="29">Выдано</option>
+                                                                <option value="25">Консультация</option>
+                                                                <option value="33">Выдано в ОИВ</option>
+                                                                <option value="34">Невостребованный</option>
+                                                                <option value="26">Отказы</option>
+                                                                <option value="27">Отказы</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label">Период</label>
+                                                                    <div class="input-group w-100" id="date-type">
+                                                                        <input type="radio" name="periodTypeId" id="statisticsTypeDay" class="btn-check" value="1" checked data-type-day>
+                                                                        <label class="btn btn-outline-primary w-50" for="statisticsTypeDay">День</label>
+                                                                        <input type="radio" name="periodTypeId" id="statisticsTypeYear" class="btn-check" value="2" data-type-year>
+                                                                        <label class="btn btn-outline-primary w-50" for="statisticsTypeYear">Год</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 wrapper" style="display:none">
+                                                                    <label for="yearId" class="form-label">Год</label>
+                                                                    <select id="yearId" name="yearId" class="form-select select2-nosearch" disabled data-year>
+                                                                        <option value="2023">2023</option>
+                                                                        <option value="2022">2022</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-sm-2 d-flex align-items-end justify-content-end">
+                                                            <button id="statisticsSubmit" type="submit" class="btn btn-primary d-none" data-edizm="Количество" data-names="Все" data-submit>Cформировать</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="chart">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="itemmfc" class="mb-3 item-wrapper">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-2">Данные по филиалам</h4>
+                                <div class="card">
+                                    <div class="card-body border border-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form id="statisticsMfcForm" asp-action="PartialMfcDataJson" asp-controller="Statistics" method="get" role="form">
+                                                    <div class="row mb-4">
+                                                        <div class="form-group col-sm-3">
+                                                            <label  class="form-label">ОИВ</label>
+                                                            <select name="providerId" class="form-select select select2-search" disabled data-provider></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label  class="form-label">Услуга</label>
+                                                            <select  name="serviceId" class="form-select select select2-search" disabled data-services></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label  class="form-label">Тип заявителя</label>
+                                                            <select  name="customerTypeId" class="form-select select select2-search" disabled data-customer-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label  class="form-label">Тип услуги</label>
+                                                            <select  name="serviceTypeId" class="form-select select select2-search" disabled data-service-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label  class="form-label">Способ взаимодействия</label>
+                                                            <select  name="interactionTypeId" class="form-select select select2-search" disabled data-interaction-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Месяц</label>
+                                                            <select name="monthId" asp-items="@SelectListViewModel.MonthTypeList" class="form-select select select2-nosearch" data-month>
+                                                                <option value="0">Все</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Год</label>
+                                                            <select name="yearId" asp-items="@SelectListViewModel.YearTypeList(true)" class="form-select select select2-nosearch" data-year></select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        @*<hr>*@
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="dataMfc">
+                                                    <table id="dataTableMfc" class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th rowspan="2">Наименование</th>
+                                                                <th colspan="2">Принято</th>
+                                                                <th rowspan="2">Выдано</th>
+                                                                <th rowspan="2">Консультация</th>
+                                                                <th rowspan="2">ИТОГО</th>
+                                                                <th rowspan="2">Отказ</th>
+                                                                <th colspan="2">Просрочено</th>
+                                                                <th colspan="2">Госзадание</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Кол-во</th>
+                                                                <th>Пошлина (руб.)</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="itememployee" class="mb-3 item-wrapper">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-2">Данные по сотрудникам</h4>
+                                <div class="card">
+                                    <div class="card-body border border-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form id="statisticsEmployeeForm" asp-action="PartialEmployeeDataJson" asp-controller="Statistics" method="get" role="form">
+                                                    <div class="row mb-4">
+                                                       @* <div class="form-group col-sm-3">
+                                                            <label class="form-label">Дата</label>
+                                                            <div class="input-daterange input-group" data-range>
+                                                                <input type="text" name="dateStart" id="report_date_start" class="form-control datepick" value="@DateTime.Now.AddDays(-days).ToShortDateString()">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text bg-primary h-100"><i class="bx bxs-calendar text-white"></i></span>
+                                                                </div>
+                                                                <input type="text" name="dateStop" id="report_date_stop" class="form-control datepick" value="@DateTime.Now.AddDays(-1).ToShortDateString()">
+                                                            </div>
+                                                        </div>*@
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Филиал</label>
+                                                            <select name="mfcId" class="form-select select select2-search" data-all="true" disabled data-mfc></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">ОИВ</label>
+                                                            <select name="providerId" class="form-select select select2-search" disabled data-provider></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Услуга</label>
+                                                            <select name="serviceId" class="form-select select select2-search" disabled data-services></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Тип заявителя</label>
+                                                            <select name="customerTypeId" class="form-select select select2-search" disabled data-customer-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Тип услуги</label>
+                                                            <select name="serviceTypeId" class="form-select select select2-search" disabled data-service-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Способ взаимодействия</label>
+                                                            <select name="interactionTypeId" class="form-select select select2-search" disabled data-interaction-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Месяц</label>
+                                                            <select name="monthId" asp-items="@SelectListViewModel.MonthTypeList" class="form-select select select2-nosearch" data-month>
+                                                                <option value="0">Все</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Год</label>
+                                                            <select name="yearId" asp-items="@SelectListViewModel.YearTypeList(true)" class="form-select select select2-nosearch" data-year></select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        @*<hr>*@
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="table-responsive" id="dataEmployee">
+                                                    <table id="dataTableEmployee" class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th rowspan="2">Сотрудник</th>
+                                                                <th colspan="2">Принято</th>
+                                                                <th rowspan="2">Выдано</th>
+                                                                <th rowspan="2">Консультация</th>
+                                                                <th rowspan="2">ИТОГО</th>
+                                                                <th rowspan="2">Отказ</th>
+                                                                <th colspan="2">Просрочено</th>
+                                                                <th colspan="2">Госзадание</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Кол-во</th>
+                                                                <th>Пошлина (руб.)</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="itemprovider" class="mb-3 item-wrapper">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-2">Данные по ОИВ</h4>
+                                <div class="card">
+                                    <div class="card-body border border-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form id="statisticsProviderForm" asp-action="PartialProviderDataJson" asp-controller="Statistics" method="get" role="form">
+                                                    <div class="row mb-4">
+                                                        @*<div class="form-group col-sm-3">
+                                                            <label class="form-label">Дата</label>
+                                                            <div class="input-daterange input-group" data-range>
+                                                                <input type="text" name="dateStart" id="report_date_start" class="form-control datepick" value="@DateTime.Now.AddDays(-days).ToShortDateString()">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text bg-primary h-100"><i class="bx bxs-calendar text-white"></i></span>
+                                                                </div>
+                                                                <input type="text" name="dateStop" id="report_date_stop" class="form-control datepick" value="@DateTime.Now.AddDays(-1).ToShortDateString()">
+                                                            </div>
+                                                        </div>*@
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Филиал</label>
+                                                            <select name="mfcId" class="form-select select select2-search" data-all="true" disabled data-mfc></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Сотрудник</label>
+                                                            <select name="employeeId" class="form-select select select2-search" disabled data-employee></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Тип заявителя</label>
+                                                            <select name="customerTypeId" class="form-select select select2-search" disabled data-customer-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Тип услуги</label>
+                                                            <select name="serviceTypeId" class="form-select select select2-search" disabled data-service-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Способ взаимодействия</label>
+                                                            <select name="interactionTypeId" class="form-select select select2-search" disabled data-interaction-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Месяц</label>
+                                                            <select name="monthId" asp-items="@SelectListViewModel.MonthTypeList" class="form-select select select2-nosearch" data-month>
+                                                                <option value="0">Все</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Год</label>
+                                                            <select name="yearId" asp-items="@SelectListViewModel.YearTypeList(true)" class="form-select select select2-nosearch" data-year></select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        @*<hr>*@
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="table-responsive" id="dataProvider">
+                                                    <table id="dataTableProvider" class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th rowspan="2">Наименование</th>
+                                                                <th colspan="2">Принято</th>
+                                                                <th rowspan="2">Выдано</th>
+                                                                <th rowspan="2">Консультация</th>
+                                                                <th rowspan="2">ИТОГО</th>
+                                                                <th rowspan="2">Отказ</th>
+                                                                <th colspan="2">Просрочено</th>
+                                                                <th colspan="2">Госзадание</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Кол-во</th>
+                                                                <th>Пошлина (руб.)</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="itemservice" class="mb-3 item-wrapper">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-2">Данные по услугам</h4>
+                                <div class="card">
+                                    <div class="card-body border border-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form id="statisticsServiceForm" asp-action="PartialServiceDataJson" asp-controller="Statistics" method="get" role="form">
+                                                    <div class="row mb-4">
+                                                       @* <div class="form-group col-sm-3">
+                                                            <label class="form-label">Дата</label>
+                                                            <div class="input-daterange input-group" data-range>
+                                                                <input type="text" name="dateStart" id="report_date_start" class="form-control datepick" value="@DateTime.Now.AddDays(-days).ToShortDateString()">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text bg-primary h-100"><i class="bx bxs-calendar text-white"></i></span>
+                                                                </div>
+                                                                <input type="text" name="dateStop" id="report_date_stop" class="form-control datepick" value="@DateTime.Now.AddDays(-1).ToShortDateString()">
+                                                            </div>
+                                                        </div>*@
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Филиал</label>
+                                                            <select name="mfcId" class="form-select select select2-search" data-all="true" disabled data-mfc></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Сотрудник</label>
+                                                            <select name="employeeId" class="form-select select select2-search" disabled data-employee></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">ОИВ</label>
+                                                            <select name="providerId" class="form-select select select2-search" disabled data-provider></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Тип заявителя</label>
+                                                            <select name="customerTypeId" class="form-select select select2-search" disabled data-customer-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Тип услуги</label>
+                                                            <select name="serviceTypeId" class="form-select select select2-search" disabled data-service-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Способ взаимодействия</label>
+                                                            <select name="interactionTypeId" class="form-select select select2-search" disabled data-interaction-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Месяц</label>
+                                                            <select name="monthId" asp-items="@SelectListViewModel.MonthTypeList" class="form-select select select2-nosearch" data-month>
+                                                                <option value="0">Все</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Год</label>
+                                                            <select name="yearId" asp-items="@SelectListViewModel.YearTypeList(true)" class="form-select select select2-nosearch" data-year></select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        @*<hr>*@
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="table-responsive" id="dataService">
+                                                    <table id="dataTableService" class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th rowspan="2">Наименование</th>
+                                                                <th colspan="2">Принято</th>
+                                                                <th rowspan="2">Выдано</th>
+                                                                <th rowspan="2">Консультация</th>
+                                                                <th rowspan="2">ИТОГО</th>
+                                                                <th rowspan="2">Отказ</th>
+                                                                <th colspan="2">Просрочено</th>
+                                                                <th colspan="2">Госзадание</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Кол-во</th>
+                                                                <th>Пошлина (руб.)</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="itemcustomertype" class="mb-3 item-wrapper">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-2">Данные по типу заявителя</h4>
+                                <div class="card">
+                                    <div class="card-body border border-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form id="statisticsCustomerTypeForm" asp-action="PartialCustomerTypeDataJson" asp-controller="Statistics" method="get" role="form">
+                                                    <div class="row mb-4">
+                                                        @*<div class="form-group col-sm-3">
+                                                            <label class="form-label">Дата</label>
+                                                            <div class="input-daterange input-group" data-range>
+                                                                <input type="text" name="dateStart" id="report_date_start" class="form-control datepick" value="@DateTime.Now.AddDays(-days).ToShortDateString()">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text bg-primary h-100"><i class="bx bxs-calendar text-white"></i></span>
+                                                                </div>
+                                                                <input type="text" name="dateStop" id="report_date_stop" class="form-control datepick" value="@DateTime.Now.AddDays(-1).ToShortDateString()">
+                                                            </div>
+                                                        </div>*@
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Филиал</label>
+                                                            <select name="mfcId" class="form-select select select2-search" data-all="true" disabled data-mfc></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Сотрудник</label>
+                                                            <select name="employeeId" class="form-select select select2-search" disabled data-employee></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">ОИВ</label>
+                                                            <select name="providerId" class="form-select select select2-search" disabled data-provider></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Услуга</label>
+                                                            <select name="serviceId" class="form-select select select2-search" disabled data-services></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Тип услуги</label>
+                                                            <select name="serviceTypeId" class="form-select select select2-search" disabled data-service-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Способ взаимодействия</label>
+                                                            <select name="interactionTypeId" class="form-select select select2-search" disabled data-interaction-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Месяц</label>
+                                                            <select name="monthId" asp-items="@SelectListViewModel.MonthTypeList" class="form-select select select2-nosearch" data-month>
+                                                                <option value="0">Все</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Год</label>
+                                                            <select name="yearId" asp-items="@SelectListViewModel.YearTypeList(true)" class="form-select select select2-nosearch" data-year></select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        @*<hr>*@
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="table-responsive" id="dataCustomerType">
+                                                    <table id="dataTableCustomerType" class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th rowspan="2">Наименование</th>
+                                                                <th colspan="2">Принято</th>
+                                                                <th rowspan="2">Выдано</th>
+                                                                <th rowspan="2">Консультация</th>
+                                                                <th rowspan="2">ИТОГО</th>
+                                                                <th rowspan="2">Отказ</th>
+                                                                <th colspan="2">Просрочено</th>
+                                                                <th colspan="2">Госзадание</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Кол-во</th>
+                                                                <th>Пошлина (руб.)</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="itemservicetype" class="mb-3 item-wrapper">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-2">Данные по типу услуги</h4>
+                                <div class="card">
+                                    <div class="card-body border border-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form id="statisticsServiceTypeForm" asp-action="PartialServiceTypeDataJson" asp-controller="Statistics" method="get" role="form">
+                                                    <div class="row mb-4">
+                                                        @*<div class="form-group col-sm-3">
+                                                            <label class="form-label">Дата</label>
+                                                            <div class="input-daterange input-group" data-range>
+                                                                <input type="text" name="dateStart" id="report_date_start" class="form-control datepick" value="@DateTime.Now.AddDays(-days).ToShortDateString()">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text bg-primary h-100"><i class="bx bxs-calendar text-white"></i></span>
+                                                                </div>
+                                                                <input type="text" name="dateStop" id="report_date_stop" class="form-control datepick" value="@DateTime.Now.AddDays(-1).ToShortDateString()">
+                                                            </div>
+                                                        </div>*@
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Филиал</label>
+                                                            <select name="mfcId" class="form-select select select2-search" data-all="true" disabled data-mfc></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Сотрудник</label>
+                                                            <select name="employeeId" class="form-select select select2-search" disabled data-employee></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">ОИВ</label>
+                                                            <select name="providerId" class="form-select select select2-search" disabled data-provider></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Услуга</label>
+                                                            <select name="serviceId" class="form-select select select2-search" disabled data-services></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Тип заявителя</label>
+                                                            <select name="customerTypeId" class="form-select select select2-search" disabled data-customer-type></select>
+                                                        </div> 
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Способ взаимодействия</label>
+                                                            <select name="interactionTypeId" class="form-select select select2-search" disabled data-interaction-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Месяц</label>
+                                                            <select name="monthId" asp-items="@SelectListViewModel.MonthTypeList" class="form-select select select2-nosearch" data-month>
+                                                                <option value="0">Все</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Год</label>
+                                                            <select name="yearId" asp-items="@SelectListViewModel.YearTypeList(true)" class="form-select select select2-nosearch" data-year></select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        @*<hr>*@
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="table-responsive" id="dataServiceType">
+                                                    <table id="dataTableServiceType" class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th rowspan="2">Наименование</th>
+                                                                <th colspan="2">Принято</th>
+                                                                <th rowspan="2">Выдано</th>
+                                                                <th rowspan="2">Консультация</th>
+                                                                <th rowspan="2">ИТОГО</th>
+                                                                <th rowspan="2">Отказ</th>
+                                                                <th colspan="2">Просрочено</th>
+                                                                <th colspan="2">Госзадание</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Кол-во</th>
+                                                                <th>Пошлина (руб.)</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="iteminteractiontype" class="mb-3 item-wrapper">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-2">Данные по типу взаимодействия</h4>
+                                <div class="card">
+                                    <div class="card-body border border-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form id="statisticsInteractionTypeForm" asp-action="PartialInteractionTypeDataJson" asp-controller="Statistics" method="get" role="form">
+                                                    <div class="row mb-4">
+                                                       @* <div class="form-group col-sm-3">
+                                                            <label class="form-label">Дата</label>
+                                                            <div class="input-daterange input-group" data-range>
+                                                                <input type="text" name="dateStart" id="report_date_start" class="form-control datepick" value="@DateTime.Now.AddDays(-days).ToShortDateString()">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text bg-primary h-100"><i class="bx bxs-calendar text-white"></i></span>
+                                                                </div>
+                                                                <input type="text" name="dateStop" id="report_date_stop" class="form-control datepick" value="@DateTime.Now.AddDays(-1).ToShortDateString()">
+                                                            </div>
+                                                        </div>*@
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Филиал</label>
+                                                            <select name="mfcId" class="form-select select select2-search" data-all="true" disabled data-mfc></select>
+                                                        </div>
+                                                         <div class="form-group col-sm-3">
+                                                            <label class="form-label">Сотрудник</label>
+                                                            <select name="employeeId" class="form-select select select2-search" disabled data-employee></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">ОИВ</label>
+                                                            <select name="providerId" class="form-select select select2-search" disabled data-provider></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Услуга</label>
+                                                            <select name="serviceId" class="form-select select select2-search" disabled data-services></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Тип заявителя</label>
+                                                            <select name="customerTypeId" class="form-select select select2-search" disabled data-customer-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-2">
+                                                            <label class="form-label">Тип услуги</label>
+                                                            <select name="serviceTypeId" class="form-select select select2-search" disabled data-service-type></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Месяц</label>
+                                                            <select name="monthId" asp-items="@SelectListViewModel.MonthTypeList" class="form-select select select2-nosearch" data-month>
+                                                                <option value="0">Все</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-1">
+                                                            <label class="form-label">Год</label>
+                                                            <select name="yearId" asp-items="@SelectListViewModel.YearTypeList(true)" class="form-select select select2-nosearch" data-year></select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        @*<hr>*@
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="table-responsive" id="dataInteractionType">
+                                                    <table id="dataTableInteractionType" class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th rowspan="2">Наименование</th>
+                                                                <th colspan="2">Принято</th>
+                                                                <th rowspan="2">Выдано</th>
+                                                                <th rowspan="2">Консультация</th>
+                                                                <th rowspan="2">ИТОГО</th>
+                                                                <th rowspan="2">Отказ</th>
+                                                                <th colspan="2">Просрочено</th>
+                                                                <th colspan="2">Госзадание</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Кол-во</th>
+                                                                <th>Пошлина (руб.)</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                                <th>Кол-во</th>
+                                                                <th>Процент</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="itemsmevgraphic" class="mb-3 item-wrapper">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-2">Динамика по запросам в СМЭВ</h4>
+                                <div class="card">
+                                    <div class="card-body border border-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form id="statisticsSmevForm" asp-action="StatisticsSmevGraphic" asp-controller="Statistics" method="get" role="form">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Филиал</label>
+                                                            <select name="mfcId" class="form-select select select2-search" data-all="true" disabled data-mfc></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Сотрудник</label>
+                                                            <select name="employeeId" class="form-select select select2-search" disabled data-employee></select>
+                                                        </div>
+                                                         <div class="form-group col-sm-3">
+                                                            <label class="form-label">Сервис</label>
+                                                            <select name="smevId" class="form-select select select2-search" disabled data-smev></select>
+                                                        </div>
+                                                         <div class="form-group col-sm-3">
+                                                            <label class="form-label">Запрос</label>
+                                                            <select name="smevRequestId" class="form-select select select2-search" disabled data-smevrequest></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label class="form-label">Период</label>
+                                                                    <div class="input-group w-100" id="date-type">
+                                                                        <input type="radio" name="periodTypeId" id="statisticsSmevTypeDay" class="btn-check" value="1" checked data-type-day>
+                                                                        <label class="btn btn-outline-primary w-50" for="statisticsSmevTypeDay">День</label>
+                                                                        <input type="radio" name="periodTypeId" id="statisticsSmevTypeYear" class="btn-check" value="2" data-type-year>
+                                                                        <label class="btn btn-outline-primary w-50" for="statisticsSmevTypeYear">Год</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 wrapper" style="display:none">
+                                                                    <label for="yearId" class="form-label">Год</label>
+                                                                    <select name="yearId" asp-items="@SelectListViewModel.YearTypeList(true)" class="form-select select2-nosearch" disabled data-year></select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-sm-2 d-flex align-items-end justify-content-end">
+                                                            <button id="statisticsSmevSubmit" type="submit" class="btn btn-primary d-none" data-edizm="Количество" data-names="Все" data-submit>Cформировать</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="chartSmev">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="itemsmev" class="mb-3 item-wrapper">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-2">Данные по запросам в СМЭВ</h4>
+                                <div class="card">
+                                    <div class="card-body border border-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form id="statisticsSmevDataForm" asp-action="PartialSmevDataJson" asp-controller="Statistics" method="get" role="form">
+                                                    <div class="row mb-4">
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Дата</label>
+                                                            <div class="input-daterange input-group" data-range>
+                                                                <input type="text" name="dateStart" id="report_date_start" class="form-control datepick" value="@DateTime.Now.AddDays(-days).ToShortDateString()">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text bg-primary h-100"><i class="bx bxs-calendar text-white"></i></span>
+                                                                </div>
+                                                                <input type="text" name="dateStop" id="report_date_stop" class="form-control datepick" value="@DateTime.Now.AddDays(-1).ToShortDateString()">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Филиал</label>
+                                                            <select name="mfcId" class="form-select select select2-search" data-all="true" disabled data-mfc></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Сотрудник</label>
+                                                            <select name="employeeId" class="form-select select select2-search" disabled data-employee></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Сервис</label>
+                                                            <select name="smevId" class="form-select select select2-search" disabled data-smev></select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        @*<hr>*@
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="dataSmev">
+                                                    <table id="dataTableSmev" class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Наименование</th>
+                                                                <th>Отправлено</th>
+                                                                <th>Получено</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="itemsmevmfc" class="mb-3 item-wrapper">
+                         <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-2">Данные по запросам в СМЭВ в разрезе филиалов</h4>
+                                <div class="card">
+                                    <div class="card-body border border-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form id="statisticsSmevMfcForm" asp-action="PartialSmevMfcDataJson" asp-controller="Statistics" method="get" role="form">
+                                                    <div class="row mb-4">
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Дата</label>
+                                                            <div class="input-daterange input-group" data-range>
+                                                                <input type="text" name="dateStart" id="report_date_start" class="form-control datepick" value="@DateTime.Now.AddDays(-days).ToShortDateString()">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text bg-primary h-100"><i class="bx bxs-calendar text-white"></i></span>
+                                                                </div>
+                                                                <input type="text" name="dateStop" id="report_date_stop" class="form-control datepick" value="@DateTime.Now.AddDays(-1).ToShortDateString()">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Сервис</label>
+                                                            <select name="smevId" class="form-select select select2-search" disabled data-smev></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Запрос</label>
+                                                            <select name="smevRequestId" class="form-select select select2-search" disabled data-smevrequest></select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        @*<hr>*@
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="dataSmevMfc">
+                                                    <table id="dataTableSmevMfc" class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Наименование</th>
+                                                                <th>Отправлено</th>
+                                                                <th>Получено</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="itemsmevemployee" class="mb-3 item-wrapper">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="mb-2">Данные по запросам в СМЭВ в разрезе сотрудников</h4>
+                                <div class="card">
+                                    <div class="card-body border border-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form id="statisticsSmevEmployeeForm" asp-action="PartialSmevEmployeeDataJson" asp-controller="Statistics" method="get" role="form">
+                                                    <div class="row mb-4">
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Дата</label>
+                                                            <div class="input-daterange input-group" data-range>
+                                                                <input type="text" name="dateStart" id="report_date_start" class="form-control datepick" value="@DateTime.Now.AddDays(-days).ToShortDateString()">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text bg-primary h-100"><i class="bx bxs-calendar text-white"></i></span>
+                                                                </div>
+                                                                <input type="text" name="dateStop" id="report_date_stop" class="form-control datepick" value="@DateTime.Now.AddDays(-1).ToShortDateString()">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Филиал</label>
+                                                            <select name="mfcId" class="form-select select select2-search" data-all="true" disabled data-mfc></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Сервис</label>
+                                                            <select name="smevId" class="form-select select select2-search" disabled data-smev></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <label class="form-label">Запрос</label>
+                                                            <select name="smevRequestId" class="form-select select select2-search" disabled data-smevrequest></select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        @*<hr>*@
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="dataSmevEmployee">
+                                                    <table id="dataTableSmevEmployee" class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Сотрудник</th>
+                                                                <th>Отправлено</th>
+                                                                <th>Получено</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script src="~/assets/vendor/libs/d3/d3.js"></script>
+    <script src="~/assets/vendor/libs/c3/c3.js"></script>
+    <script src="~/assets/js/pages/statistics.js"></script>
+}

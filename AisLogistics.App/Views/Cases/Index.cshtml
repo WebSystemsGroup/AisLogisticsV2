@@ -1,0 +1,353 @@
+﻿@using AisLogistics.App.ViewModels.Cases
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ViewModelBuilder
+@{
+    ViewBag.Title = Model.ViewTitle;
+    var responseData = Model.Model as SearchCasesResponseData;
+    var filterselect = new string[] { "По умолчанию", "по дате возрастания", "по дате убывания", "по дням возростания", "по дням убывания" };
+    var filterSelectOptions =  string.Join("", filterselect.Select((s,i) => $"<option value=\"{i}\">{s}</option>"));
+    var isView = (bool)ViewBag.CasesAllView;
+}
+
+<link rel="stylesheet" href="~/assets/css/css-reestr.css" asp-append-version="true" />
+
+<section class="search-bar-wrapper">
+    
+    <!-- Search Bar end -->
+    <!-- seach result section -->
+    <div class="card">
+        <div class="card-body">
+            <!-- datatable start -->
+            <div class="table-responsive">
+
+                <table id="@Model.TableName" data-action-table="@Model.TableMethodAction" class="table table-sm table-striped w-100"></table>
+            </div>
+            <!-- datatable ends -->
+        </div>
+    </div>
+</section>
+
+@section Scripts
+    {
+    <script>
+        const $table = $("#@(Model.TableName)");
+     
+        $(document).ready(function () {
+           
+          
+
+            $table.DataTable({
+                sDom: "<'row justify-content-between mb-3'<'col-sm-12 col-md-4 padding-left-1'<'#officeFilter'>><'col-sm-12 col-md-6'><'col-sm-12 col-md-2 padding-right-1'<'#sortFilter'>>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                processing: true,
+                serverSide: true,
+                ordering: false,
+                filter: true,
+                searchDelay: 1500,
+                ajax: {
+                    url: $table.data('action-table'),
+                    type: "POST",
+                    datatype: "json",
+                    dataSrc: function(json) {
+                        return json.data;
+                    }
+                },
+                initComplete: function () {
+                    let dateAddColumn = this.api().column(1);
+                    let caseColumn = this.api().column(2);
+                    let customerColumn = this.api().column(3);
+                    let servicesColumn = this.api().column(4);
+                    let officesColumn = this.api().column(5);
+                    let currentEmployeeColumn = this.api().column(6);
+                    let statusColumn = this.api().column(7);
+                    let stageColumn = this.api().column(8);
+                    let filterSelectColumn = this.api().column(9);
+                    let officeSelectColumn = this.api().column(10);
+
+                    var $sortFilter = $('#sortFilter');
+                    var $customerSelect = $('<select id="selectsortFilter" class="form-select form-select-sm">@Html.Raw(filterSelectOptions)</select>')
+                        .appendTo($sortFilter)
+                        .select2({
+                            language: "ru",
+                            minimumResultsForSearch: -1
+                        })
+                        .on('change', function () { 
+                             filterSelectColumn.search($(this).val()).draw();
+                        });
+
+                   var $officeFilter = $('#officeFilter');
+                   if('@isView'==='True') {
+                        var $officeFilterSelect = $('<select id="selectOfficeFilter" class="form-select form-select-sm"><option value="@Guid.Empty">ВСЕ</option>@Html.Raw(ViewBag.Mfc)</select>')
+                            .appendTo($officeFilter)
+                            .select2({
+                                language: "ru",
+                            })
+                            .on('change', function () {
+                                officeSelectColumn.search($(this).val()).draw();
+                            });
+                   }
+
+                   $('#dateAdd').datepicker({
+                      language: "ru",
+                      autoclose: true,
+                      format: 'dd.mm.yyyy',
+                   }).on('change', function () { 
+                            dateAddColumn.search($(this).val()).draw();
+                   });
+
+                    $('#SServicesId').select2({
+                         placeholder: "Услуга",
+                         language: "ru",
+                         allowClear: true
+                    }).on('change', function () { 
+                            servicesColumn.search($(this).val()).draw();
+                    });
+
+                    $('#SOfficesId').select2({
+                        placeholder: "Орган Власти",
+                        language: "ru",
+                        allowClear: true
+                    }).on('change', function () { 
+                            officesColumn.search($(this).val()).draw();
+                    });
+
+                    $('#SStatusId').select2({
+                        placeholder: "Статус",
+                        minimumResultsForSearch: -1,
+                        language: "ru",
+                        allowClear: true
+                    }).on('change', function () { 
+                            statusColumn.search($(this).val()).draw();
+                    });
+
+                    $('#SStageId').select2({
+                        placeholder: "Этап",
+                        minimumResultsForSearch: -1,
+                        language: "ru",
+                        allowClear: true
+                     }).on('change', function () { 
+                            stageColumn.search($(this).val()).draw();
+                        });
+
+                    $('#caseId').on('change', function () {
+                        if ($(this).val().length >= 3 || $(this).val().length == 0)
+                            caseColumn.search($(this).val()).draw();
+                        });
+
+                    $('#customer').on('change', function () {
+                        if ($(this).val().length >= 3 || $(this).val().length == 0)
+                            customerColumn.search($(this).val()).draw();
+                        });
+
+                    $('#currentEmployee').on('change', function () { 
+                        if($(this).val().length>=3 || $(this).val().length==0)
+                        currentEmployeeColumn.search($(this).val()).draw();
+                    });
+
+                    $('#checkSelectedRowMain').change(function () {
+                        let value = $('#checkSelectedRowMain').prop("checked");
+                        $('[data-check]').each(function (i, el) {
+                            $(el).prop("checked", value)
+                        });
+                    });
+
+                    $('[data-check]').change(function () {
+                        if ($('#checkSelectedRowMain').prop("checked"))
+                            $('#checkSelectedRowMain').prop("checked", false);
+                    });
+
+                    $('#casesStageAddModal').on('click', function() {
+                        let mass = [];
+                        $('[data-check]').each(function (i, el) {
+                            if ($(el).prop("checked")) {
+                                mass.push($(el).attr('data-service-id'));
+                            }
+                        });
+
+                        CaseAddStage(mass);
+                    });
+
+                },
+                columns: [
+                    {
+                        title: `<div class="d-flex justify-content-between align-items-center"><input type="checkbox" data-check-main id="checkSelectedRowMain">
+                                    <div>
+                                        <a id="casesStageAddModal" href="javascript:void(0);"  title="Добавить">
+                                            <span class="action-icon favorite">
+                                                <i class="bx bx-plus bx-md"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>`,
+                        className: "case-check-column",
+                        name: 'dataCheck',
+                        render: function (data, type, row) {
+                            let content = `<input type="checkbox" data-service-id="${row.service.id}" data-check id="checkSelectedRow">`;
+                            return content;
+                        }
+                    },
+                    {
+                        title:  `<div class="input-group input-group-merge"> 
+                                     <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                     <input type="text" id="dateAdd"  class="form-control datepick" placeholder="Дата">
+                                 </div>`,
+                        className: "case-dateAdd-column text-center", 
+                        name: 'dateAdd',
+                        data: 'casesMainDto.dateAdd'
+                    },
+                    {
+                        title: '<input id="caseId" class="form-control w-100" type="text" placeholder="Номер обращения"/>',
+                        className: "case-number-column",
+                        name: 'caseId',
+                        //data: 'casesMainDto.caseId',
+                        render: function (data, type, row) {
+                            let str = `<div id="caseIdNumber">${row.casesMainDto.caseId}</div>`;
+                            if (row.casesMainDto.numberPKPVD !== null) {
+                                str += `<div>ПК ПВД: ${row.casesMainDto.numberPKPVD}</div>`
+                            }
+                            return str;
+                        }
+                    },
+                    {
+                        title: '<input id="customer" class="form-control w-100" type="text" placeholder="Заявитель"/>',
+                        className: "case-customer-column",
+                        name: 'customer', 
+                        render: function (data, type, row) {
+                            let content = `<div>${row.casesMainDto.applicant.name}</div>`;
+                            if (row.casesMainDto.applicant.address !== null)
+                                content += `<div class="small"><i class="bx bx-map me-1"></i>${row.casesMainDto.applicant.address}</div>`;
+                            if (row.casesMainDto.applicant.phone !== null)
+                                content += `<div class="small"><i class="bx bx-phone me-1"></i>${row.casesMainDto.applicant.phone}</div>`;
+                            return content;
+                        }
+                    },
+                    {
+                        title: `<select id="SServicesId"  class="form-select" placeholder="Услуга">
+                                         <option value="">Не задано</option>
+                                         @Html.Raw(ViewBag.Services)
+                                </select>`,
+                        className: "case-services-column",
+                        name: 'servicesId', 
+                        render: function (data, type, row) {
+                            let str =  row.service.name.length > 90 ? row.service.name.slice(0, 90) + "..." : row.service.name 
+                            return `<div title="${row.service.name}">${str}</div>`;
+                        }
+                    },
+                    {
+                        title: `<select id="SOfficesId"  class="form-select" placeholder="Орган власти">
+                                         <option value="">Не задано</option>
+                                        @Html.Raw(ViewBag.Offices)
+                                </select>`,
+                        className: "case-offices-column",
+                        name: 'officesId', 
+                        data: 'service.office'   
+                    },
+                    {
+                        title: '<input id="currentEmployee" class="form-control w-100" type="text" placeholder="Исполнитель"/>',
+                        className: "case-currentEmployee-column",
+                        name: 'currentEmployee', 
+                        render: function (data, type, row) {
+                            return `<div>
+                                    <div class="text-bold-500">${row.service.serivesStage.employeeCurrent.name}</div>
+                                            <small class="text-muted d-block">${row.service.serivesStage.employeeCurrent.job}</small>
+                                            <small class="text-muted">${row.service.serivesStage.office}</small>
+                                    </div>`;
+                        }
+                    },
+                    {
+                        title: `<select id="SStatusId"  class="form-select" placeholder="Статус">
+                                         <option value="">Не задано</option>
+                                         @Html.Raw(ViewBag.Statuses)
+                                </select>`,
+                        className: "case-status-column",
+                        name: 'statusId', 
+                        render: function (data, type, row) {
+                              let colorStatus = ""; 
+                              switch(row.service.status.id) {
+                                  case 0:
+                                    colorStatus = "bg-warning";   
+                                    break;
+                                  case 1:
+                                    colorStatus = "bg-success"; 
+                                    break;
+                                  case 2:
+                                    colorStatus = "bg-secondary"; 
+                                    break;
+                                  case 4:
+                                    colorStatus = "bg-secondary"; 
+                                    break;
+                                  case 5:
+                                    colorStatus = "bg-danger"; 
+                                    break;
+                                  case 6:
+                                    colorStatus = "bg-warning";
+                                    break;
+                              };
+                            return `<div class="badge ${colorStatus} text-white">${row.service.status.name}</div>`;
+                        }
+                    },
+                    {
+                        title: `<select id="SStageId"  class="form-select" placeholder="Этап">
+                                         <option value="">Не задано</option>
+                                         @Html.Raw(ViewBag.Stages)
+                                </select>`,
+                        className: "case-stage-column",
+                        name: 'stageId',
+                        render: function (data, type, row) {
+                            let colorDay = row.service.serivesStage.days < 0 ? "text-danger" : row.service.serivesStage.days <= 3 ? "text-warning" : "text-success";
+                            let content = "";
+                            if (row.service.serivesStage.days !== null)
+                                content += `<div class="${colorDay} text-end ">${row.service.serivesStage.days}</div>`;
+                               
+                            else content += `<div class="text-warning text-end ">-</div>`;
+
+                            content += `<div class="text-warning text-end">${row.service.serivesStage.stage.name}</div>`;
+                         
+                            return content;
+                        }
+                    },
+                    {
+                        name: "filterSelect",
+                        title: '',
+                        visible: false,
+                        orderable: false,
+                        render: function(data, type, row) {
+                            return "";
+                        }
+                    },
+                    {
+                        name: "officeFilterSelect",
+                        title: '',
+                        visible: false,
+                        orderable: false,
+                        render: function (data, type, row) {
+                            return "";
+                        }
+                    },
+                ]
+            }).on('click', 'tbody tr', function() {
+                var val = $(this).find('td.case-number-column #caseIdNumber').text();
+                window.open(`Cases/Details?id=${val}`, "_blank");
+            }).on('click', '[data-check]', function (e) { e.stopPropagation();});
+        });
+
+        function CaseAddStage(mass) {
+            
+            $.ajax({
+                url: '/Cases/ServicesStageAddModal',
+                type: 'POST',
+                data: { id: mass },
+                beforeSend: () => {
+                    $.pageBlock();
+                },
+                complete: () => {
+                    $.unblockUI();
+                },
+                success: function (content) {
+                    $('#modalContainerOver').html(content).modal('show');
+                }
+            });
+        };
+    </script>
+}

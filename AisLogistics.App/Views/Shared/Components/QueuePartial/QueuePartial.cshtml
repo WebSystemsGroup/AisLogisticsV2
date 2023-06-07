@@ -1,0 +1,117 @@
+﻿@using AisLogistics.App.Models.Queue
+
+<link rel="stylesheet" href="~/assets/css/queue-details.css" asp-append-version="true" />
+
+@*<div class="col-sm-2 col-2 header_notification" id="electronicQueue">
+
+    <div class="col-sm-2 col-2 header_notification">
+        <a class="me-3 dropdown-toggle hidden-arrow"
+           href="javascript:void(0);"
+           data-bs-toggle="dropdown"
+           data-bs-auto-close="outside"
+           aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="bx feather feather-users bx-sm"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span class="badge rounded-pill badge-notifications bg-danger" id="queueHeadCountAbon"></span>
+            <span class="fw-bold ms-2">
+                <span id="electronicQueueActiveNum"></span>
+                <span id="electronicQueueActiveTime"></span>
+            </span>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-end dropdown-arrow dropdown-lg scoreboard-dropdown" id="electronicQueueContent">
+            <div class="row no-gutters justify-content-end">
+                <div class="col-12 position-static queue-width">
+                    <div class="queue-height-25 m-2">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                Окно: <span id="queueMyWindowNum"></span>
+                            </div>
+                            <div>
+                                <span id="queueActiveTime"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scoreboard bx-shadow m-2">
+                        <!-- номер абонента -->
+                        <h2 class="text-success line_text"> --- </h2>
+                        <input class="input" id="queue_num" name="queue_num" type="hidden">
+                    </div>
+                    <div class="queue-height-25 m-2">
+                        Всего клиентов: <span id="queueAllAbonentsCount"></span>
+                    </div>
+                    <div class="m-2">
+                        <div class="btn-group  w-100" role="group">
+                            <!-- показать список людей в очереди -->
+                            <button type="button" class="btn btn-success btn-submenu btn-width-badge waves-effect waves-light count-abon">
+                                <span class="badge bg-danger badge-left count-abon"></span>
+                                <i class="bx bx-list-ul"></i>
+                            </button>
+                            <!-- вызов следующего -->
+                            <button type="button" class="btn btn-success flex-grow-1 waves-effect waves-light" data-queue-next="0">Вызвать</button>
+                        </div>
+                        <div id="scoreboard-next" class="scoreboard-submenu bx-shadow custom-scrollbar">
+                            <h6 class="m-0 pb-3 text-center border-bottom">На очереди</h6>
+                            <!-- список людей в очереди -->
+                            <ul class="list-unstyled h-100"></ul>
+                        </div>
+                    </div>
+                    <div class="m-2">
+                        <div class="btn-group btn-group-block w-100" role="group">
+                            <!-- показать список людей в очереди -->
+                            <button type="button" class="btn btn-info btn-submenu btn-width-badge waves-effect waves-light count-abon">
+                                <span class="badge bg-danger badge-left redirect-abon"></span>
+                                <i class="bx bx-exit"></i>
+                            </button>
+                            <!-- вызов следующего -->
+                            <button type="button" class="btn btn-info flex-grow-1 waves-effect waves-light">Передать</button>
+                        </div>
+                        <div id="scoreboard-redirect-list" class="scoreboard-submenu bx-shadow custom-scrollbar">
+                            <h6 class="m-0 pb-3 text-center border-bottom">Передать</h6>
+                            <!-- список людей в очереди -->
+                            <ul class="list-unstyled h-100"></ul>
+                        </div>
+                    </div>
+                    <div class="m-2">
+                        <div class="btn-group btn-group-block w-100" role="group">
+                            <!-- показать список людей в очереди -->
+                            <button type="button" class="btn btn-beige btn-submenu btn-width-badge waves-effect waves-light count-abon">
+                                <span class="badge bg-danger badge-left deferred-abon"></span>
+                                <i class="bx bx-history"></i>
+                            </button>
+                            <!-- вызов следующего -->
+                            <button type="button" class="btn btn-beige flex-grow-1 waves-effect waves-light">Отложить</button>
+                        </div>
+                        <div id="scoreboard-deferred" class="scoreboard-submenu bx-shadow custom-scrollbar">
+                            <h6 class="m-0 pb-3 text-center border-bottom">Отложенные</h6>
+                            <!-- список людей в очереди -->
+                            <ul class="list-unstyled h-100"></ul>
+                        </div>
+                    </div>
+                    <div class="m-2">
+                        <div class="btn-group btn-group-block w-100" role="group">
+                            <button type="button" class="btn btn-danger flex-grow-1 waves-effect waves-light" data-queue-next="1">Завершить</button>
+                        </div>
+                    </div>
+                    <div class="m-2">
+                        <div class="btn-group btn-group-block w-100" role="group">
+                            <button type="button" class="btn btn-secondary btn-submenu btn-submenu-max flex-grow-1 w-100 waves-effect waves-light registration">Пред. запись</button>
+                        </div>
+                        <div id="scoreboard-registration" class="scoreboard-submenu bx-shadow custom-scrollbar">
+                            <h6 class="m-0 pb-3 text-center border-bottom">Пред. запись</h6>
+                            <!-- список людей в очереди -->
+                            <ul class="list-unstyled h-100">
+                                <li class="d-flex justify-content-between align-items-center p-2 border-bottom"><a asp-controller="Queue" asp-action="AddPreRegestrationModal" data-bs-toggle="tooltip" data-btn-type="modal" class="btn btn-success btn-sm waves-effect waves-light w-100">Записать</a></li>
+                                <li class="d-flex justify-content-between align-items-center p-2 border-bottom"><a asp-controller="Queue" asp-action="AddCancelPreRegestrationModal" data-bs-toggle="tooltip" data-btn-type="modal" class="btn btn-danger btn-sm waves-effect waves-light w-100">Отменить</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+<script src="~/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="~/assets/js/pages/queue-details.js"></script>
+

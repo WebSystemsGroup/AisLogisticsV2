@@ -1,0 +1,49 @@
+﻿@using System.Resources
+<nav class="row align-items-center mb-3">
+    <div class="col-sm-auto navbar-brand app-brand demo d-none d-xxl-flex py-0 me-3">
+        <div class="header_logo">
+            <a href="/">
+                <img src="/img/logo.svg" alt="">
+            </a>
+        </div>
+    </div>
+    <div class="navbar-expand-xl col-xl-7 col-xxl-6 col-2 col-lg-4">
+        <partial name="LayoutPartial/_MainMenuPartialV2" />
+    </div>
+    <div class="col">
+        <div class="row align-items-center header_create justify-content-end">
+
+            @if (User.HasClaim(AccessKeyNames.DataCase, AccessKeyValues.Add))
+            {
+
+                <a asp-action="Create" asp-controller="Cases" class="col-sm-4 col-4 btn btn-primary col-xl-6 col-xxl-6">
+                    <P>Создать</P>
+                </a>
+            }
+
+            @*<div class="col-sm-2 col-2">
+            <a class="nav-link style-switcher-toggle hide-arrow" href="javascript:void(0);">
+            <i class="bx bx-sm"></i>
+            </a>
+            </div>
+            *@
+
+            <!-- Notification -->
+            @await Component.InvokeAsync("NotificationPartial")
+
+            <!--/ Notification -->
+            <!-- Queue -->
+            @if (User.HasClaim(AccessKeyNames.EmployeeQueue, AccessKeyValues.View))
+            {
+                @await Component.InvokeAsync("QueuePartial")
+            }
+
+            <!-- Queue -->
+            <!-- User -->
+            @await Component.InvokeAsync("LoginPartial")
+            <!--/ User -->
+
+        </div>
+    </div>
+</nav>
+

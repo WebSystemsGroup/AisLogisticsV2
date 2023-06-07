@@ -1,0 +1,149 @@
+﻿@model ViewModelBuilder
+@{
+    ViewBag.Title = Model.ViewTitle;
+}
+
+<!-- table -->
+<section id="content-datatable">
+    <div class="row">
+        <div class="col-12">
+                @if (Model.IsVisibleTitle)
+                {
+                    <div class="card-header">
+                        <h4 class="card-title">@Model.ViewTitle</h4>
+                    </div>
+                }
+
+            <div class="row mb-3">
+                        <div class="col-md-10">
+                            @if (Model.IsVisibleDescription)
+                            {
+                                <p class="card-text">
+                                    @Model.ViewDescription
+                                </p>
+                            }
+                        </div>
+                <div class="col-md-2 text-md-end directory_search">
+                            <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
+                                <i class="bx bx-plus"></i> Добавить
+                            </button>
+                        </div>
+                    </div>
+                
+                    <div class="table-responsive">
+                <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceEmployee" class="table directory_names-items"></table>
+                    </div>
+        </div>
+    </div>
+</section>
+<!--/ table -->
+@section Scripts
+{
+    <script>
+        const $table = $('#@(Model.TableName)'),
+            isCanAdd = true,
+            isCanEdit = true,
+            isCanRemove = true;
+
+        $(document).ready(function() {
+            $table.DataTable({
+                sDom: "<'row'<'col-sm-12 col-md-6 'f><'col-sm-12 col-md-5'l>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                processing: true,
+                serverSide: true,
+                filter: true,
+                searchDelay: 1500,
+                order: [[1, 'asc']],
+                ajax: {
+                    url: $table.data('action-table'),
+                    type: "POST",
+                    datatype: "json",
+                    dataSrc: function(json) {
+                        return json.data;
+                    }
+                },
+                initComplete: function () {
+                    $('[name="mainDataTable_length"]')
+                    .select2({minimumResultsForSearch: Infinity})
+                },
+                columnDefs: [
+                    {
+                        data: "id",
+                        targets: 0,
+                        title: '',
+                        visible: false,
+                        orderable: false
+                    },
+                    {
+                        targets: 1,
+                        title: 'Наименование',
+                        orderable: true
+                    },
+                    {
+                        targets: 2,
+                        title: 'Офис',
+                        orderable: true
+                    },
+                    {
+                        targets: 3,
+                        title: 'Должность',
+                        orderable: true
+                    },
+                    {
+                        targets: 4,
+                        title: 'Статус',
+                        className: "text-center",
+                        orderable: true
+                    },
+                    {
+                        targets: 5,
+                        title: 'Исполнение',
+                        className: "text-center",
+                        orderable: false
+                    },
+                    {
+                        targets: 6,
+                        title: 'Активность',
+                        className: "text-center",
+                        orderable: false
+                    }
+                ],
+                columns: [
+                    {},
+                    {
+                        data: "employeeName",
+                        render: function(data, type, row) {
+                            return `<a href="/Reference/EmployeeDetails/${row.sEmployeesId}"><h2>${data}</h2></a>`;
+                        }
+                    },
+                    { data: "officeName" },
+                    { data: "jobPositionName" },
+                    { data: "statusName" },
+                    {
+                        data: "isExecution",
+                        render: function(data, type, row) {
+                            return isChecked(data);
+                        }
+                    },
+                    {
+                        data: "isActive",
+                        render: function(data, type, row) {
+                            return isChecked(data);
+                        }
+                    }
+                ]
+        });
+
+            $table.on("reload", () => {
+                $table.DataTable().ajax.reload(null, false);
+            });
+
+            var isChecked = function(data)
+            {
+                return `${data === true ? '<span class="check"><i class="bi bi-check"></i></span>' : '<i class="bx bx-x-circle text-danger"></i > '}`;
+            }
+           
+        });
+    </script>
+}

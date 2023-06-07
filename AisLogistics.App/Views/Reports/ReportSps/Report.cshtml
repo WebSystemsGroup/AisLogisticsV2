@@ -1,0 +1,51 @@
+﻿@using AisLogistics.App.Models.Reports;
+@using Newtonsoft.Json;
+@model AisLogistics.App.ViewModels.Reports.ReportViewResponseModel
+@{
+    var data = Model?.DataList?.Cast<ReportSps>();
+    int i = 0;
+    int count = 0;
+}
+
+<div class="card">
+    <div class="card-body mx-auto">
+        @if (data != null && data.Any())
+        {
+            <div class="pt-3 pb-3">
+                <table class="table table-bordered fs-12" style="page-break-after: always;">
+                    <thead>
+                        <tr>
+                            <th  style="padding: 5px; width: 35px;">№</th>
+                            <th style="padding: 5px;">Наименование услуги</th>
+                            <th style="padding: 5px;">Количество</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in data)
+                        {
+                            <tr>
+                                <td style="padding: 5px;" scope="row">@(++i)</td>
+                                <td style="padding: 5px;">@item.service_name</td>
+                                <td style="padding: 5px;text-align:center;">@(item.count)</td>
+                            </tr>
+
+                            {
+                                count += item.count;
+                            }
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2" style="padding: 5px;"><strong>ИТОГО</strong></td>
+                            <td style="padding: 5px;text-align:center;"><strong>@count</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        }
+        else
+        {
+        <span class="text-muted">Нет данных</span>
+        }
+    </div>
+</div>

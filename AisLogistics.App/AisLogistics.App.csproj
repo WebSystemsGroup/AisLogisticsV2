@@ -1,0 +1,105 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>aspnet-AisLogistics-8A8769DC-395E-4475-B2F9-47F62FFDE8B1</UserSecretsId>
+		<AnalysisLevel>latest-Recommended</AnalysisLevel>
+		<AssemblyVersion>1.0</AssemblyVersion>
+		<RootNamespace>AisLogistics.App</RootNamespace>
+		<AllowUntrustedCertificate>true</AllowUntrustedCertificate>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Pages\**" />
+	  <Content Remove="Pages\**" />
+	  <EmbeddedResource Remove="Pages\**" />
+	  <None Remove="Pages\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Remove="Views\Reports\ReestrSmevByOfficeV1.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="12.0.0" />
+		<PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="6.0.0" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+		<PackageReference Include="Clave.Expressionify" Version="6.5.0" />
+		<PackageReference Include="Clave.Expressionify.Generator" Version="6.5.0" />
+		<PackageReference Include="DataTables.AspNet.AspNetCore" Version="2.0.2" />
+		<PackageReference Include="DataTables.AspNet.Core" Version="2.0.2" />
+		<PackageReference Include="DocumentFormat.OpenXml" Version="2.18.0" />
+		<PackageReference Include="FastReport.Core" Version="2022.1.6" />
+		<PackageReference Include="FastReport.Data.Postgres" Version="2022.1.0" />
+		<PackageReference Include="FastReport.Web" Version="2022.1.6" />
+		<PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.372" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.9" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+		<PackageReference Include="MimeTypes" Version="2.4.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="NinjaNye.SearchExtensions" Version="3.0.1" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.7" />
+		<PackageReference Include="NToastNotify" Version="8.0.0" />
+		<PackageReference Include="PdfSharp" Version="1.50.5147" />
+		<PackageReference Include="Sentry.AspNetCore" Version="3.21.0" />
+		<PackageReference Include="SharpZipLib" Version="1.4.0" />
+		<PackageReference Include="SmartBreadcrumbs" Version="3.6.1" />
+
+		<PackageReference Include="SmevGate.Client.Core" Version="1.0.25" />
+
+		<PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="6.15.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AisLogistics.DataLayer\AisLogistics.DataLayer.csproj" />
+		<ProjectReference Include="..\AisLogistics.WorkerService\AisLogistics.WorkerService.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Views\SmevForm\Other\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Views\Reference\Services\Details\Index.cshtml" />
+	  <None Include="Views\Reference\Services\Index.cshtml" />
+	  <None Include="Views\Reference\Services\_ModalChangeService.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Resource.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resource.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Resource.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AdditionalFiles Include="Views\SmevForm\PFR\FindSnils\Index.cshtml" />
+	  <AdditionalFiles Include="Views\SmevForm\PFR\PfrZdp\Index.cshtml" />
+	  <AdditionalFiles Include="Views\SmevForm\Rosim\Excerpt\Index.cshtml" />
+	  <AdditionalFiles Include="Views\SmevForm\Rosim\LandPreAgreement\Index.cshtml" />
+	  <AdditionalFiles Include="Views\SmevForm\RosReestr\EgrnSubjectInfo\Index.cshtml" />
+	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

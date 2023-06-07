@@ -1,0 +1,558 @@
+﻿@using AisLogistics.App.ViewModels.Cases
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ViewModelBuilder
+@{
+    ViewBag.Title = Model.ViewTitle;
+    var responseData = Model.Model as SearchCasesResponseData;
+    var filterselect = new string[] { "По умолчанию", "по дате возрастания", "по дате убывания" };
+    var statusselect = new string[] { "Просрочено", "Отправлено", "Ошибка", "Получен ответ", "Неизвестно" };
+
+    var smevStatusList = new List<SelectListItem>
+    {
+        new("Просрочено", "0"),
+        new("Отправлено", "1"),
+        new("Ошибка", "2"),
+        new("Получен ответ", "3"),
+        new("Неизвестно", "4"),
+    };
+    var filterSelectOptions = string.Join("", filterselect.Select((s, i) => $"<option value=\"{i}\">{s}</option>"));
+    var statusSelectOptions = string.Join("", statusselect.Select((s, i) => $"<option value=\"{i}\">{s}</option>"));
+    var isView = (bool)ViewBag.CasesAllView;
+}
+
+<link rel="stylesheet" href="~/assets/css/css-reestr.css" asp-append-version="true" />
+
+<section class="search-bar-wrapper">
+    <!-- Search Bar -->
+    <form id="services-search-form" class="mb-3">
+        <div class="row">
+            <div class="col-3">
+                @if (isView)
+                {
+                    <select class="form-select select select2-search" asp-for="@responseData.MfcId" asp-items="@responseData.MfcList" form="services-search-form">
+                        <option value="">ВСЕ</option>
+                    </select>
+                }
+                else
+                {
+                    <select class="form-select select select2-search" asp-for="@responseData.MfcId" asp-items="@responseData.MfcList" form="services-search-form" disabled></select>
+                }
+            </div>
+            <div class="col-7">
+                <div class="search-bar">
+                    <!-- input search -->
+                    <fieldset class="page-search-input input-group position-relative m-0">
+                        <input type="search" asp-for="@responseData.Query" class="form-control rounded-right shadow ps-2" placeholder="Номер обращения, ФИО заявителя" data-query>
+                        @* <button class="btn btn-primary search-btn rounded" type="submit">
+                        <span class="d-none d-sm-block">Поиск</span>
+                        <i class="bx bx-search d-block d-sm-none"></i>
+                        </button>*@
+                    </fieldset>
+                    <!--/ input search -->
+                </div>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-outline-primary btn-icon"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseAdvancedSearch">
+                    <i class="bx bx-customize"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="row search-menu pt-2">
+            <div class="col-12">
+                <!-- search menu tab -->
+                <div id="accordionFilter">
+                    <div class="mb-2 collapse" id="collapseAdvancedSearch" data-parent="#accordionFilter">
+                        <div class="card collapse-icon accordion-icon-rotate">
+                            <div class="card-header">
+                                <h4 class="card-title mb-0">Расширенный поиск</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-3">
+                                        <label asp-for="@responseData.SmevServices" class="form-label">Сервис</label>
+                                        <select class="form-select select select2-search" asp-for="@responseData.SmevServices" asp-items="@responseData.SmevServicesList" form="services-search-form">
+                                            <option value="" selected>ВСЕ</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <label asp-for="@responseData.SmevRequest" class="form-label">Запрос</label>
+                                        <select class="form-select select select2-search" asp-for="@responseData.SmevRequest" asp-items="@responseData.SmevRequestList" form="services-search-form">
+                                            <option value="" selected>ВСЕ</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <label asp-for="@responseData.SmevStatusId" class="form-label">Статус</label>
+                                        <select class="form-select select select2-search" asp-for="@responseData.SmevStatusId" asp-items="@smevStatusList" form="services-search-form">
+                                            <option value="" selected>ВСЕ</option>
+                                        </select>
+                                    </div>
+                                    @*<div class="col-3">
+                                        <label asp-for="@responseData.Status" class="form-label">Статус</label>
+                                        <select class="form-select select select2-nosearch" asp-for="@responseData.Status" asp-items="@responseData.StatusList" form="services-search-form">
+                                            <option value="" selected>ВСЕ</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <label asp-for="@responseData.Stages" class="form-label">Этап</label>
+                                        <select class="form-select select select2-nosearch" asp-for="@responseData.Stages" asp-items="@responseData.StagesList" form="services-search-form">
+                                            <option value="" selected>ВСЕ</option>
+                                        </select>
+                                    </div>*@
+                                </div>
+                                <div class="row">
+                                 @*   <div class="col-3">
+                                        <label class="form-label" asp-for="@responseData.EmployeeCurrent">Принял</label>
+                                        <input class="form-control" asp-for="@responseData.EmployeeCurrent" placeholder="ФИО" form="services-search-form" data-query />
+                                    </div>*@
+                                    <div class="col-3">
+                                        <label class="form-label" asp-for="@responseData.EmployeeAdd">Исполнитель</label>
+                                        <input class="form-control" asp-for="@responseData.EmployeeAdd" placeholder="ФИО" form="services-search-form" data-query />
+                                    </div>
+                                    <div class="col-1">
+                                        <label asp-for="@responseData.PeriodId" class="form-label">Тип периода</label>
+                                        <select class="form-select select select2-nosearch" asp-for="@responseData.PeriodId" form="services-search-form">
+                                            <option value="" selected>Выбор</option>
+                                            <option value="1">Сегодня</option>
+                                            <option value="2">Неделя</option>
+                                            <option value="3">Месяц</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3 wrapper">
+                                        <label for="date_range" class="form-label">Период</label>
+                                        <div class="input-group input-daterange" id="date_range">
+                                            <input type="text" asp-for="@responseData.DateStart" placeholder="@DateTime.Today.ToShortDateString()" class="form-control" form="services-search-form" data-range>
+                                            <span class="input-group-text">по</span>
+                                            <input type="text" asp-for="@responseData.DateStop" placeholder="@DateTime.Today.ToShortDateString()" class="form-control" form="services-search-form" data-range>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 d-none">
+                                        <div class="form-check mt-4 pt-2">
+                                            <input class="form-check-input" type="checkbox" id="responseData_IsFavorite" name="responseData.IsFavorite" value="true" form="services-search-form" />
+                                            <label class="form-check-label" for="responseData_IsFavorite">Избранные</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--/ search menu tab -->
+            </div>
+        </div>
+    </form>
+    <!-- Search Bar end -->
+    <!-- seach result section -->
+    <div class="card">
+        <div class="card-body">
+            <!-- datatable start -->
+            <div class="table-responsive">
+
+                <table id="@Model.TableName" data-action-table="@Model.TableMethodAction" class="table table-sm table-striped w-100"></table>
+            </div>
+            <!-- datatable ends -->
+        </div>
+    </div>
+</section>
+
+@section Scripts
+    {
+    <script>
+        const $table = $("#@(Model.TableName)")
+        period = $("#responseData_PeriodId"),
+            //query = $("#responseData_Query"),
+            //office = $("#responseData_OfficeId"),
+            //service = $("#responseData_ServiceId"),
+            //stage = $("#responseData_Stages"),
+            //favorite = $("[name='responseData.IsFavorite']:checkbox"),
+            //dateStart = $("#responseData_DateStart"),
+            //dateStop = $("#responseData_DateStop");
+
+            $(document).ready(function () {
+
+                $('select.select2-search').select2({});
+
+                $('select.select2-nosearch').select2({
+                    minimumResultsForSearch: Infinity
+                });
+
+                $('select.select2-tags').select2({
+                    tags: true
+                });
+
+                $(".input-daterange").datepicker({
+                    todayHighlight: true,
+                    format: 'dd.mm.yyyy',
+                    language: "ru"
+                });
+
+                period.change(function () {
+                    if ($(this).val() == '') {
+                        $('#date_range').parents('.wrapper').show();
+                    }
+                    else {
+                        $('#date_range').parents('.wrapper').hide();
+                    }
+                });
+
+                $('#services-search-form select').change(function () {
+                    $table.DataTable().ajax.reload();
+                    return false;
+                });
+
+                $('#services-search-form [data-range]').on('changeDate', function () {
+                    $table.DataTable().ajax.reload();
+                    return false;
+                });
+
+                $('#services-search-form [data-query]').on('change', function () {
+                    if ($(this).val().length >= 4 || $(this).val().length == 0)
+                        $table.DataTable().ajax.reload();
+                });
+
+                $('#services-search-form').submit(function () {
+                    $table.DataTable().ajax.reload();
+                    return false;
+                });
+
+                //$("#accordionFilter select").select2({
+                //    placeholder: "Все",
+                //    language: "ru"
+                //});
+
+
+
+
+                //office.change(function(e) {
+
+                //    let arr = [];
+
+                //    $.each($(e.target).val(), function( i, v ) {
+                //      arr.push({ name: 'providersId', value: v })
+                //    });
+
+                //    $.ajax({
+                //        type: "GET",
+                //        url: 'Cases/GetServicesForProviderDataJson',
+                //        data: arr,
+                //        beforeSend: () => {
+                //            service.empty();
+                //            service.prop("disabled", true);
+                //        },
+                //        success: (data) => {
+                //           data.forEach(function(item) {
+                //               service.append($('<option>', {
+                //                value: item.id,
+                //                text:  item.serviceName
+                //                 }));
+                //           });
+                //        },
+                //        complete: () => {
+                //          service.prop("disabled", false);
+                //        }
+                //    });
+                //})
+
+
+
+
+                $table.DataTable({
+                    sDom: "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                    processing: true,
+                    serverSide: true,
+                    ordering: false,
+                    filter: true,
+                    searchDelay: 1500,
+                    ajax: {
+                        url: $table.data('action-table'),
+                        type: "POST",
+                        datatype: "json",
+                        data: function (data) {
+                            let form = document.querySelector('#services-search-form');
+                            var formData = new FormData(form);
+                            for (var pair of formData.entries()) {
+                                let name = pair[0].split('.')[1];
+                                if (pair[1]) data[name] = pair[1];
+                            }
+                        }
+                        //dataSrc: function(json) {
+                        //    return json.data;
+                        //}
+                    },
+                    initComplete: function () {
+                        // let dateAddColumn = this.api().column(1);
+                        // let caseColumn = this.api().column(2);
+                        // let customerColumn = this.api().column(3);
+                        // let servicesColumn = this.api().column(4);
+                        // let officesColumn = this.api().column(5);
+                        // let currentEmployeeColumn = this.api().column(6);
+                        // let statusColumn = this.api().column(7);
+                        // let stageColumn = this.api().column(8);
+                        // let filterSelectColumn = this.api().column(9);
+                        // let officeSelectColumn = this.api().column(10);
+
+                        // var $sortFilter = $('#sortFilter');
+                        // var $customerSelect = $('<select id="selectsortFilter" class="form-select form-select-sm">@Html.Raw(filterSelectOptions)</select>')
+                        //     .appendTo($sortFilter)
+                        //     .select2({
+                        //         language: "ru",
+                        //         minimumResultsForSearch: -1
+                        //     })
+                        //     .on('change', function () {
+                        //          filterSelectColumn.search($(this).val()).draw();
+                        //     });
+
+                        //var $officeFilter = $('#officeFilter');
+                        //if('@isView'==='True') {
+                        //     var $officeFilterSelect = $('<select id="selectOfficeFilter" class="form-select form-select-sm"><option value="@Guid.Empty">ВСЕ</option>@Html.Raw(ViewBag.Mfc)</select>')
+                        //         .appendTo($officeFilter)
+                        //         .select2({
+                        //             language: "ru",
+                        //         })
+                        //         .on('change', function () {
+                        //             officeSelectColumn.search($(this).val()).draw();
+                        //         });
+                        //}
+
+                        //$('#dateAdd').datepicker({
+                        //   language: "ru",
+                        //   autoclose: true,
+                        //   format: 'dd.mm.yyyy',
+                        //}).on('change', function () {
+                        //         dateAddColumn.search($(this).val()).draw();
+                        //});
+
+                        // $('#SServicesId').select2({
+                        //      placeholder: "Услуга",
+                        //      language: "ru",
+                        //      allowClear: true
+                        // }).on('change', function () {
+                        //         servicesColumn.search($(this).val()).draw();
+                        // });
+
+                        // $('#SOfficesId').select2({
+                        //     placeholder: "Орган Власти",
+                        //     language: "ru",
+                        //     allowClear: true
+                        // }).on('change', function () {
+                        //         officesColumn.search($(this).val()).draw();
+                        // });
+
+                        // $('#SStatusId').select2({
+                        //     placeholder: "Статус",
+                        //     minimumResultsForSearch: -1,
+                        //     language: "ru",
+                        //     allowClear: true
+                        // }).on('change', function () {
+                        //         statusColumn.search($(this).val()).draw();
+                        // });
+
+                        // $('#SStageId').select2({
+                        //     placeholder: "Этап",
+                        //     minimumResultsForSearch: -1,
+                        //     language: "ru",
+                        //     allowClear: true
+                        //  }).on('change', function () {
+                        //         stageColumn.search($(this).val()).draw();
+                        //     });
+
+                        // $('#caseId').on('change', function () {
+                        //     if ($(this).val().length >= 3 || $(this).val().length == 0)
+                        //         caseColumn.search($(this).val()).draw();
+                        //     });
+
+                        // $('#customer').on('change', function () {
+                        //     if ($(this).val().length >= 3 || $(this).val().length == 0)
+                        //         customerColumn.search($(this).val()).draw();
+                        //     });
+
+                        // $('#currentEmployee').on('change', function () {
+                        //     if($(this).val().length>=3 || $(this).val().length==0)
+                        //     currentEmployeeColumn.search($(this).val()).draw();
+                        // });
+
+                        //$('#checkSelectedRowMain').change(function () {
+                        //    let value = $('#checkSelectedRowMain').prop("checked");
+                        //    $('[data-check]').each(function (i, el) {
+                        //        $(el).prop("checked", value)
+                        //    });
+                        //});
+
+                        //$('[data-check]').change(function () {
+                        //    if ($('#checkSelectedRowMain').prop("checked"))
+                        //        $('#checkSelectedRowMain').prop("checked", false);
+                        //});
+
+                        //$('#casesStageAddModal').on('click', function () {
+                        //    let mass = [];
+                        //    $('[data-check]').each(function (i, el) {
+                        //        if ($(el).prop("checked")) {
+                        //            mass.push($(el).attr('data-service-id'));
+                        //        }
+                        //    });
+
+                        //    CaseAddStage(mass);
+                        //});
+
+                    },
+                    columns: [
+                        {
+                            title: `<div>Дата</div>`,
+                            className: "case-dateAdd-column text-centr",
+                            name: 'dateAdd',
+                            render: function (data, type, row) {
+                                let content = `<div>${row.dateCreate}</div>`;
+                                content += `<div>${row.employeeAdd.name}</div>`;
+                                content += `<small class="text-muted">${row.employeeAdd.job}</small>`
+                                return content;
+                            }
+                        },
+                        {
+                            title: '<div>Обращение</div>',
+                            className: "case-number-column",
+                            name: 'caseId',
+                            render: function (data, type, row) {
+                                let str = row.service.name.length > 90 ? row.service.name.slice(0, 90) + "..." : row.service.name
+                                let content = `<a href="javascript:void(0);" data-case-id="${row.caseId}" data-smev-id="${row.id}" id="caseNumber">${row.caseId}</a>`;
+                                content += `<div>${row.applicant.name}</div>`;
+                                content += `<div class="small text-muted">${row.service.name}</div>`;
+                                return content;
+                            }
+                        },
+                        //{
+                        //    title: `<div></div>`,
+                        //    className: "case-customer-column",
+                        //    name: 'customer',
+                        //    render: function (data, type, row) {
+                        //        let content = `<div>${row.applicant.name}</div>`;
+                        //        if (row.applicant.address !== null)
+                        //            content += `<div class="small"><i class="bx bx-map me-1"></i>${row.applicant.address}</div>`;
+                        //        if (row.applicant.phone !== null)
+                        //            content += `<div class="small"><i class="bx bx-phone me-1"></i>${row.applicant.phone}</div>`;
+                        //        return content;
+                        //    }
+                        //},
+                        //{
+                        //    title: `<div></div>`,
+                        //    className: "case-services-column",
+                        //    name: 'servicesId',
+                        //    render: function (data, type, row) {
+                        //        let str = row.service.name.length > 90 ? row.service.name.slice(0, 90) + "..." : row.service.name
+                        //        let content = `<div title="${row.service.name}">${str}</div>`;
+                        //        content += `<div class="small text-muted">${row.service.office}</div>`
+                        //        return content;
+                        //    }
+                        //},
+                        {
+                            title: `<div>Запрос</div>`,
+                            className: "case-offices-column",
+                            name: 'officesId',
+                            render: function (data, type, row) {
+                                let content = `<div >${row.smevService}</div>`;
+                                content += `<div class="small text-muted">${row.provider}</div>`;
+                                return content;
+                            }
+                        },
+                        //{
+                        //    title: `<div></div>`,
+                        //    className: "case-currentEmployee-column",
+                        //    name: 'currentEmployee',
+                        //    render: function (data, type, row) {
+                        //        return `<div>
+                        //                        <div class="text-bold-500 mb-n1">${row.employeeAdd.name}</div>
+                        //                                <small class="text-muted">${row.employeeAdd.job}</small>
+                        //                    </div>`;
+                        //    }
+                        //},
+                        {
+                            title: `<div>Статус</div>`,
+                            className: "case-status-column",
+                            name: 'statusId',
+                            render: function (data, type, row) {
+                                let colorStatus = "";
+                                let statusName = "";
+                                switch (row.status) {
+                                    case 0:
+                                        colorStatus = "bg-danger";
+                                        statusName = `Просрочено`;
+                                        break;
+                                    case 1:
+                                        colorStatus = "bg-warning";
+                                        statusName = `Отправлено`;
+                                        break;
+                                    case 2:
+                                        colorStatus = "bg-danger";
+                                        statusName = `Ошибка`;
+                                        break;
+                                    case 3:
+                                        colorStatus = "bg-success";
+                                        statusName = `Получен ответ`;
+                                        break;
+                                    case 4:
+                                        colorStatus = "bg-warning";
+                                        statusName = `Неизвестно`;
+                                        break;
+                                };
+                                return `<div class="badge ${colorStatus} text-white">${statusName}</div> <div class="small text-muted">${row.comment}</div>`;
+                            }
+                        },
+                        {
+                            title: `<div>Дата ответа</div>`,
+                            className: "case-dateAdd-column text-centr",
+                            name: 'dateResponce',
+                            render: function (data, type, row) {
+                                let content = '';
+                                content += `<div><span>Фак: </span><span>${row.dateResponseFact}</span></div>`
+                                content += `<div><span>Рег: </span><span>${row.dateResponseReg}</span></div>`
+                                return content;
+                            }
+                        }
+                    ]
+                }).on('click', 'tbody tr', function (e) {
+                    ViewSmev(e);
+                }).on('click', '#caseNumber', function (e) {
+                    OpenCase(e);
+                })
+
+                function ViewSmev(e) {
+                    let th = e.currentTarget;
+                    let td = $(th).find('td.case-number-column a');
+                    let id = $(td).data('smev-id');
+                    $.ajax({
+                        url: '/SmevBase/GetSmevDetailsModal',
+                        type: 'POST',
+                        data: { id: id },
+                        beforeSend: () => {
+                            $.pageBlock();
+                        },
+                        complete: () => {
+                            $.unblockUI();
+                        },
+                        success: function (content) {
+                            $('#mainModal').html(content).modal('show');
+                        },
+                        error: function (event) {
+                            //toastr['error'](event.responseText, 'Ошибка', {
+                            //    closeButton: true,
+                            //    tapToDismiss: false,
+                            //    rtl: isRtl
+                            //});
+                        }
+
+                    });
+                }
+
+                function OpenCase(e) {
+                    e.stopPropagation();
+                    var val = $(e.currentTarget).text();
+                    window.open(`/Cases/Details?id=${val}`, "_blank");
+                }
+            });
+    </script>
+}
+

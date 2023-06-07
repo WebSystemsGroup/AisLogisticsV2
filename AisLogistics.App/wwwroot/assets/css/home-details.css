@@ -1,0 +1,312 @@
+﻿
+.head-info {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.035em;
+    color: #172359;
+}
+
+.info-conteiner {
+    background: #FFFFFF !important;
+    border-radius: 3px !important;
+    box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
+    height: 174px;
+    overflow-x: hidden;
+}
+
+.info-employee {
+    background: #FFFFFF !important;
+    border-radius: 3px !important;
+    box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
+    border-radius: 3px;
+    height: 470px;
+}
+
+.casesId {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.035em;
+    color: #B5B5B5;
+}
+
+.dateReminder {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.035em;
+    color: #172359;
+}
+
+.applicantName {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.035em;
+    color: #172359;
+}
+
+.noteText {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.035em;
+    color: #B5B5B5;
+}
+
+.info-notes {
+    background: #FFFFFF;
+    box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
+    border-radius: 3px;
+    width: 526px;
+    height: 470px;
+}
+
+.notes-item {
+    border-bottom: 1px solid #F2F2F2;
+}
+
+.reminder {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.035em;
+    color: #172359;
+}
+
+
+
+.employeePoint {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.035em;
+    color: #B5B5B5;
+}
+
+.total {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.035em;
+    color: #172359;
+}
+
+.info-employee tbody tr:nth-child(1) td, tbody tr:nth-child(2) td, tbody tr:nth-child(3) td {
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.035em;
+}
+
+element.style {
+    width: 44.9844px;
+}
+
+.table:not(.table-dark) thead:not(.table-dark) th {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.035em;
+    padding-left: 20px;
+    color: #B5B5B5;
+    font-family: 'golos-regular', sans-serif, serif;
+}
+
+.offices {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.035em;
+    color: #B5B5B5;
+}
+
+.info-employee div.dataTables_scrollBody table {
+    padding-left: 20px;
+}
+
+
+tbody {
+}
+
+.info-employee tbody, td, tfoot, th, thead, tr {
+    border: none;
+    border-bottom: 1px solid #F2F2F2;
+}
+
+::-webkit-scrollbar {
+    visibility: hidden;
+}
+
+td {
+    padding-left: 22px !important;
+    padding-right: 0px !important;
+}
+
+thead th {
+    padding-left: 20px !important;
+    padding-right: 0px !important;
+}
+
+
+/* info-item-1 and info-item-2 */
+
+.info-item-1 {
+    background: #077EFA !important;
+    color: #FFFFFF !important;
+    border-radius: 3px;
+    width: 23.83%;
+    height: 83%;
+}
+
+    .info-item-1 *, .info-item-2 * {
+        color: #FFFFFF !important;
+    }
+
+    .info-item-1 .employeeJob, .info-item-1 .employeeFio, .info-item-2 .employeeJob, .info-item-2 .employeeFio {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 12px;
+        letter-spacing: 0.035em;
+        color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    .info-item-1 .text, .info-item-2 .text {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.035em;
+        color: #172359;
+        -webkit-line-clamp: 3;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .info-item-1 .type, .info-item-2 .type {
+        font-weight: 400 !important;
+        font-size: 12px !important;
+        font-family: 'golos-regular';
+        line-height: 14px !important;
+        letter-spacing: 0.035em !important;
+        color: #FFFFFF !important;
+    }
+
+    .info-item-1 .topic, .info-item-2 .topic {
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.035em;
+        font-family: 'golos-regular';
+        color: #FFFFFF;
+    }
+
+    .info-item-1 .text-block, .info-item-2 .text-block {
+        height: 35%;
+        width: 95%;
+        overflow: hidden;
+    }
+
+    .info-item-1 .dateAdd, .info-item-2 .dateAdd {
+        font-weight: 400 !important;
+        font-size: 12px !important;
+        line-height: 14px !important;
+        letter-spacing: 0.035em !important;
+        color: #FFFFFF !important;
+        font-family: 'golos-regular';
+    }
+
+.info-item-2 {
+    background: #729EFB !important;
+    color: #FFFFFF !important;
+    border-radius: 3px;
+    width: 23.83%;
+    height: 83%;
+}
+
+
+/* info-item-3 and info-item-4 */
+
+.info-item-3, .info-item-4 {
+    background: #F2F2F2 !important;
+    color: #FFFFFF !important;
+    border-radius: 3px;
+    width: 24.83%;
+    height: 83%;
+}
+
+    .info-item-3 *, .info-item-4 * {
+        color: #172359 !important;
+    }
+
+    .info-item-3 .employeeJob, .info-item-3 .employeeFio, .info-item-4 .employeeJob, .info-item-4 .employeeFio {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 12px;
+        letter-spacing: 0.035em;
+        color: rgba(23, 35, 89, 0.4) !important;
+    }
+
+    .info-item-3 .text, .info-item-4 .text {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.035em;
+        color: #172359;
+        -webkit-line-clamp: 3;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .info-item-3 .type, .info-item-4 .type {
+        font-weight: 400 !important;
+        font-size: 12px !important;
+        font-family: 'golos-regular';
+        line-height: 14px !important;
+        letter-spacing: 0.035em !important;
+        color: #172359 !important;
+    }
+
+    .info-item-3 .topic, .info-item-4 .topic {
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.035em;
+        font-family: 'golos-regular';
+        color: #172359;
+    }
+
+    .info-item-3 .text-block, .info-item-4 .text-block {
+        height: 35%;
+        width: 95%;
+        overflow: hidden;
+    }
+
+    .info-item-3 .dateAdd, .info-item-4 .dateAdd {
+        font-weight: 400 !important;
+        font-size: 12px !important;
+        line-height: 14px !important;
+        letter-spacing: 0.035em !important;
+        color: #172359 !important;
+        font-family: 'golos-regular';
+    }
+
+.left-button {
+    background: #FFFFFF !important;
+    border-radius: 3px !important;
+    box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
+    height: 173px !important;
+    display:inline-block;
+    vertical-align:middle !important;
+}
+.right-button {
+    background: #FFFFFF !important;
+    border-radius: 3px !important;
+    box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
+    height: 173px !important;
+    vertical-align: middle !important;
+}

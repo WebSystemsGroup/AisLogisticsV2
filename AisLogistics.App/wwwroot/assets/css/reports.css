@@ -1,0 +1,16 @@
+﻿.breadcrumb-item.active {
+    background-color: transparent !important;
+}
+
+.tab-content-report {
+    flex-shrink: 1;
+    border: 1px solid #d4d8dd;
+}
+
+.tab-content-backgroud {
+    background: #fff;
+}
+
+.padding-content {
+    padding: 1.375rem;
+}

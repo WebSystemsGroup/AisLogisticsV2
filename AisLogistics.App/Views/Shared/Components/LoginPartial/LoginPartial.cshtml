@@ -1,0 +1,79 @@
+﻿@using AisLogistics.App.Data
+@using AisLogistics.App.Utils
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model AisLogistics.App.Views.Shared.Components.LoginPartial.UserInfo
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    <div class="col-sm-1 col-1 me-4 header_personal d-flex">
+        <a class="me-3 dropdown-toggle hidden-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+            <div class="avatar avatar-online">
+                <span class="avatar-initial rounded-circle">@Model.Badge</span>
+            </div>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+                <a class="dropdown-item" href="javascript:void(0);">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0 me-3">
+                            <div class="avatar avatar-online">
+                                <span class="avatar-initial rounded-circle">@Model.Badge</span>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <span class="lh-1 d-block fw-semibold" data-bs-toggle="tooltip" title="@Model.Name">@NameSplitter.GetInitials(Model.Name)</span>
+                            <small class="d-block text-muted">@Model.Job</small>
+                            <small class="d-block text-body">@Model.Office</small>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+            <li>
+                <a class="dropdown-item disabled" href="javascript:void(0);">
+                    <i class="bx bx-user me-2"></i>
+                    <span class="align-middle">Мой профиль</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item disabled" href="javascript:void(0);">
+                    <i class="bx bx-cog me-2"></i>
+                    <span class="align-middle">Настройки</span>
+                </a>
+            </li>
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+            <li>
+                <a class="dropdown-item disabled" href="javascript:void(0);">
+                    <i class="bx bx-support me-2"></i>
+                    <span class="align-middle">Поддержка</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item disabled" href="javascript:void(0);">
+                    <i class="bx bx-help-circle me-2"></i>
+                    <span class="align-middle">Часто задаваемые вопросы</span>
+                </a>
+            </li>
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+            <li>
+                <form method="post" asp-area="Identity" asp-page="/Account/Logout">
+                    <button type="submit" class="dropdown-item">
+                        <i class="bx bx-power-off me-2"></i>
+                        <span class="align-middle">Выход</span>
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+}

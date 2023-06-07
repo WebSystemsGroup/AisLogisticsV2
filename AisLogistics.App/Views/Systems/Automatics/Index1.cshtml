@@ -1,0 +1,89 @@
+﻿@using AisLogistics.App.Models.DTO.Automatics
+@model List<AutomaticsDto>;
+
+<style>
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .automatic_Wrapper {
+        height: 49rem;
+    }
+</style>
+
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4">
+                    <div class="automatic_Wrapper" id="automatic_Wrapper">
+                        @foreach(var item in Model)
+                        {
+                            <div data-automatic-id="@item.Id" class="card cursor-pointer mb-3">
+                                <div class="card-body">
+                                    <p class="mb-1">@($"{item.Id}. {item.OperationName}")</p>
+                                    <div><span class="text-muted px-1">Дата начало: @(item.DateStart.HasValue ?  item.DateStart.Value.ToString() : "-")</span></div>
+                                </div>
+                            </div>
+                        } 
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div id="automaticLog_Wrapper">
+                        <h3 class="text-center">Выберите Показатель</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        (function () {
+            new PerfectScrollbar("#automatic_Wrapper");
+
+            $('[data-automatic-id]').click(function() {
+                let id = $(this).data('automatic-id');
+                $.ajax({
+                    url: '/Systems/AutomaticsLogs',
+                    type: 'POST',
+                    data: { id: id },
+                    beforeSend: () => {
+                        $.pageBlock();
+                    },
+                    complete: () => {
+                        $.unblockUI();
+                    },
+                    success: function (content) {
+                        $('#automaticLog_Wrapper').empty();
+                        $('#automaticLog_Wrapper').html(content);
+                    }
+                });
+            })
+
+
+            function automaticLogs(e) {
+                let th = e.currentTarget;
+                let id = $(th).find('[data-reestr-id]').data('reestr-id');
+                $.ajax({
+                    url: '/Systems/AutomaticsLogs',
+                    type: 'POST',
+                    data: { id: id },
+                    beforeSend: () => {
+                        $.pageBlock();
+                    },
+                    complete: () => {
+                        $.unblockUI();
+                    },
+                    success: function (content) {
+                        $('#automaticLog_Wrapper').empty();
+                        $('#automaticLog_Wrapper').html(content);
+                    }
+                });
+            }
+
+
+        })();
+    </script>
+}

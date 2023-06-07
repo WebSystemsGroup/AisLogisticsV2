@@ -1,0 +1,211 @@
+﻿@model ViewModelBuilder 
+@using AisLogistics.App.Extensions
+@{
+    //Guid Id = Guid.Parse(ViewContext.RouteData.Values["Id"]?.ToString());
+    string navId = "details";
+    var serviceModel = Model.Model as AisLogistics.DataLayer.Common.Dto.Reference.ServiceModelDto;
+}
+@section Header{
+<style>
+    .nav-align-left>.nav .nav-item
+    {
+        width: 200px;
+    }
+</style>
+}
+<!-- table -->
+<section id="content-datatable">
+    <div class="row">
+        <div class="col-12">
+            <div class="nav-align-left">
+                <partial name="Services/Details/_NavLeft" model="navId" />
+                <div class="tab-content shadow-none">
+                    <div class="tab-pane fade active show" id="navs-tabs-default">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    @if (Model.IsVisibleTitle)
+                                    {
+                                        <h4 class="card-title">@Model.ViewTitle</h4>
+                                    }
+                                </div>
+                                <div class="row">
+                                    <div class="col-9">
+                                        @if (Model.IsVisibleDescription)
+                                        {
+                                            <p class="card-text">
+                                                @Model.ViewDescription
+                                            </p>
+                                        }
+                                    </div>
+                                    @if (User.HasClaim(AccessKeyNames.ReferenceService, AccessKeyValues.Add))
+                                    {
+                                    <div class="col-3 pull-right">
+                                        <a asp-action="ServiceChangeModal" asp-route-id="@serviceModel.Id" asp-route-actiontype="edit" data-btn-type="modal" class="btn btn-primary float-end">
+                                            <i class="bx bx-edit"></i> Изменить
+                                        </a>
+                                    </div>    
+                                    }
+                                </div>
+                                <div class="row">
+                                    <div class="pt-1">
+                                        <fieldset>
+
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Мнемоника услуги</label>
+                                                    <input type="text" value="@serviceModel.ServiceMnemo" class="form-control" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Наименование</label>
+                                                    <textarea class="form-control" rows="3" readonly>@serviceModel.ServiceName</textarea>
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Краткое наименование услуги</label>
+                                                    <input type="text" value="@serviceModel.ServiceNameSmall" class="form-control" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Орган власти</label>
+                                                    <input type="text" value="@serviceModel.OfficeName" class="form-control" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Тип услуги</label>
+                                                    <input type="text" value="@serviceModel.SServicesTypeName" class="form-control" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Способ взаимодействия</label>
+                                                    <input type="text" value="@serviceModel.SServicesInteractionName" class="form-control" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Расположение услуги</label>
+                                                    <input type="text" class="form-control" value="@(((ServicePositionType)@serviceModel.ServicePosition).GetDisplayName())" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Реквизиты НПА</label>
+                                                    <textarea class="form-control" cols="2" readonly>@serviceModel.LegalAct</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Описание подуслуги</label>
+                                                    <textarea class="form-control char-textarea" rows="3" readonly>@serviceModel.ServiceDescription</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Идентификатор ФРГУ</label>
+                                                    <input type="text" value="@serviceModel.FrguServiceId" class="form-control" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Наименование ФРГУ</label>
+                                                    <input type="text" value="@serviceModel.FrguName" class="form-control" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Срок хранения документов</label>
+                                                    <input type="text" value="@serviceModel.TimeStorage" class="form-control" readonly>
+                                                </div>
+                                            </div>
+
+                                             <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Жизненные ситуации </label>
+                                                    <input type="text" value="@String.Join(" ", serviceModel.ServiceLivingSituation.Select(s=>"#"+s.Name))" class="form-control" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Хэштеги</label>
+                                                    <input type="text" value="@serviceModel.Hashtag" class="form-control" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-6 mb-3">
+                                                    <input type="checkbox" checked="@serviceModel.IsReportSelect" class="checkbox" disabled>
+                                                    <label class="form-label">Вывод в отчетах</label>
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <input type="checkbox" checked="@serviceModel.IsTariffEdit" class="checkbox" disabled>
+                                                    <label class="form-label">Возможность редактирования тарифа</label>
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="row">
+                                                <div class="col-6 mb-3">
+                                                    <input type="checkbox" checked="@serviceModel.IasMkgu" class="checkbox" disabled>
+                                                    <label class="form-label">Участие услуги в ИАС МКГУ</label>
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <input type="checkbox" checked="@serviceModel.IsPlan" class="checkbox" disabled>
+                                                    <label class="form-label">Учитывать в плане</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-6 mb-3">
+                                                    <input type="checkbox" checked="@serviceModel.IsMdm" class="checkbox" disabled>
+                                                    <label class="form-label">ИС МДМ</label>
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <input type="checkbox" checked="@serviceModel.IsIssueAuthority" class="checkbox" disabled>
+                                                    <label class="form-label">Выдача в ОИВ</label>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ table -->
+@section Scripts
+{
+<script>
+    $(function(){
+        var tabEls = $('button[data-bs-toggle="tab"]');
+        tabEls.on('shown.bs.tab', function (event) {
+            //event.target // newly activated tab
+            //event.relatedTarget // previous active tab
+        });
+        //tabEls.addEventListener('shown.bs.tab', function (event) {
+        //    //event.target // newly activated tab
+        //    //event.relatedTarget // previous active tab
+        //})
+    });
+</script>
+}

@@ -1,0 +1,147 @@
+﻿@model CasesMainDto
+
+<div class="row case-app-header">
+    <div class="row col-sm-auto">
+        <div class="col-sm-auto">
+            <small><b>№ обращения: </b></small>
+            <p class="mb-0">@Model.CaseId</p>
+        </div>
+        @*<small class="d-block text-muted">от @Model.DateAdd</small>*@
+        <div class="col-sm-auto pe-0">
+            <div class="d-flex flex-column">
+                <a asp-controller="Cases" asp-action="ServiceCustomerAddModal" asp-route-id="@Model.Applicant.Id" asp-route-subjectCustomerType="@Model.CustomerType" data-btn-type="modal" data-bs-toggle="tooltip">
+                    <h2 class=""><span class="text-truncate fw-semibold">@Model.Applicant.Name</span></h2>
+                </a>
+                @if (string.IsNullOrEmpty(Model.Applicant.Address) == false)
+                {
+                    <div class="d-flex align-items-center">
+                        <small>
+                            <img src="~/img/location.svg" alt="">
+                            @Model.Applicant.Address
+                        </small>
+
+                    </div>
+                }
+                @if (string.IsNullOrEmpty(Model.Applicant.Phone) == false)
+                {
+                    <div class="d-flex align-items-center">
+                        <small>
+                            <img src="~/img/phone.svg" alt="">
+                            @Model.Applicant.Phone
+                        </small>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <div class="col-sm-auto pe-0">
+            <small>Представитель:</small>
+        </div>
+        <div class="col-sm-auto">
+            @if (Model.Recipient != null)
+            {
+                <div class="d-flex flex-column">
+                    <a asp-controller="Cases" asp-action="ServiceCustomerAddModal" asp-route-id="@Model.Recipient.Id" asp-route-subjectCustomerType="2" data-btn-type="modal" data-bs-toggle="tooltip">
+                        <h6 class=""><span class="text-truncate fw-semibold">@Model.Recipient.Name</span></h6>
+                    </a>
+                    @if (string.IsNullOrEmpty(Model.Recipient.Address) == false)
+                    {
+                        <div class="d-flex align-items-center">
+                            <small>
+                                <img src="~/img/location.svg" alt="">
+                                @Model.Recipient.Address
+                            </small>
+                        </div>
+                    }
+                    @if (string.IsNullOrEmpty(Model.Recipient.Phone) == false)
+                    {
+                        <div class="d-flex align-items-center">
+                            <small>
+                                <img src="~/img/phone.svg" alt="">
+                                @Model.Recipient.Phone
+                            </small>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted small mt-1">
+                    Нет данных
+                </p>
+            }
+        </div>
+    </div>
+    <div class="col-sm-auto">
+        <div class="header_menu">
+            <ul class="@(Model.Recipient != null ? "" : "d-flex") align-items-center justify-content-end">
+                <li><a asp-action="DetailsComments" class="" asp-controller="Cases" asp-route-id="@Model.CaseId" data-btn-type="modal" data-bs-toggle="tooltip"><i class="bi bi-chat-right-text me-1"></i>Комментарии</a></li>
+                <li><a asp-action="DetailsNotification" class="" asp-controller="Cases" asp-route-id="@Model.CaseId" data-btn-type="modal" data-bs-toggle="tooltip"><i class="bx bx-bell me-1"></i>Оповещения @*<sup>@Model.NotificationsCount</sup>*@</a></li>
+                <li><a asp-action="DetailsAudit" class="" asp-controller="Cases" asp-route-id="@Model.CaseId" data-btn-type="modal" data-bs-toggle="tooltip"><i class="bi bi-clipboard-check me-1"></i>Действия @*<sup>@Model.AuditCounts</sup>*@</a></li>
+                <li><a href="" class="" data-bs-toggle="collapse" data-bs-target="#notesAccordion" aria-expanded="false"><i class="bi bi-card-list me-1"></i>Заметки @*<sup>@Model.Notes.Count</sup>*@</a></li>
+                <div id="notesAccordion" class="accordion-collapse collapse">
+                    <div class="modal-service-header">
+                        <h6 class="d-flex justify-content-between align-items-center px-2 font-weight-light text-black-50 mb-0">
+                            <span class="vertical-middle">Напоминания</span>
+                            <a asp-action="ServiceNotesChangeModal" asp-controller="Cases" asp-route-actionType="0" asp-route-caseid="@Model.CaseId" data-btn-type="modal" data-bs-toggle="tooltip" class="btn btn-primary btn-icon btn-sm waves-effect waves-light">
+                                <i class="bx bx-plus"></i>
+                            </a>
+                        </h6>
+                        <hr class="my-2" />
+                        <ul id="casesNotesList" class="list-group list-group-flush list-notes">
+                            @foreach (var item in Model.Notes)
+                            {
+                                <li class="list-group-item px-2">
+                                    <div class="row">
+                                        <div class="col-8 d-flex flex-column justify-content-center">
+                                            <strong>@(item.DateReminder.HasValue ? item.DateReminder.Value.ToShortDateString() : string.Empty)</strong>
+                                            <span>@item.NotesText</span>
+                                        </div>
+                                        <div class="col-4 px-1 d-flex justify-content-end">
+                                            <a asp-action="ServiceNotesChangeModal" asp-controller="Cases" asp-route-actionType="1" asp-route-id="@item.Id" class="btn btn-icon" data-btn-type="modal" data-bs-toggle="tooltip"><i class='bx bx-edit-alt'></i></a>
+                                            <a href="javascript:void(0);" class="btn btn-icon text-danger" data-btn-type="remove" data-action-remove="/Cases/ServiceNotesDelete" data-btn-params={"id":"@item.Id"}><i class="bx bx-trash"></i></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-1 ms-auto me-3">
+        <button class="btn btn-outline-primary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bx bx-printer-fill"></i>
+            Печать
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 40px);" data-popper-placement="bottom-start">
+            <a asp-action="PrintConsultationService" asp-controller="Cases" asp-route-id="@Model.CaseId" class="dropdown-item" target="_blank" data-bs-toggle="tooltip">Консультация</a>
+            <a asp-action="PrintProcessingPersonalData" asp-controller="Cases" asp-route-id="@Model.CaseId" class="dropdown-item" target="_blank" data-bs-toggle="tooltip">Согласие на ОПД </a>
+            <a asp-action="ModalPrintAcceptDocuments" asp-controller="Cases" asp-route-id="@Model.CaseId" class="dropdown-item" data-btn-type="modal" data-bs-toggle="tooltip">Расписка о принятии документов</a>
+            <a asp-action="ModalPrintIssuanceDocuments" asp-controller="Cases" asp-route-id="@Model.CaseId" class="dropdown-item" data-btn-type="modal" data-bs-toggle="tooltip">Расписка о выдаче документов</a>
+            <hr/>
+                        <a asp-action="DownloadConsultationService" asp-controller="Cases" asp-route-id="@Model.CaseId" class="dropdown-item" target="_blank" data-bs-toggle="tooltip">Скачать Консультация</a>
+                        <a asp-action="DownloadProcessingPersonalData" asp-controller="Cases" asp-route-id="@Model.CaseId" class="dropdown-item" target="_blank" data-bs-toggle="tooltip">Скачать Согласие на ОПД </a>
+        </div>
+    </div>
+
+    @* <div class="col-sm-2">
+    <button class="btn btn-outline-primary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-printer-fill"></i>
+    Печать
+    </button>
+
+    </div>*@
+</div>
+
+
+
+
+
+
+
+
+
+

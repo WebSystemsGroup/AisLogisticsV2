@@ -1,0 +1,15 @@
+﻿@model string
+@{
+    string Id = ViewContext.RouteData.Values["Id"]?.ToString();
+    ViewData["ActiveTabId"] = Model;
+}
+
+<navtabs-left>
+    <nav-tab id="details" target="@Url.Action("EmployeeDetails", "Reference", new { id = Id })">Общая информация</nav-tab>
+    <nav-tab id="jobs" target="@Url.Action("EmployeeJobs", "Reference", new { id = Id })">Должность</nav-tab>
+    <nav-tab id="statuses" target="@Url.Action("EmployeeStatuses", "Reference", new { id = Id })">Статус</nav-tab>
+    <nav-tab id="executions" target="@Url.Action("EmployeeExecutions", "Reference", new { id = Id })">Исполнение</nav-tab>
+    <nav-tab id="executionroles" target="@Url.Action("EmployeeExecutorRoles", "Reference", new { id = Id })">Роль исполнителя</nav-tab>
+    <nav-tab id="activities" target="@Url.Action("EmployeeActivities", "Reference", new { id = Id })">Активность</nav-tab>
+    <nav-tab id="auth" target="@Url.Action("EmployeeAuthDetails", "Reference", new { id = Id })">Авторизация</nav-tab>
+</navtabs-left>

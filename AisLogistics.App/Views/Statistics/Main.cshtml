@@ -1,0 +1,50 @@
+﻿@model ViewModelBuilder
+@{
+    ViewBag.Title = Model.ViewTitle;
+    string url = ViewBag.Url + "/Index";
+}
+
+<link rel="stylesheet" href="~/assets/vendor/libs/c3/c3.css" asp-append-version="true" />
+
+<style>
+    .breadcrumb-item.active {
+        background-color: transparent !important;
+    }
+
+    .tab-content-report {
+        flex-shrink: 1;
+        border: 1px solid #d4d8dd;
+    }
+
+    .tab-content-backgroud {
+        background: #fff;
+    }
+
+    .padding-content {
+        padding: 1.375rem;
+    }
+</style>
+
+<section id="content-report">
+    <div class="nav-align-left">
+        <partial name="_NavLeft" model="ViewBag.Data" />
+        <div class="shadow-none w-100 ms-3">
+            <div class="w-100 mb-3" id="navs-tabs-default">
+                @*<div>
+                    @{
+                        await Html.RenderPartialAsync(url, Model.Model);
+                    }
+                </div>*@
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+<script src="~/assets/vendor/libs/d3/d3.js"></script>
+<script src="~/assets/vendor/libs/c3/c3.js"></script>
+<script src="~/assets/js/pages/statistics.js"></script>
+}
+
+

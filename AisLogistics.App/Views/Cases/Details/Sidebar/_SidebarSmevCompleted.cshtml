@@ -1,0 +1,86 @@
+﻿@model ViewModelBuilder
+@{
+    var items = Model.Model as List<CaseServiceSmevСompletedDto>;
+}
+
+<style>
+    .table-smev .accordion-item {
+        cursor: pointer;
+    }
+</style>
+
+<!-- Detailed case Content starts -->
+
+<div class="case-app-details overflow-auto">
+    <div class="case-scroll-area ps">
+        <div class="mail-message-wrapper active" id="SMEV">
+            <div class="smevAddRequest d-flex justify-content-center align-items-center mt-3" data-btn-type="modal" data-bs-toggle="modal" data-bs-backdrop="false" data-bs-target="#modalSmevAdd">
+                <a asp-action="ServiceSmevCreate" asp-route-id="@ViewBag.Id" data-bs-toggle="tooltip" title="Добавить" data-btn-type="modal">
+                    <p class="m-0"><span class="me-2">+</span>Добавить запрос</p>
+                </a>
+            </div>
+            <div class="accordion" id="accordionWithIcon">
+                @if (items.Any())
+                {
+                    @foreach (var item in items)
+                    {
+                        <div class="accordion-item active border-bottom shadow-none rounded-0 pb-3 pt-3" data-smev-request-id="@item.Id">
+                            <div class="row justify-content-between align-items-start">
+                                <div class="col-sm">
+                                    <div class="accordion-header d-flex align-items-start">
+                                        <div class="@(item.Status == 3 ? "success" : item.Status == 2 ? "danger" : item.Status == 1 ? "warning" : "") m-auto">
+                                            @(item.Status == 3 ? "Получен ответ" : item.Status == 2 ? "Ошибка" : item.Status == 1 ? "На исполнении" : "")
+                                        </div>
+                                        <div class="accordion-button pb-0 pt-0 collapsed d-flex flex-column align-items-start">
+                                            <p class="small mb-1">@item.Name</p>
+                                            <p class="text-muted small mb-1">@item.Description</p>
+                                            <div class="small d-flex align-items-center">@item.EmployeeAdd.Job: <h6 class="small mb-0"> @item.EmployeeAdd.Name</h6></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2 d-flex flex-column align-items-start justify-content-center">
+                                    <div class="text-muted mb-2">
+                                        @item.DateCreate.ToString().Remove(16)
+                                    </div>
+                                    <div class="text-muted">
+                                        @item.DateResponse.ToString().Remove(16)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        $("[data-smev-request-id]").on('click', function (e) {
+            let th = e.currentTarget;
+            let id = $(th).data('smev-request-id');
+            $.ajax({
+                url: '/SmevBase/GetSmevDetailsModal',
+                type: 'POST',
+                data: { id: id },
+                beforeSend: () => {
+                    $.pageBlock();
+                },
+                complete: () => {
+                    $.unblockUI();
+                },
+                success: function (content) {
+                    $('#mainModal').html(content).modal('show');
+                },
+                error: function (event) {
+                    //toastr['error'](event.responseText, 'Ошибка', {
+                    //    closeButton: true,
+                    //    tapToDismiss: false,
+                    //    rtl: isRtl
+                    //});
+                }
+            });
+        });
+    }())
+</script>
+<!-- Detailed case Content ends -->

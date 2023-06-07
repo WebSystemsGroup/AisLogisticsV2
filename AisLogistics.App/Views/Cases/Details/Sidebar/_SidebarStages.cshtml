@@ -1,0 +1,91 @@
+﻿@model ViewModelBuilder
+@{
+    var items = Model.Model as List<CaseServiceStageDto>;
+}
+
+<!-- Detailed case Header starts -->
+@*<div class="case-detail-header">
+    <div class="case-header-left d-flex align-items-center">
+        <a href="#" class="" data-bs-toggle="tooltip" title="Назад">
+            <span class="go-back action-icon me-1">
+                <i class="bx bx-chevron-left bx-md"></i>
+            </span>
+        </a>
+        <h4 class="case-subject mb-0">@Model.ViewTitle</h4>
+    </div>
+    <div class="case-header-right ms-2 ps-1">
+        <ul class="list-inline m-0">
+            @if (User.HasClaim(AccessKeyNames.DataCaseServiceStage, AccessKeyValues.Add))
+            {
+                <li class="list-inline-item">
+                    <a asp-action="ServiceStageAddModal" asp-route-id="@ViewBag.Id" data-bs-toggle="tooltip" title="Добавить" data-btn-type="modal">
+                        <span class="action-icon favorite">
+                            <i class="bx bx-plus bx-md"></i>
+                        </span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>*@
+<!-- Detailed case Header ends -->
+<!-- Detailed case Content starts -->
+@if (items.Any())
+{
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Этап</th>
+                    <th>Cотрудник</th>
+                    @*<th>Фактический сотр.</th>*@
+                    <th>Дата</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var item in items)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex flex-column">
+                                <div class="text-truncate">@item.Name</div>
+                                <small class="text-truncate"><days count="item.Days ?? 0" data-bs-toggle="tooltip" title="Дней на этапе"></days></small>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-column">
+                                <span class="text-truncate">@item.EmployeeCurrent.Name</span>
+                                <small class="text-truncate text-muted">@item.EmployeeCurrent.Job</small>
+                            </div>
+                        </td>
+                        @* <td>
+                <div class="d-flex flex-column">
+                <span class="text-truncate">@item.EmployeeAdd.Name</span>
+                <small class="text-truncate text-muted">@item.EmployeeAdd.Job</small>
+                </div>
+                </td>*@
+                        <td>
+                            <div class="d-flex flex-column">
+                                <small class="text-truncate" data-bs-toggle="tooltip" title="Дата начала этапа">@item.DateAdd.ToShortDateString()</small>
+                                @if (item.DateFact.HasValue)
+                                {
+                                    <small class="text-truncate" data-bs-toggle="tooltip" title="Фактическая дата окончания этапа">@(item.DateFact?.ToShortDateString() ?? "-")</small>
+                                }
+                                else
+                                {
+                                    <small class="text-truncate" data-bs-toggle="tooltip" title="Регламентная дата окончания этапа">@(item.DateReg?.ToShortDateString() ?? "-")</small>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+}
+else
+{
+    <div class="alert alert-primary" role="alert">
+        <h6 class="alert-heading mb-1">Нет данных</h6>
+        <span>Этапы отсутствуют</span>
+    </div>
+}
+<!-- Detailed case Content ends -->

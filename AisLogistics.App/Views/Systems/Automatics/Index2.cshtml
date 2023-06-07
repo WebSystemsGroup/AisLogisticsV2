@@ -1,0 +1,130 @@
+﻿@using AisLogistics.App.Models.DTO.Automatics
+@model ViewModelBuilder
+@{
+    ViewBag.Title = Model.ViewTitle;
+    var data = Model.Model as List<AutomaticsDto>;
+}
+
+<style>
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .automatic_Wrapper {
+        height: 49rem;
+    }
+</style>
+
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4">
+                    <div class="automatic_Wrapper" id="automatic_Wrapper">
+                        <input id="automaticId" type="hidden"  />
+                        @foreach (var item in data)
+                        {
+                            <div data-automatic-id="@item.Id" class="card cursor-pointer mb-3">
+                                <div class="card-body">
+                                    <p id="automatic_text" class="mb-1">@item.OperationName</p>
+                                    <div><span class="text-muted px-1">Дата начало: @(item.DateStart.HasValue ? item.DateStart.Value.ToString() : "-")</span></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="card" id="empty-table">
+                        <div class="card-body">
+                            <div class="alert alert-primary m-0" role="alert">
+                                <h6 class="alert-heading mb-1">Внимание</h6>
+                                <span>Выберите показатель</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card d-none">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0" id="card_title"></h5>
+                        </div>
+                        <span class="border-bottom"></span>
+                        <div class="card-body pt-0">
+                            <div class="table-responsive">
+                                <table id="@Model.TableName" data-action-table="@Model.TableMethodAction" class="table table-sm"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+
+        const $table = $("#@(Model.TableName)");
+
+        
+
+        $(document).ready(function () {
+
+            new PerfectScrollbar("#automatic_Wrapper");
+
+            const showTable = () => {
+                $("#empty-table").remove();
+                $table.closest(".card.d-none").removeClass("d-none");
+            };
+
+            $('[data-automatic-id]').click(function () {
+                let id = $(this).data('automatic-id');
+                let text = $(this).find('#automatic_text').text();
+                $('#card_title').html(text);
+                $('#automaticId').val(id);
+                $table.DataTable().ajax.reload();
+                showTable();
+                return false;
+            })
+
+            $table.DataTable({
+                sDom: "<'row'<'col-sm-12'tr>>" +
+                    //"<'row'<'col-sm-12 col-md-3 '<'#operation'>><'col-sm-12 col-md-9'l>>" +
+                    "<'row mt-3'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                processing: true,
+                serverSide: true,
+                filter: false,
+                searchDelay: 1500,
+                ajax: {
+                    url: $table.data('action-table'),
+                    type: "POST",
+                    data: function (data) {
+                        data['AutomaticId'] = $('#automaticId').val();
+                    }
+                },
+                initComplete: function () {
+
+
+                },
+                columnDefs: [
+                    {
+                        data: "id",
+                        targets: 0,
+                        title: '',
+                        visible: false,
+                        orderable: false
+                    },
+                    {
+                        data: "dateStart",
+                        targets: 1,
+                        title: 'Время запуска',
+                        orderable: false
+                    },
+                ]
+            });
+        
+        });
+
+    </script>
+}
+

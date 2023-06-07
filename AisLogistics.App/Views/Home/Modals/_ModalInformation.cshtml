@@ -1,0 +1,177 @@
+﻿@using AisLogistics.App.Models.DTO.Information
+@model InformationDetails
+<style>
+    b {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.035em;
+        color: #172359;
+    }
+
+    .modal-employeeFio {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.035em;
+        color: #B5B5B5;
+    }
+
+    .modal-text {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.035em;
+        color: #172359;
+    }
+
+    .modal-employeeJob {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.035em;
+        color: #B5B5B5;
+    }
+
+    .modal-annex {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.035em;
+        color: #172359;
+    }
+
+    .dateAdd {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.035em;
+        color: #B5B5B5;
+    }
+
+    .statuse {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.035em;
+        color: #FFFFFF;
+    }
+
+    .btn-grin {
+        background: #1CB92B;
+        border-radius: 2.59753px;
+        width: 24%;
+        height: 35px;
+    }
+
+    .btn-read {
+        width: 161px;
+        height: 35px;
+        background: #FF2222;
+        border-radius: 2.59753px;
+    }
+
+    .topic-modal {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 22px;
+        letter-spacing: 0.035em;
+        color: #172359;
+    }
+
+    .file-text
+    {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        text-align: center;
+        letter-spacing: 0.035em;
+        color: #172359;
+    }
+  .modal-dialog-scrollable .modal-content {
+        max-height: 100%;
+        overflow: hidden;
+        position: fixed;
+        width: 46vw;
+        height: 45vh;
+        left: 27%;
+        top: 27% !important;
+        background: #FFFFFF;
+        border-radius: 3px;
+}
+    .modal-header {
+        padding-left: 36px !important;
+        padding-right: 29px !important;
+    }
+
+    .modal-footer {
+        display: none;
+    }
+
+    .pdf {
+        background-image: url("/assets/img/file/pdf.png") !important;
+        width: 50px !important;
+        height: 60px !important;
+    }
+
+    .png {
+        background-image: url("/assets/img/file/png.jpg") !important;
+        width: 50px !important;
+        height: 60px !important;
+    }
+
+    .word, .doc, .docx, .dotx, .dotm, docb {
+        background-image: url("/assets/img/file/word.jpg") !important;
+        width: 50px !important;
+        height: 60px !important;
+    }
+
+    .excel, .xlsx, .xls, .xlt, .xlm, .xll, .xla8, .xla5, xla_, .xlsm, .xltx, .xltm, .xlsb, .xla, .xlam, .xlw {
+        background-image: url("/assets/img/file/exsl.jpg") !important;
+        width: 50px !important;
+        height: 60px !important;
+    }
+</style>
+
+<fieldset>
+    <div class="row ms-3">
+        <div class="col-sm-auto ps-0">
+            <p class="mb-0 modal-employeeFio">@Model.EmployeeFio</p>
+            <p class="modal-employeeJob mb-1">@Model.EmployeeJob</p>
+        </div>
+        <div class="col-3 ps-5 dateAdd">
+            @Model.DateAdd.ToString("D")
+        </div>
+        <div class="col-2 ms-auto btn-grin me-4">
+            <div class="statuse m-0 p-2 px-4"><img src="~/img/check-mark.png"/> Ознакомлен</div>
+        </div>
+    </div>
+
+    <p class="m-0 mt-3 ms-3 topic-modal">@Model.Topic</p>
+    <p class="modal-text mt-3 ms-3">@Model.Text</p>
+    <p class="modal-annex ms-3 mt-3">Приложения:</p>
+
+    @if (Model.Files.Any())
+    {
+        <div class="row ms-4">
+            @foreach (var item in Model.Files)
+            {
+                <a asp-action="DownloadBlank" asp-controller="Cases" asp-route-id="item.Id" asp-route-serviceId="item.ServiceId" target="_blank" class="col-2">
+                    <div class="row justify-content-center">
+                        <div class="col-5">
+                            <div class="@item.FileExtensions.Substring(1)"></div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <p class="mb-1 file-text">@item.FileName@item.FileExtensions</p>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+</fieldset>
+
+

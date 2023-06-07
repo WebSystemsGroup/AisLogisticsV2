@@ -1,0 +1,10 @@
+﻿@using AisLogistics.App.Extensions
+@{
+    string Id = ViewContext.RouteData.Values["Id"]?.ToString();
+    int wayType = Convert.ToInt32(ViewContext.RouteData.Values["wt"]);
+    ViewData["ActiveTabId"] = ((ServiceWayGetType)wayType).ToString();
+}
+<navtabs-top>
+    <nav-tab id="@ServiceWayGetType.ForService" target="@Url.Action("ServiceWaysGet", "Reference", new { id = Id , wt = (int)ServiceWayGetType.ForService })">@Html.Raw(ServiceWayGetType.ForService.GetDisplayName())</nav-tab>
+    <nav-tab id="@ServiceWayGetType.ForResult" target="@Url.Action("ServiceWaysGet", "Reference", new { id = Id , wt = (int)ServiceWayGetType.ForResult })">@Html.Raw(ServiceWayGetType.ForResult.GetDisplayName())</nav-tab>
+</navtabs-top>

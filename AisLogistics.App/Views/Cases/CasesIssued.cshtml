@@ -1,0 +1,186 @@
+﻿@using AisLogistics.App.ViewModels.Cases
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ViewModelBuilder
+@{
+    ViewBag.Title = Model.ViewTitle;
+    var responseData = Model.Model as SearchCasesResponseData;
+    var filterselect = new string[] { "По умолчанию", "по дате возрастания", "по дате убывания", "по дням возростания", "по дням убывания" };
+    var filterSelectOptions = string.Join("", filterselect.Select((s, i) => $"<option value=\"{i}\">{s}</option>"));
+    var isView = (bool)ViewBag.CasesAllView;
+}
+
+<link rel="stylesheet" href="~/assets/css/css-reestr.css" asp-append-version="true" />
+@*
+<section class="search-bar-wrapper">
+    <div class="card">
+        <div class="card-body">*@
+            <!-- datatable start -->
+            <div class="table-responsive">
+                <table id="@Model.TableName" data-action-table="@Model.TableMethodAction" class="table-sm w-100 directory_names-items table"></table>
+            </div>
+        @*    <!-- datatable ends -->
+        </div>
+    </div>
+</section>*@
+
+@section Scripts
+    { 
+    <script>
+        const $table = $("#@(Model.TableName)");
+
+        $(document).ready(function () {
+            $table.DataTable({
+                sDom: "<'row justify-content-between mb-3'<'col-sm-12 col-md-4 padding-left-1'<'#officeFilter'>><'col-sm-12 col-md-6'><'col-sm-12 col-md-2 padding-right-1'<'#sortFilter'>>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                processing: true,
+                serverSide: true,
+                ordering: false,
+                filter: true,
+                searchDelay: 1500,
+                ajax: {
+                    url: $table.data('action-table'),
+                    type: "POST",
+                    datatype: "json",
+                    dataSrc: function (json) {
+                        return json.data;
+                    }
+                },
+
+                initComplete: function () {
+                    let officeSelectColumn = this.api().column(9);
+                    var $officeFilter = $('#officeFilter');
+                    if ('@isView' === 'True') {
+                        var $officeFilterSelect = $('<select id="selectOfficeFilter" class="form-select form-select-sm"><option value="@Guid.Empty">ВСЕ</option>@Html.Raw(ViewBag.Mfc)</select>')
+                            .appendTo($officeFilter)
+                            .select2({
+                                language: "ru",
+                            })
+                            .on('change', function () {
+                                officeSelectColumn.search($(this).val()).draw();
+                            });
+                    }
+                },
+                columns: [
+                    {//ДАТА И СТАТУС
+                        title: `Дата и статус`,
+                        className: "case-dateAdd-column text-centr",
+                        //name: 'dateAdd',
+                        //name: 'statusId',
+                        render: function (data, type, row) {
+
+                            let colorStatus = "";
+                            switch (row.service.status.id) {
+                                case 0:
+                                    colorStatus = "warning";
+                                    break;
+                                case 1:
+                                    colorStatus = "success";
+                                    break;
+                                case 2:
+                                    colorStatus = "secondary";
+                                    break;
+                                case 4:
+                                    colorStatus = "bsecondary";
+                                    break;
+                                case 5:
+                                    colorStatus = "danger";
+                                    break;
+                            }; 
+                            let content = `<div class="table_date_status d-flex flex-column"><p>${row.casesMainDto.dateAdd}</p><p class="case-number-column">${row.casesMainDto.caseId}</p ><span class= "${colorStatus}">${row.service.status.name}</span></div > `;
+                            return content;
+                        }
+                    },
+                    
+                    {//Заявитель
+                        title: 'Заявитель',
+                        className: "table_applicant",
+                        name: 'customer',
+                        render: function (data, type, row) {
+                            let content = `<h2 >${row.casesMainDto.applicant.name}</h2>`;
+                            if (row.casesMainDto.applicant.address !== null)
+                                content += `<div class="d-flex"><p><img class="mb-auto me-1 " src="/img/location.svg" alt=""/> ${row.casesMainDto.applicant.address}</p></div>`;
+                            if (row.casesMainDto.applicant.phone !== null)
+                                content += `<div class="d-flex"><p><img class="mb-auto me-1" src="/img/phone.svg" alt=""/> ${row.casesMainDto.applicant.phone}</p></div>`;
+                            return content;
+                        }
+                    },
+                    { //Услуга
+                        title: `Услуга`,
+                        className: "case-services-column",
+                        name: 'servicesId',
+                        render: function (data, type, row) {
+                            let str = row.service.name.length > 90 ? row.service.name.slice(0, 90) + "..." : row.service.name
+                            return `<p title="${row.service.name}">${str}</p><h2>${row.service.office}</h2>`;
+                        }
+                    },
+                    {
+                        title: 'Исполнитель',
+                        className: "case-currentEmployee-column",
+                        name: 'currentEmployee',
+                        render: function (data, type, row) {
+                            return `<h2>${row.service.serivesStage.employeeCurrent.name}</h2>
+                                            <div>${row.service.serivesStage.employeeCurrent.job}</div>
+                                            <div>${row.service.serivesStage.office}</div>
+                                    </div>`;
+                        }
+                    },
+                    {
+                        title: `Действие`,
+                        className: "case-stage-column",
+                        name: 'stageId',
+                        render: function (data, type, row) {
+                            let content = `<a href="javascript:void(0);" data-service-id="${row.service.id}" id="btnStageAdd" class="btn btn-success waves-effect waves-float waves-light" role="button">Выдать</a>`;
+                            return content;
+                        }
+                    },
+                    {
+                        name: "filterSelect",
+                        title: '',
+                        visible: false,
+                        orderable: false,
+                        render: function (data, type, row) {
+                            return "";
+                        }
+                    },
+                    {
+                        name: "officeFilterSelect",
+                        title: '',
+                        visible: false,
+                        orderable: false,
+                        render: function (data, type, row) {
+                            return "";
+                        }
+                    },
+                ]
+            }).on('click', 'tbody tr', function () {
+                var val = $(this).find('.case-number-column').text();
+                window.open(`/Cases/Details?id=${val}`, "_blank");
+            }).on('click', '#btnStageAdd', function (e) { stageAdd(e) })
+
+             
+            function stageAdd(e) {
+                e.stopPropagation();
+                let th = e.currentTarget;
+                let id = $(th).data('service-id');
+                $.ajax({
+                    url: '/Cases/ServiceStageAddModal',
+                    type: 'POST',
+                    data: { id: id },
+                    beforeSend: () => {
+                        $.pageBlock();
+                    },
+                    complete: () => {
+                        $.unblockUI();
+                    },
+                    success: function (data) {
+                        $("#mainModal").html(data).modal('show');
+                    }
+                });
+            }
+
+        });
+
+    </script>
+}
+
