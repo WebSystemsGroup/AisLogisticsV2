@@ -6,13 +6,16 @@
     letter-spacing: 0.035em;
     color: #172359;
 }
-
+.info-content{
+    display:flex;
+}
 .info-conteiner {
     background: #FFFFFF !important;
     border-radius: 3px !important;
     box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
     height: 174px;
     overflow-x: hidden;
+    display: flex; 
 }
 
 .info-employee {
@@ -156,8 +159,6 @@ thead th {
     background: #077EFA !important;
     color: #FFFFFF !important;
     border-radius: 3px;
-    width: 23.83%;
-    height: 83%;
 }
 
     .info-item-1 *, .info-item-2 * {
@@ -232,9 +233,7 @@ thead th {
 .info-item-3, .info-item-4 {
     background: #F2F2F2 !important;
     color: #FFFFFF !important;
-    border-radius: 3px;
-    width: 24.83%;
-    height: 83%;
+    border-radius: 3px; 
 }
 
     .info-item-3 *, .info-item-4 * {
@@ -300,8 +299,8 @@ thead th {
     border-radius: 3px !important;
     box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
     height: 173px !important;
-    display:inline-block;
-    vertical-align:middle !important;
+    vertical-align: middle !important;
+    border: 0;
 }
 .right-button {
     background: #FFFFFF !important;
@@ -309,4 +308,11 @@ thead th {
     box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
     height: 173px !important;
     vertical-align: middle !important;
+    border: 0;
+}
+
+.info-items {
+    position: relative;
+    display: flex;
+    right: 0%;
 }

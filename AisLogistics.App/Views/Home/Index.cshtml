@@ -9,22 +9,20 @@
     List<EmployeeRatingDto>? ratings = ViewBag.Rating;
     var i = 1;
 }
-
 <link rel="stylesheet" href="~/assets/css/home-details.css" asp-append-version="true" />
-
 <section>
     <p class="head-info mb-2">Информация</p>
-    <div class="row m-0">
-        <div id="leftButton" class="col-auto p-0 left-button d-flex d-none">
+    <div class="info-content">
+        <button id="leftButton" class="p-0 left-button">
             <div class="my-auto"><i class="bi bi-chevron-left"></i></div>
-        </div>
-        <div class="col p-0">
-            <div class="d-flex info-conteiner" id="information_list">
+        </button>
+        <div class="info-conteiner d-inline-block" id="information_list">
+            <div class="info-items mx-2">
                 @if (information is not null && information.Any())
                 {
                     @foreach (var item in information)
                     {
-                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="text-bodyrow col-3 my-3 ms-2 me-1 info-item-@i" data-btn-type="modal" data-bs-toggle="tooltip">
+                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="col-3 text-bodyrow my-3 ms-2 me-1 info-item-@i" data-btn-type="modal" data-bs-toggle="tooltip">
                             <div class="row m-2">
                                 <div class="col-6">
                                     <span class="type">@item.Type</span>
@@ -52,7 +50,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="text-bodyrow col-3 my-3 ms-2 me-1 info-item-2" data-btn-type="modal" data-bs-toggle="tooltip">
+                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="col-3 text-bodyrow my-3 ms-2 me-1 info-item-2" data-btn-type="modal" data-bs-toggle="tooltip">
                             <div class="row m-2">
                                 <div class="col-6">
                                     <span class="type">@item.Type</span>
@@ -80,7 +78,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="text-bodyrow col-3 my-3 ms-2 me-1 info-item-3" data-btn-type="modal" data-bs-toggle="tooltip">
+                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="col-3 text-bodyrow my-3 ms-2 me-1 info-item-3" data-btn-type="modal" data-bs-toggle="tooltip">
                             <div class="row m-2">
                                 <div class="col-6">
                                     <span class="type">@item.Type</span>
@@ -108,7 +106,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="text-bodyrow col-3 my-3 ms-2 me-1 info-item-4" data-btn-type="modal" data-bs-toggle="tooltip">
+                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="col-3 text-bodyrow my-3 ms-2 me-1 info-item-4" data-btn-type="modal" data-bs-toggle="tooltip">
                             <div class="row m-2">
                                 <div class="col-6">
                                     <span class="type">@item.Type</span>
@@ -136,7 +134,63 @@
                                 </div>
                             </div>
                         </a>
-                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="text-bodyrow col-3 my-3 ms-2 me-1 info-item-4" data-btn-type="modal" data-bs-toggle="tooltip">
+                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="col-3 text-bodyrow my-3 ms-2 me-1 info-item-4" data-btn-type="modal" data-bs-toggle="tooltip">
+                            <div class="row m-2">
+                                <div class="col-6">
+                                    <span class="type">@item.Type</span>
+                                </div>
+                                <div class="col-6 pe-3 text-end">
+                                    <span class="ms-auto">
+                                        <small class="dateAdd">@item.DateAdd.ToLongDateString()</small>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row col-12 m-2 mb-0">
+                                <div class="topic">@item.Topic</div>
+                            </div>
+                            <div class="row col-12 m-2 mt-0 text-block">
+                                <span class="text mt-2">@item.Text</span>
+                            </div>
+                            <div class="row m-2 mt-3">
+                                <div class="col-12 d-flex justify-content-between">
+                                    <span class="employeeFio">
+                                        @item.EmployeeFio
+                                    </span>
+                                    <span class="employeeJob">
+                                        @item.EmployeeJob
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="col-3 text-bodyrow my-3 ms-2 me-1 info-item-4" data-btn-type="modal" data-bs-toggle="tooltip">
+                            <div class="row m-2">
+                                <div class="col-6">
+                                    <span class="type">@item.Type</span>
+                                </div>
+                                <div class="col-6 pe-3 text-end">
+                                    <span class="ms-auto">
+                                        <small class="dateAdd">@item.DateAdd.ToLongDateString()</small>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row col-12 m-2 mb-0">
+                                <div class="topic">@item.Topic</div>
+                            </div>
+                            <div class="row col-12 m-2 mt-0 text-block">
+                                <span class="text mt-2">@item.Text</span>
+                            </div>
+                            <div class="row m-2 mt-3">
+                                <div class="col-12 d-flex justify-content-between">
+                                    <span class="employeeFio">
+                                        @item.EmployeeFio
+                                    </span>
+                                    <span class="employeeJob">
+                                        @item.EmployeeJob
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="col-3 text-bodyrow my-3 ms-2 me-1 info-item-4" data-btn-type="modal" data-bs-toggle="tooltip">
                             <div class="row m-2">
                                 <div class="col-6">
                                     <span class="type">@item.Type</span>
@@ -165,13 +219,14 @@
                             </div>
                         </a>
                         i++;
+                        i = i > 4 ? 4 : i;
                     }
                 }
             </div>
         </div>
-        <div id="rightButton" class="col-auto p-0 right-button d-flex">
+        <button id="rightButton" class="p-0 right-button">
             <div class="my-auto"><i class="bi bi-chevron-right"></i></div>
-        </div>
+        </button>
     </div>
     <div class="row mt-4">
         <div class="col-8">
@@ -316,7 +371,6 @@
                             </div>
                         </a>
                     }
-
                 }
             </div>
         </div>
@@ -332,7 +386,6 @@
 
             (function () {
                 new PerfectScrollbar("#warning_list");
-                new PerfectScrollbar("#information_list");
                 new PerfectScrollbar("#notes_list");
             })();
 
@@ -391,14 +444,28 @@
                 ]
             });
 
+            var _infoCount = ~~($('.info-items a').length / 4);
+            var infoCount = _infoCount
+
             $('#rightButton').on('click', function () {
-                if ($('#information_list').find('a').not('.d-none').length > 4)
-                $('#information_list').find('a'f).not('.d-none')[0].addClass('d-none');
-                $('#leftButton').removeClass('d-none');
+                if (infoCount > 0) {
+                    let width = $('.info-items').width();
+                    let right = +$('.info-items').css('right').split('px')[0] + width;
+                    $('.info-items').animate({ "right": `${right}px` }, 1000);
+                    infoCount--;
+                }
             })
 
-            $('#leftButton').on('click', function () {A
-                $('#information_list').find('a.d-none').removeClass('d-none'); 
+            $('#leftButton').on('click', function () {
+                if (infoCount < _infoCount) {
+                    let width = $('.info-items').width();
+                    let right = +$('.info-items').css('right').split('px')[0] - width;
+                    $('.info-items').animate({ "right": `${right}px` }, 1000);
+                    infoCount++;
+                    if (infoCount == _infoCount) {
+                        $('.info-items').animate({ "right": '0px' }, 1000);
+                    }
+                }
             })
 
         })
