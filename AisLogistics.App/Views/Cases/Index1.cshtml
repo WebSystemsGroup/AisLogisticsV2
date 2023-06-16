@@ -27,7 +27,7 @@
                     <select class="form-select select select2-search" asp-for="@responseData.MfcId" asp-items="@responseData.MfcList" form="services-search-form" disabled></select>
                 }
             </div>
-            <div class="col-7">
+            <div class="col-4">
                 <div class="search-bar">
                     <!-- input search -->
                     <fieldset class="page-search-input input-group position-relative m-0">
@@ -228,7 +228,7 @@
                     },
                     columns: [
                         {
-                            title: 'Номер',
+                            title: 'Номер и дата',
                             className: "case-number-column",
                             name: 'caseId',
                             render: function (data, type, row) {
@@ -286,10 +286,10 @@
                             name: 'currentEmployee',
                             render: function (data, type, row) {
                                 return `<div>
-                                                                                              <h2>${row.service.serivesStage.employeeCurrent.name}</h6>
-                                                                                    <small class="text-muted d-block">${row.service.serivesStage.employeeCurrent.job}</small>
-                                                                                    <small class="text-muted">${row.service.serivesStage.office}</small>
-                                                                            </div>`;
+                                              <h2>${row.service.serivesStage.employeeCurrent.name}</h6>
+                                              <small class="text-muted d-block">${row.service.serivesStage.employeeCurrent.job}</small>
+                                              <small class="text-muted">${row.service.serivesStage.office}</small>
+                                       </div>`;
                             }
                         } 
                     ]

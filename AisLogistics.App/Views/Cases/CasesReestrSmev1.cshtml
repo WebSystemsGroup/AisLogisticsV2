@@ -38,21 +38,17 @@
                     <select class="form-select select select2-search" asp-for="@responseData.MfcId" asp-items="@responseData.MfcList" form="services-search-form" disabled></select>
                 }
             </div>
-            <div class="col-7">
+            <div class="col-4">
                 <div class="search-bar">
                     <!-- input search -->
                     <fieldset class="page-search-input input-group position-relative m-0">
-                        <input type="search" asp-for="@responseData.Query" class="form-control rounded-right shadow ps-2" placeholder="Номер обращения, ФИО заявителя" data-query>
-                        @* <button class="btn btn-primary search-btn rounded" type="submit">
-                        <span class="d-none d-sm-block">Поиск</span>
-                        <i class="bx bx-search d-block d-sm-none"></i>
-                        </button>*@
+                        <input type="search" asp-for="@responseData.Query" class="form-control rounded-right ps-2" placeholder="Поиск" data-query>
                     </fieldset>
                     <!--/ input search -->
                 </div>
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-outline-primary btn-icon"
+                <button type="button" class="btn btn-outline-primary btn-icon p-0"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseAdvancedSearch">
                     <i class="bx bx-customize"></i>
@@ -146,12 +142,11 @@
     </form>
     <!-- Search Bar end -->
     <!-- seach result section -->
-    <div class="card">
+    <div class="block">
         <div class="card-body">
             <!-- datatable start -->
             <div class="table-responsive">
-
-                <table id="@Model.TableName" data-action-table="@Model.TableMethodAction" class="table table-sm table-striped w-100"></table>
+                <table id="@Model.TableName" data-action-table="@Model.TableMethodAction" class="directory_names-items table"></table>
             </div>
             <!-- datatable ends -->
         </div>
@@ -163,13 +158,6 @@
     <script>
         const $table = $("#@(Model.TableName)")
         period = $("#responseData_PeriodId"),
-            //query = $("#responseData_Query"),
-            //office = $("#responseData_OfficeId"),
-            //service = $("#responseData_ServiceId"),
-            //stage = $("#responseData_Stages"),
-            //favorite = $("[name='responseData.IsFavorite']:checkbox"),
-            //dateStart = $("#responseData_DateStart"),
-            //dateStop = $("#responseData_DateStop");
 
             $(document).ready(function () {
 
@@ -218,51 +206,10 @@
                     return false;
                 });
 
-                //$("#accordionFilter select").select2({
-                //    placeholder: "Все",
-                //    language: "ru"
-                //});
-
-
-
-
-                //office.change(function(e) {
-
-                //    let arr = [];
-
-                //    $.each($(e.target).val(), function( i, v ) {
-                //      arr.push({ name: 'providersId', value: v })
-                //    });
-
-                //    $.ajax({
-                //        type: "GET",
-                //        url: 'Cases/GetServicesForProviderDataJson',
-                //        data: arr,
-                //        beforeSend: () => {
-                //            service.empty();
-                //            service.prop("disabled", true);
-                //        },
-                //        success: (data) => {
-                //           data.forEach(function(item) {
-                //               service.append($('<option>', {
-                //                value: item.id,
-                //                text:  item.serviceName
-                //                 }));
-                //           });
-                //        },
-                //        complete: () => {
-                //          service.prop("disabled", false);
-                //        }
-                //    });
-                //})
-
-
-
-
                 $table.DataTable({
                     sDom: "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                          "<'row'<'col-sm-12'tr>>" +
+                          "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                     processing: true,
                     serverSide: true,
                     ordering: false,
@@ -273,6 +220,7 @@
                         type: "POST",
                         datatype: "json",
                         data: function (data) {
+                            console.log(data)
                             let form = document.querySelector('#services-search-form');
                             var formData = new FormData(form);
                             for (var pair of formData.entries()) {
@@ -280,235 +228,89 @@
                                 if (pair[1]) data[name] = pair[1];
                             }
                         }
-                        //dataSrc: function(json) {
-                        //    return json.data;
-                        //}
                     },
                     initComplete: function () {
-                        // let dateAddColumn = this.api().column(1);
-                        // let caseColumn = this.api().column(2);
-                        // let customerColumn = this.api().column(3);
-                        // let servicesColumn = this.api().column(4);
-                        // let officesColumn = this.api().column(5);
-                        // let currentEmployeeColumn = this.api().column(6);
-                        // let statusColumn = this.api().column(7);
-                        // let stageColumn = this.api().column(8);
-                        // let filterSelectColumn = this.api().column(9);
-                        // let officeSelectColumn = this.api().column(10);
-
-                        // var $sortFilter = $('#sortFilter');
-                        // var $customerSelect = $('<select id="selectsortFilter" class="form-select form-select-sm">@Html.Raw(filterSelectOptions)</select>')
-                        //     .appendTo($sortFilter)
-                        //     .select2({
-                        //         language: "ru",
-                        //         minimumResultsForSearch: -1
-                        //     })
-                        //     .on('change', function () {
-                        //          filterSelectColumn.search($(this).val()).draw();
-                        //     });
-
-                        //var $officeFilter = $('#officeFilter');
-                        //if('@isView'==='True') {
-                        //     var $officeFilterSelect = $('<select id="selectOfficeFilter" class="form-select form-select-sm"><option value="@Guid.Empty">ВСЕ</option>@Html.Raw(ViewBag.Mfc)</select>')
-                        //         .appendTo($officeFilter)
-                        //         .select2({
-                        //             language: "ru",
-                        //         })
-                        //         .on('change', function () {
-                        //             officeSelectColumn.search($(this).val()).draw();
-                        //         });
-                        //}
-
-                        //$('#dateAdd').datepicker({
-                        //   language: "ru",
-                        //   autoclose: true,
-                        //   format: 'dd.mm.yyyy',
-                        //}).on('change', function () {
-                        //         dateAddColumn.search($(this).val()).draw();
-                        //});
-
-                        // $('#SServicesId').select2({
-                        //      placeholder: "Услуга",
-                        //      language: "ru",
-                        //      allowClear: true
-                        // }).on('change', function () {
-                        //         servicesColumn.search($(this).val()).draw();
-                        // });
-
-                        // $('#SOfficesId').select2({
-                        //     placeholder: "Орган Власти",
-                        //     language: "ru",
-                        //     allowClear: true
-                        // }).on('change', function () {
-                        //         officesColumn.search($(this).val()).draw();
-                        // });
-
-                        // $('#SStatusId').select2({
-                        //     placeholder: "Статус",
-                        //     minimumResultsForSearch: -1,
-                        //     language: "ru",
-                        //     allowClear: true
-                        // }).on('change', function () {
-                        //         statusColumn.search($(this).val()).draw();
-                        // });
-
-                        // $('#SStageId').select2({
-                        //     placeholder: "Этап",
-                        //     minimumResultsForSearch: -1,
-                        //     language: "ru",
-                        //     allowClear: true
-                        //  }).on('change', function () {
-                        //         stageColumn.search($(this).val()).draw();
-                        //     });
-
-                        // $('#caseId').on('change', function () {
-                        //     if ($(this).val().length >= 3 || $(this).val().length == 0)
-                        //         caseColumn.search($(this).val()).draw();
-                        //     });
-
-                        // $('#customer').on('change', function () {
-                        //     if ($(this).val().length >= 3 || $(this).val().length == 0)
-                        //         customerColumn.search($(this).val()).draw();
-                        //     });
-
-                        // $('#currentEmployee').on('change', function () {
-                        //     if($(this).val().length>=3 || $(this).val().length==0)
-                        //     currentEmployeeColumn.search($(this).val()).draw();
-                        // });
-
-                        //$('#checkSelectedRowMain').change(function () {
-                        //    let value = $('#checkSelectedRowMain').prop("checked");
-                        //    $('[data-check]').each(function (i, el) {
-                        //        $(el).prop("checked", value)
-                        //    });
-                        //});
-
-                        //$('[data-check]').change(function () {
-                        //    if ($('#checkSelectedRowMain').prop("checked"))
-                        //        $('#checkSelectedRowMain').prop("checked", false);
-                        //});
-
-                        //$('#casesStageAddModal').on('click', function () {
-                        //    let mass = [];
-                        //    $('[data-check]').each(function (i, el) {
-                        //        if ($(el).prop("checked")) {
-                        //            mass.push($(el).attr('data-service-id'));
-                        //        }
-                        //    });
-
-                        //    CaseAddStage(mass);
-                        //});
-
                     },
                     columns: [
                         {
-                            title: `<div>Дата</div>`,
-                            className: "case-dateAdd-column text-centr",
+                            title: `Дата и №`,
                             name: 'dateAdd',
                             render: function (data, type, row) {
-                                let content = `<div>${row.dateCreate}</div>`;
-                                content += `<div>${row.employeeAdd.name}</div>`;
-                                content += `<small class="text-muted">${row.employeeAdd.job}</small>`
-                                return content;
+                                let date = row.dateCreate.slice(0, 10);
+                                let content = `<div>${date}</div>` +
+                                    `<div><a style="color: #172359" href="javascript:void(0);" data-case-id="${row.caseId}" data-smev-id="${row.id}" id="caseNumber">${row.caseId}</a></div>`;
+                                return content;       
                             }
-                        },
+                        }, 
                         {
-                            title: '<div>Обращение</div>',
-                            className: "case-number-column",
-                            name: 'caseId',
+                            title: `Заявитель`,
+                            name: 'customer',
                             render: function (data, type, row) {
-                                let str = row.service.name.length > 90 ? row.service.name.slice(0, 90) + "..." : row.service.name
-                                let content = `<a href="javascript:void(0);" data-case-id="${row.caseId}" data-smev-id="${row.id}" id="caseNumber">${row.caseId}</a>`;
-                                content += `<div>${row.applicant.name}</div>`;
-                                content += `<div class="small text-muted">${row.service.name}</div>`;
-                                return content;
+                                let content = `<h2>${row.applicant.name}</h2>`;
+                                if (row.applicant.address !== null)
+                                    content += `<div><img class="mb-auto me-1" src="/img/location.svg" alt=""/>${row.applicant.address}</div>`;
+                                if (row.applicant.phone !== null)
+                                    content += `<div><img class="mb-auto me-1" src="/img/phone.svg" alt=""/>${row.applicant.phone}</div>`;
+                                return `<div class="">${content}</div>`;
                             }
-                        },
-                        //{
-                        //    title: `<div></div>`,
-                        //    className: "case-customer-column",
-                        //    name: 'customer',
-                        //    render: function (data, type, row) {
-                        //        let content = `<div>${row.applicant.name}</div>`;
-                        //        if (row.applicant.address !== null)
-                        //            content += `<div class="small"><i class="bx bx-map me-1"></i>${row.applicant.address}</div>`;
-                        //        if (row.applicant.phone !== null)
-                        //            content += `<div class="small"><i class="bx bx-phone me-1"></i>${row.applicant.phone}</div>`;
-                        //        return content;
-                        //    }
-                        //},
-                        //{
-                        //    title: `<div></div>`,
-                        //    className: "case-services-column",
-                        //    name: 'servicesId',
-                        //    render: function (data, type, row) {
-                        //        let str = row.service.name.length > 90 ? row.service.name.slice(0, 90) + "..." : row.service.name
-                        //        let content = `<div title="${row.service.name}">${str}</div>`;
-                        //        content += `<div class="small text-muted">${row.service.office}</div>`
-                        //        return content;
-                        //    }
-                        //},
+                        }, 
                         {
-                            title: `<div>Запрос</div>`,
-                            className: "case-offices-column",
+                            title: `Запрос`,
                             name: 'officesId',
                             render: function (data, type, row) {
-                                let content = `<div >${row.smevService}</div>`;
-                                content += `<div class="small text-muted">${row.provider}</div>`;
+                                let content = `<div>${row.smevService}</div>`;
+                                content += `<div class="text-muddy">${row.provider}</div>`;
                                 return content;
                             }
                         },
-                        //{
-                        //    title: `<div></div>`,
-                        //    className: "case-currentEmployee-column",
-                        //    name: 'currentEmployee',
-                        //    render: function (data, type, row) {
-                        //        return `<div>
-                        //                        <div class="text-bold-500 mb-n1">${row.employeeAdd.name}</div>
-                        //                                <small class="text-muted">${row.employeeAdd.job}</small>
-                        //                    </div>`;
-                        //    }
-                        //},
                         {
-                            title: `<div>Статус</div>`,
-                            className: "case-status-column",
+                            title: `Исполнитель`,
+                            name: 'currentEmployee',
+                            render: function (data, type, row) {
+                                return `<div>
+                                         <h2>${row.employeeAdd.name}</h2>
+                                         <small>${row.employeeAdd.job}</small>
+                                        </div>`;
+                            }
+                        },
+                        {
+                            title: `Статус`,
                             name: 'statusId',
                             render: function (data, type, row) {
                                 let colorStatus = "";
                                 let statusName = "";
                                 switch (row.status) {
                                     case 0:
-                                        colorStatus = "bg-danger";
+                                        colorStatus = "danger";
                                         statusName = `Просрочено`;
                                         break;
                                     case 1:
-                                        colorStatus = "bg-warning";
+                                        colorStatus = "warning";
                                         statusName = `Отправлено`;
                                         break;
                                     case 2:
-                                        colorStatus = "bg-danger";
+                                        colorStatus = "danger";
                                         statusName = `Ошибка`;
                                         break;
                                     case 3:
-                                        colorStatus = "bg-success";
+                                        colorStatus = "success";
                                         statusName = `Получен ответ`;
                                         break;
                                     case 4:
-                                        colorStatus = "bg-warning";
+                                        colorStatus = "warning";
                                         statusName = `Неизвестно`;
                                         break;
                                 };
-                                return `<div class="badge ${colorStatus} text-white">${statusName}</div> <div class="small text-muted">${row.comment}</div>`;
+                                return `<div class="${colorStatus} text-white">${statusName}</div>`;
                             }
                         },
                         {
-                            title: `<div>Дата ответа</div>`,
-                            className: "case-dateAdd-column text-centr",
+                            title: `Дата ответа`,
                             name: 'dateResponce',
                             render: function (data, type, row) {
                                 let content = '';
-                                content += `<div><span>Фак: </span><span>${row.dateResponseFact}</span></div>`
-                                content += `<div><span>Рег: </span><span>${row.dateResponseReg}</span></div>`
+                                content += `<div><span>Факт. дата: </span><span>${row.dateResponseFact}</span></div>`
+                                content += `<div><span>Регл. дата: </span><span>${row.dateResponseReg}</span></div>`
                                 return content;
                             }
                         }

@@ -31,7 +31,7 @@
             }, 400), //TODO для красоты (¬‿¬)
             error: (data) => {
                 setTimeout(function () { modalContainerId.modal("hide"); }, 400)
-                //console.error(data);
+                console.error(data);
             }
         });
     });

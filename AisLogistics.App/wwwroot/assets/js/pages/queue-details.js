@@ -54,7 +54,7 @@ $(document).ready(function () {
 
 function closeAllSubmenu(id = '#electronicQueueContent') {
     let queuewidth = document.getElementById('electronicQueue');
-    //queuewidth.classList.remove('dropdown-queue-max');
+    queuewidth.classList.remove('dropdown-queue-max');
 
     document.querySelectorAll(`${id} .scoreboard-submenu`).forEach(item => {
         item.classList.remove('scoreboard-submenu--open');

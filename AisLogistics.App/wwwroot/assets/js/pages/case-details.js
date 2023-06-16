@@ -26,6 +26,7 @@ var btns = {
     blanckDetailScroll = $('.blancs-scroll-area'),
     service = $('[data-service-id]');
 
+
 const sidebar = {
     _data: {
         url: "",
@@ -38,10 +39,10 @@ const sidebar = {
             url: url,
             type: 'GET',
             data: data,
-            //beforeSend: () => {
-            //    caseDetails.html('<div class="d-flex h-100 justify-content-center align-items-center"><div class="text-center"><p class="mb-0">Пожалуйста, подождите...</p> <div class="sk-wave sk-dark m-0 d-inline-flex"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div></div></div>');
-            //    caseDetailsContent.show();
-            //},
+            beforeSend: () => {
+                caseDetails.html('<div class="d-flex h-100 justify-content-center align-items-center"><div class="text-center"><p class="mb-0">Пожалуйста, подождите...</p> <div class="sk-wave sk-dark m-0 d-inline-flex"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div></div></div>');
+                caseDetailsContent.show();
+            },
             success: (content) => caseDetailsContent.change(content),
             //complete: () => caseDetailsContent.show()
         });
@@ -348,15 +349,16 @@ $(function () {
             type: 'Post',
             data: { id: id },
             beforeSend: () => {
-                caseDetails.html('<div class="d-flex h-100 justify-content-center align-items-center"><div class="text-center"><p class="mb-0">Пожалуйста, подождите...</p> <div class="sk-wave sk-dark m-0 d-inline-flex"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div></div></div>');
+              /*  caseDetails.html('<div class="d-flex h-100 justify-content-center align-items-center"><div class="text-center"><p class="mb-0">Пожалуйста, подождите...</p> <div class="sk-wave sk-dark m-0 d-inline-flex"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div></div></div>');*/
             },
             success: (content) => {
                 $("#mainModal").html(content).modal('show');
-            },
-            complete: () => caseDetails.empty()
+            }
+            /*complete: () => caseDetails.empty()*/
         });
     }
-     
+
+
     if (service.length) {
         ServiceStages($(service).attr('data-service-id'));
         ServiceBlancs($(service).attr('data-service-id'));

@@ -131,16 +131,16 @@ if (window.moment) {
 
   // Navbar Scroll class
   //---------------------
-  //function scrollTopFn() {
-  //  if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
-  //    document.getElementById('layout-navbar').classList.add('navbar-elevated');
-  //  } else {
-  //    document.getElementById('layout-navbar').classList.remove('navbar-elevated');
-  //  }
-  ////}
-  //window.onscroll = function () {
-  //  scrollTopFn();
-  //};
+  function scrollTopFn() {
+    if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+      document.getElementById('layout-navbar').classList.add('navbar-elevated');
+    } else {
+      //document.getElementById('layout-navbar').classList.remove('navbar-elevated');
+    }
+  }
+  window.onscroll = function () {
+    scrollTopFn();
+  };
 
 
   // Notification
@@ -190,7 +190,7 @@ if (window.moment) {
   const notificationRemoveAll = document.querySelector('.dropdown-notifications-all');
   const notificationMarkAsReadList = document.querySelectorAll('.dropdown-notifications-read');
     var notificationAll = document.querySelectorAll('.dropdown-notifications-item');
-    var notificationBadge = document.querySelector('.dropdown-notifications .badge-notification');
+    var notificationBadge = document.querySelector('.dropdown-notifications .badge-notifications');
     // Notification: all 
     if (notificationAll) {
         notificationAll.forEach(item => {
@@ -363,11 +363,11 @@ if (window.moment) {
   // If current layout is vertical and current window screen is > small
 
   // Auto update menu collapsed/expanded based on the themeConfig
-  //if (typeof TemplateCustomizer !== 'undefined') {
-  //  if (window.templateCustomizer.settings.defaultMenuCollapsed) {
-  //    window.Helpers.setCollapsed(true, false);
-  //  }
-  //}
+  if (typeof TemplateCustomizer !== 'undefined') {
+    if (window.templateCustomizer.settings.defaultMenuCollapsed) {
+      window.Helpers.setCollapsed(true, false);
+    }
+  }
 
   // Manage menu expanded/collapsed state with local storage support If enableMenuLocalStorage = true in config.js
   if (typeof config !== 'undefined') {

@@ -1,16 +1,17 @@
-﻿<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <i class="bx bx-list"></i>
-                </button>
-<div class="header_menu navbar-collapse collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <!-- Cases -->
-        <li class="nav-item dropdown">
-            <a href="javascript:void(0)" class="accordion-button collapsed" id="navbarServiceMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+﻿
+<button class="navbar-toggler ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="bi bi-list"></i>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mb-2 mb-lg-0">
+        <!-- Услуги -->
+        <li class="nav-item dropdown me-xxl-4">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="/img/uslugi.svg" alt="">
                 Услуги
             </a>
 
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @if (User.HasClaim(AccessKeyNames.DataCase, AccessKeyValues.View))
                 {
                     <li>
@@ -74,30 +75,29 @@
             </ul>
         </li>
 
-        <!-- Reports -->
-        <li class="nav-item">
-            <a asp-action="Index" asp-controller="Reports" class="nav-link p-3">
+        <!-- Отчеты -->
+        <li class="nav-item me-xxl-4">
+            <a asp-action="Index" asp-controller="Reports" class="nav-link">
                 <i class="menu-icon bx bxs-report"></i>
                 Отчеты
             </a>
         </li>
 
-        <!-- Statistics -->
-        <li class="nav-item">
-            <a asp-action="Index" asp-controller="Statistics" class="nav-link p-3">
+        <!-- Аналитика -->
+        <li class="nav-item me-xxl-4">
+            <a asp-action="Index" asp-controller="Statistics" class="nav-link">
                 <i class="menu-icon bx bx-stats"></i>
                 Аналитика
             </a>
         </li>
 
-        <!-- Reference -->
-        <li class="nav-item dropdown">
-            <a href="javascript:void(0)" class="accordion-button collapsed" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuLink2">
+        <!-- Справочники -->
+        <li class="nav-item dropdown me-xxl-4">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="/img/spravochmiki.svg" alt="">
                 Справочники
             </a>
-
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
                 @if (User.HasClaim(AccessKeyNames.ReferenceEmployee, AccessKeyValues.View))
                 {
                     <li>
@@ -201,13 +201,14 @@
                 }
             </ul>
         </li>
+
         <!-- System -->
-        <li class="dropdown m-0">
-            <a href="javascript:void(0)" class="accordion-button collapsed" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuLink3">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="menu-icon bx bx-cog"></i>
                 Система
             </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
                 @if (User.HasClaim(AccessKeyNames.ReferenceRole, AccessKeyValues.View))
                 {
                     <li>
@@ -218,10 +219,10 @@
                     </li>
                 }
                 @*<li>
-                    <a asp-action="SMS" asp-controller="Systems" class="dropdown-item">
-                        <i class="menu-icon bx bx-message"></i>
-                        СМС
-                    </a>
+                <a asp-action="SMS" asp-controller="Systems" class="dropdown-item">
+                <i class="menu-icon bx bx-message"></i>
+                СМС
+                </a>
                 </li>*@
                 <li>
                     <a asp-action="Terminals" asp-controller="Systems" class="dropdown-item">
@@ -233,5 +234,3 @@
         </li>
     </ul>
 </div>
-
-

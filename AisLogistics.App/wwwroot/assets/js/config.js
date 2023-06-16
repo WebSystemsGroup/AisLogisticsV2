@@ -1,4 +1,4 @@
-/*
+/**
  * Config
  * -------------------------------------------------------------------------------------
  * ! IMPORTANT: Make sure you clear the browser local storage In order to see the config changes in the template.

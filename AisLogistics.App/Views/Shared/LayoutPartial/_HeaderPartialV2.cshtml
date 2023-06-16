@@ -1,22 +1,22 @@
 ﻿@using System.Resources
-<nav class="row align-items-center mb-3">
-    <div class="col-sm-auto navbar-brand app-brand demo d-none d-xxl-flex py-0 me-3">
-        <div class="header_logo">
-            <a href="/">
-                <img src="/img/logo.svg" alt="">
-            </a>
-        </div>
+<div class="d-flex align-items-lg-start align-items-xl-center mb-3">
+    <div class="col-xxl-2 col-xl-2 d-xl-inline-block d-none">
+        <a href="/">
+            <img src="/img/logo.svg" alt="">
+        </a>
+    </div> 
+    <div class="col-xxl-8 col-xl-auto">
+        <nav class="navbar-expand-xl">
+            <div class="container-fluid">
+                <partial name="LayoutPartial/_MainMenuPartialV2" />
+            </div>
+        </nav>
     </div>
-    <div class="navbar-expand-xl col-xl-7 col-xxl-6 col-2 col-lg-4">
-        <partial name="LayoutPartial/_MainMenuPartialV2" />
-    </div>
-    <div class="col">
-        <div class="row align-items-center header_create justify-content-end">
-
+    <div class="col-xxl-2 col-xl-2 col-lg-10 col-md-10 col-sm-10 ms-auto">
+        <div class="row align-items-center header_create justify-content-xl-between justify-content-end ms-xl-auto">
             @if (User.HasClaim(AccessKeyNames.DataCase, AccessKeyValues.Add))
             {
-
-                <a asp-action="Create" asp-controller="Cases" class="col-sm-4 col-4 btn btn-primary col-xl-6 col-xxl-6">
+                <a asp-action="Create" asp-controller="Cases" class="btn btn-primary px-md-1 col-xxl-5 col-xl-5 col-lg-2 col-md-2 col-sm-3">
                     <P>Создать</P>
                 </a>
             }
@@ -42,8 +42,6 @@
             <!-- User -->
             @await Component.InvokeAsync("LoginPartial")
             <!--/ User -->
-
         </div>
     </div>
-</nav>
-
+</div> 
