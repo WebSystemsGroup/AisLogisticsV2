@@ -26115,3 +26115,12 @@ html[data-textdirection=rtl] .case-application .case-app-details .case-next .act
     color: #475F7B;
     padding: 1rem 1.9rem;
 }
+.detail-card.card {
+    background: #FFFFFF;
+    box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
+    border-radius: 3px;
+}
+.header_menu .bi {
+    color: #BEBEBE !important;
+    margin-left: 1.5rem;
+}

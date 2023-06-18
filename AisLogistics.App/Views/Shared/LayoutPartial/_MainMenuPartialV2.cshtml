@@ -1,14 +1,30 @@
-﻿
-<button class="navbar-toggler ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="bi bi-list"></i>
+﻿<style>
+     .dropdown-toggle::after {
+         color: #B5B5B5;
+     } 
+    .menu-icon{
+        color: #BEBEBE;
+    }
+
+    .bx-list-service:before {
+        content: url("/assets/svg/icons/list-service.svg");
+    }
+
+    .bx-spravochmiki:before {
+        content: url("/assets/svg/icons/spravochmiki.svg");
+    }
+</style>
+<button class="navbar-toggler ps-0 d-flex d-xl-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="bi bi-list me-4"></i>
+    <img src="/img/logo.svg" alt="">
 </button>
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mb-2 mb-lg-0">
         <!-- Услуги -->
         <li class="nav-item dropdown me-xxl-4">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="/img/uslugi.svg" alt="">
-                Услуги
+                <i class="menu-icon bx bx-list-service"></i>
+                <span class="mt-auto d-inline-flex">Услуги</span>
             </a>
 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -93,8 +109,8 @@
 
         <!-- Справочники -->
         <li class="nav-item dropdown me-xxl-4">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="/img/spravochmiki.svg" alt="">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+                <i class="menu-icon bx bx-spravochmiki"></i>
                 Справочники
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">

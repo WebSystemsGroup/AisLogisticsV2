@@ -89,7 +89,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .menu-icon {
     margin-right: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 /*
 .header_notification, .header_personal {
@@ -925,18 +925,13 @@ section {
 .case-app-header h2 {
     font-size: 18px;
 }
-
-.detail-card {
-    padding: 50px !important;
-}
-
+ 
     .detail-card .btn-outline-primary {
         border-width: 2px;
         color: #172359;
     }
 
-.case-app-header {
-    margin-bottom: 70px;
+.case-app-header { 
     position: relative;
 }
 
@@ -1100,7 +1095,7 @@ section {
 }
 
 .detail-card .success, .detail-card .danger, .detail-card .warning {
-    font-family: 'golos-bold';
+    font-family: 'golos-bold' !important;
     padding: 5px 17px;
     width: 100%;
     max-width: 130px;

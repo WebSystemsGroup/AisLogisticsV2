@@ -6,17 +6,17 @@
         </a>
     </div> 
     <div class="col-xxl-8 col-xl-auto">
-        <nav class="navbar-expand-xl">
+        <nav class="navbar-expand-xl" id="layout-navbar">
             <div class="container-fluid">
                 <partial name="LayoutPartial/_MainMenuPartialV2" />
             </div>
         </nav>
     </div>
-    <div class="col-xxl-2 col-xl-2 col-lg-10 col-md-10 col-sm-10 ms-auto">
+    <div class="col-xxl-2 col-xl-2 col-lg-auto col-md-auto col-sm-auto ms-auto">
         <div class="row align-items-center header_create justify-content-xl-between justify-content-end ms-xl-auto">
             @if (User.HasClaim(AccessKeyNames.DataCase, AccessKeyValues.Add))
             {
-                <a asp-action="Create" asp-controller="Cases" class="btn btn-primary px-md-1 col-xxl-5 col-xl-5 col-lg-2 col-md-2 col-sm-3">
+                <a asp-action="Create" asp-controller="Cases" class="btn btn-primary px-md-1 col-xxl-5 col-xl-5 col-lg-4 col-md-4 col-sm-4">
                     <P>Создать</P>
                 </a>
             }
