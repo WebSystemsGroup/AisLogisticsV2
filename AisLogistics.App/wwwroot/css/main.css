@@ -238,8 +238,10 @@ h1, h2, h3, h4, h5, h6 {
     color: #BEBEBE;
 }
 
-    .breadcrumb-item + .breadcrumb-item::before { 
+    .breadcrumb-item + .breadcrumb-item::before {
         line-height: 0.6 !important;
+        content: url(../assets/svg/icons/breadcrumb-item-before.svg) !important; 
+        float:none !important;
     }
 
 .directory_breadcrumbs a:not(:last-child)::after {
@@ -478,6 +480,12 @@ table .names-items span {
     padding: 9px;
 }
 
+hr {
+    background-color: #c6b9b9 !important;
+}
+.form-control:focus {
+    box-shadow:none !important;
+}
 .buttonAdd {
     width: 100%;
     font-family: golos-bold;

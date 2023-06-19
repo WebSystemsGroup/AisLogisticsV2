@@ -3,11 +3,12 @@
     ViewBag.Title = Model.ViewTitle;
 }
 
-<section id="content-report">
-    <div class="nav-align-left">
+<link rel="stylesheet" href="~/assets/css/reports.css" asp-append-version="true" />
+<section id="content-report" class="d-flex">
+    <div class="col-2">
         <partial name="_NavLeft" model=@Model.Model />
-        <div class="shadow-none w-100 my-auto">
-            <h3 class="text-center">Выберите отчет</h3>
-        </div>
+    </div>
+    <div class="shadow-none w-100 my-auto card">
+        <h3 class="text-center">Выберите отчет</h3>
     </div>
 </section>

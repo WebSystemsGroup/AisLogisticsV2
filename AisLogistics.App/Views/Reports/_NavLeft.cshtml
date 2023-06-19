@@ -6,15 +6,8 @@
 @{
     ViewData["ActiveTabId"] = Model.NavId;
 }
-
-<style>
-    .active-color {
-        color: #5a8dee !important;
-    }
-</style>
-
-
-<ul class="nav nav-tabs tabs-line border-end" role="tablist">
+  
+<ul class="nav tabs-line" role="tablist">
     @foreach(var item in Model.Reports) {
         <li class="nav-item">
             <a class="nav-link @(item.Id.ToString()==Model.NavId ? "active active-color" : string.Empty)" data-bs-target="#navs-tabs-default" href="@Url.Action("MainReport", "Reports", new {navId=@item.Id.ToString(), urlAction=@item.Path})" id="@item.Id.ToString()" role="tab">@item.Name</a>

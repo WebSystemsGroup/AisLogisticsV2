@@ -7,24 +7,24 @@
         <input type="hidden" name="id" value="@Model" />
         <input type="hidden" name="method" value="@ReportsType.Function" />
         <input type="hidden" name="modelType" value="@typeof(ReportReestrCountEmployees)" />
-        <div class="form-group col-sm-3">
+        <div class="form-group col-auto">
             <label for="mfcId" class="form-label">МФЦ</label>
             <select id="mfcId" name="mfcId" class="form-select select2-search" data-all="false" disabled></select>
         </div>
-        <div class="form-group col-sm-3">
+        <div class="form-group col-auto">
             <label for="providerId" class="form-label">Поставщик</label>
             <select id="providerId" name="providerIdList" class="form-select select2-search" multiple disabled></select>
         </div>
-        <div class="form-group col-sm-3">
+        <div class="form-group col-auto">
             <label for="serviceId" class="form-label">Услуга</label>
             <select id="serviceId" name="serviceIdList" class="form-select select2-search" multiple disabled>Услуга</select>
         </div>
-        <div class="form-group col-sm-3">
+        <div class="form-group col-auto">
             <label class="form-label" for="dateStart">Дата</label>
             <div class="input-daterange input-group" id="date-range">
                 <input type="text" name="dateStart" id="report_date_start" class="form-control datepick" value="@DateTime.Now.AddDays(-1).ToShortDateString()">
                 <div class="input-group-append">
-                    <span class="input-group-text bg-primary h-100"><i class="bx bxs-calendar text-white"></i></span>
+                    <span class="input-group-text bg-primary h-100"><i class="bx bx-calendar text-white"></i></span>
                 </div>
                 <input type="text" name="dateStop" id="report_date_stop" class="form-control datepick" value="@DateTime.Now.AddDays(-1).ToShortDateString()">
             </div>
