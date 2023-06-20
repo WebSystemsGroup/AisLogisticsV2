@@ -116,12 +116,11 @@ namespace AisLogistics.App.Service
                 List<int> indicators = new List<int>() {1,25,29 };
 
                 var data = _context.DIndicatorsValues
-                     .Where(w => w.Month == date.Month &&
-                              w.Year == date.Year &&
-                              indicators.Contains(w.SIndicatorsId))
-                    .Join(_context.SEmployees, indicators => indicators.SEmployeesId, b => b.Id, (indicators, b) => new { indicators.SEmployeesId, indicators.SOfficesId, indicators.IndicatorValue, b.EmployeeName })
-                    .Join(_context.SOffices, c => c.SOfficesId, d => d.Id, (c, d) => new { c.SEmployeesId, c.SOfficesId, c.IndicatorValue, c.EmployeeName, d.OfficeName })
-                    .Select(s => new { s.SEmployeesId, s.EmployeeName, s.OfficeName, s.SOfficesId, s.IndicatorValue })
+                     .Where(w => w.Month == date.Month && w.Year == date.Year
+                             && indicators.Contains(w.SIndicatorsId)
+                           )
+                    .Join(_context.SEmployees, indicators => indicators.SEmployeesId, b => b.Id, (indicators, b) => new { indicators.SEmployeesId, indicators.SOfficesId, indicators.SIndicatorsId, indicators.IndicatorValue, b.EmployeeName })
+                    .Join(_context.SOffices, c => c.SOfficesId, d => d.Id, (c, d) => new { c.SEmployeesId, c.SOfficesId, c.SIndicatorsId, c.IndicatorValue, c.EmployeeName, d.OfficeName })
                     .GroupBy(g => g.SEmployeesId)
                     .Select(s => new EmployeeRatingDto
                     {
@@ -130,6 +129,9 @@ namespace AisLogistics.App.Service
                         OfficessName = s.First().OfficeName,
                         OfficessId = s.First().SOfficesId.Value,
                         EmployeePoint = (int)s.Sum(s => s.IndicatorValue),
+                        ReceivedCount = (int)s.Where(w=>w.SIndicatorsId==1).Sum(s => s.IndicatorValue),
+                        IssuedCount = (int)s.Where(w => w.SIndicatorsId == 25).Sum(s => s.IndicatorValue),
+                        ConsultationCount = (int)s.Where(w=>w.SIndicatorsId==29).Sum(s => s.IndicatorValue),
                     })
                     .OrderByDescending(o => o.EmployeePoint);
                     

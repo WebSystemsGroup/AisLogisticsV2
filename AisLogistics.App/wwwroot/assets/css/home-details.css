@@ -1,4 +1,7 @@
-﻿
+﻿.info {
+    height: 95%;
+}
+
 .head-info {
     font-weight: 400;
     font-size: 16px;
@@ -23,7 +26,6 @@
     border-radius: 3px !important;
     box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
     border-radius: 3px;
-    height: 470px;
 }
 
 .casesId {
@@ -63,7 +65,6 @@
     box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
     border-radius: 3px;
     width: 100%;
-    height: 41.2%;
 }
 
 .notes-item {
@@ -155,17 +156,17 @@ thead th {
 
 /* info-item-1 and info-item-2 */
 
-.info-item-1 {
+.info-item:first-child {
     background: #077EFA !important;
     color: #FFFFFF !important;
     border-radius: 3px;
 }
 
-    .info-item-1 *, .info-item-2 * {
+    .info-item:first-child *, .info-item-2 * {
         color: #FFFFFF !important;
     }
 
-    .info-item-1 .employeeJob, .info-item-1 .employeeFio, .info-item-2 .employeeJob, .info-item-2 .employeeFio {
+    .info-item:first-child .employeeJob, .info-item:first-child .employeeFio, .info-item-2 .employeeJob, .info-item-2 .employeeFio {
         font-style: normal;
         font-weight: 400;
         font-size: 10px;
@@ -174,7 +175,7 @@ thead th {
         color: rgba(255, 255, 255, 0.4) !important;
     }
 
-    .info-item-1 .text, .info-item-2 .text {
+    .info-item:first-child .text, .info-item-2 .text {
         font-style: normal;
         font-weight: 400;
         font-size: 12px;
@@ -187,7 +188,7 @@ thead th {
         overflow: hidden;
     }
 
-    .info-item-1 .type, .info-item-2 .type {
+    .info-item:first-child .type, .info-item-2 .type {
         font-weight: 400 !important;
         font-size: 12px !important;
         font-family: 'golos-regular';
@@ -196,7 +197,7 @@ thead th {
         color: #FFFFFF !important;
     }
 
-    .info-item-1 .topic, .info-item-2 .topic {
+    .info-item:first-child .topic, .info-item-2 .topic {
         font-weight: 700;
         font-size: 12px;
         letter-spacing: 0.035em;
@@ -204,13 +205,13 @@ thead th {
         color: #FFFFFF;
     }
 
-    .info-item-1 .text-block, .info-item-2 .text-block {
+    .info-item:first-child .text-block, .info-item-2 .text-block {
         height: 35%;
         width: 95%;
         overflow: hidden;
     }
 
-    .info-item-1 .dateAdd, .info-item-2 .dateAdd {
+    .info-item:first-child .dateAdd, .info-item-2 .dateAdd {
         font-weight: 400 !important;
         font-size: 12px !important;
         line-height: 14px !important;
@@ -230,17 +231,17 @@ thead th {
 
 /* info-item-3 and info-item-4 */
 
-.info-item-3, .info-item-4 {
+.info-item:nth-child(n+3) {
     background: #F2F2F2 !important;
     color: #FFFFFF !important;
     border-radius: 3px; 
 }
 
-    .info-item-3 *, .info-item-4 * {
+    .info-item:nth-child(n+3) * {
         color: #172359 !important;
     }
 
-    .info-item-3 .employeeJob, .info-item-3 .employeeFio, .info-item-4 .employeeJob, .info-item-4 .employeeFio {
+    .info-item:nth-child(n+3) .employeeJob, .info-item:nth-child(n+3) .employeeFio {
         font-style: normal;
         font-weight: 400;
         font-size: 10px;
@@ -249,7 +250,7 @@ thead th {
         color: rgba(23, 35, 89, 0.4) !important;
     }
 
-    .info-item-3 .text, .info-item-4 .text {
+    .info-item:nth-child(n+3) .text {
         font-style: normal;
         font-weight: 400;
         font-size: 12px;
@@ -262,7 +263,7 @@ thead th {
         overflow: hidden;
     }
 
-    .info-item-3 .type, .info-item-4 .type {
+    .info-item:nth-child(n+3) .type {
         font-weight: 400 !important;
         font-size: 12px !important;
         font-family: 'golos-regular';
@@ -271,7 +272,7 @@ thead th {
         color: #172359 !important;
     }
 
-    .info-item-3 .topic, .info-item-4 .topic {
+    .info-item:nth-child(n+3) .topic {
         font-weight: 700;
         font-size: 12px;
         letter-spacing: 0.035em;
@@ -279,13 +280,13 @@ thead th {
         color: #172359;
     }
 
-    .info-item-3 .text-block, .info-item-4 .text-block {
+    .info-item:nth-child(n+3) .text-block {
         height: 35%;
         width: 95%;
         overflow: hidden;
     }
 
-    .info-item-3 .dateAdd, .info-item-4 .dateAdd {
+    .info-item:nth-child(n+3) .dateAdd {
         font-weight: 400 !important;
         font-size: 12px !important;
         line-height: 14px !important;

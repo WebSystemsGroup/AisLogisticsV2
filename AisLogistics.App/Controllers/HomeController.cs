@@ -31,7 +31,7 @@ namespace AisLogistics.App.Controllers
         {
             ViewBag.Inf = await _informationManager.GetInformationListAsync(5);
             /*ViewBag.Warning = await _informationManager.GetWarningRousteStageListAsync();*/
-            ViewBag.Rating = await _informationManager.GetEmployeeRatingAsync(null, false);
+            //ViewBag.Rating = await _informationManager.GetEmployeeRatingAsync(null, true);
             ViewBag.Notes = await _informationManager.GetNotesListAsync();
 
             return View();

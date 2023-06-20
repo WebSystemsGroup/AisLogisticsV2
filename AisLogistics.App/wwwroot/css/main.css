@@ -18,7 +18,7 @@
     padding: 0;
     outline: 0;
     box-sizing: border-box;
-    font-family: golos-medium; 
+    font-family: golos-regular;
     font-style: normal;
     list-style-type: none;
     text-decoration: none !important;
@@ -49,8 +49,9 @@ footer {
 }
 
 .container-custom {
-    padding-left: 5%;
-    padding-right: 5%;
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+    padding-top: 1.5rem;
 }
 
 textarea {
@@ -63,7 +64,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header {
-    padding-top: 40px;
+    padding-top: 1.5rem;
 }
 
 .header_menu ul {
@@ -91,6 +92,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 0.5rem;
     font-size: 1.5rem;
 }
+
+.menu-text {
+    color: #172359;
+    font-size: 14px;
+    display: block;
+}
+
 /*
 .header_notification, .header_personal {
     position: relative;
@@ -148,7 +156,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .dropdown-menu h5 {
     font-size: 16px;
-    font-family: golos-medium;
+    font-family: golos-regular;
 }
 
 .header_notification .badge-notification {
@@ -159,8 +167,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header_notification .dropdown-menu {
-    min-width: 18rem !important;
-    max-width: 18rem !important;
+    min-width: 22rem !important;
+    max-width: 22rem !important;
     padding-bottom: 0;
 }
 
@@ -183,22 +191,23 @@ h1, h2, h3, h4, h5, h6 {
         }
 
 .dropdown-notifications-list ul.list-group {
-    height: 78vh;
+    max-height: 60vh;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
-    .dropdown-notifications-list ul.list-group::-webkit-scrollbar {
-        width: 5px;
-        background-color: #fff;
-    }
+.dropdown-notifications-list ul.list-group::-webkit-scrollbar {
+    width: 5px;
+    background-color: #fff;
+}
 
-    .dropdown-notifications-list ul.list-group::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background-color: #077EFA;
-    }
+.dropdown-notifications-list ul.list-group::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #077EFA;
+}
 
 .dropdown-notifications-list .list-group-item h6 {
-    font-family: golos-medium;
+    font-family: golos-regular;
 }
 
 .dropzone {
@@ -430,7 +439,7 @@ border: 1px solid #E4E4E4 !important;
 
             .directory_names-items.block-view .names-items p {
                 margin: 0;
-                font-family: golos-medium;
+                font-family: golos-regular;
                 order: 1;
             }
 
@@ -1639,7 +1648,7 @@ div.dataTables_wrapper div.dataTables_length, div.dataTables_wrapper div.dataTab
 
 .directory_names-items.block-view .names-items p {
     margin: 0;
-    font-family: golos-medium !important;
+    font-family: golos-regular !important;
     order: 1;
     color: #212529;
 }
@@ -1724,6 +1733,7 @@ input::placeholder, select::placeholder {
     color: #BEBEBE !important;
 }
 
+
 .nav-link {
     color: #172359 !important;
 }
@@ -1734,3 +1744,10 @@ input::placeholder, select::placeholder {
     letter-spacing: 0.035em !important;
     color: rgba(23, 35, 89, 0.31) !important;
 }
+
+.menu-text {
+    color: #172359 !important;
+    font-size: 14px !important;
+    display: block !important;
+}
+

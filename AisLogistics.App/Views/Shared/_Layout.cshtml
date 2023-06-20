@@ -48,6 +48,9 @@
     <link rel="stylesheet" type="text/css" href="~/assets/vendor/libs/magnific-popup.js/magnific-popup.min.css">
     <link rel="stylesheet" type="text/css" href="~/assets/vendor/libs/lightgallery/css/lightgallery.min.css">
 
+
+   
+
     <!-- Page CSS -->
     <!-- Helpers -->
     <script src="~/assets/vendor/js/helpers.js"></script>
@@ -77,26 +80,15 @@
 
 <body>
     <!-- Layout wrapper -->
-    @*<div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
-    <div class="layout-container">
-    *@
+
     <div class="container-custom header">
         <!-- Navbar -->
-        <partial name="LayoutPartial/_HeaderPartialV2" />
-        @*<div class="directory_breadcrumbs">
-        <div class="col">
-
-        </div>
-        </div>*@
+        <partial name="LayoutPartial/_HeaderPartial" />
         <!-- Layout page -->
         <div class="layout-page">
             <!-- Content wrapper -->
             <div class="content-wrapper">
-                <!-- Menu -->
-                @* <partial name="LayoutPartial/_MainMenuPartial" />*@
-                <!-- / Menu -->
                 <!-- Content -->
-
                 <breadcrumb></breadcrumb>
                 <div class="flex-grow-1 container-p-y pt-0 mt-1">
                     @RenderBody()
@@ -107,14 +99,10 @@
             <!--/ Content wrapper -->
         </div>
     </div>
-
-    <!-- New JS -->
-    @*<script src="~/js/bootstrap.min.js"></script>*@
-    @*<script src="~/js/main.js"></script>*@
-    <!--/ Layout page -->
     <!-- Core JS -->
     <!-- build:js ~/assets/vendor/js/core.js --> 
     @*<script src="~/assets/vendor/js/core.js"></script>*@
+
     <script src="~/assets/vendor/libs/jquery/jquery.js"></script>
     <script src="~/assets/vendor/libs/jquery.signalR-6.0.1/signalr.min.js"></script>
     <script src="~/assets/vendor/libs/popper/popper.js"></script>
@@ -124,8 +112,6 @@
     <script src="~/assets/vendor/libs/i18n/i18n.js"></script>
     <script src="~/assets/vendor/libs/typeahead-js/typeahead.js"></script>
     <script src="~/assets/vendor/js/menu.js"></script>
-    <!-- end build -->
-
     <script src="~/assets/vendor/libs/datatables/jquery.dataTables.js"></script>
     <script src="~/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="~/assets/vendor/libs/datatables-responsive/datatables.responsive.js"></script>
@@ -167,34 +153,7 @@
     @await RenderSectionAsync("Scripts", required: false)
 
     <!-- END: Page JS-->
-    @*<div id="sidebar" class="sidebar-content">
-    <div class="card shadow-none">
-    <div class="card-header d-flex justify-content-between align-items-center border-bottom px-2 py-1">
-    <h3 class="card-title">Информация об услуге</h3>
-    <button type="button" class="close close-icon">
-    <i class="bx bx-x"></i>
-    </button>
-    </div>
-    <div class="">
-    <div class="card-body">
-    <div class="row">
-    <div class="col-6 offset-3">
-    <div class="form-group">
-    <div class="fonticon-wrap pt-5">
-    <i class="livicon-evo" data-options="name: gears.svg; size: 120px; style: original;"></i>
-    </div>
-    <p class="fonticon-classname text-center text-muted">Скоро...</p>
-    </div>
-    </div>
-    </div>
-    </div>
-    <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-    <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div>
-    <div class="ps__rail-y" style="top: 0px; right: 0px; height: 676px;">
-    <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 599px;"></div></div>
-    </div>
-    </div>
-    </div>*@
+   
     <div id="mainModal" class="modal fade" role="dialog" aria-labelledby="myMainModalLabel" aria-hidden="true" style="display: none;" data-bs-backdrop="static" data-keyboard="false"></div>
     <div id="modalContainer" class="modal fade" role="dialog" aria-labelledby="myMainModalLabel" aria-hidden="true" style="display: none;" data-bs-backdrop="static" data-keyboard="false"></div>
     <div id="modalContainerOver" class="modal fade" role="dialog" aria-labelledby="myMainModalLabel" aria-hidden="true" style="display: none;" data-bs-backdrop="static" data-keyboard="false"></div>
@@ -202,8 +161,8 @@
     <!-- Overlay -->
     <div class="layout-overlay layout-menu-toggle"></div>
 
-    <!-- Footer -->
-    <partial name="LayoutPartial/_FooterPartial" />
-    <!-- / Footer -->
-</body> 
+</body>
+<!-- Footer -->
+<partial name="LayoutPartial/_FooterPartial" />
+<!-- / Footer -->
 </html>

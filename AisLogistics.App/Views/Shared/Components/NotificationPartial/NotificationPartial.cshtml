@@ -10,56 +10,76 @@
 
     var count = Model.NewServicesAlert.Count + Model.NewServicesAlert.Count + Model.SmevResponseAlert.Count;
 }
-<div class="col-sm-2 col-2 header_notification">
-    <a class="me-3 dropdown-toggle hidden-arrow"
+
+<style>
+    .fs-14 {
+        font-size: 14px;
+    }
+
+    .fs-12 {
+       font-size: 12px;
+    }
+
+    .list-group-item-notification {
+        border: none !important;
+    }
+
+</style>
+
+<div class="col-sm-1 col-1 header_notification">
+    <a class="dropdown-toggle hidden-arrow menu-text"
        href="javascript:void(0);"
        data-bs-toggle="dropdown"
        data-bs-auto-close="outside"
        aria-expanded="false">
-        <img src="~/img/notification.svg" alt="">
+        <i class="bx bx-bell bx-sm"></i>
         @if (count > 0)
         {
             <span class="badge rounded-pill badge-notification bg-danger">@count</span>
 
         }
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuNotification">
+    <ul class="dropdown-menu dropdown-menu-end pt-0" aria-labelledby="dropdownMenuNotification">
 
-        <li class="dropdown-header d-flex align-items-center justify-content-between">
-            <h5>Уведомления</h5>
-            <a href="" class="dropdown-notifications-all" data-bs-toggle="tooltip" data-bs-placement="top" title="Удалить все"><i class="bi bi-trash fs-4"></i></a>
+        <li class="dropdown-header d-flex align-items-center justify-content-between p-3">
+            <h5 class="fw-bold mb-0">Уведомления</h5>
+            <a href="" class="dropdown-notifications-all text-muted fs-12" data-bs-toggle="tooltip" data-bs-placement="top" title="Удалить все">
+                <i class="bi bi-trash bi-sm"></i>
+                Очистить
+            </a>
         </li>
 
-        <li class="dropdown-notifications-list">
-            <ul class="list-group list-group-flush">
+        <li class="dropdown-notifications-list ">
+            <ul class="list-group list-group-flush px-3 pb-3">
                 @if (count > 0)
                 {
                     foreach (var item in Model.SmevResponseAlert)
                     {
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read" data-notification="@item.Id">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 me-3">
-                                    <div class="avatar">
-                                        <span class="avatar-initial bg-label-primary rounded-circle w-75 h-75">
-                                            <i class="bi bi-globe"></i>
-                                        </span>
+                        <li class="list-group-item list-group-item-notification marked-as-read bg-light mt-3" data-notification="@item.Id">
+                            <div class="row m-0">
+                                <div class="col-11 p-0 my-auto">
+                                    <div class="d-flex justify-content-start align-items-center">
+                                        <i class="bi bi-globe text-muted"></i>
+                                        <p class="mb-0  ms-2 text-muted fs-14">@notificationsDetails[NotificationType.SmevRequest].Title</p>
                                     </div>
                                 </div>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-1">@notificationsDetails[NotificationType.SmevRequest].Title</h6>
-                                    <p class="mb-0">@notificationsDetails[NotificationType.SmevRequest].Description</p>
-                                    <span class="mb-0 d-block">@item.ApplicantName</span>
-                                    <span class="mb-0 d-block">Запрос: @item.SmevName</span>
-                                    <p class="mb-0">
-                                        <a asp-controller="Cases" asp-action="Details" asp-route-id="@item.CaseId">@item.CaseId</a>
-                                    </p>
-                                    <small class="text-muted" data-bs-toggle="tooltip" title="@item.DateSmevResponse" data-timeago="@item.DateSmevResponse"></small>
-                                </div>
-                                <div class="dropdown-notifications-actions flex-shrink-0">
-
-                                    <a href="javascript:void(0)" class="dropdown-notifications-archive" data-bs-toggle="tooltip" title="Удалить">
+                                <div class="dropdown-notifications-actions col-1 p-0 my-auto">
+                                    <a href="javascript:void(0)" class="dropdown-notifications-archive fs-12 text-muted" data-bs-toggle="tooltip" title="Удалить">
                                         <i class="bi bi-x fs-5"></i>
                                     </a>
+                                </div>
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 p-0">
+                                    <p class="mb-0 fs-14"><strong>@notificationsDetails[NotificationType.SmevRequest].Description</strong></p>
+                                    <span class="d-block fs-12">@item.ApplicantName</span>
+                                    <span class="d-block fs-12">Запрос: @item.SmevName</span>
+                                    <div class="d-flex justify-content-between align-items-center fs-14">
+                                        <div>
+                                            <a asp-controller="Cases" asp-action="Details" asp-route-id="@item.CaseId">@item.CaseId</a>
+                                        </div>
+                                        <small class="text-muted fs-12" data-bs-toggle="tooltip" title="@item.DateSmevResponse" data-timeago="@item.DateSmevResponse"></small>
+                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -68,54 +88,62 @@
 
                     foreach (var item in Model.NewServicesAlert)
                     {
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read" data-notification="@item.Id">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 me-3">
-                                    <div class="avatar">
-                                        <span class="avatar-initial bg-label-primary rounded-circle w-75 h-75">
-                                            <i class="bi bi-globe"></i>
-                                        </span>
+                        <li class="list-group-item list-group-item-notification marked-as-read bg-light mt-3" data-notification="@item.Id">
+                            <div class="row m-0">
+                                <div class="col-11 p-0 my-auto">
+                                    <div class="d-flex justify-content-start align-items-center">
+                                        <i class="bi bi-globe text-muted"></i>
+                                        <p class="mb-0  ms-2 text-muted fs-14">@notificationsDetails[NotificationType.NewCase].Title</p>
                                     </div>
                                 </div>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-1">@notificationsDetails[NotificationType.NewCase].Title</h6>
-                                    <p class="mb-0">@notificationsDetails[NotificationType.NewCase].Description</p>
-                                    <p class="mb-0">
-                                        <a asp-controller="Cases" asp-action="Details" asp-route-id="@item.CaseId">@item.CaseId</a>
-                                    </p>
-                                    <small class="text-muted" data-bs-toggle="tooltip" title="@item.DateAddStage" data-timeago="@item.DateAddStage"></small>
-                                </div>
-                                <div class="dropdown-notifications-actions flex-shrink-0">
-                                    <a href="javascript:void(0)" class="dropdown-notifications-archive" data-bs-toggle="tooltip" title="Удалить">
+                                <div class="dropdown-notifications-actions col-1 p-0 my-auto">
+                                    <a href="javascript:void(0)" class="dropdown-notifications-archive fs-12 text-muted" data-bs-toggle="tooltip" title="Удалить">
                                         <i class="bi bi-x fs-5"></i>
                                     </a>
+                                </div>
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 p-0">
+                                    <p class="mb-0 fs-14"><strong>@notificationsDetails[NotificationType.NewCase].Description</strong></p>
+                                    <span class="d-block fs-12">@item.ApplicantName</span>
+                                    <span class="d-block fs-12">Услуга: @item.ServicesName</span>
+                                    <div class="d-flex justify-content-between align-items-center fs-14">
+                                        <div>
+                                            <a asp-controller="Cases" asp-action="Details" asp-route-id="@item.CaseId">@item.CaseId</a>
+                                        </div>
+                                        <small class="text-muted fs-12" data-bs-toggle="tooltip" title="@item.DateAddStage" data-timeago="@item.DateAddStage"></small>
+                                    </div>
                                 </div>
                             </div>
                         </li>
                     }
                     foreach (var item in Model.CommentsAlert)
                     {
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read" data-notification="@item.Id">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 me-3">
-                                    <div class="avatar">
-                                        <span class="avatar-initial bg-label-primary rounded-circle w-75 h-75">
-                                            <i class="bi bi-globe"></i>
-                                        </span>
+                        <li class="list-group-item list-group-item-notification marked-as-read bg-light mt-3" data-notification="@item.Id">
+                            <div class="row m-0">
+                                <div class="col-11 p-0 my-auto">
+                                    <div class="d-flex justify-content-start align-items-center">
+                                        <i class="bi bi-globe text-muted"></i>
+                                        <p class="mb-0  ms-2 text-muted fs-14">@notificationsDetails[NotificationType.NewComment].Title</p>
                                     </div>
                                 </div>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-1">@notificationsDetails[NotificationType.NewComment].Title</h6>
-                                    <p class="mb-0">@notificationsDetails[NotificationType.NewComment].Description</p>
-                                    <p class="mb-0">
-                                        <a asp-controller="Cases" asp-action="Details" asp-route-id="@item.CaseId">@item.CaseId</a>
-                                    </p>
-                                    <small class="text-muted" data-bs-toggle="tooltip" title="@item.DateAddComment" data-timeago="@item.DateAddComment"></small>
-                                </div>
-                                <div class="dropdown-notifications-actions flex-shrink-0">
-                                    <a href="javascript:void(0)" class="dropdown-notifications-archive" data-bs-toggle="tooltip" title="Удалить">
+                                <div class="dropdown-notifications-actions col-1 p-0 my-auto">
+                                    <a href="javascript:void(0)" class="dropdown-notifications-archive fs-12 text-muted" data-bs-toggle="tooltip" title="Удалить">
                                         <i class="bi bi-x fs-5"></i>
                                     </a>
+                                </div>
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-12 p-0">
+                                    <p class="mb-0 fs-14"><strong>@notificationsDetails[NotificationType.NewComment].Description</strong></p>
+                                    <span class="d-block fs-12">@item.ApplicantName</span>
+                                    <span class="d-block fs-12">Примечание: @item.TextComment</span>
+                                    <div class="d-flex justify-content-between align-items-center fs-14">
+                                        <div>
+                                            <a asp-controller="Cases" asp-action="Details" asp-route-id="@item.CaseId">@item.CaseId</a>
+                                        </div>
+                                        <small class="text-muted fs-12" data-bs-toggle="tooltip" title="@item.DateAddComment" data-timeago="@item.DateAddComment"></small>
+                                    </div>
                                 </div>
                             </div>
                         </li>

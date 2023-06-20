@@ -60,6 +60,10 @@ namespace AisLogistics.App.Models.DTO.Information
         public Guid OfficessId { get; set; }
         public string OfficessName { get; set; }
         public int EmployeePoint { get; set; }
+        public int ReceivedCount { get; set; }
+        public int IssuedCount { get; set; }
+        public int ConsultationCount { get; set; }
+
     }
 
 
