@@ -1,228 +1,287 @@
-﻿<div class="navbar-collapse collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav my-auto mb-2 mb-lg-0">
-        <!-- Cases -->
-        <li class="nav-item dropdown my-auto">
-            <a href="javascript:void(0)" class="nav-link dropdown-toggle menu-text" id="dropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="/img/uslugi.svg" alt="">
-                Услуги
-            </a>
+﻿<nav class="navbar-expand-xl navbar-elevated" id="layout-navbar">
+    <div class="container-fluid">
+        <style>
+            .dropdown-toggle::after {
+                color: #B5B5B5;
+            }
 
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                @if (User.HasClaim(AccessKeyNames.DataCase, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="Index" asp-controller="Cases" class="dropdown-item">
-                            <i class="menu-icon bx bx-folder"></i>
-                            Реестр
-                        </a>
-                    </li>
-                }
-                @if (User.HasClaim(AccessKeyNames.DataCaseIssued, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="CasesIssued" asp-controller="Cases" class="dropdown-item">
-                            <i class="menu-icon bx bx-folder"></i>
-                            Реестр выдачи
-                        </a>
-                    </li>
-                }
-                @if (User.HasClaim(AccessKeyNames.DataCaseIssued, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="CasesReestrSmev" asp-controller="Cases" class="dropdown-item">
-                            <i class="menu-icon bx bx-folder"></i>
-                            Реестр СМЭВ
-                        </a>
-                    </li>
-                }
-                @if (User.HasClaim(AccessKeyNames.DataCaseReestr, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="Index" asp-controller="ReestrTransferDocuments" class="dropdown-item">
-                            <i class="menu-icon bx bx-folder"></i>
-                            Реестр передачи документов
-                        </a>
-                    </li>
-                }
-                @if (User.HasClaim(AccessKeyNames.DataCaseReestr, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="Index" asp-controller="ReestrUnclaimedDocuments" class="dropdown-item">
-                            <i class="menu-icon bx bx-folder"></i>
-                            Реестр невостребованных документов
-                        </a>
-                    </li>
-                }
-                @if (User.HasClaim(AccessKeyNames.DataCaseReestr, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="Index" asp-controller="ReestrSentMessage" class="dropdown-item">
-                            <i class="menu-icon bx bx-folder"></i>
-                            Реестр отправленных смс
-                        </a>
-                    </li>
-                }
-                <li class="border-top">
-                    <a asp-action="Index" asp-controller="Archive" class="dropdown-item">
-                        <i class="menu-icon bx bx-hourglass"></i>
-                        Архив
+            .menu-icon {
+                color: #BEBEBE;
+            }
+
+            .bx-list-service:before {
+                content: url("/assets/svg/icons/list-service.svg");
+            }
+
+            .bx-spravochniki:before {
+                content: url("/assets/svg/icons/spravochniki.svg");
+            }
+
+            .bx-list-service.active:before {
+                content: url(/assets/svg/icons/list-service-active.svg) !important;
+            }
+
+            .bx-spravochniki.active:before {
+                content: url(/assets/svg/icons/spravochniki-active.svg) !important;
+            }
+
+            .bx-cog.active {
+                color: #077EFA;
+            }
+
+            #navbarSupportedContent .menu-icon {
+                vertical-align: sub;
+            }
+
+        </style>
+        <button class="navbar-toggler ps-0 d-flex d-xl-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list me-4"></i>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <!-- Cases -->
+                <li class="nav-item dropdown me-xxl-4 menu-text">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="menu-icon bx bx-list-service"></i>
+                        <span class="spanText">Услугyи</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @if (User.HasClaim(AccessKeyNames.DataCase, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="Cases" class="dropdown-item">
+                                    <i class="menu-icon bx bx-folder"></i>
+                                    Реестр
+                                </a>
+                            </li>
+                        }
+                        @if (User.HasClaim(AccessKeyNames.DataCaseIssued, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="CasesIssued" asp-controller="Cases" class="dropdown-item">
+                                    <i class="menu-icon bx bx-folder"></i>
+                                    Реестр выдачи
+                                </a>
+                            </li>
+                        }
+                        @if (User.HasClaim(AccessKeyNames.DataCaseIssued, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="CasesReestrSmev" asp-controller="Cases" class="dropdown-item">
+                                    <i class="menu-icon bx bx-folder"></i>
+                                    Реестр СМЭВ
+                                </a>
+                            </li>
+                        }
+                        @if (User.HasClaim(AccessKeyNames.DataCaseReestr, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="ReestrTransferDocuments" class="dropdown-item">
+                                    <i class="menu-icon bx bx-folder"></i>
+                                    Реестр передачи документов
+                                </a>
+                            </li>
+                        }
+                        @if (User.HasClaim(AccessKeyNames.DataCaseReestr, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="ReestrUnclaimedDocuments" class="dropdown-item">
+                                    <i class="menu-icon bx bx-folder"></i>
+                                    Реестр невостребованных документов
+                                </a>
+                            </li>
+                        }
+                        @if (User.HasClaim(AccessKeyNames.DataCaseReestr, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="ReestrSentMessage" class="dropdown-item">
+                                    <i class="menu-icon bx bx-folder"></i>
+                                    Реестр отправленных смс
+                                </a>
+                            </li>
+                        }
+                        <li class="border-top">
+                            <a asp-action="Index" asp-controller="Archive" class="dropdown-item">
+                                <i class="menu-icon bx bx-hourglass"></i>
+                                Архив
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Reports -->
+                <li class="nav-item me-xxl-4 menu-text">
+                    <a asp-action="Index" asp-controller="Reports" class="nav-link menu-text">
+                        <i class="menu-icon bx bxs-report"></i>
+                        <span class="spanText">Отчеты</span>
                     </a>
                 </li>
-            </ul>
-        </li>
 
-        <!-- Reports -->
-        <li class="nav-item">
-            <a asp-action="Index" asp-controller="Reports" class="nav-link menu-text">
-                <i class="menu-icon bx bxs-report"></i>
-                Отчеты
-            </a>
-        </li>
-
-        <!-- Statistics -->
-        <li class="nav-item">
-            <a asp-action="Index" asp-controller="Statistics" class="nav-link menu-text">
-                <i class="menu-icon bx bx-stats"></i>
-                Аналитика
-            </a>
-        </li>
-
-        <!-- Reference -->
-        <li class="nav-item dropdown my-auto">
-            <a href="javascript:void(0)" class="nav-link dropdown-toggle menu-text" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuLink2">
-                <img src="/img/spravochmiki.svg" alt="">
-                Справочники
-            </a>
-
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-                @if (User.HasClaim(AccessKeyNames.ReferenceEmployee, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="Employees" asp-controller="Reference" class="dropdown-item">
-                            <i class="menu-icon bi bi-people"></i>
-                            Сотрудники
-                        </a>
-                    </li>
-                }
-
-                @if (User.HasClaim(AccessKeyNames.ReferenceOffice, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="Offices" asp-controller="Reference" class="dropdown-item">
-                            <i class="menu-icon bi bi-building"></i>
-                            Офисы
-                        </a>
-                    </li>
-                }
-
-                @if (User.HasClaim(AccessKeyNames.ReferenceRole, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="RolesExecutor" asp-controller="Reference" class="dropdown-item">
-                            <i class="menu-icon bi bi-unlock"></i>
-                            Роли исполнителя
-                        </a>
-                    </li>
-                }
-
-                @if (User.HasClaim(AccessKeyNames.ReferenceService, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="Services" asp-controller="Reference" class="dropdown-item">
-                            <i class="menu-icon bi bi-folder"></i>
-                            Услуги
-                        </a>
-                    </li>
-                }
-
-                @if (User.HasClaim(AccessKeyNames.ReferenceLivingSituation, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="LivingSituation" asp-controller="Reference" class="dropdown-item">
-                            <i class="menu-icon bi bi-bookmark-heart"></i>
-                            Жизненным ситуации
-                        </a>
-                    </li>
-                }
-
-                @if (User.HasClaim(AccessKeyNames.ReferenceDocument, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="Documents" asp-controller="Reference" class="dropdown-item">
-                            <i class="menu-icon bi bi-file-earmark-text"></i>
-                            Документы
-                        </a>
-                    </li>
-                }
-                @if (User.HasClaim(AccessKeyNames.ReferenceCalendar, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="Calendar" asp-controller="Reference" class="dropdown-item">
-                            <i class="menu-icon bi bi-calendar-date"></i>
-                            Календарь
-                        </a>
-                    </li>
-                }
-                <li>
-                    <a asp-action="SmevServices" asp-controller="Reference" class="dropdown-item">
-                        <i class="menu-icon bi bi-globe"></i>
-                        СМЭВ
+                <!-- Statistics -->
+                <li class="nav-item me-xxl-4 menu-text">
+                    <a asp-action="Index" asp-controller="Statistics" class="nav-link menu-text">
+                        <i class="menu-icon bx bx-stats"></i>
+                        <span class="spanText">  Аналитика</span>
                     </a>
                 </li>
-                @if (User.HasClaim(AccessKeyNames.ReferenceFTP, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="FTP" asp-controller="Reference" class="dropdown-item">
-                            <i class="menu-icon bi bi-hdd"></i>
-                            FTP
-                        </a>
-                    </li>
-                }
-                @if (User.HasClaim(AccessKeyNames.ReferenceStateTask, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="StateTask" asp-controller="Reference" class="dropdown-item">
-                            <i class="menu-icon bx bx-task"></i>
-                            Гос задание
-                        </a>
-                    </li>
-                }
-                @if (User.HasClaim(AccessKeyNames.ReferenceInformation, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="Information" asp-controller="Reference" class="dropdown-item">
-                            <i class="menu-icon bi bi-info-circle"></i>
-                            Информация
-                        </a>
-                    </li>
-                }
-            </ul>
-        </li>
-        <!-- System -->
-        <li class="nav-item dropdown my-auto">
-            <a href="javascript:void(0)" class="nav-link dropdown-toggle menu-text" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuLink3">
-                <i class="menu-icon bx bx-cog"></i>
-                Система
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
-                @if (User.HasClaim(AccessKeyNames.ReferenceRole, AccessKeyValues.View))
-                {
-                    <li>
-                        <a asp-action="Roles" asp-controller="Systems" class="dropdown-item">
-                            <i class="menu-icon bx bx-lock-open"></i>
-                            Роли доступа
-                        </a>
-                    </li>
-                }
-                <li>
-                    <a asp-action="Terminals" asp-controller="Systems" class="dropdown-item">
-                        <i class="menu-icon bi bi-terminal"></i>
-                        Терминалы
+
+                <!-- Reference -->
+                <li class="nav-item dropdown me-xxl-4 menu-text">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="menu-icon bx bx-spravochniki"></i>
+                        <span class="spanText">   Справочники</span>
                     </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        @if (User.HasClaim(AccessKeyNames.ReferenceEmployee, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="Employees" asp-controller="Reference" class="dropdown-item">
+                                    <i class="menu-icon bi bi-people"></i>
+                                    Сотрудники
+                                </a>
+                            </li>
+                        }
+
+                        @if (User.HasClaim(AccessKeyNames.ReferenceOffice, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="Offices" asp-controller="Reference" class="dropdown-item">
+                                    <i class="menu-icon bi bi-building"></i>
+                                    Офисы
+                                </a>
+                            </li>
+                        }
+
+                        @if (User.HasClaim(AccessKeyNames.ReferenceRole, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="RolesExecutor" asp-controller="Reference" class="dropdown-item">
+                                    <i class="menu-icon bi bi-unlock"></i>
+                                    Роли исполнителя
+                                </a>
+                            </li>
+                        }
+
+                        @if (User.HasClaim(AccessKeyNames.ReferenceService, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="Services" asp-controller="Reference" class="dropdown-item">
+                                    <i class="menu-icon bi bi-folder"></i>
+                                    Услуги
+                                </a>
+                            </li>
+                        }
+
+                        @if (User.HasClaim(AccessKeyNames.ReferenceLivingSituation, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="LivingSituation" asp-controller="Reference" class="dropdown-item">
+                                    <i class="menu-icon bi bi-bookmark-heart"></i>
+                                    Жизненным ситуации
+                                </a>
+                            </li>
+                        }
+
+                        @if (User.HasClaim(AccessKeyNames.ReferenceDocument, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="Documents" asp-controller="Reference" class="dropdown-item">
+                                    <i class="menu-icon bi bi-file-earmark-text"></i>
+                                    Документы
+                                </a>
+                            </li>
+                        }
+                        @if (User.HasClaim(AccessKeyNames.ReferenceCalendar, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="Calendar" asp-controller="Reference" class="dropdown-item">
+                                    <i class="menu-icon bi bi-calendar-date"></i>
+                                    Календарь
+                                </a>
+                            </li>
+                        }
+                        <li>
+                            <a asp-action="SmevServices" asp-controller="Reference" class="dropdown-item">
+                                <i class="menu-icon bi bi-globe"></i>
+                                СМЭВ
+                            </a>
+                        </li>
+                        @if (User.HasClaim(AccessKeyNames.ReferenceFTP, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="FTP" asp-controller="Reference" class="dropdown-item">
+                                    <i class="menu-icon bi bi-hdd"></i>
+                                    FTP
+                                </a>
+                            </li>
+                        }
+                        @if (User.HasClaim(AccessKeyNames.ReferenceStateTask, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="StateTask" asp-controller="Reference" class="dropdown-item">
+                                    <i class="menu-icon bx bx-task"></i>
+                                    Гос задание
+                                </a>
+                            </li>
+                        }
+                        @if (User.HasClaim(AccessKeyNames.ReferenceInformation, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="Information" asp-controller="Reference" class="dropdown-item">
+                                    <i class="menu-icon bi bi-info-circle"></i>
+                                    Информация
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+                <!-- System -->
+                <li class="nav-item dropdown menu-text">
+                    <a href="javascript:void(0)" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarDropdown3">
+                        <i class="menu-icon bx bx-cog"></i>
+                        <span class="spanText"> Система</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                        @if (User.HasClaim(AccessKeyNames.ReferenceRole, AccessKeyValues.View))
+                        {
+                            <li>
+                                <a asp-action="Roles" asp-controller="Systems" class="dropdown-item">
+                                    <i class="menu-icon bx bx-lock-open"></i>
+                                    Роли доступа
+                                </a>
+                            </li>
+                        }
+                        <li>
+                            <a asp-action="Terminals" asp-controller="Systems" class="dropdown-item">
+                                <i class="menu-icon bi bi-terminal"></i>
+                                Терминалы
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
-        </li>
-    </ul>
-</div>
+        </div>
+    </div>
+</nav>
+<script>
+    $(function () {
+        switch ($('.breadcrumb-item.active').text()) {
+
+            case 'Услуги': 
+                $('.bx-list-service').addClass('active'); 
+                break;
+            case 'Справочники':
+                $('.bx-spravochniki').addClass('active');
+                break;
+            case 'Система':
+                $('.bx-cog').addClass('active');
+                break; 
+        }
+
+        $('#navbarSupportedContent [aria-labelledby^="navbarDropdown"]').find('a')
 
 
+
+    })
+</script>

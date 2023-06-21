@@ -12,12 +12,12 @@
     </div>
     <div class="card col-sm-12 col-lg-10" id="navs-tabs-default">
         <div class="row p-5">
-            <div class="col-auto">
+            <div class="col-12">
                 @{
                     await Html.RenderPartialAsync(url, ViewBag.NavId as string);
                  }
             </div>
-            <div class="col-auto mt-auto pt-2">
+            <div class="col-auto pt-2 ms-auto">
                 <button id="reportPrint" data-report-print="ReportDataPrint" type="button" class="btn btn-danger d-none" disabled>Печать</button>
                 <a href="" id="reportDownload" data-report-upload="ReportDataDownLoad" type="button" class="btn btn-success d-none" target="_blank" disabled>Выгрузить</a>
                 <button id="reportSubmit" type="submit" class="btn btn-primary">Cформировать</button>

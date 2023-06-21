@@ -29,8 +29,7 @@
         stage = $('[data-stage]');
 
     $(document).ready(function () {
-
-            new PerfectScrollbar("#scrollspy-wrapper");
+         
 
             $('select.select2-search').select2({});
 
@@ -42,6 +41,7 @@
                 tags: true
             });
 
+
             if (datePeriod.length) {
                 datePeriod.datepicker({
                     language: "ru",
@@ -49,11 +49,6 @@
                     toggleActive: true
                 });
             }
-
-            $('.nav-link').on('click', function () {
-                $('.nav-link').removeClass('active2');
-                $(this).addClass('active2');
-            })
 
             if (statisticsTypeDay.length) {
                 statisticsTypeDay.change(function () {
@@ -1107,5 +1102,13 @@
                     { data: "receivedCount" },
                 ]
             });
+
+         $('#statistics .nav-link').each(function () {
+             $(this).click(function () { 
+                $(this).parent().find('.nav-link.active').attr('class','nav-link');
+                $(this).attr('class', 'nav-link active');
+
+            })
+         })
 
         });

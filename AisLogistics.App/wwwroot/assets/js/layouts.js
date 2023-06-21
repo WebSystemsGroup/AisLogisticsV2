@@ -120,5 +120,10 @@ $('#helpers-setFlipped-false').click(function () {
   window.Helpers.setFlipped(false);
 });
 
+
+//active nav item
+
+
+ 
 // Init PerfectScrollbar in Navbar Dropdown (i.e notification)
 window.Helpers.initNavbarDropdownScrollbar();

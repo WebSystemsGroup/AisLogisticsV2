@@ -14,8 +14,34 @@
 
     .scrollspy-wrapper {
         height: 49rem;
-        /*position: relative;
-        overflow-y: scroll;*/
+        /*position: relative;*/
+        /*overflow-y: scroll;*/
+        overflow-x: hidden;
+    }
+
+    .bx-stats {
+        color: #077EFA !important;
+    }
+
+    .nav-link.active:not(.nav-link.active.active-color) {
+        border-bottom: none !important;
+    }
+
+    .nav-link.active {
+        border-bottom: none !important;
+        letter-spacing: 0.035em !important;
+        color: #172359 !important;
+        font-weight: 700 !important;
+        font-size: 16px !important;
+        /*background: linear-gradient(90deg, rgba(7, 126, 250, 0) 94.41%, #077EFA 101%) !important;*/
+    }
+
+    #content-report .nav-tabs .nav-link.active {
+        box-shadow: none !important;
+    }
+
+    #content-report .nav-link.active {
+        border-color: none !important;
     }
 </style>
 
@@ -921,7 +947,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="itemsmevmfc" class="mb-3 item-wrapper">
+                    <div id="itemsmev_mfc" class="mb-3 item-wrapper">
                          <div class="row">
                             <div class="col-12">
                                 <h4 class="mb-2">Данные по запросам в СМЭВ в разрезе филиалов</h4>
