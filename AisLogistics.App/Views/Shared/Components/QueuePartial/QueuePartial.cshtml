@@ -2,6 +2,46 @@
 
 <link rel="stylesheet" href="~/assets/css/queue-details.css" asp-append-version="true" />
 
+<style>
+    .fs-14 {
+        font-size: 14px;
+    }
+
+    .queue_wrapper {
+        margin: 0 2rem;
+    }
+
+    .scoreboard_wrapper {
+        display:flex;
+        
+    }
+
+    .w-80 {
+        width: 80%;
+    }
+
+    .queue-list_wrapper ul.list-group {
+        max-height: 190px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .queue-list_wrapper ul.list-group::-webkit-scrollbar {
+        width: 5px;
+        background-color: #fff;
+    }
+
+    .queue-list_wrapper ul.list-group::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: #077EFA;
+    }
+
+    .queue-list_wrapper .list-group-item:first-child {
+        padding-top: 0;
+    }
+
+</style>
+
 <div class="col-sm-1 col-1 header_notification" id="electronicQueue">
     <a class="dropdown-toggle hidden-arrow menu-text"
         href="javascript:void(0);"
@@ -16,7 +56,7 @@
         </span>
     </a>
 
-    <div class="dropdown-menu dropdown-menu-end dropdown-arrow dropdown-lg scoreboard-dropdown" id="electronicQueueContent">
+    @*<div class="dropdown-menu dropdown-menu-end dropdown-arrow dropdown-lg scoreboard-dropdown" id="electronicQueueContent">
         <div class="row no-gutters justify-content-end">
             <div class="col-12 position-static queue-width">
                 <div class="queue-height-25 m-2">
@@ -105,9 +145,91 @@
                 </div>
             </div>
         </div>
+    </div>*@
+    <div class="dropdown-menu dropdown-menu-end dropdown-arrow dropdown-lg scoreboard-dropdown p-0" id="electronicQueueContent">
+        <div class="row my-3">
+            <div class="col-12 mb-3">
+                <div class="queue_wrapper">
+                    <div class="d-flex justify-content-between fs-14">
+                        <div class="text-muted">
+                            Окно: <span id="queueMyWindowNum">12</span>
+                        </div>
+                        <div>
+                            <span id="queueActiveTime">15:23</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <div class="queue_wrapper">
+                    <div class="w-80 mx-auto mb-3">
+                        <div class="d-flex justify-content-center align-content-center">
+                            <!-- номер абонента -->
+                            <h1 class="text-primary line_text">A101</h1>
+                            <input class="input" id="queue_num" name="queue_num" type="hidden">
+                        </div>
+                    </div>
+                    <div class="w-80 mx-auto mb-3">
+                        <div class="d-flex justify-content-center align-content-center">
+                            <div class="btn-group w-100" role="group">
+                                <button type="button" class="btn btn-success shadow-none border-end border-2 border-white flex-grow-0">
+                                    <i class="bx bx-list-ul"></i>
+                                </button>
+                                <button type="button" class="btn btn-success shadow-none flex-grow-1">Вызвать</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-80 mx-auto">
+                        <div class="d-flex justify-content-around align-content-center">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn shadow-none pe-0">
+                                    <i class="bx bx-exit"></i>
+                                </button>
+                                <button type="button" class="btn shadow-none">Передать</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn shadow-none pe-0">
+                                    <i class="bx bx-history"></i>
+                                </button>
+                                <button type="button" class="btn shadow-none">Отложить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <div class="border-bottom"></div>
+            </div>
+            <div class="col-12 mb-3">
+                <div class="queue_wrapper">
+                    <div class="d-flex flex-column">
+                        <button type="button" class="btn shadow-none">Завершить</button>
+                        <button type="button" class="btn shadow-none">Записать</button>
+                        <button type="button" class="btn shadow-none">Отменить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="queue_wrapper queue-list_wrapper">
+                    <div class="text-muted mb-2">Талоны</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-primary ps-0">A102</li>
+                        <li class="list-group-item text-primary ps-0">A102</li>
+                        <li class="list-group-item text-primary ps-0">A102</li>
+                        <li class="list-group-item text-primary ps-0">A102</li>
+                        <li class="list-group-item text-primary ps-0">A102</li>
+                        <li class="list-group-item text-primary ps-0">A102</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
+
+
+
+
 <script src="~/assets/vendor/libs/jquery/jquery.js"></script>
-<script src="~/assets/js/pages/queue-details.js"></script>
+@*<script src="~/assets/js/pages/queue-details.js"></script>*@
 

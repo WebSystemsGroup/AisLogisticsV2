@@ -139,7 +139,7 @@ if (window.moment) {
     }
   }
   window.onscroll = function () {
-    scrollTopFn();
+    //scrollTopFn();
   };
 
 
