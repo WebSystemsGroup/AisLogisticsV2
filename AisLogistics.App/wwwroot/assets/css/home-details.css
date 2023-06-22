@@ -15,8 +15,7 @@
 .info-conteiner {
     background: #FFFFFF !important;
     border-radius: 3px !important;
-    box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
-    height: 174px;
+    box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07); 
     overflow-x: hidden;
     display: flex; 
 }
@@ -162,11 +161,11 @@ thead th {
     border-radius: 3px;
 }
 
-    .info-item:first-child *, .info-item-2 * {
+    .info-item:first-child *, .info-item:nth-child(2) * {
         color: #FFFFFF !important;
     }
 
-    .info-item:first-child .employeeJob, .info-item:first-child .employeeFio, .info-item-2 .employeeJob, .info-item-2 .employeeFio {
+    .info-item:first-child .employeeJob, .info-item:first-child .employeeFio, .info-item:nth-child(2) .employeeJob, .info-item:nth-child(2) .employeeFio {
         font-style: normal;
         font-weight: 400;
         font-size: 10px;
@@ -175,7 +174,7 @@ thead th {
         color: rgba(255, 255, 255, 0.4) !important;
     }
 
-    .info-item:first-child .text, .info-item-2 .text {
+    .info-item:first-child .text, .info-item:nth-child(2) .text {
         font-style: normal;
         font-weight: 400;
         font-size: 12px;
@@ -188,7 +187,7 @@ thead th {
         overflow: hidden;
     }
 
-    .info-item:first-child .type, .info-item-2 .type {
+    .info-item:first-child .type, .info-item:nth-child(2) .type {
         font-weight: 400 !important;
         font-size: 12px !important;
         font-family: 'golos-regular';
@@ -197,7 +196,7 @@ thead th {
         color: #FFFFFF !important;
     }
 
-    .info-item:first-child .topic, .info-item-2 .topic {
+    .info-item:first-child .topic, .info-item:nth-child(2) .topic {
         font-weight: 700;
         font-size: 12px;
         letter-spacing: 0.035em;
@@ -205,13 +204,13 @@ thead th {
         color: #FFFFFF;
     }
 
-    .info-item:first-child .text-block, .info-item-2 .text-block {
+    .info-item:first-child .text-block, .info-item:nth-child(2) .text-block {
         height: 35%;
         width: 95%;
         overflow: hidden;
     }
 
-    .info-item:first-child .dateAdd, .info-item-2 .dateAdd {
+    .info-item:first-child .dateAdd, .info-item:nth-child(2) .dateAdd {
         font-weight: 400 !important;
         font-size: 12px !important;
         line-height: 14px !important;
@@ -220,7 +219,7 @@ thead th {
         font-family: 'golos-regular';
     }
 
-.info-item-2 {
+.info-item:nth-child(2) {
     background: #729EFB !important;
     color: #FFFFFF !important;
     border-radius: 3px;
@@ -299,7 +298,6 @@ thead th {
     background: #FFFFFF !important;
     border-radius: 3px !important;
     box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
-    height: 173px !important;
     vertical-align: middle !important;
     border: 0;
 }
@@ -307,13 +305,48 @@ thead th {
     background: #FFFFFF !important;
     border-radius: 3px !important;
     box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
-    height: 173px !important;
     vertical-align: middle !important;
     border: 0;
 }
 
-.info-items {
-    position: relative;
-    display: flex;
-    right: 0%;
+.info-item {
+  margin-right:0.75rem;
+  margin-left:0.75rem;
+  height:149px!important;
+}
+   
+
+@media(min-width:500px) {
+    .info-item {
+        flex: 0 0 auto !important;
+        width: 86.9vw !important;
+    }
+}
+
+@media(min-width:900px) {
+    .info-item {
+        flex: 0 0 auto !important;
+        width: 45.6vw !important;
+    }
+}
+
+@media(min-width:1200px) {
+    .info-item {
+        flex: 0 0 auto !important;
+        width: 45.6vw !important;
+    }
+}
+
+@media(min-width:1400px) {
+    .info-item {
+        flex: 0 0 auto !important;
+        width: 30.2vw !important;
+    }
+}
+
+@media(min-width:1600px) {
+    .info-item {
+        flex: 0 0 auto !important;
+        width: 22.7vw !important;
+    }
 }

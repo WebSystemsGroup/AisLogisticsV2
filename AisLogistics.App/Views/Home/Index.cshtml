@@ -22,8 +22,7 @@
                 {
                     @foreach (var item in information)
                     {
-                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 text-bodyrow my-3 ms-2 me-1 info-item info-item-@i" data-btn-type="modal" data-bs-toggle="tooltip">
-
+                        <a asp-action="InformationDetailsModal" asp-controller="Home" asp-route-id="@item.Id" class="my-3 text-bodyrow info-item" data-btn-type="modal" data-bs-toggle="tooltip">
                             <div class="row m-2">
                                 <div class="col-6">
                                     <span class="type">@item.Type</span>
@@ -51,6 +50,7 @@
                                 </div>
                             </div>
                         </a>
+                        
                         i++;
                     }
                 }
@@ -161,9 +161,10 @@
                 ]
             });
             $('#information_list').slick({
-                infinite: false,
-                slidesToShow: 4,
-                slidesToScroll: 4
+                infinite: false, 
+                prevArrow: '<button class="slick-prev p-0 left-button" aria-label="Previous" type="button"><div class="my-auto"><i class="bi bi-chevron-left"></i></div></button>',
+                nextArrow: '<button class="slick-next p-0 right-button" aria-label="Next" type="button"><div class="my-auto"><i class="bi bi-chevron-right"></i></div></button>',          
+                slideWidth: '250px'
             });
         })
     </script>

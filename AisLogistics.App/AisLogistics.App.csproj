@@ -69,6 +69,7 @@
 
 	<ItemGroup>
 		<Folder Include="Views\SmevForm\Other\" />
+		<Folder Include="wwwroot\assets\vendor\bi\" />
 	</ItemGroup>
 
 	<ItemGroup>

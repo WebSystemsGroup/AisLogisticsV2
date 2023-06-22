@@ -1,7 +1,10 @@
 ﻿@using AisLogistics.App.Models.DTO.Information
 @model InformationDetails
 <style>
-    b {
+    .modal-header {
+        border-bottom:none !important;
+    }
+        b {
         font-weight: 700;
         font-size: 16px;
         line-height: 19px;
@@ -61,7 +64,6 @@
     .btn-grin {
         background: #1CB92B;
         border-radius: 2.59753px;
-        width: 24%;
         height: 35px;
     }
 
@@ -100,67 +102,70 @@
         background: #FFFFFF;
         border-radius: 3px;
 }
-    .modal-header {
+
+    .modal-header, .modal-body {
         padding-left: 36px !important;
         padding-right: 29px !important;
-    }
+    } 
+    .modal-header{
+         
+     }
 
     .modal-footer {
         display: none;
     }
 
     .pdf {
-        background-image: url("/assets/img/file/pdf.png") !important;
-        width: 50px !important;
-        height: 60px !important;
+        content: url("/assets/img/file/pdf.png") !important;
     }
 
     .png {
-        background-image: url("/assets/img/file/png.jpg") !important;
-        width: 50px !important;
-        height: 60px !important;
+        content: url("/assets/img/file/png.jpg") !important;
     }
 
     .word, .doc, .docx, .dotx, .dotm, docb {
-        background-image: url("/assets/img/file/word.jpg") !important;
-        width: 50px !important;
-        height: 60px !important;
+        content: url("/assets/img/file/word.jpg") !important;
     }
 
     .excel, .xlsx, .xls, .xlt, .xlm, .xll, .xla8, .xla5, xla_, .xlsm, .xltx, .xltm, .xlsb, .xla, .xlam, .xlw {
-        background-image: url("/assets/img/file/exsl.jpg") !important;
+        content: url("/assets/img/file/exsl.jpg") !important;
+    }
+
+    .file-icon {
         width: 50px !important;
-        height: 60px !important;
+        height: 65px !important;
+    }
+
+    .file-icon:hover {
+        color: #077EFA !important;
     }
 </style>
 
 <fieldset>
-    <div class="row ms-3">
-        <div class="col-sm-auto ps-0">
+    <div class="row justify-content-between">
+        <div class="col-sm-12 col-lg-auto">
             <p class="mb-0 modal-employeeFio">@Model.EmployeeFio</p>
             <p class="modal-employeeJob mb-1">@Model.EmployeeJob</p>
         </div>
-        <div class="col-3 ps-5 dateAdd">
+        <div class="col-sm-12 col-lg-auto dateAdd">
             @Model.DateAdd.ToString("D")
         </div>
-        <div class="col-2 ms-auto btn-grin me-4">
-            <div class="statuse m-0 p-2 px-4"><img src="~/img/check-mark.png"/> Ознакомлен</div>
+        <div class="ms-sm-2 ms-lg-auto mt-sm-2 mt-lg-0 col-sm-9 col-lg-4 btn-grin d-flex align-items-center justify-content-center">
+            <div class="statuse"><img src="~/img/check-mark.png"/> Ознакомлен</div>
         </div>
     </div>
-
-    <p class="m-0 mt-3 ms-3 topic-modal">@Model.Topic</p>
-    <p class="modal-text mt-3 ms-3">@Model.Text</p>
-    <p class="modal-annex ms-3 mt-3">Приложения:</p>
-
+    <p class="m-0 mt-3 topic-modal">@Model.Topic</p>
+    <p class="modal-text mt-3">@Model.Text</p>
+    <p class="modal-annex mt-3">Приложения:</p>
     @if (Model.Files.Any())
     {
-        <div class="row ms-4">
+        <div class="row">
             @foreach (var item in Model.Files)
             {
                 <a asp-action="DownloadBlank" asp-controller="Cases" asp-route-id="item.Id" asp-route-serviceId="item.ServiceId" target="_blank" class="col-2">
                     <div class="row justify-content-center">
                         <div class="col-5">
-                            <div class="@item.FileExtensions.Substring(1)"></div>
+                            <div class="file-icon @item.FileExtensions.Substring(1)"></div>
                         </div>
                     </div>
                     <div class="row mt-3">
