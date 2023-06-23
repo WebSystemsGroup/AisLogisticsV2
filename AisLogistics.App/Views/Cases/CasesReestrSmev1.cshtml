@@ -142,11 +142,11 @@
     </form>
     <!-- Search Bar end -->
     <!-- seach result section -->
-    <div class="block">
+    <div class="card">
         <div class="card-body">
             <!-- datatable start -->
             <div class="table-responsive">
-                <table id="@Model.TableName" data-action-table="@Model.TableMethodAction" class="directory_names-items table"></table>
+                <table id="@Model.TableName" data-action-table="@Model.TableMethodAction" class="directory_names-items table table-fs"></table>
             </div>
             <!-- datatable ends -->
         </div>
@@ -236,22 +236,21 @@
                             title: `Дата и №`,
                             name: 'dateAdd',
                             render: function (data, type, row) {
-                                let date = row.dateCreate.slice(0, 10);
-                                let content = `<div>${date}</div>` +
-                                    `<div><a style="color: #172359" href="javascript:void(0);" data-case-id="${row.caseId}" data-smev-id="${row.id}" id="caseNumber">${row.caseId}</a></div>`;
-                                return content;       
+                                let content = `<div>${row.dateCreate}</div>`;
+                                content += `<div>${row.employeeAdd.name}</div>`;
+                                content += `<small class="text-muted">${row.employeeAdd.job}</small>`
+                                return content;
                             }
                         }, 
                         {
                             title: `Заявитель`,
                             name: 'customer',
                             render: function (data, type, row) {
-                                let content = `<h2>${row.applicant.name}</h2>`;
-                                if (row.applicant.address !== null)
-                                    content += `<div><img class="mb-auto me-1" src="/img/location.svg" alt=""/>${row.applicant.address}</div>`;
-                                if (row.applicant.phone !== null)
-                                    content += `<div><img class="mb-auto me-1" src="/img/phone.svg" alt=""/>${row.applicant.phone}</div>`;
-                                return `<div class="">${content}</div>`;
+                                let str = row.service.name.length > 90 ? row.service.name.slice(0, 90) + "..." : row.service.name
+                                let content = `<a href="javascript:void(0);" data-case-id="${row.caseId}" data-smev-id="${row.id}" id="caseNumber">${row.caseId}</a>`;
+                                content += `<div class="text-bold">${row.applicant.name}</div>`;
+                                content += `<small class="">${row.service.name}</small>`;
+                                return content;
                             }
                         }, 
                         {
@@ -259,18 +258,8 @@
                             name: 'officesId',
                             render: function (data, type, row) {
                                 let content = `<div>${row.smevService}</div>`;
-                                content += `<div class="text-muddy">${row.provider}</div>`;
+                                content += `<small class="text-muted">${row.provider}</small>`;
                                 return content;
-                            }
-                        },
-                        {
-                            title: `Исполнитель`,
-                            name: 'currentEmployee',
-                            render: function (data, type, row) {
-                                return `<div>
-                                         <h2>${row.employeeAdd.name}</h2>
-                                         <small>${row.employeeAdd.job}</small>
-                                        </div>`;
                             }
                         },
                         {
@@ -301,7 +290,7 @@
                                         statusName = `Неизвестно`;
                                         break;
                                 };
-                                return `<div class="${colorStatus} text-white">${statusName}</div>`;
+                                return `<div class="${colorStatus} text-white">${statusName}</div> <div class="small text-muted">${row.comment}</div>`;
                             }
                         },
                         {

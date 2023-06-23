@@ -3,8 +3,8 @@
 }
 
 .case-check-column {
-    width: 0.1em;
-    max-width: 0.1em;
+    width: 5%;
+    max-width: 5%;
 }
 
 .case-dateAdd-column {
@@ -42,7 +42,6 @@
 
 .padding-right-1 {
     padding-right: .625rem !important;
- 
 }
 
 .card-body label {
@@ -64,4 +63,15 @@
     line-height: 14px !important;
     letter-spacing: 0.035em !important;
     color: #172359 !important;
+}
+.bx-list-service {
+    content: url(/assets/svg/icons/list-service-active.svg) !important;
+}
+
+.table-fs {
+    font-size: 14px;
+}
+
+.table td {
+    vertical-align: middle;
 }

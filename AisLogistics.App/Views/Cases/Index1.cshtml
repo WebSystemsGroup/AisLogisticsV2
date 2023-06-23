@@ -27,11 +27,11 @@
                     <select class="form-select select select2-search" asp-for="@responseData.MfcId" asp-items="@responseData.MfcList" form="services-search-form" disabled></select>
                 }
             </div>
-            <div class="col-4">
+            <div class="col-7">
                 <div class="search-bar">
                     <!-- input search -->
                     <fieldset class="page-search-input input-group position-relative m-0">
-                        <input type="search" asp-for="@responseData.Query" class="form-control rounded-right ps-2" placeholder="Поиск" data-query>
+                        <input type="search" asp-for="@responseData.Query" class="form-control rounded-right ps-2" placeholder="Номер обращения, ПКПВД, ФИО, адрес или номер телефона" data-query>
                     </fieldset>
                     <!--/ input search -->
                 </div>
@@ -125,7 +125,8 @@
     </form>
     <!-- Search Bar end -->
     <!-- seach result section -->
-    <div class="block">
+
+    <div class="card">
         <div class="card-body">
             <!-- datatable start -->
             <div class="table-responsive">
@@ -134,6 +135,7 @@
             <!-- datatable ends -->
         </div>
     </div>
+
 </section>
 
 @section Scripts
@@ -228,6 +230,23 @@
                     },
                     columns: [
                         {
+                            title: `<div class="d-flex justify-content-between align-items-center"><input type="checkbox" data-check-main id="checkSelectedRowMain">
+                                            <div>
+                                                <a id="casesStageAddModal" href="javascript:void(0);"  title="Добавить">
+                                                    <span class="action-icon favorite">
+                                                        <i class="bx bx-plus bx-md"></i>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>`,
+                            className: "case-check-column",
+                            name: 'dataCheck',
+                            render: function (data, type, row) {
+                                let content = `<input type="checkbox" data-service-id="${row.service.id}" data-check id="checkSelectedRow">`;
+                                return content;
+                            }
+                        },
+                        {
                             title: 'Номер и дата',
                             className: "case-number-column",
                             name: 'caseId',
@@ -241,11 +260,14 @@
                             title: `Заявитель`,
                             name: 'customer',
                             render: function (data, type, row) {
-                                let content = `<h2>${row.casesMainDto.applicant.name}</h2>`;
+                                let content = `<div class="text-bold">${row.casesMainDto.applicant.name}</div>`;
                                 if (row.casesMainDto.applicant.address !== null)
                                     content += `<div><img class="mb-auto me-1" src="/img/location.svg" alt=""/>${row.casesMainDto.applicant.address}</div>`;
                                 if (row.casesMainDto.applicant.phone !== null)
                                     content += `<div><img class="mb-auto me-1" src="/img/phone.svg" alt=""/>${row.casesMainDto.applicant.phone}</div>`;
+                                if (row.casesMainDto.numberPKPVD !== null) {
+                                    content += `<div class="small">ПК ПВД: ${row.casesMainDto.numberPKPVD}</div>`
+                                }
                                 return `<div class="">${content}</div>`;
                             }
                         },
@@ -278,7 +300,7 @@
 
                                 return `<div class="${colorStatus} m-auto d-inline">${row.service.status.name}</div>` +
                                        `<div class="mt-1" title="${row.service.name}">${str}</div>` +
-                                       `<h2>${row.service.office}</h2>`;
+                                    `<div class="text-bold">${row.service.office}</div>`;
                             }
                         },
                         {
@@ -286,7 +308,7 @@
                             name: 'currentEmployee',
                             render: function (data, type, row) {
                                 return `<div>
-                                              <h2>${row.service.serivesStage.employeeCurrent.name}</h6>
+                                                      <div class="text-bold">${row.service.serivesStage.employeeCurrent.name}</div>
                                               <small class="text-muted d-block">${row.service.serivesStage.employeeCurrent.job}</small>
                                               <small class="text-muted">${row.service.serivesStage.office}</small>
                                        </div>`;
@@ -295,7 +317,6 @@
                     ]
                 }).on('click', 'tbody tr', function () {
                     var val = $(this).find('td.case-number-column #caseIdNumber').text();
-                    console.log(val);
                     window.open(`Cases/Details?id=${val}`, "_blank");
                 }).on('click', '[data-check]', function (e) { e.stopPropagation(); });
             });

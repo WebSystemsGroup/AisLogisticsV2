@@ -10,18 +10,17 @@
 }
 
 <link rel="stylesheet" href="~/assets/css/css-reestr.css" asp-append-version="true" />
-@*
-<section class="search-bar-wrapper">
-    <div class="card">
-        <div class="card-body">*@
-            <!-- datatable start -->
-            <div class="table-responsive">
-                <table id="@Model.TableName" data-action-table="@Model.TableMethodAction" class="table-sm w-100 directory_names-items table"></table>
-            </div>
-        @*    <!-- datatable ends -->
+
+<div class="card">
+    <div class="card-body">
+        <!-- datatable start -->
+        <div class="table-responsive">
+            <table id="@Model.TableName" data-action-table="@Model.TableMethodAction" class="directory_names-items table table-fs"></table>
         </div>
+        <!-- datatable ends -->
     </div>
-</section>*@
+</div>
+
 
 @section Scripts
     { 
@@ -64,7 +63,7 @@
                 columns: [
                     {//ДАТА И СТАТУС
                         title: `Дата и статус`,
-                        className: "case-dateAdd-column text-centr",
+                        //className: "case-dateAdd-column text-centr",
                         //name: 'dateAdd',
                         //name: 'statusId',
                         render: function (data, type, row) {
@@ -94,40 +93,43 @@
                     
                     {//Заявитель
                         title: 'Заявитель',
-                        className: "table_applicant",
+                        //className: "table_applicant",
                         name: 'customer',
                         render: function (data, type, row) {
-                            let content = `<h2 >${row.casesMainDto.applicant.name}</h2>`;
+                            let content = '<div>'
+                                content += `<div class="text-bold">${row.casesMainDto.applicant.name}</div>`;
                             if (row.casesMainDto.applicant.address !== null)
-                                content += `<div class="d-flex"><p><img class="mb-auto me-1 " src="/img/location.svg" alt=""/> ${row.casesMainDto.applicant.address}</p></div>`;
+                                content += `<div class="d-flex"><div><img class="mb-auto me-1 " src="/img/location.svg" alt=""/> ${row.casesMainDto.applicant.address}</div></div>`;
                             if (row.casesMainDto.applicant.phone !== null)
-                                content += `<div class="d-flex"><p><img class="mb-auto me-1" src="/img/phone.svg" alt=""/> ${row.casesMainDto.applicant.phone}</p></div>`;
+                                content += `<div class="d-flex"><div><img class="mb-auto me-1" src="/img/phone.svg" alt=""/> ${row.casesMainDto.applicant.phone}</div></div>`;
+                                content += '</div>'
                             return content;
                         }
                     },
                     { //Услуга
                         title: `Услуга`,
-                        className: "case-services-column",
+                        //className: "case-services-column",
                         name: 'servicesId',
                         render: function (data, type, row) {
                             let str = row.service.name.length > 90 ? row.service.name.slice(0, 90) + "..." : row.service.name
-                            return `<p title="${row.service.name}">${str}</p><h2>${row.service.office}</h2>`;
+                            return `<div><div title="${row.service.name}">${str}</div><div class="text-bold">${row.service.office}</div></div>`;
                         }
                     },
                     {
                         title: 'Исполнитель',
-                        className: "case-currentEmployee-column",
+                        //className: "case-currentEmployee-column",
                         name: 'currentEmployee',
                         render: function (data, type, row) {
-                            return `<h2>${row.service.serivesStage.employeeCurrent.name}</h2>
-                                            <div>${row.service.serivesStage.employeeCurrent.job}</div>
-                                            <div>${row.service.serivesStage.office}</div>
+                            return `<div>
+                                        <div class="text-bold">${row.service.serivesStage.employeeCurrent.name}</div>
+                                        <div>${row.service.serivesStage.employeeCurrent.job}</div>
+                                        <div>${row.service.serivesStage.office}</div>
                                     </div>`;
                         }
                     },
                     {
                         title: `Действие`,
-                        className: "case-stage-column",
+                        //className: "case-stage-column",
                         name: 'stageId',
                         render: function (data, type, row) {
                             let content = `<a href="javascript:void(0);" data-service-id="${row.service.id}" id="btnStageAdd" class="btn btn-success waves-effect waves-float waves-light" role="button">Выдать</a>`;

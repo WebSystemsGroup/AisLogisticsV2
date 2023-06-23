@@ -1531,7 +1531,10 @@ input::placeholder, select::placeholder {
     color: rgba(23, 35, 89, 0.31) !important;
 }
 
-
-
-
- 
+.text-bold {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.035em;
+    color: #172359;
+} 
