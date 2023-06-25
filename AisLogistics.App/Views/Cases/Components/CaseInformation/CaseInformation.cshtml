@@ -3,41 +3,40 @@
 <div class="row case-app-header">
     <div class="row col-sm-auto">
         <div class="col-auto">
-            <small><b>№ обращения: </b></small>
-            <p class="mb-0">@Model.CaseId</p>
+            <div class="b-s-12">№ обращения:</div>
+            <div class="r-s-12">@Model.CaseId</div>
         </div>
         @*<small class="d-block text-muted">от @Model.DateAdd</small>*@
         <div class="col-auto pe-0">
             <div class="d-flex flex-column">
                 <a asp-controller="Cases" asp-action="ServiceCustomerAddModal" asp-route-id="@Model.Applicant.Id" asp-route-subjectCustomerType="@Model.CustomerType" data-btn-type="modal" data-bs-toggle="tooltip">
-                    <h2 class="text-truncate fw-semibold">@Model.Applicant.Name</h2>
+                    <div class="b-s-18">@Model.Applicant.Name</div>
                 </a>
                 @if (string.IsNullOrEmpty(Model.Applicant.Address) == false)
                 {
                     <div class="d-flex align-items-center">
-                        <small>
+                        <div class="r-s-12">
                             <img src="~/img/location.svg" alt="">
                             @Model.Applicant.Address
-                        </small>
-
+                        </div> 
                     </div>
                 }
                 @if (string.IsNullOrEmpty(Model.Applicant.Phone) == false)
                 {
                     <div class="d-flex align-items-center">
-                        <small>
+                        <div class="r-s-12">
                             <img src="~/img/phone.svg" alt="">
                             @Model.Applicant.Phone
-                        </small>
+                        </div>
                     </div>
                 }
             </div>
         </div>
         <div class="col-auto pe-0 ms-5">
-            <small>Представитель:</small>
+            <div class="r-s-12">Представитель:</div>
             @if (Model.Recipient == null)
             {
-                <p class="text-muted small mt-1">Нет данных</p>
+                <div class="r-l-12 mt-1">Нет данных</div>
             } 
         </div>
         @if (Model.Recipient != null)
@@ -45,24 +44,24 @@
             <div class="col-auto">
                 <div class="d-flex flex-column">
                     <a asp-controller="Cases" asp-action="ServiceCustomerAddModal" asp-route-id="@Model.Recipient.Id" asp-route-subjectCustomerType="2" data-btn-type="modal" data-bs-toggle="tooltip">
-                        <h2 class="text-truncate fw-semibold">@Model.Recipient.Name</h2>
+                        <div class="b-s-18">@Model.Recipient.Name</div>
                     </a>
                     @if (string.IsNullOrEmpty(Model.Recipient.Address) == false)
                     {
                         <div class="d-flex align-items-center">
-                            <small>
+                            <div class="r-s-12">
                                 <img src="~/img/location.svg" alt="">
                                 @Model.Recipient.Address
-                            </small>
+                            </div>
                         </div>
                     }
                     @if (string.IsNullOrEmpty(Model.Recipient.Phone) == false)
                     {
                         <div class="d-flex align-items-center">
-                            <small>
+                            <div class="r-s-12">
                                 <img src="~/img/phone.svg" alt="">
                                 @Model.Recipient.Phone
-                            </small>
+                            </div>
                         </div>
                     }
                 </div>
@@ -72,10 +71,28 @@
     <div class="col-auto ms-auto d-flex align-items-center">
         <div class="header_menu">
             <ul class="@(Model.Recipient != null ? "" : "d-flex") align-items-center justify-content-end">
-                <li><a asp-action="DetailsComments" class="" asp-controller="Cases" asp-route-id="@Model.CaseId" data-btn-type="modal" data-bs-toggle="tooltip"><i class="bi bi-chat-right-text me-2"></i>Комментарии</a></li>
-                <li><a asp-action="DetailsNotification" class="" asp-controller="Cases" asp-route-id="@Model.CaseId" data-btn-type="modal" data-bs-toggle="tooltip"><i class="bi bi-bell me-2"></i>Оповещения @*<sup>@Model.NotificationsCount</sup>*@</a></li>
-                <li><a asp-action="DetailsAudit" class="" asp-controller="Cases" asp-route-id="@Model.CaseId" data-btn-type="modal" data-bs-toggle="tooltip"><i class="bi bi-clipboard-check me-2"></i>Действия @*<sup>@Model.AuditCounts</sup>*@</a></li>
-                <li><a href="" class="" data-bs-toggle="collapse" data-bs-target="#notesAccordion" aria-expanded="false"><i class="bi bi-card-list me-2"></i>Заметки @*<sup>@Model.Notes.Count</sup>*@</a></li>
+                <li><a asp-action="DetailsComments" class="" asp-controller="Cases" asp-route-id="@Model.CaseId" data-btn-type="modal" data-bs-toggle="tooltip">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none" class="me-2">
+                            <path d="M5.83464 12.0486H14.168C14.4041 12.0486 14.6019 11.9672 14.7613 11.8044C14.9213 11.6421 15.0013 11.4409 15.0013 11.2006C15.0013 10.9603 14.9213 10.7588 14.7613 10.596C14.6019 10.4337 14.4041 10.3526 14.168 10.3526H5.83464C5.59852 10.3526 5.40047 10.4337 5.24047 10.596C5.08102 10.7588 5.0013 10.9603 5.0013 11.2006C5.0013 11.4409 5.08102 11.6421 5.24047 11.8044C5.40047 11.9672 5.59852 12.0486 5.83464 12.0486ZM5.83464 9.50456H14.168C14.4041 9.50456 14.6019 9.42315 14.7613 9.26032C14.9213 9.09807 15.0013 8.8968 15.0013 8.65653C15.0013 8.41625 14.9213 8.21471 14.7613 8.05189C14.6019 7.88963 14.4041 7.8085 14.168 7.8085H5.83464C5.59852 7.8085 5.40047 7.88963 5.24047 8.05189C5.08102 8.21471 5.0013 8.41625 5.0013 8.65653C5.0013 8.8968 5.08102 9.09807 5.24047 9.26032C5.40047 9.42315 5.59852 9.50456 5.83464 9.50456ZM5.83464 6.96048H14.168C14.4041 6.96048 14.6019 6.87935 14.7613 6.71709C14.9213 6.55427 15.0013 6.35272 15.0013 6.11245C15.0013 5.87217 14.9213 5.67063 14.7613 5.50781C14.6019 5.34555 14.4041 5.26442 14.168 5.26442H5.83464C5.59852 5.26442 5.40047 5.34555 5.24047 5.50781C5.08102 5.67063 5.0013 5.87217 5.0013 6.11245C5.0013 6.35272 5.08102 6.55427 5.24047 6.71709C5.40047 6.87935 5.59852 6.96048 5.83464 6.96048ZM16.918 17.3912L15.0013 15.4407H3.33464C2.8763 15.4407 2.48408 15.2748 2.15797 14.943C1.8313 14.6105 1.66797 14.2111 1.66797 13.7447V3.56837C1.66797 3.10195 1.8313 2.70253 2.15797 2.37011C2.48408 2.03824 2.8763 1.87231 3.33464 1.87231H16.668C17.1263 1.87231 17.5188 2.03824 17.8455 2.37011C18.1716 2.70253 18.3346 3.10195 18.3346 3.56837V16.7764C18.3346 17.158 18.1646 17.4229 17.8246 17.571C17.4841 17.7197 17.1819 17.6597 16.918 17.3912ZM3.33464 3.56837V13.7447H15.6888L16.668 14.7411V3.56837H3.33464ZM3.33464 3.56837V14.7411V3.56837Z" fill="#BEBEBE" />
+                        </svg>
+                        Комментарии
+                    </a>
+                </li>
+                <li><a asp-action="DetailsNotification" class="" asp-controller="Cases" asp-route-id="@Model.CaseId" data-btn-type="modal" data-bs-toggle="tooltip">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none" class="me-2">
+                            <path d="M15.8333 14.5927V10.183C15.4167 10.2678 15 10.3526 14.5833 10.3526H14.1667V15.4407H5.83333V9.50456C5.83333 7.13008 7.66667 5.26442 10 5.26442C10.0833 4.16199 10.5833 3.22916 11.25 2.46593C11 2.12672 10.5 1.87231 10 1.87231C9.08333 1.87231 8.33333 2.63554 8.33333 3.56837V3.82278C5.83333 4.586 4.16667 6.87567 4.16667 9.50456V14.5927L2.5 16.2888V17.1368H17.5V16.2888L15.8333 14.5927ZM8.33333 17.9848C8.33333 18.9177 9.08333 19.6809 10 19.6809C10.9167 19.6809 11.6667 18.9177 11.6667 17.9848H8.33333ZM17.5 5.68843C17.5 7.29969 16.1667 8.65653 14.5833 8.65653C13 8.65653 11.6667 7.29969 11.6667 5.68843C11.6667 4.07718 13 2.72034 14.5833 2.72034C16.1667 2.72034 17.5 4.07718 17.5 5.68843Z" fill="#BEBEBE" />
+                        </svg>
+                    Оповещения @*<sup>@Model.NotificationsCount</sup>*@</a></li>
+                <li><a asp-action="DetailsAudit" class="" asp-controller="Cases" asp-route-id="@Model.CaseId" data-btn-type="modal" data-bs-toggle="tooltip">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none" class="me-2">
+                            <path d="M14.1667 18.8329C13.0139 18.8329 12.0314 18.4196 11.2192 17.593C10.4064 16.7659 10 15.7658 10 14.5927C10 13.4196 10.4064 12.4195 11.2192 11.5924C12.0314 10.7659 13.0139 10.3526 14.1667 10.3526C15.3194 10.3526 16.3022 10.7659 17.115 11.5924C17.9272 12.4195 18.3333 13.4196 18.3333 14.5927C18.3333 15.7658 17.9272 16.7659 17.115 17.593C16.3022 18.4196 15.3194 18.8329 14.1667 18.8329ZM15.5625 16.6068L16.1458 16.0132L14.5833 14.4231V12.0486H13.75V14.7623L15.5625 16.6068ZM4.16667 17.9848C3.70833 17.9848 3.31583 17.8189 2.98917 17.487C2.66306 17.1546 2.5 16.7552 2.5 16.2888V4.4164C2.5 3.94998 2.66306 3.55056 2.98917 3.21814C3.31583 2.88628 3.70833 2.72035 4.16667 2.72035H7.64583C7.79861 2.22566 8.09722 1.81918 8.54167 1.50088C8.98611 1.18316 9.47222 1.02429 10 1.02429C10.5556 1.02429 11.0522 1.18316 11.49 1.50088C11.9272 1.81918 12.2222 2.22566 12.375 2.72035H15.8333C16.2917 2.72035 16.6842 2.88628 17.0108 3.21814C17.3369 3.55056 17.5 3.94998 17.5 4.4164V9.71657C17.25 9.53283 16.9861 9.37736 16.7083 9.25015C16.4306 9.12295 16.1389 9.00988 15.8333 8.91094V4.4164H14.1667V6.96048H5.83333V4.4164H4.16667V16.2888H8.58333C8.68056 16.5997 8.79167 16.8965 8.91667 17.1792C9.04167 17.4619 9.19444 17.7304 9.375 17.9848H4.16667ZM10 4.4164C10.2361 4.4164 10.4342 4.33499 10.5942 4.17217C10.7536 4.00991 10.8333 3.80865 10.8333 3.56837C10.8333 3.3281 10.7536 3.12655 10.5942 2.96373C10.4342 2.80147 10.2361 2.72035 10 2.72035C9.76389 2.72035 9.56611 2.80147 9.40667 2.96373C9.24667 3.12655 9.16667 3.3281 9.16667 3.56837C9.16667 3.80865 9.24667 4.00991 9.40667 4.17217C9.56611 4.33499 9.76389 4.4164 10 4.4164Z" fill="#BEBEBE" />
+                        </svg>
+                    Действия @*<sup>@Model.AuditCounts</sup>*@</a></li>
+                <li><a href="" class="" data-bs-toggle="collapse" data-bs-target="#notesAccordion" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none" class="me-2">
+                            <path d="M2 18.4937C1.45 18.4937 0.979 18.2945 0.587 17.8963C0.195667 17.4974 0 17.0181 0 16.4584V2.21153C0 1.65184 0.195667 1.17253 0.587 0.77362C0.979 0.375386 1.45 0.17627 2 0.17627H16C16.55 0.17627 17.021 0.375386 17.413 0.77362C17.8043 1.17253 18 1.65184 18 2.21153V9.02967C17.6833 8.87702 17.3583 8.74541 17.025 8.63483C16.6917 8.52492 16.35 8.44453 16 8.39365V2.21153H2V16.4584H8.05C8.1 16.8315 8.17933 17.1877 8.288 17.5269C8.396 17.8661 8.525 18.1884 8.675 18.4937H2ZM2 15.4408V16.4584V2.21153V8.39365V8.31733V15.4408ZM4 14.4231H8.075C8.125 14.0669 8.204 13.7193 8.312 13.38C8.42067 13.0408 8.54167 12.7101 8.675 12.3879H4V14.4231ZM4 10.3526H10.1C10.6333 9.84378 11.229 9.41976 11.887 9.08055C12.5457 8.74134 13.25 8.51237 14 8.39365V8.31733H4V10.3526ZM4 6.28206H14V4.2468H4V6.28206ZM15 20.5289C13.6167 20.5289 12.4377 20.033 11.463 19.0411C10.4877 18.0486 10 16.8485 10 15.4408C10 14.033 10.4877 12.8329 11.463 11.8404C12.4377 10.8485 13.6167 10.3526 15 10.3526C16.3833 10.3526 17.5627 10.8485 18.538 11.8404C19.5127 12.8329 20 14.033 20 15.4408C20 16.8485 19.5127 18.0486 18.538 19.0411C17.5627 20.033 16.3833 20.5289 15 20.5289ZM14.5 18.4937H15.5V15.9496H18V14.9319H15.5V12.3879H14.5V14.9319H12V15.9496H14.5V18.4937Z" fill="#BEBEBE" />
+                        </svg>
+                    Заметки @*<sup>@Model.Notes.Count</sup>*@</a></li>
                 <div id="notesAccordion" class="accordion-collapse collapse">
                     <div class="modal-service-header">
                         <h6 class="d-flex justify-content-between align-items-center px-2 font-weight-light text-black-50 mb-0">
@@ -110,7 +127,9 @@
 
     <div class="col-auto me-3 d-flex align-items-center">
         <button class="btn btn-outline-primary px-4" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-printer-fill"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none" class="me-2 mt-1">
+                <path d="M3.5445 2.27426V3.18836H2.83333C2.08189 3.18836 1.36122 3.50029 0.829864 4.05552C0.298511 4.61075 0 5.3638 0 6.14902V11.3302C0 11.9191 0.223883 12.4839 0.622398 12.9003C1.02091 13.3167 1.56141 13.5506 2.125 13.5506H3.54167V14.2908C3.54167 14.8797 3.76555 15.4445 4.16406 15.8609C4.56258 16.2774 5.10308 16.5113 5.66667 16.5113H11.3333C11.8969 16.5113 12.4374 16.2774 12.8359 15.8609C13.2345 15.4445 13.4583 14.8797 13.4583 14.2908V13.5506H14.875C15.4386 13.5506 15.9791 13.3167 16.3776 12.9003C16.7761 12.4839 17 11.9191 17 11.3302V6.14902C17 5.3638 16.7015 4.61075 16.1701 4.05552C15.6388 3.50029 14.9181 3.18836 14.1667 3.18836H13.4583V2.26464C13.4583 1.99709 13.4079 1.73217 13.3098 1.48502C13.2117 1.23788 13.068 1.01336 12.8868 0.824311C12.7056 0.635263 12.4905 0.485395 12.2539 0.383278C12.0172 0.281161 11.7636 0.2288 11.5076 0.229189L5.48958 0.238811C4.97345 0.239596 4.47872 0.45439 4.11403 0.836026C3.74934 1.21766 3.5445 1.73494 3.5445 2.27426ZM12.3958 2.26464V3.18836H4.607V2.27426C4.607 1.76355 5.00225 1.3498 5.491 1.34906L11.509 1.33943C11.6254 1.33924 11.7407 1.36303 11.8483 1.40944C11.9559 1.45584 12.0536 1.52396 12.136 1.6099C12.2184 1.69583 12.2837 1.79789 12.3283 1.91024C12.3729 2.02258 12.3958 2.14301 12.3958 2.26464ZM5.66667 9.47975H11.3333C11.6151 9.47975 11.8854 9.59672 12.0846 9.80493C12.2839 10.0131 12.3958 10.2955 12.3958 10.59V14.2908C12.3958 14.5853 12.2839 14.8677 12.0846 15.0759C11.8854 15.2841 11.6151 15.4011 11.3333 15.4011H5.66667C5.38487 15.4011 5.11462 15.2841 4.91537 15.0759C4.71611 14.8677 4.60417 14.5853 4.60417 14.2908V10.59C4.60417 10.2955 4.71611 10.0131 4.91537 9.80493C5.11462 9.59672 5.38487 9.47975 5.66667 9.47975Z" fill="#077EFA" />
+            </svg>
             Печать
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 40px);" data-popper-placement="bottom-start">

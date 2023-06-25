@@ -13,7 +13,7 @@
                     <tr>
                         <td>
                             <a asp-action="DownloadBlank" asp-controller="Cases" asp-route-id="@item.Id" asp-route-serviceId="@item.ServiceId" target="_blank" class="d-flex pb-2 pt-2">
-                                <i class="bx bx-filetype-@item.Expansion.Substring(1) me-4"></i>
+                                <i class="bi bi-filetype-@item.Expansion.Substring(1) me-4"></i>
                                 <p class="m-0">@item.Name@item.Expansion</p>
                                 <small class="text-muted">@item.Comment</small>
                             </a>
@@ -26,10 +26,8 @@
 }
 else
 {
-    <div class="col-12">
-        <div class="alert alert-primary" role="alert">
-            <h6 class="alert-heading mb-1">Нет бланков</h6>
-        </div>
+    <div class="col-12 text-center m-l-16 mt-4">
+        Нет бланков
     </div>
 }
 <script>

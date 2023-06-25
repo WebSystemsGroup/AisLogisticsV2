@@ -2,205 +2,11 @@
 @{
     var items = Model.Model as List<CaseServiceDocumentsResultsDto>;
 }
-
-<!-- Detailed case Header starts -->
-@* < div class="case-detail-header">
-    <div class="case-header-left d-flex align-items-center">
-        <a href="#" class="" data-bs-toggle="tooltip" title="Назад">
-            <span class="go-back action-icon me-1">
-                <i class="bx bx-chevron-left bx-md"></i>
-            </span>
-        </a>
-        <h4 class="case-subject mb-0">@Model.ViewTitle</h4>
-    </div>
-   <div class="case-header-right ms-2 ps-1">
-        <ul class="list-inline m-0">
-            <li class="list-inline-item">
-                <a asp-action="ServiceDocumentResultAddModal" asp-route-id="@ViewBag.Id" data-bs-toggle="tooltip" title="Добавить" data-btn-type="modal">
-                    <span class="action-icon favorite">
-                        <i class="bx bx-plus bx-md"></i>
-                    </span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>*@
-
-<!-- Detailed case Header ends -->
-<!-- Detailed case Content starts -->
-@*<div class="case-scroll-area">
-    <div class="rounded-0">
-        <div class="mail-message-wrapper">
-            @if (items.Any())
-            {
-                <div class="accordion" id="accordionWithIcon">
-                    @foreach (var item in items)
-                    {
-                        <div class="accordion-item active border-bottom shadow-none rounded-0">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <div class="accordion-header  d-flex align-items-center">
-                                        <button type="button" class="accordion-button @(item.Files.Any() ? "text-primary" : "") collapsed fw-bold pb-0 " data-bs-toggle="collapse" data-bs-target="#doc_@item.Id" aria-expanded="false">
-                                            <i class="bx bx-file me-2"></i>
-                                            @item.DocumentName
-                                        </button>
-                                    </div>
-                                    <span class="fs-6 px-5">
-                                            <small class="@(item.Result.HasValue&&item.Result.Value ? "text-success" : "text-danger")">@(item.Result.HasValue&&item.Result.Value ? "Положительный" : "Отрицательный")</small>
-                                            <small class="text-default">@item.Method</small>
-
-                                    </span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <a asp-action="ServiceDocumentResultAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Desktop" title="Загрузить" class="btn btn-outline-secondary buttons_height me-3 lh-1" data-btn-type="modal">
-                                        ЗАГР
-                                    </a>
-                                    <a asp-action="ServiceDocumentResultAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Scan" title="Сканировать" class="btn btn-outline-secondary buttons_height lh-1" data-btn-type="modal">
-                                        СКАН
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div id="doc_@item.Id" class="accordion-collapse collapse">
-                                <div class="accordion-body">
-                                    @if (item.Files.Any())
-                                    {
-                                        <table class="table table-sm table-hover table-border-bottom-0 no-thead" data-action-remove="@Model.RemoveMethodAction">
-                                            <tbody>
-                                            @foreach (var file in item.Files)
-                                            {
-                                                <tr>
-                                                    <td>
-                                                            @if (file.IsViewing)
-                                                            {
-                                                                <a asp-action="DownloadFileCase" asp-route-id="@file.Id" class="btn btn-sm viewing-file w-100 text-start" data-bs-toggle="tooltip" title="Просмотр" data-sub-html="@item.DocumentName</br>@file.Name">
-                                                                    @($"{file.Name}{file.Extension}")
-                                                                </a>
-                                                            }
-                                                            else
-                                                            {
-                                                                <a asp-action="DownloadFileCase" asp-route-id="@file.Id" asp-route-type="@DocumentType.ServiceDocumentResult" target="_blank" class="btn btn-sm w-100 text-start" data-bs-toggle="tooltip" title="Скачать">
-                                                                    @($"{file.Name}{file.Extension}")
-                                                                </a>
-                                                            }
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <a href="javascript:;" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" title="<div>@file.EmployeeAdd.Name</div><div>@file.EmployeeAdd.Job</div><div>@(file.Size/1024) КБ</div><div>@file.DateAdd.ToShortDateString()</div>"><i class="bx bx-info-circle"></i></a>
-
-                                                        if (file.IsViewing)
-                                                        {
-                                                            <a asp-action="DownloadFileCase" asp-route-id="@file.Id" class="btn btn-sm btn-icon viewing-file" data-bs-toggle="tooltip" title="Просмотр" data-sub-html="@item.DocumentName</br>@file.Name"><i class="bx bx-show"></i></a>
-                                                        }
-                                                        <a asp-action="DownloadFileCase" asp-route-id="@file.Id" asp-route-type="@DocumentType.ServiceDocumentResult" target="_blank" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" title="Скачать"><i class="bx bx-download"></i></a>
-
-                                                        </td>
-                                                </tr>
-                                            }
-                                            </tbody>
-                                        </table>
-                                    }
-                                    else
-                                    {
-                                        <div class="text-center text-muted small">Нет данных</div>
-                                    }
-
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            }
-            else
-            {
-                <div class="alert alert-primary" role="alert">
-                    <h6 class="alert-heading mb-1">Нет данных</h6>
-                    <span>Результаты отсутствуют</span>
-                </div>
-            }
-        </div>
-    </div>
-</div>*@
-
-@*
-<div id="Results">
-    @if (items.Any())
-    {
-        <div class="accordion" id="accordionWithIcon">
-            @foreach (var item in items)
-            {
-                <div class="accordion-item active border-bottom shadow-none rounded-0 pb-3 pt-3">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <div class="accordion-header mb-2 d-flex align-items-center">
-                                <button type="button" class="accordion-button pb-0 pt-0 collapsed" data-bs-toggle="collapse" data-bs-target="#doc_@item.Id" aria-expanded="false">
-                                    <i class="bx bx-file me-2"></i>
-                                    @item.DocumentName
-                                </button>
-                            </div>
-                            <span class="fs-6 px-3">
-                                <small class="@(item.Result.HasValue&&item.Result.Value ? "text-success" : "text-danger")">@(item.Result.HasValue && item.Result.Value ? "Положительный" : "Отрицательный")</small>
-                                <small class="text-default">@item.Method</small>
-                            </span>
-                        </div>
-                        <div class="d-flex align-items-start justify-content-center">
-                            <a asp-action="ServiceDocumentResultAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Desktop" title="Загрузить" class="text-muted mb-2 me-3" data-btn-type="modal" role="button" href="">
-                                <i class="bi bi-upload me-2"></i>
-                                ЗАГР
-                            </a>
-                            <a asp-action="ServiceDocumentResultAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Scan" title="Сканировать" class="text-muted" data-btn-type="modal" role="button" href="">
-                                <i class="bi bi-upc-scan me-2"></i>
-                                СКАН
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                        <div id="doc_@item.Id" class="accordion-collapse collapse">
-                            <div class="d-flex mt-3">
-                                <div class="accordion-body d-flex flex-column pt-0">
-                                    @if (item.Files.Any())
-                                    {
-                                        @foreach (var file in item.Files)
-                                        {
-
-                                            <div class="d-flex" data-action-remove="@Model.RemoveMethodAction">
-                                                <a href="javascript:void(0);" class="btn btn-sm btn-icon d-flex me-3" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                   title="<div>@file.EmployeeAdd.Name</div><div>@file.EmployeeAdd.Job</div><div>@(file.Size/1024) КБ</div><div>@file.DateAdd.ToShortDateString()</div>">
-                                                    <i class="bx bi-info-circle text-muted"></i>
-                                                </a>
-                                                @if (file.IsViewing)
-                                                {
-                                                    <a asp-action="DownloadFileCase" asp-route-id="@file.Id" class="text-muted me-3" data-bs-toggle="tooltip" title="Просмотр">
-                                                        <i class="bi bi-filetype-@(file.Extension.Substring(1)) me-1"></i>
-                                                        @($"{file.Name}{file.Extension}")
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a asp-action="DownloadFileCase" asp-route-id="@file.Id" class="text-muted me-3" data-bs-toggle="tooltip" title="Скачать">
-                                                        <i class="bi bi-filetype-@(file.Extension.Substring(1)) me-1"></i>
-                                                        @($"{file.Name}{file.Extension}")
-                                                    </a>
-                                                }
-
-                                                <a asp-action="ServiceDocumentRemove" asp-route-id="@file.Id" asp-route-type="@DocumentType.ServiceDocument" class="text-muted remove-file" data-bs-toggle="tooltip" title="Удалить">
-                                                    <i class="bi bi-trash-fill me-1"></i>
-                                                </a>
-                                            </div>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <div class="text-center text-muted small">Нет данных</div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                }
-            </div>
-            }
-        </div>*@
-
-
+<style>
+ svg{
+        vertical-align:top !important;
+    } 
+</style>
 
 <div class="case-app-details overflow-auto">
     <div class="case-scroll-area ps">
@@ -216,22 +22,38 @@
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <div class="accordion-header mb-2 d-flex align-items-center">
-                                        <div type="button" class="accordion-button pb-0 pt-0 collapsed" data-bs-toggle="collapse" data-bs-target="#doc_@item.Id" aria-expanded="false">
+                                        <div type="button" class="accordion-button pb-0 pt-0 collapsed r-s-14" data-bs-toggle="collapse" data-bs-target="#doc_@item.Id" aria-expanded="false">
                                             @item.DocumentName
                                         </div>
                                     </div>
-                                    <span class="fs-6 px-3">
-                                        <small class="@(item.Result.HasValue&&item.Result.Value ? "success" : "danger") me-5">@(item.Result.HasValue && item.Result.Value ? "Положительный" : "Отрицательный")</small>
-                                        <small class="text-muted">@item.Method</small>
+                                    <span class="align-items-center d-flex px-4">
+                                            @if (item.Result.HasValue && item.Result.Value)
+                                            {
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="11" viewBox="0 0 14 11" fill="none" class="me-1">
+                                                    <path d="M0 5.69998L1.4 4.29998L4.9 7.79998L12.6 0.0999756L14 1.49998L4.9 10.6L0 5.69998Z" fill="#1CB92B" />
+                                                </svg>
+                                            <span class="result-success">Положительный</span>
+                                            }else{
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" class="me-1">
+                                                    <rect x="4.37109" y="5.53101" width="1.64706" height="14" transform="rotate(-45 4.37109 5.53101)" fill="#FF2222" />
+                                                    <rect x="14.4102" y="4.51196" width="1.64706" height="14" transform="rotate(45 14.4102 4.51196)" fill="#FF2222" />
+                                                </svg>
+                                            <span class="result-danger">Отрицательный</span>
+                                            }
+                                        <small class="r-l-12 ms-5">@item.Method</small>
                                     </span>
                                 </div>
                                 <div class="col-sm-auto align-items-start justify-content-center me-3">
-                                    <a asp-action="ServiceDocumentResultAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Desktop" title="Загрузить" class="text-muted mb-2 me-3" data-btn-type="modal" role="button">
-                                        <i class="bi bi-upload me-2"></i>
+                                    <a class="r-l-12 d-block mb-2" asp-action="ServiceDocumentResultAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Desktop" title="Загрузить" class="text-muted mb-2 d-block" data-btn-type="modal" role="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none" class="me-1">
+                                            <path d="M6.50391 9.8571C6.29141 9.8571 6.11341 9.78314 5.96991 9.63521C5.82591 9.48779 5.75391 9.30494 5.75391 9.08664V3.57781L4.34766 5.02243C4.19766 5.17653 4.02266 5.25357 3.82266 5.25357C3.62266 5.25357 3.44141 5.1701 3.27891 5.00317C3.12891 4.84908 3.05716 4.66596 3.06366 4.45383C3.06966 4.24221 3.14141 4.06577 3.27891 3.92452L5.97891 1.15084C6.05391 1.0738 6.13516 1.01909 6.22266 0.986734C6.31016 0.954888 6.40391 0.938965 6.50391 0.938965C6.60391 0.938965 6.69766 0.954888 6.78516 0.986734C6.87266 1.01909 6.95391 1.0738 7.02891 1.15084L9.72891 3.92452C9.87891 4.07861 9.95066 4.26147 9.94416 4.47309C9.93816 4.68523 9.86641 4.86192 9.72891 5.00317C9.57891 5.15726 9.40091 5.23739 9.19491 5.24356C8.98841 5.25023 8.81016 5.17653 8.66016 5.02243L7.25391 3.57781V9.08664C7.25391 9.30494 7.18216 9.48779 7.03866 9.63521C6.89466 9.78314 6.71641 9.8571 6.50391 9.8571ZM2.00391 12.939C1.59141 12.939 1.23841 12.7882 0.944906 12.4867C0.650906 12.1847 0.503906 11.8218 0.503906 11.398V9.8571C0.503906 9.6388 0.575656 9.45569 0.719156 9.30776C0.863156 9.16035 1.04141 9.08664 1.25391 9.08664C1.46641 9.08664 1.64466 9.16035 1.78866 9.30776C1.93216 9.45569 2.00391 9.6388 2.00391 9.8571V11.398H11.0039V9.8571C11.0039 9.6388 11.0759 9.45569 11.2199 9.30776C11.3634 9.16035 11.5414 9.08664 11.7539 9.08664C11.9664 9.08664 12.1444 9.16035 12.2879 9.30776C12.4319 9.45569 12.5039 9.6388 12.5039 9.8571V11.398C12.5039 11.8218 12.3572 12.1847 12.0637 12.4867C11.7697 12.7882 11.4164 12.939 11.0039 12.939H2.00391Z" fill="#B5B5B5" />
+                                        </svg>
                                         ЗАГР
                                     </a>
-                                    <a asp-action="ServiceDocumentResultAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Scan" title="Сканировать" class="text-muted" data-btn-type="modal" role="button">
-                                        <i class="bi bi-upc-scan me-2"></i>
+                                    <a class="r-l-12 d-block" asp-action="ServiceDocumentResultAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Scan" title="Сканировать" class="text-muted d-block" data-btn-type="modal" role="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 13 14" fill="none" class="me-1">
+                                            <path d="M12.6235 9.88777V13.3093H0.519531V9.88777H1.86442V11.9407H11.2786V9.88777H12.6235ZM0.519531 6.46627H12.6235V7.83487H0.519531V6.46627ZM12.6235 4.41338H11.2786V2.36048H1.86442V4.41338H0.519531V0.991882H12.6235V4.41338Z" fill="#B5B5B5" />
+                                        </svg>
                                         СКАН
                                     </a>
                                 </div>
@@ -245,7 +67,7 @@
                                             {
                                                 <div class="d-flex" data-action-remove="@Model.RemoveMethodAction">
                                                     <a href="javascript:void(0);" class="btn btn-sm btn-icon d-flex me-3" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                                      title="<div>@file.EmployeeAdd.Name</div><div>@file.EmployeeAdd.Job</div><div>@(file.Size/1024) КБ</div><div>@file.DateAdd.ToShortDateString()</div>">
+                                       title="<div>@file.EmployeeAdd.Name</div><div>@file.EmployeeAdd.Job</div><div>@(file.Size/1024) КБ</div><div>@file.DateAdd.ToShortDateString()</div>">
                                                         <i class="bx bi-info-circle text-muted"></i>
                                                     </a>
                                                     @if (file.IsViewing)
@@ -275,35 +97,6 @@
                         </div>
                     }
                 }
-
-                @*<div class="accordion-item active border-bottom shadow-none rounded-0 pb-3 pt-3">
-                <div class="d-flex justify-content-between">
-                <div>
-                <div class="accordion-header mb-2 d-flex align-items-center">
-                <button type="button" class="accordion-button pb-0 pt-0 collapsed" data-bs-toggle="collapse" data-bs-target="#doc_@item.Id" aria-expanded="false">
-                <i class="bx bx-file me-2"></i>
-                @item.DocumentName
-                </button>
-                </div>
-                <span class="fs-6 px-3">
-                <small class="@(item.Result.HasValue&&item.Result.Value ? "text-success" : "text-danger")">@(item.Result.HasValue && item.Result.Value ? "Положительный" : "Отрицательный")</small>
-                <small class="text-default">@item.Method</small>
-                </span>
-                </div>
-                <div class="d-flex align-items-start justify-content-center">
-                <a asp-action="ServiceDocumentResultAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Desktop" title="Загрузить" class="text-muted mb-2 me-3" data-btn-type="modal" role="button" href="">
-                <i class="bi bi-upload me-2"></i>
-                ЗАГР
-                </a>
-                <a asp-action="ServiceDocumentResultAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Scan" title="Сканировать" class="text-muted" data-btn-type="modal" role="button" href="">
-                <i class="bi bi-upc-scan me-2"></i>
-                СКАН
-                </a>
-                </div>
-                </div>
-                </div>
-                *@
-
             </div>
         </div>
     </div>

@@ -1,31 +1,6 @@
 ﻿@model (Guid ServiceId, string FormPath)
-<style>
-    ul.address-list {
-    display: none;
-    width: 100%;
-    z-index: 1000;
-    position: absolute;
-    list-style: none;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,0.175);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.175);
-    background-clip: padding-box;
-    margin-top: -0.25rem;
-}
 
-ul.address-list li {
-    padding: 6px;
-}
-
-ul.address-list li:hover {
-    color: white;
-    background-color: #5a8dee;
-    cursor: pointer
-}
-</style>
+<link rel="stylesheet" href="~/assets/css/case-create.css" asp-append-version="true" />
 <form asp-controller="Cases" asp-action="AdditionalFormSave" asp-route-id="@Model.ServiceId" id="sendingForm" data-form-path="@Model.FormPath" method="post" role="form"></form>
 
 <script>
