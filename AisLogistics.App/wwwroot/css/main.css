@@ -1630,3 +1630,7 @@ input::placeholder, select::placeholder {
 .bi-filetype-frx::before {
     content: "\F3B9";
 }
+
+.bi-filetype-zip::before {
+    content: "\F391";
+}
