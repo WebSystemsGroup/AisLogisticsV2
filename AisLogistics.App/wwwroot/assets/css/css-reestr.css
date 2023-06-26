@@ -43,6 +43,13 @@
 .padding-right-1 {
     padding-right: .625rem !important;
 }
+.success, .danger, .warning {
+    padding: 4px 7px;
+    border-radius: 3px;
+    font-size: 12px;
+    white-space: nowrap
+}
+
 
 .card-body label {
     text-transform: none;
@@ -75,10 +82,3 @@
 .table td {
     vertical-align: middle;
 }
-.success, .danger, .warning {
-    padding: 4px 7px;
-    border-radius: 3px;
-    font-size: 12px;
-    white-space: nowrap
-}
-

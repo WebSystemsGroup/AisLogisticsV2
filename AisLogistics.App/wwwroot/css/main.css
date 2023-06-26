@@ -59,8 +59,8 @@ textarea {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'golos-bold';
-    color: #172359;
+    font-family: 'golos-bold' !important;
+    color: #172359 !important;
 }
 
 
@@ -679,10 +679,6 @@ footer p, footer a {
     font-size: 14px;
 }
 
-section {
-    font-size: 14px;
-}
-
 .nav-link.active:not(.nav-link.active.active-color) {
     border-bottom: 2px solid #5a8dee;
     color: #5a8dee;
@@ -782,8 +778,7 @@ section {
 .case-user-list_card {
     background: #EBF4FD;
     border-radius: 7px;
-    padding: 15px 20px;
-    margin: 20px 0;
+    padding: 15px 20px; 
 }
 
 .case-app-body p {
@@ -944,7 +939,7 @@ section {
 }
 
 .modal-backdrop {
-    z-index: 999999 !important;
+    z-index: 999 !important;
 }
 
 .accordion-header {
@@ -968,11 +963,7 @@ section {
     padding: 35px;
     width: 100%;
 }
-
-.modal {
-    z-index: 9999999 !important;
-}
-
+ 
 #modalNotesAdd .modal-content {
     max-width: 550px;
     margin: auto;
@@ -1610,7 +1601,6 @@ input::placeholder, select::placeholder {
     font-family: 'golos-bold' !important;
 }
 
-
 .r-s-12, .r-s-14, .r-s-16,
 .b-s-12, .b-s-14, .b-s-16,
 .m-s-12, .m-s-14, .m-s-16 {
@@ -1633,4 +1623,14 @@ input::placeholder, select::placeholder {
 
 .bi-filetype-zip::before {
     content: "\F391";
+}
+
+.customer:hover {
+    color: #077EFA !important;
+}
+
+.fv-plugins-message-container{
+    font-family:golos-medium !important;
+    margin:0 !important;
+    font-size:12px !important;
 }

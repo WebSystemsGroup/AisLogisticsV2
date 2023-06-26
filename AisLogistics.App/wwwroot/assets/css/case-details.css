@@ -26124,3 +26124,6 @@ html[data-textdirection=rtl] .case-application .case-app-details .case-next .act
     color: #BEBEBE !important;
     margin-left: 1.5rem;
 }
+svg {
+    vertical-align: top !important;
+}

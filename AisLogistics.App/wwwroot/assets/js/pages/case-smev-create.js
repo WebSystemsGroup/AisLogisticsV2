@@ -49,8 +49,11 @@ $(function () {
                     "Региональное бюро по технической инвентаризации и кадастровой оценке": "dagestan.png",
                     "Министерство юстиции Республики Дагестан": "justice.png",
                     "Министерство юстиции Российской Федерации (Минюст России)": "justice.png",
-                    "Федеральное казначейство (ФК)": "money.png",
+                    "Федеральное казначейство (ФК)": "money.png", 
+                    "Социальный Фонд России (СФР)": "SFR.jpg"
+
                 };
+
                 smevActiveDetails.icon.attr("src", "/assets/svg/oiv/" + logoDictionary[data.provider]);
                 smevActiveDetails.provider.text(data.provider);
                 smevActiveDetails.description.text(data.description);

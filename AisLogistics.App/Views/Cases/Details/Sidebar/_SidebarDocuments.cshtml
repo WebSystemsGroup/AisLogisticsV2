@@ -23,10 +23,6 @@
         border-radius: 4px; 
         padding: 4px 6px !important;
     }
-    svg{
-        vertical-align:top !important;
-    }
-     
 </style>
 
 <div class="case-app-details overflow-auto">
@@ -70,7 +66,7 @@
 
                             <div id="doc_@item.Id" class="accordion-collapse collapse">
                                 <div class="d-flex mt-3">
-                                    <div class="accordion-body d-flex flex-column pt-0">
+                                    <div class="accordion-body d-flex flex-column py-0">
                                         @if (item.Files.Any())
                                         {
                                             @foreach (var file in item.Files)

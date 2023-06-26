@@ -1281,7 +1281,7 @@
                                         <dd class="col-sm-9">${resultJson.Employee}</dd>
 
                                         <dt class="col-sm-3">Регламентная дата</dt>
-                                        <dd class="col-sm-9"><span class="fw-semibold">${moment(resultJson.DataReg).format("DD.MM.yyyy")}</span></dd>`;
+                                        <dd class="col-sm-9"><span class="b-s-16">${moment(resultJson.DataReg).format("DD.MM.yyyy")}</span></dd>`;
                                 createCaseWizardFormStep5.querySelector('dl').insertAdjacentHTML("beforeend", htmlContent);
                                 validationStepper.next();
                                 createCaseWizardFormStep1.remove();

@@ -12,30 +12,30 @@
     }
 
     ul.address-list {
-    display: none;
-    width: 100%;
-    z-index: 1000;
-    position: absolute;
-    list-style: none;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,0.175);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.175);
-    background-clip: padding-box;
-    margin-top: -0.25rem;
+        display: none;
+        width: 100%;
+        z-index: 1000;
+        position: absolute;
+        list-style: none;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0,0,0,0.15);
+        border-radius: 4px;
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+        background-clip: padding-box;
+        margin-top: -0.25rem;
     }
 
-    ul.address-list li {
-        padding: 6px;
-    }
+        ul.address-list li {
+            padding: 6px;
+        }
 
-    ul.address-list li:hover {
-        color: white;
-        background-color: #5a8dee;
-        cursor: pointer
-    }
+            ul.address-list li:hover {
+                color: white;
+                background-color: #5a8dee;
+                cursor: pointer
+            }
 </style>
 
 <form asp-controller="Cases" asp-action="ServiceCustomerSave" id="sendingForm" method="post" role="form">
@@ -45,7 +45,7 @@
         <div class="row g-3">
             <div class="col-11 mx-auto">
                 <div class="divider text-start">
-                    <div class="divider-text fs-5 fw-semibold">Документ, удостоверяющий личность</div>
+                    <div class="divider-text fs-5 b-s-16">Документ, удостоверяющий личность</div>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 <div class="row mb-3">
                     <div class="col-12">
                         <label class="form-label" asp-for="@customer.SDocumentsIdentityId">Тип документа</label>
-                        <select type="text" class="form-select" asp-for="@customer.SDocumentsIdentityId" asp-items="@SelectListViewModel.DocumentTypeListBase"></select>
+                        <select type="text" class="form-select select2" asp-for="@customer.SDocumentsIdentityId" asp-items="@SelectListViewModel.DocumentTypeListBase"></select>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -70,7 +70,7 @@
                         <label class="form-label" asp-for="@customer.DocumentIssueDate">Дата выдачи</label>
                         <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-calendar"></i></span>
-                            <input asp-for="@customer.DocumentIssueDate" type="text" class="form-control pickadate" placeholder="Дата выдачи" value="@customer.DocumentIssueDate.Value.ToShortDateString()"/>
+                            <input asp-for="@customer.DocumentIssueDate" type="text" class="form-control pickadate" placeholder="Дата выдачи" value="@customer.DocumentIssueDate.Value.ToShortDateString()" />
                         </div>
                     </div>
                     <div class="col-3" data-document-code>
@@ -90,7 +90,7 @@
         <div class="row g-3">
             <div class="col-11 mx-auto">
                 <div class="divider text-start">
-                    <div class="divider-text fs-5 fw-semibold">Персональные данные</div>
+                    <div class="divider-text fs-5 b-s-16">Персональные данные</div>
                 </div>
             </div>
         </div>
@@ -303,7 +303,7 @@
         <div class="row g-3">
             <div class="col-11 mx-auto">
                 <div class="divider text-start">
-                    <div class="divider-text fs-5 fw-semibold">Контакты</div>
+                    <div class="divider-text fs-5 b-s-16">Контакты</div>
                 </div>
             </div>
         </div>
@@ -329,27 +329,33 @@
 <script>
     $(function () {
         const customer = {
-                          documentsIdentityId: $("#customer_SDocumentsIdentityId"),
-                          documentSerial: $("#customer_DocumentSerial"),
-                          documentNumber: $("#customer_DocumentNumber"),
-                          documentIssueDate: $("#customer_DocumentIssueDate"),
-                          documentCode: $("#customer_DocumentCode"),
-                          documentIssueBody: $("#customer_DocumentIssueBody"),
-                          documentBirthPlace: $("#customer_DocumentBirthPlace"),
-                          address: $("#customer_CustomerAddress"),
-                          addressResidence: $("#customer_CustomerAddressResidence"),
-                          addressTemp: $("#customer_CustomerAddressTemp"),
-                          firstName: $("#customer_FirstName"),
-                          lastName: $("#customer_LastName"),
-                          secondName: $("#customer_SecondName"),
-                          gender: $("[name='customer.CustomerGender']"),
-                          snils: $("#customer_CustomerSnils"),
-                          inn: $("#customer_CustomerInn"),
-                          phone1: $("#customer_CustomerPhone1"),
-                          phone2: $("#customer_CustomerPhone2"),
-                          checksCustomerAddressCoincide: $('#customerAddressCoincide')
-                      }, 
+            documentsIdentityId: $("#customer_SDocumentsIdentityId"),
+            documentSerial: $("#customer_DocumentSerial"),
+            documentNumber: $("#customer_DocumentNumber"),
+            documentIssueDate: $("#customer_DocumentIssueDate"),
+            documentCode: $("#customer_DocumentCode"),
+            documentIssueBody: $("#customer_DocumentIssueBody"),
+            documentBirthPlace: $("#customer_DocumentBirthPlace"),
+            address: $("#customer_CustomerAddress"),
+            addressResidence: $("#customer_CustomerAddressResidence"),
+            addressTemp: $("#customer_CustomerAddressTemp"),
+            firstName: $("#customer_FirstName"),
+            lastName: $("#customer_LastName"),
+            secondName: $("#customer_SecondName"),
+            gender: $("[name='customer.CustomerGender']"),
+            snils: $("#customer_CustomerSnils"),
+            inn: $("#customer_CustomerInn"),
+            phone1: $("#customer_CustomerPhone1"),
+            phone2: $("#customer_CustomerPhone2"),
+            checksCustomerAddressCoincide: $('#customerAddressCoincide')
+        },
         pickadate = $("#mainModal .pickadate");
+
+        pickadate.datepicker({
+            language: "ru",
+            autoclose: true
+        })
+
         const setGender = {
             identify: (type) => {
                 if (type === "MALE")
@@ -358,9 +364,11 @@
                     $(customer.gender[1]).prop("checked", true);
             }
         };
+
         $("#mainModal .select2").select2({
             dropdownParent: $("#mainModal")
         });
+
         window.Helpers.initCustomOptionCheck();
 
         var FormValidationCustomer = FormValidation.formValidation(document.getElementById('sendingForm'),
@@ -449,9 +457,9 @@
                         $form.spinnerBtn("start");
                     },
                     complete: () => {
-                         document.location.reload();
+                        document.location.reload();
                     }
-                       
+
                 });
                 return false;
             });
@@ -502,7 +510,7 @@
                     FormValidationCustomer.disableValidator('customer.DocumentNumber');
                     FormValidationCustomer.disableValidator('customer.DocumentCode');
                     FormValidationCustomer.disableValidator('customer.DocumentIssueDate');
-                    FormValidationCustomer.disableValidator('customer.DocumentIssueBody'); 
+                    FormValidationCustomer.disableValidator('customer.DocumentIssueBody');
                     break;
             }
         });
@@ -510,12 +518,9 @@
 
         customer.documentsIdentityId.change();
 
-        
-                /*suggestions*/
-        pickadate.datepicker({
-            language: "ru",
-            autoclose: true
-        });
+
+        /*suggestions*/
+
         //customer.firstName.suggestions({
         //    token: config.dadata.token,
         //    type: config.dadata.types.NAME,

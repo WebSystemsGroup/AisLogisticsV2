@@ -18,7 +18,7 @@
 <div class="row justify-content-center g-3">
     <div class="col-12">
         <div class="divider text-start">
-            <div class="divider-text fs-5 fw-semibold">Данные заявителя</div>
+            <div class="divider-text fs-5 b-s-16">Данные заявителя</div>
         </div>
     </div>
 </div>
@@ -65,7 +65,7 @@
 <div class="row justify-content-center g-3">
     <div class="col-12">
         <div class="divider text-start">
-            <div class="divider-text fs-5 fw-semibold">Соответствие заявителя профилю программы льготного лизинга</div>
+            <div class="divider-text fs-5 b-s-16">Соответствие заявителя профилю программы льготного лизинга</div>
         </div>
     </div>
 </div>
@@ -73,19 +73,19 @@
     <div class="col-8">
         <div class="row justify-content-center">
             <div class="col-12 form-check form-switch">
-                <label class="form-check-label fs-5 fw-semibold" asp-for="@request.RegPlaceRf">Место регистрации Заявителя – РФ</label>
+                <label class="form-check-label fs-5 b-s-16" asp-for="@request.RegPlaceRf">Место регистрации Заявителя – РФ</label>
                 <input class="form-check-input" type="checkbox" asp-for="@request.RegPlaceRf" value="false">
             </div>
             <div class="col-12 form-check form-switch mt-2">
-                <label class="form-check-label fs-5 fw-semibold" asp-for="@request.RegPeriodOk">Срок регистрации – не менее 12 месяцев</label>
+                <label class="form-check-label fs-5 b-s-16" asp-for="@request.RegPeriodOk">Срок регистрации – не менее 12 месяцев</label>
                 <input class="form-check-input" type="checkbox" asp-for="@request.RegPeriodOk" value="false">
             </div>
             <div class="col-12 form-check form-switch mt-2">
-                <label class="form-check-label fs-5 fw-semibold" asp-for="@request.IncomeOk">Величина дохода за истекший календарный год не превышает 800 млн. руб</label>
+                <label class="form-check-label fs-5 b-s-16" asp-for="@request.IncomeOk">Величина дохода за истекший календарный год не превышает 800 млн. руб</label>
                 <input class="form-check-input" type="checkbox" asp-for="@request.IncomeOk" value="false">
             </div>
             <div class="col-12 form-check form-switch mt-2">
-                <label class="form-check-label fs-5 fw-semibold" asp-for="@request.AvgStaffNumOk">Среднесписочная численность сотрудников на момент подачи заявления не превышает 100 человек</label>
+                <label class="form-check-label fs-5 b-s-16" asp-for="@request.AvgStaffNumOk">Среднесписочная численность сотрудников на момент подачи заявления не превышает 100 человек</label>
                 <input class="form-check-input" type="checkbox" asp-for="@request.AvgStaffNumOk" value="false">
             </div>
             <hr />
@@ -103,7 +103,7 @@
                     </select>
                 </div>
                 <div class="col-12 form-check form-switch mt-2">
-                    <label class="form-check-label fs-5 fw-semibold" for="request_IsRussiaProduct">Страна производства предмета лизинга Российская Федерация</label>
+                    <label class="form-check-label fs-5 b-s-16" for="request_IsRussiaProduct">Страна производства предмета лизинга Российская Федерация</label>
                     <input class="form-check-input" type="checkbox" id="request_IsRussiaProduct" name="request.IsRussiaProduct">
                 </div>
             </div>
@@ -115,7 +115,7 @@
 <div class="row justify-content-center g-3" data-disabled id="Application2">
     <div class="col-12">
         <div class="divider text-start">
-            <div class="divider-text fs-5 fw-semibold">Контактное лицо</div>
+            <div class="divider-text fs-5 b-s-16">Контактное лицо</div>
         </div>
     </div>
 
@@ -150,7 +150,7 @@
 
     <div class="col-12">
         <div class="divider text-start">
-            <div class="divider-text fs-5 fw-semibold">Выручка</div>
+            <div class="divider-text fs-5 b-s-16">Выручка</div>
         </div>
     </div>
     <div class="col-8">
@@ -172,7 +172,7 @@
                 <input type="text" class="form-control" asp-for="@request.CurrentYearEarnings" />
             </div>
             <div class="col-12 form-check form-switch mt-3">
-                <label class="form-check-label fs-5 fw-semibold" for="request.HaveExcisableGoods">Имеются ли за 3 истекших календарных года и в течение текущего календарного года в структуре выручки (по основному виду деятельности и/или прочих доходов) доходы, связанные с производством и (или) реализацией подакцизных товаров, а также добычей и (или) реализацией полезных ископаемых, за исключением общераспространенных полезных ископаемых (в соответствии с региональным перечнем видов полезных ископаемых, относимых к общераспространенным)</label>
+                <label class="form-check-label fs-5 b-s-16" for="request.HaveExcisableGoods">Имеются ли за 3 истекших календарных года и в течение текущего календарного года в структуре выручки (по основному виду деятельности и/или прочих доходов) доходы, связанные с производством и (или) реализацией подакцизных товаров, а также добычей и (или) реализацией полезных ископаемых, за исключением общераспространенных полезных ископаемых (в соответствии с региональным перечнем видов полезных ископаемых, относимых к общераспространенным)</label>
                 <input class="form-check-input" type="checkbox" name="request.HaveExcisableGoods" id="request_HaveExcisableGoods">
             </div>
         </div>
@@ -180,7 +180,7 @@
 
     <div class="col-12">
         <div class="divider text-start">
-            <div class="divider-text fs-5 fw-semibold">Лизинг</div>
+            <div class="divider-text fs-5 b-s-16">Лизинг</div>
         </div>
     </div>
     <div class="col-8">
@@ -240,7 +240,7 @@
 <div class="row justify-content-center g-3">
     <div class="col-12 mx-auto">
         <div class="divider text-start">
-            <div class="divider-text fs-5 fw-semibold">Способ предоставления информации</div>
+            <div class="divider-text fs-5 b-s-16">Способ предоставления информации</div>
         </div>
     </div>
 </div>
@@ -262,7 +262,7 @@
 <div class="row justify-content-center g-3">
     <div class="col-12 mx-auto">
         <div class="divider text-start">
-            <div class="divider-text fs-5 fw-semibold">Способ информирования о готовности результата услуги</div>
+            <div class="divider-text fs-5 b-s-16">Способ информирования о готовности результата услуги</div>
         </div>
     </div>
 </div>

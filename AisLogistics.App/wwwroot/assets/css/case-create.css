@@ -82,7 +82,7 @@ sup {
     color: rgba(23, 35, 89, 0.31) !important; 
 }
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'golos-medium' !important;
+    font-family: 'golos-bold' !important;
 }
 .odd,.even{
     cursor:pointer;

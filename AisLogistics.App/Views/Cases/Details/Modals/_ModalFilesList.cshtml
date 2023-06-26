@@ -14,7 +14,7 @@
                         <td>
                             <a asp-action="DownloadFile" asp-controller="Cases" asp-route-id="@item.Id" asp-route-serviceId="@item.ServiceId" target="_blank" class="d-flex pb-2 pt-2">
                                 <i class="bi bi-filetype-@item.Expansion.Substring(1) me-4"></i>
-                                <p class="m-0">@(item.Name)@item.Expansion</p>
+                                <p class="my-auto">@(item.Name)@item.Expansion</p>
                             </a>
                         </td>
                     </tr>
@@ -31,37 +31,37 @@ else
 }
 
 <script>
-    //$(function () {
-    //    $(".select2").select2({
-    //        dropdownParent: $("#mainModal")
-    //    });
-    //    window.Helpers.initCustomOptionCheck();
-    //    FormValidation.formValidation(document.getElementById('sendingForm'),
-    //        {
-    //            plugins: {
-    //                trigger: new FormValidation.plugins.Trigger(),
-    //                submitButton: new FormValidation.plugins.SubmitButton(),
-    //                bootstrap5: new FormValidation.plugins.Bootstrap5(),
-    //                autoFocus: new FormValidation.plugins.AutoFocus()
-    //            }
-    //        }).on('core.form.valid', function () {
-    //            var $form = $("#sendingForm");
-    //            $.ajax({
-    //                type: $form.attr('method'),
-    //                url: $form.attr('action'),
-    //                data: $form.serialize(),
-    //                dataType: 'json',
-    //                beforeSend: () => {
-    //                    $form.spinnerBtn("start");
-    //                },
-    //                complete: () => {
-    //                    document.location.reload();
-    //                    //$table.DataTable().ajax.reload(null, false);
-    //                    //$form.spinnerBtn("stop");
-    //                    //$("#mainModal").modal('hide');
-    //                }
-    //            });
-    //            return false;
-    //        });
-    //})
+    $(function () {
+        $(".select2").select2({
+            dropdownParent: $("#mainModal")
+        });
+        window.Helpers.initCustomOptionCheck();
+        FormValidation.formValidation(document.getElementById('sendingForm'),
+            {
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    submitButton: new FormValidation.plugins.SubmitButton(),
+                    bootstrap5: new FormValidation.plugins.Bootstrap5(),
+                    autoFocus: new FormValidation.plugins.AutoFocus()
+                }
+            }).on('core.form.valid', function () {
+                var $form = $("#sendingForm");
+                $.ajax({
+                    type: $form.attr('method'),
+                    url: $form.attr('action'),
+                    data: $form.serialize(),
+                    dataType: 'json',
+                    beforeSend: () => {
+                        $form.spinnerBtn("start");
+                    },
+                    complete: () => {
+                        document.location.reload();
+                        //$table.DataTable().ajax.reload(null, false);
+                        //$form.spinnerBtn("stop");
+                        //$("#mainModal").modal('hide');
+                    }
+                });
+                return false;
+            });
+    })
 </script>
