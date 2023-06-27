@@ -96,50 +96,48 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="" data-bs-toggle="collapse" data-bs-target="#notesAccordion" aria-expanded="false">
+                    <a href="javascript:void(0)" class="nav-link" data-bs-toggle="dropdown" aria-expanded="false" aria-labelledby="DropdownNotes">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none" class="me-2">
                             <path d="M2 18.4937C1.45 18.4937 0.979 18.2945 0.587 17.8963C0.195667 17.4974 0 17.0181 0 16.4584V2.21153C0 1.65184 0.195667 1.17253 0.587 0.77362C0.979 0.375386 1.45 0.17627 2 0.17627H16C16.55 0.17627 17.021 0.375386 17.413 0.77362C17.8043 1.17253 18 1.65184 18 2.21153V9.02967C17.6833 8.87702 17.3583 8.74541 17.025 8.63483C16.6917 8.52492 16.35 8.44453 16 8.39365V2.21153H2V16.4584H8.05C8.1 16.8315 8.17933 17.1877 8.288 17.5269C8.396 17.8661 8.525 18.1884 8.675 18.4937H2ZM2 15.4408V16.4584V2.21153V8.39365V8.31733V15.4408ZM4 14.4231H8.075C8.125 14.0669 8.204 13.7193 8.312 13.38C8.42067 13.0408 8.54167 12.7101 8.675 12.3879H4V14.4231ZM4 10.3526H10.1C10.6333 9.84378 11.229 9.41976 11.887 9.08055C12.5457 8.74134 13.25 8.51237 14 8.39365V8.31733H4V10.3526ZM4 6.28206H14V4.2468H4V6.28206ZM15 20.5289C13.6167 20.5289 12.4377 20.033 11.463 19.0411C10.4877 18.0486 10 16.8485 10 15.4408C10 14.033 10.4877 12.8329 11.463 11.8404C12.4377 10.8485 13.6167 10.3526 15 10.3526C16.3833 10.3526 17.5627 10.8485 18.538 11.8404C19.5127 12.8329 20 14.033 20 15.4408C20 16.8485 19.5127 18.0486 18.538 19.0411C17.5627 20.033 16.3833 20.5289 15 20.5289ZM14.5 18.4937H15.5V15.9496H18V14.9319H15.5V12.3879H14.5V14.9319H12V15.9496H14.5V18.4937Z" fill="#BEBEBE" />
                         </svg>
-                        Заметки @*<sup>@Model.Notes.Count</sup>*@
+                        Заметки
                     </a>
-                </li>
-                <div id="notesAccordion" class="accordion-collapse collapse">
-                    <div class="modal-service-header">
-                        <h6 class="d-flex justify-content-between align-items-center px-2 font-weight-light text-black-50 mb-0">
-                            <span class="vertical-middle">Напоминания</span>
-                            <a asp-action="ServiceNotesChangeModal" asp-controller="Cases" asp-route-actionType="0" asp-route-caseid="@Model.CaseId" data-btn-type="modal" data-bs-toggle="tooltip" class="btn btn-primary btn-icon btn-sm waves-effect waves-light">
-                                <i class="bx bx-plus"></i>
-                            </a>
-                        </h6>
-                        <hr class="my-2" />
-                        <ul id="casesNotesList" class="list-group list-group-flush list-notes">
-                            @foreach (var item in Model.Notes)
-                            {
-                                <li class="list-group-item px-2">
-                                    <div class="row">
-                                        <div class="col-8 d-flex flex-column justify-content-center">
-                                            <strong>@(item.DateReminder.HasValue ? item.DateReminder.Value.ToShortDateString() : string.Empty)</strong>
-                                            <span>@item.NotesText</span>
+                    <div id="notesAccordion" aria-labelledby="DropdownNotes" class="dropdown-menu">
+                        <div class="modal-service-header">
+                            <div class="d-flex justify-content-between align-items-center px-2 font-weight-light text-black-50 mb-0">
+                                <span class="vertical-middle r-s-14">Напоминания</span>
+                                <a asp-action="ServiceNotesChangeModal" asp-controller="Cases" asp-route-actionType="0" asp-route-caseid="@Model.CaseId" data-btn-type="modal" data-bs-toggle="tooltip" class="btn btn-primary btn-icon btn-sm waves-effect waves-light">
+                                    <i class="bi bi-plus"></i>
+                                </a>
+                            </div>
+                            <hr class="my-2" />
+                            <ul id="casesNotesList" class="list-group list-group-flush list-notes">
+                                @foreach (var item in Model.Notes)
+                                {
+                                    <li class="list-group-item px-2">
+                                        <div class="row">
+                                            <div class="col-8 d-flex flex-column justify-content-center">
+                                                <span class="b-s-12">@(item.DateReminder.HasValue ? item.DateReminder.Value.ToShortDateString() : string.Empty)</span>
+                                                <span class="r-s-14">@item.NotesText</span>
+                                            </div>
+                                            <div class="col-4 px-1 d-flex justify-content-end">
+                                                <a asp-action="ServiceNotesChangeModal" asp-controller="Cases" asp-route-actionType="1" asp-route-id="@item.Id" class="btn btn-icon" data-btn-type="modal" data-bs-toggle="tooltip"><i class='bx bx-edit-alt'></i></a>
+                                                <a href="javascript:void(0);" class="btn btn-icon text-danger" data-btn-type="remove" data-action-remove="/Cases/ServiceNotesDelete" data-btn-params={"id":"@item.Id"}><i class="bx bx-trash"></i></a>
+                                            </div>
                                         </div>
-                                        <div class="col-4 px-1 d-flex justify-content-end">
-                                            <a asp-action="ServiceNotesChangeModal" asp-controller="Cases" asp-route-actionType="1" asp-route-id="@item.Id" class="btn btn-icon" data-btn-type="modal" data-bs-toggle="tooltip"><i class='bx bx-edit-alt'></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-icon text-danger" data-btn-type="remove" data-action-remove="/Cases/ServiceNotesDelete" data-btn-params={"id":"@item.Id"}><i class="bx bx-trash"></i></a>
-                                        </div>
-                                    </div>
-                                </li>
-                            }
-                        </ul>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                </li>
             </ul>
         </div>
     </div>
 
     <div class="col-auto me-3 d-flex align-items-center">
-        <button class="btn btn-outline-primary px-4 print-icon" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none" class="me-2 mt-1">
-                <path d="M3.5445 2.27426V3.18836H2.83333C2.08189 3.18836 1.36122 3.50029 0.829864 4.05552C0.298511 4.61075 0 5.3638 0 6.14902V11.3302C0 11.9191 0.223883 12.4839 0.622398 12.9003C1.02091 13.3167 1.56141 13.5506 2.125 13.5506H3.54167V14.2908C3.54167 14.8797 3.76555 15.4445 4.16406 15.8609C4.56258 16.2774 5.10308 16.5113 5.66667 16.5113H11.3333C11.8969 16.5113 12.4374 16.2774 12.8359 15.8609C13.2345 15.4445 13.4583 14.8797 13.4583 14.2908V13.5506H14.875C15.4386 13.5506 15.9791 13.3167 16.3776 12.9003C16.7761 12.4839 17 11.9191 17 11.3302V6.14902C17 5.3638 16.7015 4.61075 16.1701 4.05552C15.6388 3.50029 14.9181 3.18836 14.1667 3.18836H13.4583V2.26464C13.4583 1.99709 13.4079 1.73217 13.3098 1.48502C13.2117 1.23788 13.068 1.01336 12.8868 0.824311C12.7056 0.635263 12.4905 0.485395 12.2539 0.383278C12.0172 0.281161 11.7636 0.2288 11.5076 0.229189L5.48958 0.238811C4.97345 0.239596 4.47872 0.45439 4.11403 0.836026C3.74934 1.21766 3.5445 1.73494 3.5445 2.27426ZM12.3958 2.26464V3.18836H4.607V2.27426C4.607 1.76355 5.00225 1.3498 5.491 1.34906L11.509 1.33943C11.6254 1.33924 11.7407 1.36303 11.8483 1.40944C11.9559 1.45584 12.0536 1.52396 12.136 1.6099C12.2184 1.69583 12.2837 1.79789 12.3283 1.91024C12.3729 2.02258 12.3958 2.14301 12.3958 2.26464ZM5.66667 9.47975H11.3333C11.6151 9.47975 11.8854 9.59672 12.0846 9.80493C12.2839 10.0131 12.3958 10.2955 12.3958 10.59V14.2908C12.3958 14.5853 12.2839 14.8677 12.0846 15.0759C11.8854 15.2841 11.6151 15.4011 11.3333 15.4011H5.66667C5.38487 15.4011 5.11462 15.2841 4.91537 15.0759C4.71611 14.8677 4.60417 14.5853 4.60417 14.2908V10.59C4.60417 10.2955 4.71611 10.0131 4.91537 9.80493C5.11462 9.59672 5.38487 9.47975 5.66667 9.47975Z" fill="#077EFA" />
-            </svg>
+        <button class="btn btn-outline-primary px-4 r-s-14" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-printer me-1"></i>
             Печать
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 40px);" data-popper-placement="bottom-start">
@@ -151,7 +149,7 @@
             <a asp-action="DownloadConsultationService" asp-controller="Cases" asp-route-id="@Model.CaseId" class="dropdown-item m-s-14" target="_blank" data-bs-toggle="tooltip">Скачать Консультация</a>
             <a asp-action="DownloadProcessingPersonalData" asp-controller="Cases" asp-route-id="@Model.CaseId" class="dropdown-item m-s-14" target="_blank" data-bs-toggle="tooltip">Скачать Согласие на ОПД </a>
         </div>
-    </div> 
+    </div>
 </div>
 
 

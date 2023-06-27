@@ -21,15 +21,12 @@
             font-size: 18px;
     }
 
-     .smevAddRequest p {
+     .smevAddRequest * {
             font-family: golos-medium;
             font-size: 14px;
-            color: #172359;
-     }
-
-     .smevAddRequest:hover p, .smevAddRequest:hover span {
             color: #fff !important;
      }
+      
 
     #accordionWithIcon .status-smev {
         color: #fff !important;
@@ -60,7 +57,7 @@
 <div class="case-app-details overflow-auto">
     <div class="case-scroll-area ps">
         <div class="mail-message-wrapper active" id="SMEV">
-            <a asp-action="ServiceSmevCreate" asp-route-id="@ViewBag.Id" data-bs-toggle="tooltip" title="Добавить" data-btn-type="modal" class="col-12 btn btn-outline-primary smevAddRequest d-flex justify-content-center align-items-center mt-3 justify-content-center">
+            <a asp-action="ServiceSmevCreate" asp-route-id="@ViewBag.Id" data-bs-toggle="tooltip" title="Добавить" data-btn-type="modal" class="col-12 btn btn-primary smevAddRequest d-flex justify-content-center align-items-center mt-3 justify-content-center">
                 <p class="m-0 text-center"><span class="me-2">+</span>Добавить запрос</p>
             </a>
             <div class="accordion" id="accordionWithIcon">

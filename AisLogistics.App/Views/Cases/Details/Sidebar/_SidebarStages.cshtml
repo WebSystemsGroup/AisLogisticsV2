@@ -17,6 +17,7 @@
         padding-bottom:0.5rem !important;
     }
 
+    
     .text-success {
         color: #1CB92B !important;
     }
@@ -24,17 +25,13 @@
 </style>
 @if (items.Any())
 {
-   @* <div class="d-flex  justify-content-between r-s-12">
-        <div class="col">Этап</div>
-        <div class="col">Cотрудник</div>
-        <div class="col">Дата</div>
-    </div>*@
+   
     <table class="table">
         <thead class="head-stage">
             <tr>
-                <td>Этап</td>
-                <td>Сотрудник</td>
-                <td>Дата</td>
+                <td class="m-s-12">Этап</td>
+                <td class="m-s-12">Сотрудник</td>
+                <td class="m-s-12">Дата</td>
             </tr>
         </thead>
         <tbody>
@@ -101,53 +98,10 @@
             }
         </tbody> 
     </table>
-    }
-
-@*
-    @foreach (var item in items)
-    {
-        <div class="row r-s-12">
-            <div class="col-auto">
-                <div class="d-flex flex-column">
-                    <div class="text-success">@item.Name</div>
-                    <div class="r-l-12"><days count="item.Days ?? 0" data-bs-toggle="tooltip" title="Дней на этапе"></days></div>
-                </div>
-            </div>
-            <div class="col-auto">
-                <div class="d-flex flex-column">
-                    <div class="r-s-12">@item.EmployeeCurrent.Name</div>
-                    <div class="r-l-12">@item.EmployeeCurrent.Job</div>
-                </div>
-            </div>
-            <div class="col-auto">
-                <div class="d-flex flex-column">
-                    <div class="r-s-12" data-bs-toggle="tooltip" title="Дата начала этапа">@item.DateAdd.ToShortDateString()</div>
-                    @if (item.DateFact.HasValue)
-                    {
-                        <div class="r-s-12" data-bs-toggle="tooltip" title="Фактическая дата окончания этапа">
-                            @(
-                                item.DateFact?.ToShortDateString() ?? "-"
-                                )
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="r-s-12" data-bs-toggle="tooltip" title="Регламентная дата окончания этапа">
-                            @(
-                                item.DateReg?.ToShortDateString() ?? "-"
-                                )
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-    }
-
 }
 else
 {
-    <div class="alert alert-primary" role="alert">
-        <h6 class="alert-heading mb-1">Нет данных</h6>
-        <span>Этапы отсутствуют</span>
-    </div>
-}*@
+    <div class="r-l-12 text-center mt-2">Этапы отсутствуют</div>
+}
+
+ 

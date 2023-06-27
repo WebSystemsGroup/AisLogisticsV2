@@ -1,10 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="ru"
-      class="light-style"
       dir="ltr"
-      data-theme="theme-default"
-      data-assets-path="/assets/"
-      data-template="horizontal-menu-template">
+      data-assets-path="/assets/">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-16">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,20 +13,14 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        @*<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" asp-append-version="true" />*@
-
+      
         <!-- Icons -->
         <link rel="stylesheet" href="~/assets/vendor/fonts/boxicons.css" />
         <link rel="stylesheet" href="~/assets/vendor/fonts/fontawesome.css" />
         <link rel="stylesheet" href="~/assets/vendor/fonts/flag-icons.css" />
+        <link rel="stylesheet" href="~/assets/css/demo.css" />
 
-        <!-- Core CSS -->
-      @*<link rel="stylesheet" href="~/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-      
-        <link rel="stylesheet" href="~/assets/css/demo.css" />*@
-
-        <!-- Vendors CSS -->
-        <link rel="stylesheet" href="~/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+        <!-- Vendors CSS --> 
         <link rel="stylesheet" href="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
         <link rel="stylesheet" href="~/assets/vendor/libs/typeahead-js/typeahead.css" />
         <link rel="stylesheet" href="~/assets/vendor/libs/spinkit/spinkit.css">
@@ -47,8 +38,6 @@
         <link rel="stylesheet" type="text/css" href="~/assets/vendor/libs/magnific-popup.js/magnific-popup.min.css">
         <link rel="stylesheet" type="text/css" href="~/assets/vendor/libs/lightgallery/css/lightgallery.min.css">
 
-
-
         @await Component.InvokeAsync("NToastNotify")
 
         <!-- BEGIN: Custom CSS-->
@@ -61,16 +50,9 @@
         <!-- New CSS -->
         <link rel="stylesheet" href="~/css/main.css" type="text/css" asp-append-version="true">
         <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true">
-        @*<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" type="text/css" asp-append-version="true" />*@
         <link rel="stylesheet" href="~/assets/vendor/bi/bootstrap-icons.css" />
-        @*<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" asp-append-version="true" />*@
-
         <!-- Helpers -->
         <script src="~/assets/vendor/js/helpers.js"></script>
-    @*    <script src="~/assets/vendor/js/template-customizer.js"></script>*@
-
-        <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-        <script src="~/assets/js/config.js"></script>
     </head>
 
     <body>

@@ -611,12 +611,10 @@
 	  <None Include="wwwroot\assets\vendor\fonts\fontawesome\fa-solid-900.svg" />
 	  <None Include="wwwroot\assets\vendor\fonts\fontawesome\fa-solid-900.woff2" />
 	  <None Include="wwwroot\assets\vendor\js\bootstrap.js" />
-	  <None Include="wwwroot\assets\vendor\js\core.js" />
 	  <None Include="wwwroot\assets\vendor\js\dropdown-hover.js" />
 	  <None Include="wwwroot\assets\vendor\js\helpers.js" />
 	  <None Include="wwwroot\assets\vendor\js\mega-dropdown.js" />
 	  <None Include="wwwroot\assets\vendor\js\menu.js" />
-	  <None Include="wwwroot\assets\vendor\js\template-customizer.js" />
 	  <None Include="wwwroot\assets\vendor\libs\animate-on-scroll\animate-on-scroll.js" />
 	  <None Include="wwwroot\assets\vendor\libs\apex-charts\apexcharts.js" />
 	  <None Include="wwwroot\assets\vendor\libs\autosize\autosize.js" />

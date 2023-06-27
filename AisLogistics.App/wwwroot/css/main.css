@@ -25,12 +25,11 @@
     font-family: golos-regular;
 }
 
-
 html {
     height: 100%;
     background: #F9F9F9 !important;
 }
-
+ 
 body {
     overflow-x: hidden !important;
     min-height: 100%;
@@ -203,13 +202,15 @@ label {
         background-color: #fff;
     }
 
-    .dropdown-notifications-list ul.list-group::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background-color: #077EFA;
-    }
 
-.dropdown-notifications-list .list-group-item h6 {
-    font-family: golos-regular;
+.scroller::-webkit-scrollbar {
+    width: 3px;
+    background-color: #fff;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: #077EFA;
 }
 
 .dropzone {
@@ -591,6 +592,68 @@ footer p, footer a {
         box-shadow: none;
     }
 
+:root {
+    color-scheme: dark !important;
+}
+
+.divider {
+    display: block;
+    text-align: center;
+    margin: 1rem 0;
+    overflow: hidden;
+    white-space: nowrap
+}
+
+    .divider .divider-text {
+        position: relative;
+        display: inline-block;
+        font-size: .8rem;
+        padding: 0rem 1rem
+    }
+
+        .divider .divider-text i {
+            font-size: 1rem
+        }
+
+        .divider .divider-text:before, .divider .divider-text:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 100vw;
+            border-top: 1px solid #c4cee1
+        }
+
+        .divider .divider-text:before {
+            right: 100%
+        }
+
+        .divider .divider-text:after {
+            left: 100%
+        }
+
+.custom-option {
+    padding-left: 0;
+    border: 1px solid #d4d8dd;
+    border-radius: 0.25rem;
+}
+
+.h-100 {
+    height: 100% !important;
+}
+
+.custom-option-basic .custom-option-content {
+    padding: 1em;
+    padding-left: 2.7em;
+}
+
+.custom-option .custom-option-content {
+    cursor: pointer;
+    width: 100%;
+}
+
+label {
+    display: inline-block;
+}
 
 .directory_search .directory_sortby {
     width: 100%;
@@ -778,7 +841,7 @@ footer p, footer a {
 .case-user-list_card {
     background: #EBF4FD;
     border-radius: 7px;
-    padding: 15px 20px; 
+    padding: 15px 20px;
 }
 
 .case-app-body p {
@@ -963,7 +1026,7 @@ footer p, footer a {
     padding: 35px;
     width: 100%;
 }
- 
+
 #modalNotesAdd .modal-content {
     max-width: 550px;
     margin: auto;
@@ -1010,6 +1073,10 @@ footer p, footer a {
     font-size: 14px;
 }
 
+.btn-outline-primary:hover {
+    color: #fff !important;
+}
+
 .note-item {
     background: #F5F5F5;
     margin-bottom: 15px;
@@ -1030,7 +1097,7 @@ footer p, footer a {
 }
 
 .case-app-header #notesAccordion {
-    max-width: 735px;
+    max-width: 700px;
 }
 
 .case-app-header #notificAccordion {
@@ -1568,6 +1635,12 @@ input::placeholder, select::placeholder {
     color: rgba(23, 35, 89, 1) !important;
 }
 
+r-s-18 {
+    font-family: 'golos-regular' !important;
+    font-size: 18px !important;
+    color: rgba(23, 35, 89, 1) !important;
+}
+
 .r-s-16, .r-l-16,
 .m-s-16, .m-l-16,
 .b-s-16, .b-l-16 {
@@ -1629,10 +1702,10 @@ input::placeholder, select::placeholder {
     color: #077EFA !important;
 }
 
-.fv-plugins-message-container{
-    font-family:golos-medium !important;
-    margin:0 !important;
-    font-size:12px !important;
+.fv-plugins-message-container {
+    font-family: golos-medium !important;
+    margin: 0 !important;
+    font-size: 12px !important;
 }
 
 .modal-footer .btn-label-secondary {
@@ -1686,23 +1759,23 @@ input::placeholder, select::placeholder {
 
 .custom-option-basic .custom-option-content {
     padding: 1em;
-   /* padding-left: 2.7em*/
+    /* padding-left: 2.7em*/
 }
 
     .custom-option-basic .custom-option-content .form-check-input {
         margin-top: 0
     }
 
-.custom-option-basic .custom-option-content.content-sm {
-    padding: 0.65em;
-    /* padding-left: 2.7em; */
-}
+    .custom-option-basic .custom-option-content.content-sm {
+        padding: 0.65em;
+        /* padding-left: 2.7em; */
+    }
 
 .custom-option-basic .custom-option-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: .25rem; 
+    padding-bottom: .25rem;
 }
 
 .custom-option-icon .custom-option-content {

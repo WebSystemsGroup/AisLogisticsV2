@@ -12,7 +12,7 @@
                     case DocumentFileAddType.Desktop:
                         <div>
                             <form enctype="multipart/form-data" data-toggle="dropzone" class="dropzone needsclick" id="sendingForm" method="post" role="form">
-                                <div class="dz-message needsclick">
+                            <div class="dz-message needsclick r-s-18 text-center">
                                     Перетащите файлы сюда или нажмите, чтобы загрузить
                                 </div>
                                 <div class="fallback">
@@ -24,11 +24,19 @@
                     case DocumentFileAddType.Scan:
                         <div>
                             <form asp-action="ServiceDocumentsSave" asp-controller="Cases" asp-route-documentId="@Model.DocumentId" enctype="multipart/form-data" data-toggle="scan" class="dropzone dz-clickable" style="cursor: auto;" id="sendingForm" method="post" role="form">
-                                <div id="scan-content" class="row">
+                                <div id="scan-content" class="row justify-content-center">
                                     <div class="col-sm-6 col-xl-4">
-                                        <a href="#" id="startScan" class="align-middle d-block d-table-cell gal-box h-px-350 text-center w-px-250">
-                                            <i class="bx bx-lg bx-scan"></i>
-                                            <p>Начать сканирование</p>
+                                        <a href="#" id="startScan" class="align-middle d-block d-table-cell h-px-350 text-center w-px-250">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 54 54" fill="none">
+                                            <path d="M54 39V54H0V39H6V48H48V39H54ZM0 24H54V30H0V24ZM54 15H48V6H6V15H0V0H54V15Z" fill="url(#paint0_linear_257_3900)" />
+                                            <defs>
+                                                <linearGradient id="paint0_linear_257_3900" x1="5.1" y1="8.4" x2="66" y2="62.4" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#077EFA" />
+                                                    <stop offset="1" stop-color="#077EFA" stop-opacity="0" />
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <p class="r-s-18 text-center mt-3">Начать сканирование</p>
                                         </a>
                                     </div>
                                 </div>

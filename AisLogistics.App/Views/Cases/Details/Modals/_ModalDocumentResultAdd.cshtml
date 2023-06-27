@@ -3,100 +3,108 @@
 }
 <div>
     <input type="hidden" name="serviceId" form="sendingForm" value="@ViewBag.Id" />
-     <input type="hidden" name="fileAddType" form="sendingForm" value="@Model.FileAddType" />
+    <input type="hidden" name="fileAddType" form="sendingForm" value="@Model.FileAddType" />
     <fieldset>
-             @switch (Model.FileAddType)
-                {
-                    case DocumentFileAddType.Desktop:
-                        <div>
-                            <form enctype="multipart/form-data" data-toggle="dropzone" class="dropzone needsclick" id="sendingForm" method="post" role="form">
-                                <div class="dz-message needsclick">
-                                    Перетащите файлы сюда или нажмите, чтобы загрузить
-                                </div>
-                                <div class="fallback">
-                                    <input name="file" type="file" />
-                                </div>
-                            </form>
+        @switch (Model.FileAddType)
+        {
+            case DocumentFileAddType.Desktop:
+                <div>
+                    <form enctype="multipart/form-data" data-toggle="dropzone" class="dropzone needsclick" id="sendingForm" method="post" role="form">
+                        <div class="dz-message needsclick r-s-18 text-center">
+                            Перетащите файлы сюда или нажмите, чтобы загрузить
                         </div>
-                        break;
-                    case DocumentFileAddType.Scan:
-                        <div>
-                            <form asp-action="ServiceDocumentResultSave" asp-controller="Cases" asp-route-documentId="@Model.DocumentId" enctype="multipart/form-data" data-toggle="scan" class="dropzone dz-clickable" style="cursor: auto;" id="sendingForm" method="post" role="form">
-                                <div id="scan-content" class="row">
-                                    <div class="col-sm-6 col-xl-4">
-                                        <a href="#" id="startScan" class="align-middle d-block d-table-cell gal-box h-px-350 text-center w-px-250">
-                                            <i class="bx bx-lg bx-scan"></i>
-                                            <p>Начать сканирование</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="fallback">
+                            <input name="file" type="file" />
                         </div>
-                        break;
-                    case DocumentFileAddType.Archive:
-                        break;
-                    default:
-                        <div class="col-12">
-                            <div class="alert alert-danger" role="alert">
-                                <h6 class="alert-heading mb-1">Что-то пошло не так!</h6>
-                                <span> </span>
+                    </form>
+                </div>
+                break;
+            case DocumentFileAddType.Scan:
+                <div>
+                    <form asp-action="ServiceDocumentResultSave" asp-controller="Cases" asp-route-documentId="@Model.DocumentId" enctype="multipart/form-data" data-toggle="scan" class="dropzone dz-clickable" style="cursor: auto;" id="sendingForm" method="post" role="form">
+                        <div id="scan-content" class="row justify-content-center">
+                            <div class="col-sm-6 col-xl-4">
+                                <a href="#" id="startScan" class="align-middle d-block d-table-cell gal-box h-px-350 text-center w-px-250">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 54 54" fill="none">
+                                        <path d="M54 39V54H0V39H6V48H48V39H54ZM0 24H54V30H0V24ZM54 15H48V6H6V15H0V0H54V15Z" fill="url(#paint0_linear_257_3900)" />
+                                        <defs>
+                                            <linearGradient id="paint0_linear_257_3900" x1="5.1" y1="8.4" x2="66" y2="62.4" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#077EFA" />
+                                                <stop offset="1" stop-color="#077EFA" stop-opacity="0" />
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                    <p class="r-s-18 text-center mt-3">Начать сканирование</p>
+                                </a>
                             </div>
                         </div>
-                        break;
-                }
+                    </form>
+                </div>
+                break;
+            case DocumentFileAddType.Archive:
+                break;
+            default:
+                <div class="col-12">
+                    <div class="alert alert-danger" role="alert">
+                        <h6 class="alert-heading mb-1">Что-то пошло не так!</h6>
+                        <span> </span>
+                    </div>
+                </div>
+                break;
+        }
     </fieldset>
 </div>
 
 <script>
-    $(function() {
+    $(function () {
 
-           const dropzoneForm = $('form[data-toggle="dropzone"]');
-           const scanForm = $('form[data-toggle="scan"]');
+        const dropzoneForm = $('form[data-toggle="dropzone"]');
+        const scanForm = $('form[data-toggle="scan"]');
 
-            if (dropzoneForm.length) {
-                const previewTemplate = `<div class="dz-preview dz-file-preview"><div class="dz-details"><div class="dz-thumbnail"><img data-dz-thumbnail><span class="dz-nopreview">Просмотр недоступен</span><div class="dz-success-mark"></div><div class="dz-error-mark"></div><div class="dz-error-message"><span data-dz-errormessage></span></div><div class="progress"><div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div></div></div><div class="dz-filename" data-dz-name></div><div class="dz-size" data-dz-size></div></div></div>`;
-                $("#mainModal #documentId").select2({ dropdownParent: $("#mainModal") });
-                const dropzoneMulti = new Dropzone('#sendingForm', {
-                    url: "/Cases/ServiceDocumentResultSave",
-                    init: function() {
-                        this.on("sending", function(file, xhr, formData) {
-                            formData.append("documentId", '@Model.DocumentId');
-                        });
-                    },
-                    previewTemplate: previewTemplate,
-                    parallelUploads: 1,
-                    maxFilesize: 15,
-                    addRemoveLinks: true,
-                    dictRemoveFile: "Удалить",
-                    dictCancelUpload: "Отменить",
-                    removedfile: function(file) {
-                        $.ajax({
-                            url: "/Cases/ServiceDocumentResultRemove",
-                            type: 'Post',
-                            data: { id: file.upload.uuid },
-                            //success: (content) => file.previewElement.remove(),
-                            complete: () => sidebar.results.reload()
-                        });
-                        var _ref;
-                        return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-                    },
-                    success: function(file, response) {
-                        $("#mainModal #documentId").prop('disabled', true);
-                        if (response.responseStatus.isSuccess) {
-                            file.upload.uuid = response.id;
-                            sidebar.results.reload()
-                            return file.previewElement.classList.add("dz-success");
-                        } else {
-                            return $(file.previewElement).addClass("dz-error").find('.dz-error-message').text(response.responseStatus.message);
-                        }
-                    },
-                    error: function(file, message) {
-                        return $(file.previewElement).addClass("dz-error").find('.dz-error-message').text(message.Message);
+        if (dropzoneForm.length) {
+            const previewTemplate = `<div class="dz-preview dz-file-preview"><div class="dz-details"><div class="dz-thumbnail"><img data-dz-thumbnail><span class="dz-nopreview">Просмотр недоступен</span><div class="dz-success-mark"></div><div class="dz-error-mark"></div><div class="dz-error-message"><span data-dz-errormessage></span></div><div class="progress"><div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div></div></div><div class="dz-filename" data-dz-name></div><div class="dz-size" data-dz-size></div></div></div>`;
+            $("#mainModal #documentId").select2({ dropdownParent: $("#mainModal") });
+            const dropzoneMulti = new Dropzone('#sendingForm', {
+                url: "/Cases/ServiceDocumentResultSave",
+                init: function () {
+                    this.on("sending", function (file, xhr, formData) {
+                        formData.append("documentId", '@Model.DocumentId');
+                    });
+                },
+                previewTemplate: previewTemplate,
+                parallelUploads: 1,
+                maxFilesize: 15,
+                addRemoveLinks: true,
+                dictRemoveFile: "Удалить",
+                dictCancelUpload: "Отменить",
+                removedfile: function (file) {
+                    $.ajax({
+                        url: "/Cases/ServiceDocumentResultRemove",
+                        type: 'Post',
+                        data: { id: file.upload.uuid },
+                        //success: (content) => file.previewElement.remove(),
+                        complete: () => sidebar.results.reload()
+                    });
+                    var _ref;
+                    return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+                },
+                success: function (file, response) {
+                    $("#mainModal #documentId").prop('disabled', true);
+                    if (response.responseStatus.isSuccess) {
+                        file.upload.uuid = response.id;
+                        sidebar.results.reload()
+                        return file.previewElement.classList.add("dz-success");
+                    } else {
+                        return $(file.previewElement).addClass("dz-error").find('.dz-error-message').text(response.responseStatus.message);
                     }
-                });
-            }
+                },
+                error: function (file, message) {
+                    return $(file.previewElement).addClass("dz-error").find('.dz-error-message').text(message.Message);
+                }
+            });
+        }
 
-            if (scanForm.length) {
+        if (scanForm.length) {
             $("#mainModal #startScan").on("click", () => {
                 scanner.scan(displayImagesOnPage,
                     {
@@ -223,7 +231,7 @@
                     mainClass: 'mfp-with-zoom mfp-img-mobile',
                     image: {
                         verticalFit: true,
-                        titleSrc: function(item) {
+                        titleSrc: function (item) {
                             return item.el.attr('title');
                         }
                     },
@@ -234,7 +242,7 @@
                         enabled: true,
                         duration: 300, // don't foget to change the duration also in CSS
                         easing: 'ease-in-out',
-                        opener: function(element) {
+                        opener: function (element) {
                             return element.find('img');
                         }
                     }
@@ -260,5 +268,5 @@
             }
         }
 
-     });
+    });
 </script>

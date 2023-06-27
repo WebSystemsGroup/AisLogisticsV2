@@ -26121,8 +26121,7 @@ html[data-textdirection=rtl] .case-application .case-app-details .case-next .act
     border-radius: 3px;
 }
 .header_menu .bi {
-    color: #BEBEBE !important;
-    margin-left: 1.5rem;
+    color: #fff !important;
 }
 svg {
     vertical-align: top !important;
