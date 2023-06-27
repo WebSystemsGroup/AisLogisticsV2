@@ -25,12 +25,12 @@
                         <div class="form-check custom-option custom-option-basic">
                             <label class="form-check-label custom-option-content content-sm" for="stage_@item.Id">
                                 <input name="stageId" class="form-check-input" type="radio" value="@item.Id" id="stage_@item.Id" checked />
-                                <span class="custom-option-header p-0">
-                                    <span class="h6 mb-0">@item.Name</span>
+                                <span class="custom-option-header ms-2">
+                                    <span class="text-bold">@item.Name</span>
                                     <days count="item.Days ?? 0" class="text-body"></days>
                                 </span>
-                                <span class="custom-option-body">
-                                    <small>@item.Comment</small>
+                                <span class="custom-option-body ms-1">
+                                    @item.Comment
                                 </span>
                             </label>
                         </div>

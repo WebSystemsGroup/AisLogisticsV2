@@ -1,20 +1,20 @@
 ﻿@using System.Resources
-<div class="d-flex align-items-lg-start align-items-xl-center mb-3">
+<header class="d-flex align-items-lg-start align-items-xl-center mb-3">
     <div class="col-xl-auto d-xl-inline-block d-none me-xl-5">
         <a href="/">
             <img src="/img/logo.svg" alt="">
         </a>
     </div>
-    <div class="col-xxl-7 col-xl-auto">
+    <nav class="col-7 col-xxl-7 col-xl-auto">
         <partial name="LayoutPartial/_MainMenuPartial" />
-    </div>
+    </nav>
     <div class="col-sm col-xl-3 col-xxl-auto ms-auto pe-xl-5">
         <div class="row align-items-center header_create justify-content-xl-between justify-content-end ms-xl-auto">
 
             @if (User.HasClaim(AccessKeyNames.DataCase, AccessKeyValues.Add))
             {
-                <div class="col-sm-3 btn-group">
-                    <a asp-action="Create" asp-controller="Cases" role="button" class="btn btn-primary waves-effect waves-float waves-light text-white">Создать</a>
+                <div class="col-sm-6 btn-group">
+                    <a asp-action="Create" asp-controller="Cases" role="button" class="btn btn-primary waves-effect waves-float waves-light shadow-none text-white">Создать</a>
                 </div>
             }
 
@@ -35,5 +35,5 @@
 
         </div>
     </div>
-</div>
+</header>
 

@@ -109,10 +109,13 @@
             const $table = $('#tableRating');
             $table.DataTable({
                 sDom: "<'row'<'col-sm-12'tr>>",
+                processing: true,
                 serverSide: true,
                 ordering: false,
-                "sScrollY": 440,
+                "autoWidth": false,
+                "sScrollY": 550,
                 searchDelay: 1500,
+                oLanguage: {sProcessing: "<div id='loader' style='width: 150px; height: 150px; '>safasfasf</div>"},
                 ajax: {
                     url: 'Home/GetEmployeeRatingDataJson',
                     type: "POST",

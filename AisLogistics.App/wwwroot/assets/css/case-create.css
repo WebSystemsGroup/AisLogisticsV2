@@ -63,16 +63,16 @@ label {
 
 .form-control, select, textarea, .light-style .select2-container--default .select2-selection {
     color: #172359 !important;
-    font-size: 12px;
-    font-family: 'golos-medium' !important;
+   /* font-size: 12px;*/
+    font-family: 'golos-regular' !important;
     border: 1px solid rgba(93, 102, 250, 0.35);
 }
 
 .light-style .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: #172359 !important;
-    font-size: 12px;
-    font-family: 'golos-medium' !important;
-    line-height:2rem !important;
+  /*  font-size: 12px;*/
+    font-family: 'golos-regular' !important;
+   /* line-height: 2rem !important;*/
 }
 
 sup {
@@ -82,7 +82,7 @@ sup {
     color: rgba(23, 35, 89, 0.31) !important; 
 }
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'golos-bold' !important;
+    font-family: 'golos-regular' !important;
 }
 .odd,.even{
     cursor:pointer;

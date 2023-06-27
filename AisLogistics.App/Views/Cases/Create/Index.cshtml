@@ -97,7 +97,7 @@
                                                 }
                                             </div>
                                         </div>
-                                        <table class="table cursor-pointer table-hover table-sm no-thead" id="services-table"></table>
+                                        <table class="table cursor-pointer table-hover no-thead" id="services-table"></table>
                                     </div>
 
                                     <div id="service-procedure-table-container" class="d-none">
@@ -106,7 +106,7 @@
                                             <h6 class="mb-0">Процедура</h6>
                                             <small>Выберите процедуру оказываемой услуги.</small>
                                         </div>
-                                        <table class="table cursor-pointer table-hover no-thead table-sm table-bordered" id="service-procedure-table"></table>
+                                        <table class="table cursor-pointer table-hover no-thead table-bordered" id="service-procedure-table"></table>
                                     </div>
 
                                     <div id="service-tariff-table-container" class="d-none">
@@ -115,7 +115,7 @@
                                             <h6 class="mb-0">Тариф</h6>
                                             <small>Выберите тариф оказываемой услуги.</small>
                                         </div>
-                                        <table class="table cursor-pointer table-hover table-sm table-bordered" id="service-tariff-table">
+                                        <table class="table cursor-pointer table-hover table-bordered" id="service-tariff-table">
                                             <thead>
                                                 <tr>
                                                     <th rowspan="2">Тип платежа</th>
@@ -895,10 +895,10 @@
                                             <label class="form-check-label custom-option-content" for="customer_SAlertCustomerId0">
                                                 <input asp-for="@customer.SAlertCustomerId" class="form-check-input" type="radio" value="0" id="customer_SAlertCustomerId0" checked="">
                                                 <span class="custom-option-header">
-                                                    <span class="h6 mb-0">Не информировать</span>
+                                                    <span class="text-bold mb-0">Не информировать</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                    <small class="">Не информировать заявителя о ходе и результате предоставления услуги.</small>
+                                                    Не информировать заявителя о ходе и результате предоставления услуги.
                                                 </span>
                                             </label>
                                         </div>
@@ -908,10 +908,10 @@
                                             <label class="form-check-label custom-option-content" for="customer_SAlertCustomerId1">
                                                 <input asp-for="@customer.SAlertCustomerId" class="form-check-input" type="radio" value="1" id="customer_SAlertCustomerId1">
                                                 <span class="custom-option-header">
-                                                    <span class="h6 mb-0">Звонок</span>
+                                                    <span class="text-bold mb-0">Звонок</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                    <small class="">Информирование заявителя о ходе и результате предоставления услуги по телефону.</small>
+                                                    Информирование заявителя о ходе и результате предоставления услуги по телефону
                                                 </span>
                                             </label>
                                         </div>
@@ -921,10 +921,10 @@
                                             <label class="form-check-label custom-option-content" for="customer_SAlertCustomerId2">
                                                 <input asp-for="@customer.SAlertCustomerId" class="form-check-input" type="radio" value="2" id="customer_SAlertCustomerId2" >
                                                 <span class="custom-option-header">
-                                                    <span class="h6 mb-0">СМС</span>
+                                                    <span class="text-bold mb-0">СМС</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                    <small class="">Информирование заявителя о ходе и результате предоставления услуги путем СМС-оповещения.</small>
+                                                    Информирование заявителя о ходе и результате предоставления услуги путем СМС-оповещения.
                                                 </span>
                                             </label>
                                         </div>
@@ -937,10 +937,10 @@
                                             <label class="form-check-label custom-option-content" for="customer_PollIasMkgu0">
                                                 <input asp-for="@customer.PollIasMkgu" class="form-check-input" type="radio" value="0" id="customer_PollIasMkgu0" checked="">
                                                 <span class="custom-option-header">
-                                                    <span class="h6 mb-0">Отказ</span>
+                                                    <span class="text-bold mb-0">Отказ</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                    <small class="">Отказ от оценки качества предоставления услуги.</small>
+                                                    Отказ от оценки качества предоставления услуги.
                                                 </span>
                                             </label>
                                         </div>
@@ -950,10 +950,10 @@
                                             <label class="form-check-label custom-option-content" for="customer_PollIasMkgu2">
                                                 <input asp-for="@customer.PollIasMkgu" class="form-check-input" type="radio" value="2" id="customer_PollIasMkgu2">
                                                 <span class="custom-option-header">
-                                                    <span class="h6 mb-0">Терминал</span>
+                                                    <span class="text-bold mb-0">Терминал</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                    <small class="">Терминалы, расположенные в территориальных органах ведомств, а также в МФЦ.</small>
+                                                    Терминалы, расположенные в территориальных органах ведомств, а также в МФЦ.
                                                 </span>
                                             </label>
                                         </div>
@@ -963,10 +963,10 @@
                                             <label class="form-check-label custom-option-content" for="customer_PollIasMkgu1">
                                                 <input asp-for="@customer.PollIasMkgu" class="form-check-input" type="radio" value="1" id="customer_PollIasMkgu1">
                                                 <span class="custom-option-header">
-                                                    <span class="h6 mb-0">СМС</span>
+                                                    <span class="text-bold mb-0">СМС</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                    <small class="">Сбор мнений получателя услуги с помощью бесплатного смс-опроса.</small>
+                                                   Сбор мнений получателя услуги с помощью бесплатного смс-опроса.
                                                 </span>
                                             </label>
                                         </div>
@@ -981,10 +981,10 @@
                                             <label class="form-check-label custom-option-content" for="representative_SAlertCustomerId0">
                                                 <input asp-for="@representative.SAlertCustomerId" class="form-check-input" type="radio" value="0" id="representative_SAlertCustomerId0" checked="" disabled>
                                                 <span class="custom-option-header">
-                                                    <span class="h6 mb-0">Не информировать</span>
+                                                    <span class="text-bold mb-0">Не информировать</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                    <small class="">Не информировать заявителя о ходе и результате предоставления услуги.</small>
+                                                   Не информировать заявителя о ходе и результате предоставления услуги.
                                                 </span>
                                             </label>
                                         </div>
@@ -994,10 +994,10 @@
                                             <label class="form-check-label custom-option-content" for="representative_SAlertCustomerId1">
                                                 <input asp-for="@representative.SAlertCustomerId" class="form-check-input" type="radio" value="1" id="representative_SAlertCustomerId1" disabled>
                                                 <span class="custom-option-header">
-                                                    <span class="h6 mb-0">Звонок</span>
+                                                    <span class="text-bold mb-0">Звонок</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                    <small class="">Информирование заявителя о ходе и результате предоставления услуги по телефону.</small>
+                                                    Информирование заявителя о ходе и результате предоставления услуги по телефону.
                                                 </span>
                                             </label>
                                         </div>
@@ -1007,10 +1007,10 @@
                                             <label class="form-check-label custom-option-content" for="representative_SAlertCustomerId2">
                                                 <input asp-for="@representative.SAlertCustomerId" class="form-check-input" type="radio" value="2" id="representative_SAlertCustomerId2" disabled>
                                                 <span class="custom-option-header">
-                                                    <span class="h6 mb-0">СМС</span>
+                                                    <span class="text-bold mb-0">СМС</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                    <small class="">Информирование заявителя о ходе и результате предоставления услуги путем СМС-оповещения.</small>
+                                                    Информирование заявителя о ходе и результате предоставления услуги путем СМС-оповещения.
                                                 </span>
                                             </label>
                                         </div>
@@ -1023,10 +1023,10 @@
                                             <label class="form-check-label custom-option-content" for="representative_PollIasMkgu0">
                                                 <input asp-for="@representative.PollIasMkgu" class="form-check-input" type="radio" value="0" id="representative_PollIasMkgu0" checked="" disabled>
                                                 <span class="custom-option-header">
-                                                    <span class="h6 mb-0">Отказ</span>
+                                                    <span class="text-bold mb-0">Отказ</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                    <small class="">Отказ от оценки качества предоставления услуги.</small>
+                                                   Отказ от оценки качества предоставления услуги.
                                                 </span>
                                             </label>
                                         </div>
@@ -1036,10 +1036,10 @@
                                             <label class="form-check-label custom-option-content" for="representative_PollIasMkgu2">
                                                 <input asp-for="@representative.PollIasMkgu" class="form-check-input" type="radio" value="2" id="representative_PollIasMkgu2" disabled>
                                                 <span class="custom-option-header">
-                                                    <span class="h6 mb-0">Терминал</span>
+                                                    <span class="text-bold mb-0">Терминал</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                    <small class="">Терминалы, расположенные в территориальных органах ведомств, а также в МФЦ.</small>
+                                                   Терминалы, расположенные в территориальных органах ведомств, а также в МФЦ.
                                                 </span>
                                             </label>
                                         </div>
@@ -1049,10 +1049,10 @@
                                             <label class="form-check-label custom-option-content" for="representative_PollIasMkgu1">
                                                 <input asp-for="@representative.PollIasMkgu" class="form-check-input" type="radio" value="1" id="representative_PollIasMkgu1" disabled>
                                                 <span class="custom-option-header">
-                                                    <span class="h6 mb-0">СМС</span>
+                                                    <span class="text-bold mb-0">СМС</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                    <small class="">Сбор мнений получателя услуги с помощью бесплатного смс-опроса.</small>
+                                                   Сбор мнений получателя услуги с помощью бесплатного смс-опроса.
                                                 </span>
                                             </label>
                                         </div>

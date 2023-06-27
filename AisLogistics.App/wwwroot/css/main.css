@@ -42,10 +42,10 @@ body {
 footer {
     position: absolute;
     width: 90%;
-    height: 50px;
     bottom: 0;
-    color: #BEBEBE;
     padding-left: 5%;
+    color: #BEBEBE;
+    height: 50px;
 }
 
 .container-custom {
@@ -608,7 +608,7 @@ footer p, footer a {
 .table:not(.table-dark) tbody:not(.table-dark) tr {
     color: #172359;
     font-family: golos-regular;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 
@@ -1655,4 +1655,141 @@ input::placeholder, select::placeholder {
     width: 25% !important;
     max-width: 201px;
     max-height: 45px;
+}
+
+.custom-option {
+    padding-left: 0;
+    border: 1px solid #d4d8dd;
+    border-radius: .25rem
+}
+
+    .custom-option:hover {
+        border: 1px solid #bec5cc
+    }
+
+    .custom-option.custom-option-image {
+        border-width: 2px !important
+    }
+
+        .custom-option.custom-option-image:hover {
+            border-width: 2px !important
+        }
+
+        .custom-option.custom-option-image .custom-option-body img {
+            border-radius: .25rem
+        }
+
+    .custom-option .custom-option-content {
+        cursor: pointer;
+        width: 100%
+    }
+
+.custom-option-basic .custom-option-content {
+    padding: 1em;
+   /* padding-left: 2.7em*/
+}
+
+    .custom-option-basic .custom-option-content .form-check-input {
+        margin-top: 0
+    }
+
+.custom-option-basic .custom-option-content.content-sm {
+    padding: 0.65em;
+    /* padding-left: 2.7em; */
+}
+
+.custom-option-basic .custom-option-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: .25rem; 
+}
+
+.custom-option-icon .custom-option-content {
+    text-align: center;
+    padding: 1em
+}
+
+.custom-option-icon .custom-option-body {
+    display: block;
+    margin-bottom: .5rem
+}
+
+    .custom-option-icon .custom-option-body i {
+        font-size: 2rem;
+        margin-bottom: .25rem;
+        display: block
+    }
+
+    .custom-option-icon .custom-option-body svg {
+        height: 38px;
+        width: 38px;
+        margin-bottom: .25rem
+    }
+
+    .custom-option-icon .custom-option-body .custom-option-title {
+        display: block;
+        font-family: "Rubik","Times New Roman",serif;
+        font-size: .9375rem;
+        font-weight: 500;
+        color: #516377
+    }
+
+.custom-option-icon .form-check-input {
+    float: none !important;
+    margin: 0 !important
+}
+
+.custom-option-image {
+    border-width: 2px
+}
+
+    .custom-option-image .custom-option-content {
+        padding: 0
+    }
+
+    .custom-option-image .custom-option-body img {
+        height: 100%;
+        width: 100%
+    }
+
+    .custom-option-image.custom-option-image-radio .form-check-input {
+        display: none
+    }
+
+    .custom-option-image.custom-option-image-check {
+        position: relative
+    }
+
+        .custom-option-image.custom-option-image-check .form-check-input {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            margin: 0;
+            border: 0;
+            opacity: 0
+        }
+
+            .custom-option-image.custom-option-image-check .form-check-input:checked {
+                opacity: 1
+            }
+
+        .custom-option-image.custom-option-image-check:hover .form-check-input {
+            border: inherit;
+            border-width: 1px;
+            opacity: 1
+        }
+
+[dir=rtl] .custom-option {
+    padding-right: 0
+}
+
+[dir=rtl] .custom-option-basic .custom-option-content {
+    padding-right: 2.7em;
+    padding-left: 1em
+}
+
+[dir=rtl] .custom-option-image.custom-option-image-check .form-check-input {
+    right: auto;
+    left: 10px
 }

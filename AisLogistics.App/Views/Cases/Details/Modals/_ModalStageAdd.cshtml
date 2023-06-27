@@ -28,12 +28,12 @@
                         <div class="form-check custom-option custom-option-basic">
                             <label class="form-check-label custom-option-content content-sm" for="stage_@item.Id">
                                 <input name="stageId" class="form-check-input" type="radio" value="@item.Id" id="stage_@item.Id" checked />
-                                <span class="custom-option-header p-0">
-                                    <span class="h6 mb-0">@item.Name</span>
+                                <span class="custom-option-header ms-2">
+                                    <span class="text-bold">@item.Name</span>
                                     <days count="item.Days ?? 0" class="text-body"></days>
                                 </span>
-                                <span class="custom-option-body">
-                                    <small>@item.Comment</small>
+                                <span class="custom-option-body ms-1">
+                                    @item.Comment
                                 </span>
                             </label>
                         </div>
@@ -54,8 +54,6 @@
 </form>
 
 <script>
-//const { error } = require("jquery");
-
     $(function () {
         $(".select2").select2({
             dropdownParent: $("#mainModal")
@@ -63,8 +61,6 @@
 
         $("#ServiceId").hide();
 
-        window.Helpers.initCustomOptionCheck();
-     
         $("#OfficeId").on('change', function () {
             $stageId = $('input[name=stageId]:checked').val();
             $serviceId = $('#ServiceId').val();
@@ -96,6 +92,37 @@
         });
 
         $("#OfficeId").change();
+
+        $("[data-stageId]").on('change', function () {
+            $stageId = $('input[name=stageId]:checked').val();
+            $serviceId = $('#ServiceId').val();
+            var data = {};
+            let mass = [];
+            mass.push($serviceId);
+            data['serviceId'] = mass;
+            data['officeId'] = $('#OfficeId').val();;
+            data['stageId'] = $stageId;
+            $.ajax({
+                type: "Post",
+                url: "/Cases/ServiceStageNextEmployess",
+                data: { request: data },
+                beforeSend: function () {
+                    $("#employeeId").empty();
+                },
+                success: function (data) {
+                    if (data != null) {
+                        for (var i = 0; i < data.length; i++) {
+                            let selected = data[i].id === '@Model.EmployeeId';
+                            var opt = new Option(data[i].name, data[i].id, false, selected);
+                            $("#employeeId").append(opt);
+                        }
+                    }
+                },
+                error: function () {
+
+                }
+            })
+        });
 
         FormValidation.formValidation(document.getElementById('sendingForm'),
         {
