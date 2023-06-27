@@ -592,10 +592,6 @@ footer p, footer a {
         box-shadow: none;
     }
 
-:root {
-    color-scheme: dark !important;
-}
-
 .divider {
     display: block;
     text-align: center;
