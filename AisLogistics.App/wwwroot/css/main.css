@@ -921,7 +921,7 @@ label {
     background: #FCFCFC;
     border: 1px solid #E4E4E4;
     border-radius: 15px;
-    padding: 25px 35px;
+    padding: 0 1.5rem;
 }
 
     .blancs_and_files-wrapper tbody {
