@@ -35,7 +35,7 @@ namespace AisLogistics.App.Controllers
             var modelBuilder = new ViewModelBuilder()
                 .AddViewTitle("Аналитика").SetInvisibleViewTitle()
                 .AddModel(statistics);
-            return View("Index1", modelBuilder);
+            return View(modelBuilder);
         }
 
         [Breadcrumb("Cтатистика", FromAction = nameof(Index), FromController = typeof(HomeController))]

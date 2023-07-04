@@ -47,7 +47,7 @@ namespace AisLogistics.App.Controllers
                     .AddViewTitle("Реестр")
                     .AddModel(model);
                     //.AddTableMethodAction(Url.Action(nameof(GetEmployeeReestrTransferDocumentsDataJson)));
-                return View("Index1", modelBuilder);
+                return View(modelBuilder);
         }
 
         public async Task<IActionResult> GetReestrTransferDocuments(Guid? officeId)

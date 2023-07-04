@@ -81,7 +81,7 @@ namespace AisLogistics.App.Controllers.Cases
                 .SetElementName("cases-datatable")
                 .AddModel(model)
                 .AddTableMethodAction(Url.Action(nameof(GetEmployeeCasesDataJson)));
-            return View("Index1", modelBuilder);
+            return View(modelBuilder);
         }
 
         public async Task<IActionResult> GetEmployeeCasesDataJson(IDataTablesRequest request, SearchCasesRequestData additionalRequest)
