@@ -615,7 +615,7 @@
                                     </div>
                                     @* <div class="row justify-content-center"> *@
                                     @*     <div class="col-1"> *@
-                                    @*         <button type="button" class="btn btn-primary" id="addActData"><i class="bx bx-plus"></i></button> *@
+                                    @*         <button type="button" class="btn btn-primary" id="addActData"><i class="bi bi-plus"></i></button> *@
                                     @*     </div> *@
                                     @* </div> *@
                                 </div>
@@ -631,7 +631,7 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-1">
-                                <button type="button" class="btn btn-primary" id="addFamily"><i class="bx bx-plus"></i></button>
+                                <button type="button" class="btn btn-primary" id="addFamily"><i class="bi bi-plus"></i></button>
                             </div>
                         </div>
                         <hr />
@@ -644,7 +644,7 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-1">
-                                <button type="button" class="btn btn-primary" id="addRelatives"><i class="bx bx-plus"></i></button>
+                                <button type="button" class="btn btn-primary" id="addRelatives"><i class="bi bi-plus"></i></button>
                             </div>
                         </div>
                         <hr />
@@ -930,7 +930,7 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-1">
-                                <button type="button" class="btn btn-primary" id="addService"><i class="bx bx-plus"></i></button>
+                                <button type="button" class="btn btn-primary" id="addService"><i class="bi bi-plus"></i></button>
                             </div>
                         </div>
                     </div>
@@ -1184,7 +1184,7 @@
                 </div>
             </div>
             <div class="col-1">
-                <button type="button" class="btn btn-danger" onclick="blockRemove(this)"><i class="bx bx-trash-alt bx-sm"></i></button>
+                <button type="button" class="btn btn-danger" onclick="blockRemove(this)"><i class="bi bi-trash-alt bx-sm"></i></button>
             </div>
         </div>
     </div>
@@ -1431,7 +1431,7 @@
                 </div>
             </div>
             <div class="col-1">
-                <button type="button" class="btn btn-danger" onclick="blockRemove(this)"><i class="bx bx-trash-alt bx-sm"></i></button>
+                <button type="button" class="btn btn-danger" onclick="blockRemove(this)"><i class="bi bi-trash-alt bx-sm"></i></button>
             </div>
         </div>
         <hr />
@@ -1444,7 +1444,7 @@
         </div>
         <div class="row justify-content-center">
         <div class="col-1">
-        <button type="button" class="btn btn-primary" id="addParent"><i class="bx bx-plus"></i></button>
+        <button type="button" class="btn btn-primary" id="addParent"><i class="bi bi-plus"></i></button>
         </div>
         </div>
         <hr />*@
@@ -1575,7 +1575,7 @@
                 </div>
             </div>
             <div class="col-1">
-                <button type="button" class="btn btn-danger" onclick="blockRemove(this)"><i class="bx bx-trash-alt bx-sm"></i></button>
+                <button type="button" class="btn btn-danger" onclick="blockRemove(this)"><i class="bi bi-trash-alt bx-sm"></i></button>
             </div>
         </div>
         <hr />
@@ -1619,7 +1619,7 @@
                 </div>
             </div>
             <div class="col-1">
-                <button type="button" class="btn btn-danger" onclick="blockRemove(this)"><i class="bx bx-trash-alt bx-sm"></i></button>
+                <button type="button" class="btn btn-danger" onclick="blockRemove(this)"><i class="bi bi-trash-alt bx-sm"></i></button>
             </div>
         </div>
     </div>
@@ -1637,7 +1637,7 @@
                 </div>
             </div>
             <div class="col-1">
-                <button type="button" class="btn btn-danger" onclick="blockRemove(this)"><i class="bx bx-trash-alt bx-sm"></i></button>
+                <button type="button" class="btn btn-danger" onclick="blockRemove(this)"><i class="bi bi-trash-alt bx-sm"></i></button>
             </div>
         </div>
     </div>
@@ -1778,7 +1778,7 @@ getServiceDocuments();
                             tr.append(`<td class="px-2" style="width: 10%;">${(file.size / 1024).toFixed(2)} кБ</td>`);
                             tr.append(`<td class="px-2" style="width: 1%;"><a class="btn btn-sm btn-icon viewing-file" data-bs-toggle="tooltip" title="" data-sub-html="${file.name}${file.extension}" href="/SmevBase/DownloadFile/${file.id}" data-bs-original-title="Просмотр" aria-label="Просмотр"><i class="bx bx-show"></i></a></td>`);
                             //tr.append(`<td class="px-2" style="width: 1%;"><i onclick="docMove('up', this)" role="button" class='bx bx-chevron-up btn-link'></i><i onclick="docMove('down', this)" role="button" class='bx bx-chevron-down btn-link'></i></td>`);
-                            tr.append(`<td class="px-2" style="width: 1%;"><i onclick="docRemove(this)" role="button" class='bx bx-trash'></i></td>`);
+                            tr.append(`<td class="px-2" style="width: 1%;"><i onclick="docRemove(this)" role="button" class='bi bi-trash'></i></td>`);
                             tr.append(`<td class="px-2" style="width: 1%;"><input class="form-check-input" type="checkbox" checked></td>`);
 
                             let trHide = $('<tr class="active" style="display: none;">');

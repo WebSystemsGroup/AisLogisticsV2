@@ -21,16 +21,14 @@
             <div class="col">
                 @if (Model.IsVisibleDescription)
                 {
-                    <p class="card-text">
-                        @Model.ViewDescription
-                    </p>
+                    <div class="b-s-14">@Model.ViewDescription</div>
                 }
             </div>
             @if (User.HasClaim(AccessKeyNames.ReferenceInformation, AccessKeyValues.Add))
             {
                 <div class="col-md-2 text-md-end directory_search">
                     <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
-                        <i class="bx bx-plus"></i> Добавить
+                        <i class="bi bi-plus"></i> Добавить
                     </button>
                 </div>
             }
@@ -54,7 +52,7 @@
             //$('.dz-progress').hide();
 
             $table.DataTable({
-                sDom: "<'row me-5 pe-1'<'col-sm-12 col-md-8 'f><'col-sm-12 col-md-3 w-25'l>>" +
+                sDom: "<'row me-5 pe-1'<'col-sm-12 col-md-8 'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 processing: true,
@@ -71,8 +69,6 @@
                     }
                 },
                 initComplete: function () {
-                    $('[name="mainDataTable_length"]')
-                        .select2({ minimumResultsForSearch: Infinity })
                 },
                 columnDefs: [
                     {
@@ -152,13 +148,13 @@
         const EditBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="edit" data-bs-toggle="tooltip" title="Изменить" class="btn btn-sm btn-icon text-body">
-                    <i class="bx bx-edit"></i></a>`;
+                    <i class="bi bi-pencil-square"></i></a>`;
         }
 
         const DeleteBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger">
-                    <i class="bx bx-trash"></i></a>`;
+                    <i class="bi bi-trash"></i></a>`;
         }
     </script>
 }

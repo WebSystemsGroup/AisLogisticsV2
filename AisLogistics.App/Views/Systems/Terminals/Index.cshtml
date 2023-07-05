@@ -19,7 +19,7 @@
             {
                 <div class="col-md-2 text-md-end directory_search">
                     <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
-                        <i class="bx bx-plus"></i> Добавить
+                        <i class="bi bi-plus"></i> Добавить
                     </button>
                 </div>
             }
@@ -126,12 +126,12 @@
         const EditBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="edit" data-bs-toggle="tooltip" title="Изменить" class="btn btn-sm btn-icon text-body">
-                                    <i class="bx bx-edit"></i></a>`;
+                                    <i class="bi bi-pencil-square"></i></a>`;
         }
         const DeleteBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger">
-                                    <i class="bx bx-trash"></i></a>`;
+                                    <i class="bi bi-trash"></i></a>`;
         }
     </script>
 }

@@ -302,11 +302,7 @@ label {
     color: #172359;
     margin-top: 30px;
 }
-
-.directory_names a {
-    color: #172359;
-}
-
+  
 .directory_names-items {
     box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
     border-radius: 2px;
@@ -511,11 +507,7 @@ footer p, footer a {
     .popup_container .directory_sortby .btn {
         padding: 9px 30px;
     }
-
-    .popup_container a {
-        color: #172359;
-        margin-left: 10px;
-    }
+     
 
     .popup_container h1 {
         font-size: 16px;
@@ -663,13 +655,13 @@ label {
     font-size: 14px;
     text-transform: none;
 }
-
+/*
 .table:not(.table-dark) tbody:not(.table-dark) tr {
     color: #172359;
     font-family: golos-regular;
-    font-size: 14px;
+    font-size: 12px;
 }
-
+*/
 
 .directory_names-items.table > :not(:first-child) {
     border-top: 1px solid #E4E4E4;
@@ -678,6 +670,7 @@ label {
 .directory_names-items.table td {
     padding: 10px 15px;
     color: #172359;
+    font-size: 14px;
 }
 
 .table_date_status p {
@@ -790,7 +783,7 @@ label {
     border-radius: 50%;
     border: 2px solid #1CB92B;
     color: #1CB92B;
-    font-size: 14px;
+    font-size: 12px;
     width: 20px;
     height: 20px;
     text-align: center;
@@ -1325,7 +1318,7 @@ section.active {
     font-size: 0.9375rem;
     font-weight: 400;
     line-height: 1.4;
-    color: #677788 !important;
+    color: rgba(23, 35, 89, 1);
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #d4d8dd;
@@ -1375,7 +1368,6 @@ section.active {
     background-color: #b6e7ff99;
     color: blue;
 }
-
 .datepicker table thead tr th.next, .datepicker table thead tr th.prev {
     width: 1.5rem;
     height: 1.5rem;
@@ -1438,6 +1430,19 @@ input[type="search"] {
     border-left: 0px solid #ced4da !important;
 }
 
+.form-control:disabled, .form-control[readonly] {
+    background-color: #fff !important;
+    border: 1px solid #ced4da !important;
+}
+
+.aside_menu .nav {
+    display: block !important;
+    border-style: none !important;
+    border: none !important;
+}
+html:not([dir=rtl]) .border-end {
+    border: none !important;
+}
 .form-label {
     margin-bottom: 0 !important;
 }
@@ -1468,18 +1473,42 @@ label:has([name="mainDataTable_length"]), label:has([name="reest-sentMessage-dat
 
 div.dataTables_wrapper div.dataTables_filter input {
     display: block;
-    margin: 0;
-    margin-left: 4px;
+    margin: 0; 
 }
 
+.nav-tabs .nav-link {
+    border-style: none !important;
+}
 
+.aside_menu .nav {
+    display: block !important;
+    border-style: none !important;
+    border: none !important;
+}
+.aside_menu .tabs-line.nav-tabs .nav-link.active {
+    box-shadow: none !important;
+}
+.aside_menu .nav-link {
+    padding: 0 !important;
+}
+
+    .aside_menu .nav-link.active:not(.nav-link.active.active-color) {
+        font-size: 18px !important;
+        color: #172359 !important;
+        margin-top: 0 !important;
+        margin-bottom: 15px;
+        border-bottom: none;
+        font-family: 'golos-bold' !important;
+        font-weight: 500;
+        line-height: 1.2;
+    }
 
 input::placeholder, .selection {
     color: #BEBEBE;
 }
 
 div.dataTables_wrapper div.dataTables_length, div.dataTables_wrapper div.dataTables_filter {
-    margin-top: 1.75rem;
+    margin-top: 0.75rem;
 }
 
 .directory_names.table th .row h1 {
@@ -1615,6 +1644,9 @@ input::placeholder, select::placeholder {
     color: rgba(23, 35, 89, 0.31) !important;
 }
 
+.reference:hover {
+    color: #077EFA !important;
+}
 
 .text-bold {
     font-weight: 700;
@@ -1622,6 +1654,7 @@ input::placeholder, select::placeholder {
     line-height: 17px;
     letter-spacing: 0.035em;
     color: #172359;
+    font-family: 'golos-bold';
 }
 
 

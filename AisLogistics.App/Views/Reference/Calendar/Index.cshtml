@@ -52,7 +52,7 @@
                     if (calendarEvent._def.extendedProps.dateType === 1) return {html:""};
                     if(isCanEdit === false) return {html:`${calendarEvent.title}`};
                     var params = JSON.stringify({id: calendarEvent.id });
-                    return {html : `${calendarEvent.title} <a data-btn-type="remove" data-btn-params='${params}' data-bs-toggle="tooltip" data-parent="#calendar" title="Удалить" class="btn btn-xs btn-icon text-danger float-end"><i class="bx bx-trash"></i></a>`}
+                    return {html : `${calendarEvent.title} <a data-btn-type="remove" data-btn-params='${params}' data-bs-toggle="tooltip" data-parent="#calendar" title="Удалить" class="btn btn-xs btn-icon text-danger"><i class="bi bi-trash"></i></a>`}
                 },
                 eventDidMount: function(info) {
                     $(info.el.querySelector('[data-bs-toggle="tooltip"]')).tooltip();

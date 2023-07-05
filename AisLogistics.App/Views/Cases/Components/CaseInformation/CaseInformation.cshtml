@@ -121,8 +121,8 @@
                                                 <span class="r-s-14">@item.NotesText</span>
                                             </div>
                                             <div class="col-4 px-1 d-flex justify-content-end">
-                                                <a asp-action="ServiceNotesChangeModal" asp-controller="Cases" asp-route-actionType="1" asp-route-id="@item.Id" class="btn btn-icon" data-btn-type="modal" data-bs-toggle="tooltip"><i class='bx bx-edit-alt'></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-icon text-danger" data-btn-type="remove" data-action-remove="/Cases/ServiceNotesDelete" data-btn-params={"id":"@item.Id"}><i class="bx bx-trash"></i></a>
+                                                <a asp-action="ServiceNotesChangeModal" asp-controller="Cases" asp-route-actionType="1" asp-route-id="@item.Id" class="btn btn-icon" data-btn-type="modal" data-bs-toggle="tooltip"><i class='bi bi-pencil-square-alt'></i></a>
+                                                <a href="javascript:void(0);" class="btn btn-icon text-danger" data-btn-type="remove" data-action-remove="/Cases/ServiceNotesDelete" data-btn-params={"id":"@item.Id"}><i class="bi bi-trash"></i></a>
                                             </div>
                                         </div>
                                     </li>

@@ -4,46 +4,6 @@
     string navId = "stages";
 }
 
-<style>
-    .nav-tabs .nav-link {
-        border-style: none !important;
-    }
-
-   .aside_menu  .nav {
-        display: block !important;
-        border-style: none !important;
-        border-right: none !important;
-    }
-
-    html:not([dir=rtl]) .border-end {
-        border-right: none !important;
-    }
-
-    .aside_menu .nav-link.active:not(.nav-link.active.active-color) {
-        font-size: 18px !important;
-        color: #172359 !important;
-        margin-top: 0 !important;
-        margin-bottom: 15px;
-        border-bottom: none;
-        font-family: 'golos-bold' !important;
-        font-weight: 500;
-        line-height: 1.2;
-    }
-
-    .aside_menu .nav-link {
-        padding: 0 !important;
-    }
-
-    .form-control:disabled, .form-control[readonly] {
-        background-color: #fff !important;
-        border: 1px solid #ced4da !important;
-    }
-
-    .bg-label-primary{
-        background-color: #cffff7;
-    }
-</style>
-
 <div class="row directory_names" id="content-smev">
     <div class="col-2 aside_menu">
         <partial name="Services/Details/_NavLeft" model="navId" />
@@ -56,16 +16,14 @@
 
                     @if (Model.IsVisibleDescription)
                     {
-                        <h1>
-                            @Model.ViewDescription
-                        </h1>
+                       <div class="b-s-14">@Model.ViewDescription</div>
                     }
                 </div>
                 @if (User.HasClaim(AccessKeyNames.ReferenceService, AccessKeyValues.Add))
                 {
                     <div class="col-md-2 text-md-end directory_search">
                         <button data-btn-params='{"actionType":"@ActionType.Add", "serviceId" : "@Id" }' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
-                            <i class="bx bx-plus"></i> Добавить
+                            <i class="bi bi-plus"></i> Добавить
                         </button>
                     </div>
                 }
@@ -301,7 +259,7 @@
                 var params = JSON.stringify(data);
 
                 content += `<a href="javascript:void(0);" class="btn btn-sm btn-icon float-end" data-btn-params='${params}' data-btn-type="add" data-for-table="@Model.TableName" data-bs-toggle="tooltip" title="Добавить этап">
-                        <i class="bx bx-plus me-2"></i></a>`
+                        <i class="bi bi-plus me-2"></i></a>`
             }
             return content;
         }
@@ -311,20 +269,20 @@
             if (isCanRemove === true) {
                 var params = JSON.stringify(data);
                 content += `<a href="javascript:void(0);" class="btn btn-sm btn-icon text-danger float-end" data-btn-params='${params}' data-btn-type="remove" data-parent="${data.parentTableId}" data-bs-toggle="tooltip" title="Удалить">
-                        <i class="bx bx-trash"></i></a>`;
+                        <i class="bi bi-trash"></i></a>`;
 
                 //content += `<a href="javascript:void(0);" class="btn btn-sm btn-icon text-success float-end" data-btn-params='${params}' data-btn-type="roleremove" data-action-remove="@Model.RemoveMethodAction" data-bs-toggle="tooltip" title="Удалить">
-                //    <i class="bx bx-trash"></i></a>`;
+                //    <i class="bi bi-trash"></i></a>`;
             }
             return content;
         }
 
         var formatStageRoles = function (data) {
-            var content = '<div><a href="@Url.Action("ServiceStageAddRole", "Reference")?id=' + data.id + '&parentId=' + data.parentId + '" class="btn btn-primary text-white" data-btn-type="modal" data-bs-toggle="tooltip" title="Добавить роль"><i class="bx bx-plus"></i></a>';
+            var content = '<div><a href="@Url.Action("ServiceStageAddRole", "Reference")?id=' + data.id + '&parentId=' + data.parentId + '" class="btn btn-primary text-white" data-btn-type="modal" data-bs-toggle="tooltip" title="Добавить роль"><i class="bi bi-plus"></i></a>';
             var roles = data.routesStageRoles;
             if (roles.length > 0) {
                 for (var i = 0; i < roles.length; i++) {
-                    content += `<span class="badge bg-label-primary ms-2">${roles[i].roleName}<a href="javascript:void(0);" class="btn btn-sm btn-icon" data-btn-params='{ "id": "${roles[i].id}", "accordionId": "${data.id}", "parentId": "${data.parentId}" }' data-btn-type="roleremove" data-action-remove="@Url.Action("ServiceStageRoleRemove", "Reference")?id=${data.id}" data-bs-toggle="tooltip" title="Удалить роль"><i class="bx bx-x text-danger mb-3"></i></a></span>`;
+                    content += `<span class="badge bg-label-primary ms-2">${roles[i].roleName}<a href="javascript:void(0);" class="btn btn-sm btn-icon" data-btn-params='{ "id": "${roles[i].id}", "accordionId": "${data.id}", "parentId": "${data.parentId}" }' data-btn-type="roleremove" data-action-remove="@Url.Action("ServiceStageRoleRemove", "Reference")?id=${data.id}" data-bs-toggle="tooltip" title="Удалить роль"><i class="bi bi-x text-danger"></i></a></span>`;
                 }
             }
             else {

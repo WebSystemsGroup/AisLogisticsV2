@@ -3,40 +3,7 @@
     ViewBag.Title = Model.ViewTitle;
     (string providersOptions, string typesOptions, string hashtagOptions) = (ValueTuple<string, string, string>)Model.Model;
 }
-<style>
-    .serviceName{
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 14px;
-        letter-spacing: 0.035em;
-        color: #172359;
-    }
-    .officeName{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 14px;
-        letter-spacing: 0.035em;
-        color: #B5B5B5;
-    }
 
-    .name{
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 22px;
-        letter-spacing: 0.035em;
-        color: #172359;
-    }
-
-    .form-label{
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 14px;
-        letter-spacing: 0.035em;
-        color: #172359;
-        text-transform:none;
-    }
-</style>
 <!-- table -->
 <section id="content-datatable">
     <div class="row">
@@ -45,19 +12,10 @@
                 <div class="col directory_title">
                     @if (Model.IsVisibleDescription)
                     {
-                        <h1>@Model.ViewDescription</h1>
+                        <div class="b-s-14">@Model.ViewDescription</div>
                     }
                 </div>
-                @if (User.HasClaim(AccessKeyNames.ReferenceService, AccessKeyValues.Add))
-                {
-                    <div class="d-none" id="HtmlbuttonAdd">
-
-                        <button data-btn-params='{"actionType":"@ActionType.Add" }' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
-                            <i class="bx bx-plus"></i> Добавить
-                        </button>
-
-                    </div>
-                }
+               
             </div>
 
             <div class="table-responsive overflow-hidden">
@@ -71,18 +29,16 @@
 @section Scripts
     {
     <script>
-        const $table = $('#@(Model.TableName)'),
-            isCanAdd = $table.is('[data-action-add]'),
-            isCanEdit = $table.is('[data-action-edit]'),
-            isCanRemove = $table.is('[data-action-remove]');
+        const $table = $('#@(Model.TableName)');
+            //isCanAdd = $table.is('[data-action-add]'),
+            //isCanEdit = $table.is('[data-action-edit]'),
+            //isCanRemove = $table.is('[data-action-remove]');
 
         $(document).ready(function () {
             $table.DataTable({
-                sDom: `<'row'<'col-sm-12 col-md-4'f>'<'col-sm-12 col-md-6'><'col-sm-12 col-md-2 text-md-end my-4 buttonAdd directory_search'>>` +
-                    "<'row mb-3'<'col-sm-12 col-md-3'<'#types'>><'col-sm-12 col-md-3'<'#providers'>><'col-sm-12 col-md-3'<'#hashtags'>><'col-sm-12 col-md-2'l>>" +
+                sDom:"<'row align-items-center'<'col-md-3'f><'col-md-3'<'#types'>><'col-md-3'<'#providers'>><'col-md-2'<'#hashtags'>><'col-md-auto mt-3 ms-auto'<'#btnCreate'>>>" +
                     "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>", 
                 processing: true,
                 serverSide: true,
                 filter: true,
@@ -99,12 +55,17 @@
                 initComplete: function () {
                     var providersColumn = this.api().column(2);
                     var typesColumn = this.api().column(3);
-                    var hashtagsColumn = this.api().column(4);
+                    var hashtagsColumn = this.api().column(4); 
+                    if (`@(User.HasClaim(AccessKeyNames.ReferenceService, AccessKeyValues.Add))`=='True')
+                    {
+                      $('#btnCreate').append(`
+                                               <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
+                                <i class="bi bi-plus"></i> Добавить
+                            </button>`);
+                   }
+                     
 
-                    $('.buttonAdd').append($('#HtmlbuttonAdd').html());
-                    $('#HtmlbuttonAdd').remove();
-
-                    $('[name="mainDataTable_length"]')
+                   $('[name="mainDataTable_length"]')
                         .select2({ minimumResultsForSearch: Infinity })
                     $('tbody').addClass('container-fluid directory_names-items p-0');
 
@@ -176,10 +137,12 @@
                             $('.directory_names-items').addClass('row row-cols-4');
                             $('.names-items').addClass('d-flex');
                             $('.directory_names-items').addClass('block-view')
+                            $('[href^="/Reference/Services/"]').children().children().removeClass('py-0');
                         } else {
                             $('.directory_names-items').removeClass('row row-cols-4');
                             $('.names-items').removeClass('d-flex');
-                            $('.directory_names-items').removeClass('block-view')
+                            $('.directory_names-items').removeClass('block-view'); 
+                            $('[href^="/Reference/Services/"]').children().children().addClass('py-0');
                         }
 
                     })
@@ -196,7 +159,7 @@
                     {
                         targets: 1,
                         orderable: false,
-                        title: `<div class="row"><h1 class="col name">Наименование</h1>
+                        title: `<div class="row mt-2"><div class="col b-l-16">Наименование</div>
                                 <div class="col row change_view_items align-items-end justify-content-end p-0">
                                     <div class= "col-auto d-flex justify-content-center align-items-center change_view change_view-inline active">
                                         <img src="/img/humburger.svg" alt = "" >
@@ -244,10 +207,11 @@
                         data: "serviceName",
                         className: "row h-100 w-100",
                         render: function (data, type, row) {
+                            let service = data.length > 170 ? data.substring(0, 170) + ' ...' : data;
                             return `<a class="d-flex" href="/Reference/Services/Details/${row.id}">
-                                          <div class="col names-items align-items-center justify-content-between">
-                                                                    <p class="serviceName">${data}</p>
-                                                           ${row.officeName === null ? '' : '<span class="officeName">' + row.officeName + '</span>'}
+                                          <div class="col names-items align-items-center">
+                                                                                                    <div class="b-s-14 p-2 py-0">${service}</div>
+                                                                                        ${row.officeName === null ? '' : '<span class="r-l-12 p-2 py-0 ms-auto">' + row.officeName + '</span>'}
                                                            </div></a>`;
                         },
                         orderable: false
@@ -286,13 +250,13 @@
         const EditBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="edit" data-bs-toggle="tooltip" title="Изменить" class="btn btn-sm btn-icon text-body">
-                                    <i class="bx bx-edit"></i></a>`;
+                                    <i class="bi bi-pencil-square"></i></a>`;
         }
 
         const DeleteBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger">
-                                    <i class="bx bx-trash"></i></a>`;
+                                    <i class="bi bi-trash"></i></a>`;
         }
 
         const CopyBtn = (data) => {

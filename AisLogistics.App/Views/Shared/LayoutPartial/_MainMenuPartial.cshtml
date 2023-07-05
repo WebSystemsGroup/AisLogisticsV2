@@ -5,6 +5,9 @@
                 color: #B5B5B5;
             }
 
+            #navbarSupportedContent .bi {
+                color: #B5B5B5;
+            }
             .menu-icon {
                 color: #BEBEBE;
             }
@@ -33,6 +36,9 @@
                 vertical-align: sub;
             }
 
+            .bi-file-earmark-bar-graph{
+                 font-size: 1.2rem;
+            }
         </style>
         <button class="navbar-toggler ps-0 d-flex d-xl-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-list me-4"></i>
@@ -43,7 +49,7 @@
                 <li class="nav-item dropdown me-xxl-4 menu-text">
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="menu-icon bx bx-list-service"></i>
-                        <span class="spanText">Услугyи</span>
+                        <span class="spanText">Услуги</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @if (User.HasClaim(AccessKeyNames.DataCase, AccessKeyValues.View))
@@ -112,7 +118,7 @@
                 <!-- Reports -->
                 <li class="nav-item me-xxl-4 menu-text">
                     <a asp-action="Index" asp-controller="Reports" class="nav-link menu-text">
-                        <i class="menu-icon bx bxs-report"></i>
+                        <i class="bi bi-file-earmark-bar-graph"></i>
                         <span class="spanText">Отчеты</span>
                     </a>
                 </li>
@@ -178,7 +184,7 @@
                             <li>
                                 <a asp-action="LivingSituation" asp-controller="Reference" class="dropdown-item">
                                     <i class="menu-icon bi bi-bookmark-heart"></i>
-                                    Жизненным ситуации
+                                    Жизненные ситуации
                                 </a>
                             </li>
                         }

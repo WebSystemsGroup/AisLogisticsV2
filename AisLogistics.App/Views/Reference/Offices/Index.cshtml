@@ -19,23 +19,12 @@
                         <div class="col-md-10">
                             @if (Model.IsVisibleDescription)
                             {
-                                <p class="card-text">
-                                    @Model.ViewDescription
-                                </p>
+                        <div class="b-s-14">@Model.ViewDescription</div>
                             }
                         </div>
-                        @if (User.HasClaim(AccessKeyNames.ReferenceOffice, AccessKeyValues.Add))
-                        {
-                            <div class="col-md-2 text-md-end">
-                                <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
-                                    <i class="bx bx-plus"></i> Добавить
-                                </button>
-                            </div>
-                        }
                     </div>
-                
                     <div class="table-responsive">
-                <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceOffice" class="directory_names-items table"></table>
+                       <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceOffice" class="directory_names-items table"></table>
                     </div>
         </div>
     </div>
@@ -51,8 +40,8 @@
 
         $(document).ready(function() {
             $table.DataTable({
-                sDom: "<'row me-5 pe-1'<'col-sm-12 col-md-8 'f><'col-sm-12 col-md-3 w-25'l>>" +
-                    "<'row mb-3'<'col-sm-12 col-md-6'<'#parentOffice'>><'col-sm-12 col-md-5'<'#officeType'>>>" +
+                sDom: "<'row align-items-center'<'col-md-4 'f>" +
+                    "<'col-md-3'<'#parentOffice'>><'col-md-3'<'#officeType'>><'col-md-auto mt-3 ms-auto'<'#btnCreate'>>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 processing: true,
@@ -69,7 +58,13 @@
                 },
                 initComplete: function() { 
                     var officesTypeColumn = this.api().column(2);
+                    if (@(User.HasClaim(AccessKeyNames.ReferenceOffice, AccessKeyValues.Add))== 'True') {
+                     $('#btnCreate').append(`
+                                        <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary ">
+                                            <i class="bi bi-plus"></i> Добавить
+                                        </button>`);
 
+        }
                     var $officeType = $('#officeType');
                     $officeType.html('<label class="form-label" for="selectOfficesProviders">Тип</label>');
                     var $procedureSelect = $('<select id="selectOfficesProviders" class="form-select"><option selected value="">ВСЕ</option>@Html.Raw(officeTypeOptions)</select>')
@@ -92,11 +87,7 @@
                         })
                         .on('change', function () { 
                             officesParentsColumn.search($(this).val()).draw();
-                        });
-
-                    $('[name="mainDataTable_length"]')
-                    .select2({minimumResultsForSearch: Infinity})
-               
+                        }); 
                 },
                 columnDefs: [
                     {
@@ -128,8 +119,7 @@
                     {
                         targets: -1,
                         title: 'Действия',
-                        data: "id",
-                        width: "80px",
+                        data: "id", 
                         className: 'text-center editor-edit',
                         sorting: false,
                         orderable: false
@@ -142,8 +132,8 @@
                     {
                         data: "officeName",
                         render: function(data, type, row) {
-                            return `<a href="@Url.Action("OfficeInfoModal", "Reference")?id=${row.id}" data-btn-type="modal"><h2>${data}</h2></a>
-                            ${ row.parentOfficeName === null ? '' : '<small>' + row.parentOfficeName + '</small>'}`;
+                            return `<a href="@Url.Action("OfficeInfoModal", "Reference")?id=${row.id}" data-btn-type="modal"><div class="text-bold reference">${data}</div></a>
+                            ${ row.parentOfficeName === null ? '' : '<div class="r-l-12">' + row.parentOfficeName + '</div>'}`;
                         }
                     },
                     {
@@ -184,14 +174,14 @@
 
         const EditBtn = (data) => {
             const params = JSON.stringify(data);
-            return `<span class="d-block m-2"><a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="edit" data-bs-toggle="tooltip" title="Изменить" class="btn btn-sm btn-icon text-body">
-            <i class="bx bx-edit"></i></a>`;
+            return `<span class="d-block"><a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="edit" data-bs-toggle="tooltip" title="Изменить" class="btn btn-sm btn-icon text-body py-0">
+            <i class="bi bi-pencil-square"></i></a>`;
         }
 
         const DeleteBtn = (data) => {
             const params = JSON.stringify(data);
-            return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger">
-            <i class="bx bx-trash"></i></a></span>`;
+            return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger py-0">
+            <i class="bi bi-trash"></i></a></span>`;
         }
     </script>
 }
