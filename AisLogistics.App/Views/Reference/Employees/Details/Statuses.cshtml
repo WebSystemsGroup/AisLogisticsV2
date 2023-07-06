@@ -4,61 +4,47 @@
     string navId = "statuses";
 }
 
-<section id="content-employee-jobs">
-    <div class="row">
-        <div class="col-12">
-            <div class="nav-align-left">
-                <partial name="Employees/Details/_NavLeft" model="navId" />
-                <div class="tab-content shadow-none">
-                    <div class="tab-pane fade active show" id="navs-tabs-default">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="row">
-                                    @if (Model.IsVisibleTitle)
-                                    {
-                                        <h4 class="card-title">@Model.ViewTitle</h4>
-                                    }
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        @if (Model.IsVisibleDescription)
-                                        {
-                                            <p class="card-text">
-                                                @Model.ViewDescription
-                                            </p>
-                                        }
-                                    </div>
-                                    @if (User.HasClaim(AccessKeyNames.ReferenceService, AccessKeyValues.Add))
-                                    {
-                                        <div class="col-md-2 text-md-end">
-                                            <button data-btn-params='{"actionType":"@ActionType.Add", "employeeId" : "@Id" }' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
-                                                <i class="bi bi-plus"></i> Добавить
-                                            </button>
-                                        </div>
-                                    }
-                                </div>
-                                <div class="table-responsive">
-                                    <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceService" class="table table-sm table-bordered"></table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+<div class="row directory_names" id="content-datatable">
+    <div class="col-auto aside_menu">
+        <partial name="Employees/Details/_NavLeft" model="navId" />
+    </div>
+    <div class="col">
+        <div class="directory_names-items popup_container" id="navs-tabs-default">
+            <div class="row justify-content-between align-items-center">
+                <div class="col">
+                    @if (Model.IsVisibleDescription)
+                    {
+                        <div class="b-s-14">@Model.ViewDescription</div>
+                    }
                 </div>
+                @if (User.HasClaim(AccessKeyNames.ReferenceService, AccessKeyValues.Add))
+                {
+                    <div class="col-auto text-md-end">
+                        <button data-btn-params='{"actionType":"@ActionType.Add", "employeeId" : "@Id" }' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
+                            <i class="bi bi-plus"></i> Добавить
+                        </button>
+                    </div>
+                }
+            </div>
+            <div class="table-responsive">
+                <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceService" class="directory_names-items table"></table>
             </div>
         </div>
     </div>
-</section>
+</div>
+
 @section Scripts
-{
+    {
     <script>
-        const $table = $('#@(Model.TableName)'), 
+        const $table = $('#@(Model.TableName)'),
             isCanAdd = $table.is('[data-action-add]'),
             isCanEdit = $table.is('[data-action-edit]'),
             isCanRemove = $table.is('[data-action-remove]');
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $table.DataTable({
-                sDom: "<'row'<'col-sm-12 col-md-6 'f><'col-sm-12 col-md-6'l>>" +
+                sDom: "<'row'<'col-sm-12 col-md-6 'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 processing: true,
@@ -70,7 +56,7 @@
                     url: $table.data('action-table'),
                     type: "POST",
                     datatype: "json",
-                    dataSrc: function(json) {
+                    dataSrc: function (json) {
                         return json.data;
                     }
                 },
@@ -90,15 +76,11 @@
                     {
                         targets: 2,
                         title: 'Дата начала',
-                        width: "80px",
-                        className: 'text-center',
                         orderable: false
                     },
                     {
                         targets: 3,
                         title: 'Дата окончания',
-                        width: "80px",
-                        className: 'text-center',
                         orderable: false
                     },
                     {
@@ -115,26 +97,25 @@
                         targets: -1,
                         title: 'Действия',
                         data: "id",
-                        width: "80px",
                         className: 'text-center editor-edit',
                         sorting: false,
                         orderable: false
                     }
                 ],
                 columns: [
-                    { },
+                    {},
                     { data: "statusName" },
                     { data: "dateStart" },
                     { data: "dateStop" },
                     { data: "commentt" },
                     {
                         data: "employeesFioAdd",
-                        render: function(data, type, row) {
+                        render: function (data, type, row) {
                             return `${data}<p class="small">${row.dateAdd}</p>`;
                         }
                     },
                     {
-                        render: function(data, type, row) {
+                        render: function (data, type, row) {
                             return DeleteBtn({ "id": data });
                         }
                     }
@@ -157,7 +138,7 @@
         const DeleteBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger">
-            <i class="bi bi-trash"></i></a>`;
+                    <i class="bi bi-trash"></i></a>`;
         }
     </script>
 }

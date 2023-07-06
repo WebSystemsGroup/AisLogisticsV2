@@ -64,7 +64,7 @@ $(function () {
                     wizardSmevNext[0].classList.add("btn-primary");
                     wizardSmevNext[0].classList.remove("btn-danger");
                     wizardSmevNext[0].removeAttribute("disabled");
-                    wizardSmevNext[0].innerHTML = "Далее <i class=\"bx bx-chevron-right\"></i>";
+                    wizardSmevNext[0].innerHTML = "Далее <i class=\"bi bi-chevron-right \"></i>";
                     smevData.smevId = data.id;
                     smevData.smevSubmitAction = data.actionPath;
                 } else {

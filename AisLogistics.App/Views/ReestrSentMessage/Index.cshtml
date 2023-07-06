@@ -44,7 +44,7 @@
 
         $(document).ready(function () {
             $table.DataTable({
-                sDom: "<'row'<'col-sm-12 col-md-6 'f><'col-sm-12 col-md-5'l>>" +
+                sDom: "<'row align-items-center'<'col-sm-12 col-md-6 'f><'col-auto ms-auto'l>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 processing: true,
@@ -55,8 +55,7 @@
                     url: $table.data('action-table'),
                     type: "POST",
                     datatype: "json",
-                    dataSrc: function (json) {
-                        //console.log(json.rParam1);
+                    dataSrc: function (json) { 
                         return json.data;
                     }
                 },
@@ -64,6 +63,7 @@
                 initComplete: function () {
                     $('[name="reest-sentMessage-datatable_length"]')
                         .select2({ minimumResultsForSearch: Infinity })
+
                 },
                 columnDefs: [
                     {
@@ -174,10 +174,9 @@
                         boundary: document.body
                     });
                 });
-            });
-        });
-
-
+            }); 
+        }); 
+          
         const EmployeesBtn = (data, count) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="view">

@@ -18,10 +18,7 @@
 }
 div.dataTables_wrapper div.dataTables_filter {
     text-align: left;
-}
-div.dataTables_wrapper div.dataTables_length {
-    text-align: right;
-}
+} 
 div.dataTables_wrapper div.dataTables_filter label {
     width: 100%;
 }

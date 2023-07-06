@@ -1449,6 +1449,11 @@ html:not([dir=rtl]) .border-end {
 
 div.dataTables_wrapper div.dataTables_length label {
     color: #BEBEBE;
+    font-weight: normal;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;  
 }
 
 .btn-label-secondary {
@@ -1459,10 +1464,12 @@ div.dataTables_wrapper div.dataTables_length label {
 .directory_names-items.table a:hover h2 {
     color: #1e80e6 !important;
 }
+[href^="/Reference/Services/"]:hover{
+    cursor: pointer;
+    color: #077EFA !important;
+}
 
 label:has([name="mainDataTable_length"]), label:has([name="reest-sentMessage-datatable_length"]) {
-    min-width: 85px;
-    max-width: 85px;
     padding: 0;
     margin: 0;
 }
@@ -1894,4 +1901,10 @@ r-s-18 {
 [dir=rtl] .custom-option-image.custom-option-image-check .form-check-input {
     right: auto;
     left: 10px
+}
+ 
+.form-control:not([type="search"]), select, textarea, .light-style .select2-container--default .select2-selection {
+    color: #172359 !important;
+    font-family: 'golos-regular' !important;
+    border: 1px solid rgba(93, 102, 250, 0.35);
 }

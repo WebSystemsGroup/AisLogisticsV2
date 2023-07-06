@@ -5,10 +5,10 @@
 }
 <div class="row directory_names" id="content-smev-services">
     <div class="row">
-                    <navtabs-top>
-                        <nav-tab id="services" target="@Url.Action("SmevServices", "Reference")">Сервисы</nav-tab>
-                        <nav-tab id="requests" target="@Url.Action("SmevRequests", "Reference")">Запросы</nav-tab>
-                    </navtabs-top>
+        <navtabs-top>
+            <nav-tab id="services" target="@Url.Action("SmevServices", "Reference")">Сервисы</nav-tab>
+            <nav-tab id="requests" target="@Url.Action("SmevRequests", "Reference")">Запросы</nav-tab>
+        </navtabs-top>
         <div class="directory_names-items popup_container" id="navs-tabs-default">
 
             <div class="row justify-content-between align-items-center">
@@ -19,30 +19,30 @@
                         <div class="b-s-14">@Model.ViewDescription</div>
                     }
                 </div>
-                <div class="col-md-2 text-md-end directory_search">
-                            <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
-                                <i class="bi bi-plus"></i> Добавить
-                            </button>
-                        </div>
-                    </div>
-                
-                    <div class="table-responsive">
-                <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceDocument" class="directory_names-items table"></table>
-                    </div>
+                <div class="col-autp text-md-end directory_search">
+                    <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
+                        <i class="bi bi-plus"></i> Добавить
+                    </button>
                 </div>
             </div>
+
+            <div class="table-responsive">
+                <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceDocument" class="directory_names-items table"></table>
+            </div>
         </div>
-    
+    </div>
+</div>
+
 
 @section Scripts
-{
+    {
     <script>
-        const $table = $('#@(Model.TableName)'), 
+        const $table = $('#@(Model.TableName)'),
             isCanAdd = $table.is('[data-action-add]'),
             isCanEdit = $table.is('[data-action-edit]'),
             isCanRemove = $table.is('[data-action-remove]');
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $table.DataTable({
                 sDom: "<'row me-5 pe-1'<'col-sm-12 col-md-8 'f><'col-sm-12 col-md-3 w-25'l>>" +
                     "<'row'<'col-sm-12'tr>>" +
@@ -56,13 +56,13 @@
                     url: $table.data('action-table'),
                     type: "POST",
                     datatype: "json",
-                    dataSrc: function(json) {
+                    dataSrc: function (json) {
                         return json.data;
                     }
                 },
                 initComplete: function () {
                     $('[name="mainDataTable_length"]')
-                    .select2({minimumResultsForSearch: Infinity})
+                        .select2({ minimumResultsForSearch: Infinity })
                 },
                 columnDefs: [
                     {
@@ -118,11 +118,11 @@
                     }
                 ],
                 columns: [
-                    { },
-                    { 
-                        render: function(data, type, row) {
+                    {},
+                    {
+                        render: function (data, type, row) {
                             return `<span>${row.smevName}<span>
-                            ${ row.smevMnemo === null ? '' : '<br /><small>' + row.smevMnemo + '</small>'}`;
+                                    ${row.smevMnemo === null ? '' : '<br /><small>' + row.smevMnemo + '</small>'}`;
                         }
                     },
                     { data: "smevProvider" },
@@ -130,18 +130,18 @@
                     { data: "providerName" },
                     { data: "smevDescription" },
                     { data: "providerUrl" },
-                    { 
+                    {
                         data: "isSmev3",
-                        render: function(data, type, row) {
+                        render: function (data, type, row) {
                             return `${data === true ? '<i class="bx bx-check-circle text-success"></i>' : '<i class="bi bi-x-circle text-danger"></i>'}`;
                         }
                     },
                     {
-                        render: function(data, type, row) {
+                        render: function (data, type, row) {
                             let content = "";
-                            if (isCanEdit === true) 
+                            if (isCanEdit === true)
                                 content += EditBtn({ "id": data, "actionType": 1 });
-                            if (isCanRemove === true) 
+                            if (isCanRemove === true)
                                 content += DeleteBtn({ "id": data });
                             return content;
                         }
@@ -151,25 +151,25 @@
             $table.on("reload", () => {
                 $table.DataTable().ajax.reload(null, false);
             });
-          $table.on('draw.dt', function () {
-                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                        return new bootstrap.Tooltip(tooltipTriggerEl, {
-                            boundary: document.body
-                        });
+            $table.on('draw.dt', function () {
+                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl, {
+                        boundary: document.body
                     });
                 });
-        });      
+            });
+        });
 
         const EditBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="edit" data-bs-toggle="tooltip" title="Изменить" class="btn btn-sm btn-icon text-body">
-            <i class="bi bi-pencil-square"></i></a>`;
+                    <i class="bi bi-pencil-square"></i></a>`;
         }
         const DeleteBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger">
-            <i class="bi bi-trash"></i></a>`;
+                    <i class="bi bi-trash"></i></a>`;
         }
     </script>
 }

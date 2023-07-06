@@ -14,10 +14,10 @@
 }
 <!-- table -->
 <div class="row directory_names" id="content-datatable">
-    <div class="col-2 aside_menu">
+    <div class="col-auto aside_menu">
         <partial name="Services/Details/_NavLeft" model="navId" />
     </div>
-    <div class="col-10 px-4">
+    <div class="col">
         <div class="directory_names-items popup_container" id="navs-tabs-default"> 
             <div class="row justify-content-between align-items-center">
             <div class="col">
@@ -28,7 +28,7 @@
             </div> 
                 @if (User.HasClaim(AccessKeyNames.ReferenceService, AccessKeyValues.Add))
                 {
-                <div class="col-md-2 text-md-end directory_search">
+                    <div class="col-auto text-md-end directory_search">
                         <a asp-action="ServiceChangeModal" asp-route-id="@serviceModel.Id" asp-route-actiontype="edit" data-btn-type="modal" class="btn btn-primary float-end ">
                             <i class="bi bi-pencil-square"></i> Изменить
                         </a>

@@ -6,23 +6,21 @@
     var aspUserId = Model.Model;
 }
 
-<section id="content-auth">
-    <div class="row">
-        <div class="col-12">
-            <div class="nav-align-left">
-                <partial name="Employees/Details/_NavLeft" model="navId" />
-                <div class="tab-content shadow-none">
-                    <div class="tab-pane fade active show" id="navs-tabs-default">
-                        <div class="row">
-                            <div class="col-md-9">
-                                @if (Model.IsVisibleDescription)
-                                {
-                                    <p class="card-text">
-                                        @Model.ViewDescription
-                                    </p>
-                                }
-                            </div>
-                            <div class="col-md-3 text-md-end">
+
+<div class="row directory_names" id="content-datatable">
+    <div class="col-auto aside_menu">
+        <partial name="Employees/Details/_NavLeft" model="navId" />
+    </div>
+    <div class="col">
+        <div class="directory_names-items popup_container" id="navs-tabs-default">
+            <div class="row justify-content-between align-items-center">
+                <div class="col">
+                    @if (Model.IsVisibleDescription)
+                    {
+                        <div class="b-s-14">@Model.ViewDescription</div>
+                    }
+                </div>
+                <div class="col-auto text-md-end">
                                 <a asp-action="EmployeePasswordChangeModal" asp-route-id="@Id" asp-route-actiontype="edit" data-btn-type="modal" class="btn btn-primary float-end">
                                     <i class="bi bi-pencil-square"></i> Изменить пароль
                                 </a>
@@ -37,7 +35,7 @@
                             <div class="col-12">
                                 <div class="table-responsive">
                                     <h5>Роли</h5>
-                                    <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceService" class="table table-sm table-bordered"></table>
+                        <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceService" class="directory_names-items table"></table>
                                 </div>
                             </div>
                         </div>
@@ -59,9 +57,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        
 
 @section Scripts
 {
@@ -139,7 +135,6 @@
                         targets: -1,
                         title: 'Действия',
                         data: "id",
-                        width: "80px",
                         className: 'text-center editor-edit',
                         sorting: false,
                         orderable: false

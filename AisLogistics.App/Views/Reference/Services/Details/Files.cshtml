@@ -5,10 +5,10 @@
 }
 
 <div class="row directory_names" id="content-files">
-    <div class="col-2 aside_menu">
+    <div class="col-auto aside_menu">
         <partial name="Services/Details/_NavLeft" model="navId" />
     </div>
-    <div class="col-10 px-4">
+    <div class="col">
         <div class="directory_names-items popup_container" id="navs-tabs-default">
 
             <div class="row justify-content-between align-items-center">
@@ -21,7 +21,7 @@
                 </div>
                 @if (User.HasClaim(AccessKeyNames.ReferenceService, AccessKeyValues.Add))
                 {
-                    <div class="col-md-2 text-md-end directory_search">
+                    <div class="col-auto text-md-end directory_search">
                         <button data-btn-params='{"actionType":"@ActionType.Add", "serviceId" : "@Id" }' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
                             <i class="bi bi-plus"></i> Добавить
                         </button>

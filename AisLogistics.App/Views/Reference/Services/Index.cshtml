@@ -15,14 +15,13 @@
                         <div class="b-s-14">@Model.ViewDescription</div>
                     }
                 </div>
-               
+
             </div>
 
             <div class="table-responsive overflow-hidden">
                 <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceService" class="directory_names table service"></table>
             </div>
-
-        </div>
+        </div> 
     </div>
 </section>
 <!--/ table -->
@@ -30,15 +29,15 @@
     {
     <script>
         const $table = $('#@(Model.TableName)');
-            //isCanAdd = $table.is('[data-action-add]'),
-            //isCanEdit = $table.is('[data-action-edit]'),
-            //isCanRemove = $table.is('[data-action-remove]');
+        isCanAdd = $table.is('[data-action-add]'),
+            isCanEdit = $table.is('[data-action-edit]'),
+            isCanRemove = $table.is('[data-action-remove]');
 
         $(document).ready(function () {
             $table.DataTable({
-                sDom:"<'row align-items-center'<'col-md-3'f><'col-md-3'<'#types'>><'col-md-3'<'#providers'>><'col-md-2'<'#hashtags'>><'col-md-auto mt-3 ms-auto'<'#btnCreate'>>>" +
+                sDom: "<'row align-items-center'<'col-md-3'f><'col-md-3'<'#types'>><'col-md-3'<'#providers'>><'col-md-2'<'#hashtags'>><'col-md-auto mt-3 ms-auto'<'#btnCreate'>>>" +
                     "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>", 
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 processing: true,
                 serverSide: true,
                 filter: true,
@@ -55,17 +54,16 @@
                 initComplete: function () {
                     var providersColumn = this.api().column(2);
                     var typesColumn = this.api().column(3);
-                    var hashtagsColumn = this.api().column(4); 
-                    if (`@(User.HasClaim(AccessKeyNames.ReferenceService, AccessKeyValues.Add))`=='True')
-                    {
-                      $('#btnCreate').append(`
-                                               <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
-                                <i class="bi bi-plus"></i> Добавить
-                            </button>`);
-                   }
-                     
+                    var hashtagsColumn = this.api().column(4);
+                    if (`@(User.HasClaim(AccessKeyNames.ReferenceService, AccessKeyValues.Add))` == 'True') {
+                        $('#btnCreate').append(`
+                                                       <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
+                                        <i class="bi bi-plus"></i> Добавить
+                                    </button>`);
+                    }
 
-                   $('[name="mainDataTable_length"]')
+
+                    $('[name="mainDataTable_length"]')
                         .select2({ minimumResultsForSearch: Infinity })
                     $('tbody').addClass('container-fluid directory_names-items p-0');
 
@@ -141,34 +139,39 @@
                         } else {
                             $('.directory_names-items').removeClass('row row-cols-4');
                             $('.names-items').removeClass('d-flex');
-                            $('.directory_names-items').removeClass('block-view'); 
+                            $('.directory_names-items').removeClass('block-view');
                             $('[href^="/Reference/Services/"]').children().children().addClass('py-0');
                         }
 
-                    })
+                    });
+                    
+        $('[href^="/Reference/Services/Details/"]').on('click',function(){
+            window.open($(this).attr('href'))
+        });
+
                 },
 
                 columnDefs: [
                     {
-                        data: "id",
+                       data: "id",
                         targets: 0,
                         title: '',
                         visible: false,
                         orderable: false
-                    },
+                    }, 
                     {
                         targets: 1,
                         orderable: false,
-                        title: `<div class="row mt-2"><div class="col b-l-16">Наименование</div>
-                                <div class="col row change_view_items align-items-end justify-content-end p-0">
-                                    <div class= "col-auto d-flex justify-content-center align-items-center change_view change_view-inline active">
-                                        <img src="/img/humburger.svg" alt = "" >
-                                            </div>
-                                            <div class= "col-auto d-flex justify-content-center align-items-center change_view change_view-block">
-                                                <img src="/img/dots.svg" alt = "" >
+                        title: `<div class="row mt-2">
+                                        <div class="col row change_view_items align-items-end justify-content-end p-0">
+                                            <div class= "col-auto d-flex justify-content-center align-items-center change_view change_view-inline active">
+                                                <img src="/img/humburger.svg" alt = "" >
                                                     </div>
-                                                    </div>
-                                                    </div>`,
+                                                    <div class= "col-auto d-flex justify-content-center align-items-center change_view change_view-block">
+                                                        <img src="/img/dots.svg" alt = "" >
+                                                            </div>
+                                                            </div>
+                                                            </div>`,
                     },
                     {
                         name: "providers",
@@ -191,47 +194,49 @@
                         visible: false,
                         orderable: false
                     }
-
-                        //targets: -1,
-                        //data: "id",
-                        //className: 'text-center editor-edit',
-                        //sorting: false,
-                        //orderable: false
-                    
                 ],
                 columns: [
                     {
-                        
-                    },
-                    {
+                       
+                    },  
+                    { 
                         data: "serviceName",
-                        className: "row h-100 w-100",
                         render: function (data, type, row) {
+                            let contentBtn = "";
+                            if (isCanEdit === true) contentBtn += EditBtn({ "id": row.id, "actionType": 1 });
+                            contentBtn += CopyBtn({ "id": row.id });
+
+                            if (isCanRemove === true)
+                                contentBtn += DeleteBtn({ "id": row.id });
+
                             let service = data.length > 170 ? data.substring(0, 170) + ' ...' : data;
-                            return `<a class="d-flex" href="/Reference/Services/Details/${row.id}">
-                                          <div class="col names-items align-items-center">
-                                                                                                    <div class="b-s-14 p-2 py-0">${service}</div>
-                                                                                        ${row.officeName === null ? '' : '<span class="r-l-12 p-2 py-0 ms-auto">' + row.officeName + '</span>'}
-                                                           </div></a>`;
+                            var content =`<div class=" col names-items align-items-center">
+                                                      <div  href="/Reference/Services/Details/${row.id}" class="b-s-14 p-2 py-0">${service}</div>
+                                                      ${row.officeName === null ? '' : '<span class="r-l-12 p-2 py-0 ms-auto">' + row.officeName + '</span>'}
+                                                      <div class="text-end editor-edit">${contentBtn}</div>
+                                                  </div>`;
+
+                            return `<div class="d-flex">${content}</div>`;
+                                  
                         },
                         orderable: false
                     },
                     {
                         render: function (data, type, row) {
                             return "";
-                        }
+                        } 
                     },
                     {
                         render: function (data, type, row) {
                             return "";
                         }
                     },
-                    {
-                          render: function(data, type, row) {
+                     {
+                        render: function (data, type, row) {
                             return "";
                         }
-                    }
-                ]
+                    },
+                ] 
             });
             $table.on("reload", () => {
                 $table.DataTable().ajax.reload(null, false);
@@ -250,19 +255,19 @@
         const EditBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="edit" data-bs-toggle="tooltip" title="Изменить" class="btn btn-sm btn-icon text-body">
-                                    <i class="bi bi-pencil-square"></i></a>`;
+                                            <i class="bi bi-pencil-square"></i></a>`;
         }
 
         const DeleteBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger">
-                                    <i class="bi bi-trash"></i></a>`;
+                                            <i class="bi bi-trash"></i></a>`;
         }
 
         const CopyBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="copy" data-action-copy="/Reference/ServiceСopy" data-bs-toggle="tooltip" title="Скопировать" class="btn btn-sm btn-icon text-success">
-                                    <i class='bx bx-copy'></i></a>`;
+                                            <i class='bi bi-bookmarks'></i></a>`;
         }
 
     </script>
