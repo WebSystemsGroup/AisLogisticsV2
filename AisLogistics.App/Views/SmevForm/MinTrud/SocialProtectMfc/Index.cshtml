@@ -290,18 +290,18 @@
                                 <label class="d-block form-label mb-3">Пол</label>
                                 <div class="form-check form-check-inline mx-0">
                                     <input class="form-check-input" type="radio" asp-for="@request.Declarant.Gender" id="smevModel_Gender1" value="Male" checked="checked">
-                                    <label class="form-check-label" for="smevModel_Gender1"><i class="bx bx-male fs-3"></i>Мужской</label>
+                                    <label class="form-check-label" for="smevModel_Gender1"><i class="bi bi-gender-male fs-6"></i>Мужской</label>
                                 </div>
                                 <div class="form-check form-check-inline mx-0">
                                     <input class="form-check-input" type="radio" asp-for="@request.Declarant.Gender" id="smevModel_Gender2" value="Female">
-                                    <label class="form-check-label" for="smevModel_Gender2"><i class="bx bx-female fs-3"></i>Женский</label>
+                                    <label class="form-check-label" for="smevModel_Gender2"><i class="bi bi-gender-female fs-6"></i>Женский</label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <label class="form-label" asp-for="@request.Declarant.BirthDate">Дата Рождения</label>
                                 <div class="input-group input-group-merge">
                                     <span class="input-group-text">
-                                        <i class="bx bx-calendar"></i>
+                                        <i class="bi bi-calendar3"></i>
                                     </span>
                                     <input type="text" class="form-control pickdate" placeholder="Дата рождения"
                                            asp-for="@request.Declarant.BirthDate" value="">
@@ -354,7 +354,7 @@
                                         <label class="form-label" asp-for="@request.Declarant.DocumentPersonal.IssueDate">Дата выдачи</label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text">
-                                                <i class="bx bx-calendar"></i>
+                                                <i class="bi bi-calendar3"></i>
                                             </span>
                                             <input type="text" class="form-control pickdate required" placeholder="Дата выдачи"
                                                    asp-for="@request.Declarant.DocumentPersonal.IssueDate" value="">
@@ -390,7 +390,7 @@
                                         <label class="form-label" asp-for="@request.Declarant.ChangeNameData.Date">Дата актовой записи</label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text">
-                                                <i class="bx bx-calendar"></i>
+                                                <i class="bi bi-calendar3"></i>
                                             </span>
                                             <input type="text" class="form-control pickdate" placeholder="Дата"
                                                    asp-for="@request.Declarant.ChangeNameData.Date" value="">
@@ -487,17 +487,17 @@
                                             <label class="d-block form-label mb-3">Пол</label>
                                             <div class="form-check form-check-inline mx-0">
                                                 <input class="form-check-input" type="radio" asp-for="@request.FamilyMembersData.SpouseData.Gender" id="smevModel1_Gender1" value="Male" checked="checked">
-                                                <label class="form-check-label" for="smevModel1_Gender1"><i class="bx bx-male fs-3"></i>Мужской</label>
+                                                <label class="form-check-label" for="smevModel1_Gender1"><i class="bi bi-gender-male fs-6"></i>Мужской</label>
                                             </div>
                                             <div class="form-check form-check-inline mx-0">
                                                 <input class="form-check-input" type="radio" asp-for="@request.FamilyMembersData.SpouseData.Gender" id="smevModel1_Gender2" value="Female">
-                                                <label class="form-check-label" for="smevModel1_Gender2"><i class="bx bx-female fs-3"></i>Женский</label>
+                                                <label class="form-check-label" for="smevModel1_Gender2"><i class="bi bi-gender-female fs-6"></i>Женский</label>
                                             </div>
                                         </div>
                                         <div class="col-4">
                                             <label class="form-label" asp-for="@request.FamilyMembersData.SpouseData.BirthDate">Дата рождения</label>
                                             <div class="input-group input-group-merge">
-                                                <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                                <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                                                 <input type="text" class="form-control pickdate" placeholder="Дата рождения"
                                                        asp-for="@request.FamilyMembersData.SpouseData.BirthDate" value="">
                                             </div>
@@ -536,7 +536,7 @@
                                                         <label class="form-label" asp-for="@request.FamilyMembersData.SpouseData.DocumentPersonal.IssueDate">Дата выдачи</label>
                                                         <div class="input-group input-group-merge">
                                                             <span class="input-group-text">
-                                                                <i class="bx bx-calendar"></i>
+                                                                <i class="bi bi-calendar3"></i>
                                                             </span>
                                                             <input type="text" class="form-control pickdate required" placeholder="Дата выдачи"
                                                                    asp-for="@request.FamilyMembersData.SpouseData.DocumentPersonal.IssueDate" value="">
@@ -599,7 +599,7 @@
                                                     <label class="form-label" asp-for="@request.FamilyMembersData.SpouseData.Acts[0].ActData.Date">Дата составления</label>
                                                     <div class="input-group input-group-merge">
                                                         <span class="input-group-text">
-                                                            <i class="bx bx-calendar"></i>
+                                                            <i class="bi bi-calendar3"></i>
                                                         </span>
                                                         <input type="text" class="form-control pickdate" placeholder="Дата"
                                                                asp-for="@request.FamilyMembersData.SpouseData.Acts[0].ActData.Date" value="">
@@ -692,17 +692,17 @@
                                             <label class="d-block form-label mb-3">Пол</label>
                                             <div class="form-check form-check-inline mx-0">
                                                 <input class="form-check-input" type="radio" asp-for="@request.Delegate.Gender" id="smevModel2_Gender1" value="Male" checked="checked">
-                                                <label class="form-check-label" for="smevModel2_Gender1"><i class="bx bx-male fs-3"></i>Мужской</label>
+                                                <label class="form-check-label" for="smevModel2_Gender1"><i class="bi bi-gender-male fs-6"></i>Мужской</label>
                                             </div>
                                             <div class="form-check form-check-inline mx-0">
                                                 <input class="form-check-input" type="radio" asp-for="@request.Delegate.Gender" id="smevModel2_Gender2" value="Female">
-                                                <label class="form-check-label" for="smevModel2_Gender2"><i class="bx bx-female fs-3"></i>Женский</label>
+                                                <label class="form-check-label" for="smevModel2_Gender2"><i class="bi bi-gender-female fs-6"></i>Женский</label>
                                             </div>
                                         </div>
                                         <div class="col-4">
                                             <label class="form-label" asp-for="@request.Delegate.BirthDate">Дата рождения</label>
                                             <div class="input-group input-group-merge">
-                                                <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                                <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                                                 <input type="text" class="form-control pickdate" placeholder="Дата рождения"
                                                        asp-for="@request.Delegate.BirthDate" value="">
                                             </div>
@@ -761,7 +761,7 @@
                                                     <label class="form-label" asp-for="@request.Delegate.DocumentPersonal.IssueDate">Дата выдачи</label>
                                                     <div class="input-group input-group-merge">
                                                         <span class="input-group-text">
-                                                            <i class="bx bx-calendar"></i>
+                                                            <i class="bi bi-calendar3"></i>
                                                         </span>
                                                         <input type="text" class="form-control pickdate required" placeholder="Дата выдачи"
                                                                asp-for="@request.Delegate.DocumentPersonal.IssueDate" value="">
@@ -900,7 +900,7 @@
                             <div class="col-4 d-none">
                                 <label class="form-label" asp-for="@request.DeclarationDate">Дата составления заявления</label>
                                 <div class="input-group input-group-merge">
-                                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                    <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                                     <input type="text" class="form-control pickdate" placeholder="Дата составления заявления"
                                            asp-for="@request.DeclarationDate" value="@DateTime.Today.ToShortDateString()">
                                 </div>
@@ -1015,17 +1015,17 @@
                             <label class="d-block form-label mb-3">Пол</label>
                             <div class="form-check form-check-inline mx-0">
                                 <input class="form-check-input" type="radio" asp-for="@request.FamilyMembersData.FamilyData[0].ParentDataBlock[0].ParentData.Gender" id="smevModel_Parent1_Gender1" value="Male" checked="checked">
-                                <label class="form-check-label" for="smevModel_Parent1_Gender1"><i class="bx bx-male fs-3"></i>Мужской</label>
+                                <label class="form-check-label" for="smevModel_Parent1_Gender1"><i class="bi bi-gender-male fs-6"></i>Мужской</label>
                             </div>
                             <div class="form-check form-check-inline mx-0">
                                 <input class="form-check-input" type="radio" asp-for="@request.FamilyMembersData.FamilyData[0].ParentDataBlock[0].ParentData.Gender" id="smevModel_Parent1_Gender2" value="Female">
-                                <label class="form-check-label" for="smevModel_Parent1_Gender2"><i class="bx bx-female fs-3"></i>Женский</label>
+                                <label class="form-check-label" for="smevModel_Parent1_Gender2"><i class="bi bi-gender-female fs-6"></i>Женский</label>
                             </div>
                         </div>
                         <div class="col-4">
                             <label class="form-label" asp-for="@request.FamilyMembersData.FamilyData[0].ParentDataBlock[0].ParentData.BirthDate">Дата рождения</label>
                             <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                                 <input asp-for="@request.FamilyMembersData.FamilyData[0].ParentDataBlock[0].ParentData.BirthDate"
                                        type="text" class="form-control pickdate" placeholder="Дата">
                             </div>
@@ -1062,7 +1062,7 @@
                                     <label class="form-label" asp-for="@request.FamilyMembersData.FamilyData[0].ParentDataBlock[0].ParentData.DocumentPersonal.IssueDate">Дата выдачи</label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text">
-                                            <i class="bx bx-calendar"></i>
+                                            <i class="bi bi-calendar3"></i>
                                         </span>
                                         <input type="text" class="form-control pickdate required" placeholder="Дата выдачи"
                                                asp-for="@request.FamilyMembersData.FamilyData[0].ParentDataBlock[0].ParentData.DocumentPersonal.IssueDate" value="">
@@ -1127,7 +1127,7 @@
                                     <label class="form-label" asp-for="@request.FamilyMembersData.FamilyData[0].ParentDataBlock[0].MarriageData.Date">Дата составления</label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text">
-                                            <i class="bx bx-calendar"></i>
+                                            <i class="bi bi-calendar3"></i>
                                         </span>
                                         <input type="text" class="form-control pickdate" placeholder="Дата"
                                                asp-for="@request.FamilyMembersData.FamilyData[0].ParentDataBlock[0].MarriageData.Date" value="">
@@ -1166,7 +1166,7 @@
                                     <label class="form-label" asp-for="@request.FamilyMembersData.FamilyData[0].ParentDataBlock[0].ActData.Date">Дата составления</label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text">
-                                            <i class="bx bx-calendar"></i>
+                                            <i class="bi bi-calendar3"></i>
                                         </span>
                                         <input type="text" class="form-control pickdate" placeholder="Дата"
                                                asp-for="@request.FamilyMembersData.FamilyData[0].ParentDataBlock[0].ActData.Date" value="">
@@ -1229,17 +1229,17 @@
                                 <label class="d-block form-label mb-3">Пол</label>
                                 <div class="form-check form-check-inline mx-0">
                                     <input class="form-check-input" type="radio" asp-for="@request.FamilyMembersData.FamilyData[0].ChildrenDataBlock.Gender" id="FamilyMembersData_FamilyData0_ChildrenDataBlock_Gender1" value="Male" checked="checked">
-                                    <label class="form-check-label" for="FamilyMembersData_FamilyData0_ChildrenDataBlock_Gender1"><i class="bx bx-male fs-3"></i>Мужской</label>
+                                    <label class="form-check-label" for="FamilyMembersData_FamilyData0_ChildrenDataBlock_Gender1"><i class="bi bi-gender-male fs-6"></i>Мужской</label>
                                 </div>
                                 <div class="form-check form-check-inline mx-0">
                                     <input class="form-check-input" type="radio" asp-for="@request.FamilyMembersData.FamilyData[0].ChildrenDataBlock.Gender" id="FamilyMembersData_FamilyData0_ChildrenDataBlock_Gender2" value="Female">
-                                    <label class="form-check-label" for="FamilyMembersData_FamilyData0_ChildrenDataBlock_Gender2"><i class="bx bx-female fs-3"></i>Женский</label>
+                                    <label class="form-check-label" for="FamilyMembersData_FamilyData0_ChildrenDataBlock_Gender2"><i class="bi bi-gender-female fs-6"></i>Женский</label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <label class="form-label" asp-for="@request.FamilyMembersData.FamilyData[0].ChildrenDataBlock.BirthDate">Дата рождения</label>
                                 <div class="input-group input-group-merge">
-                                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                    <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                                     <input type="text" class="form-control pickdate" placeholder="Дата рождения"
                                            asp-for="@request.FamilyMembersData.FamilyData[0].ChildrenDataBlock.BirthDate" value="">
                                 </div>
@@ -1274,7 +1274,7 @@
                         <label class="form-label" asp-for="@request.FamilyMembersData.FamilyData[0].ChildrenDataBlock.BirthCertData.Date">Дата выдачи</label>
                         <div class="input-group input-group-merge">
                         <span class="input-group-text">
-                        <i class="bx bx-calendar"></i>
+                        <i class="bi bi-calendar3"></i>
                         </span>
                         <input type="text" class="form-control pickdate" placeholder="Дата выдачи"
                         asp-for="@request.FamilyMembersData.FamilyData[0].ChildrenDataBlock.BirthCertData.Date" value="">
@@ -1306,7 +1306,7 @@
                                         <label class="form-label" asp-for="@request.FamilyMembersData.FamilyData[0].ChildrenDataBlock.GuardianData.Date">Дата выдачи</label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text">
-                                                <i class="bx bx-calendar"></i>
+                                                <i class="bi bi-calendar3"></i>
                                             </span>
                                             <input type="text" class="form-control pickdate" placeholder="Дата выдачи"
                                                    asp-for="@request.FamilyMembersData.FamilyData[0].ChildrenDataBlock.GuardianData.Date" value="">
@@ -1348,7 +1348,7 @@
                                         <label class="form-label" asp-for="@request.FamilyMembersData.FamilyData[0].ChildrenDataBlock.DocumentPersonal.IssueDate">Дата выдачи</label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text">
-                                                <i class="bx bx-calendar"></i>
+                                                <i class="bi bi-calendar3"></i>
                                             </span>
                                             <input type="text" class="form-control pickdate required" placeholder="Дата выдачи"
                                                    asp-for="@request.FamilyMembersData.FamilyData[0].ChildrenDataBlock.DocumentPersonal.IssueDate" value="">
@@ -1486,17 +1486,17 @@
                                 <label class="d-block form-label mb-3">Пол</label>
                                 <div class="form-check form-check-inline mx-0">
                                     <input class="form-check-input" type="radio" asp-for="@request.FamilyMembersData.RelativesData[0].Gender" id="FamilyMembersData_RelativesData100_Gender1" value="Male" checked="checked">
-                                    <label class="form-check-label" for="FamilyMembersData_RelativesData100_Gender1"><i class="bx bx-male fs-3"></i>Мужской</label>
+                                    <label class="form-check-label" for="FamilyMembersData_RelativesData100_Gender1"><i class="bi bi-gender-male fs-6"></i>Мужской</label>
                                 </div>
                                 <div class="form-check form-check-inline mx-0">
                                     <input class="form-check-input" type="radio" asp-for="@request.FamilyMembersData.RelativesData[0].Gender" id="FamilyMembersData_RelativesData100_Gender2" value="Female">
-                                    <label class="form-check-label" for="FamilyMembersData_RelativesData100_Gender2"><i class="bx bx-female fs-3"></i>Женский</label>
+                                    <label class="form-check-label" for="FamilyMembersData_RelativesData100_Gender2"><i class="bi bi-gender-female fs-6"></i>Женский</label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <label class="form-label" asp-for="@request.FamilyMembersData.RelativesData[0].BirthDate">Дата рождения</label>
                                 <div class="input-group input-group-merge">
-                                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                    <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                                     <input type="text" class="form-control pickdate" placeholder="Дата рождения"
                                            asp-for="@request.FamilyMembersData.RelativesData[0].BirthDate" value="">
                                 </div>
@@ -1534,7 +1534,7 @@
                                         <label class="form-label" asp-for="@request.FamilyMembersData.RelativesData[0].DocumentPersonal.IssueDate">Дата выдачи</label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text">
-                                                <i class="bx bx-calendar"></i>
+                                                <i class="bi bi-calendar3"></i>
                                             </span>
                                             <input type="text" class="form-control pickdate required" placeholder="Дата выдачи"
                                                    asp-for="@request.FamilyMembersData.RelativesData[0].DocumentPersonal.IssueDate" value="">
@@ -1605,7 +1605,7 @@
                         <label class="form-label" asp-for="@request.FamilyMembersData.SpouseData.Acts[0].ActData.Date">Дата составления</label>
                         <div class="input-group input-group-merge">
                             <span class="input-group-text">
-                                <i class="bx bx-calendar"></i>
+                                <i class="bi bi-calendar3"></i>
                             </span>
                             <input type="text" class="form-control pickdate" placeholder="Дата"
                                    asp-for="@request.FamilyMembersData.SpouseData.Acts[0].ActData.Date" value="">
@@ -1776,8 +1776,8 @@ getServiceDocuments();
                             tr.append(`<td data-name class="px-2">${file.name}${file.extension}</td>`);
                             //tr.append(`<td class="px-2" style="width: 40%;">${docTypes[0].outerHTML}</td>`);
                             tr.append(`<td class="px-2" style="width: 10%;">${(file.size / 1024).toFixed(2)} кБ</td>`);
-                            tr.append(`<td class="px-2" style="width: 1%;"><a class="btn btn-sm btn-icon viewing-file" data-bs-toggle="tooltip" title="" data-sub-html="${file.name}${file.extension}" href="/SmevBase/DownloadFile/${file.id}" data-bs-original-title="Просмотр" aria-label="Просмотр"><i class="bx bx-show"></i></a></td>`);
-                            //tr.append(`<td class="px-2" style="width: 1%;"><i onclick="docMove('up', this)" role="button" class='bx bx-chevron-up btn-link'></i><i onclick="docMove('down', this)" role="button" class='bx bx-chevron-down btn-link'></i></td>`);
+                            tr.append(`<td class="px-2" style="width: 1%;"><a class="btn btn-sm btn-icon viewing-file" data-bs-toggle="tooltip" title="" data-sub-html="${file.name}${file.extension}" href="/SmevBase/DownloadFile/${file.id}" data-bs-original-title="Просмотр" aria-label="Просмотр"><i class="bi bi-eye"></i></a></td>`);
+                            //tr.append(`<td class="px-2" style="width: 1%;"><i onclick="docMove('up', this)" role="button" class='bi bi-chevron-up btn-link'></i><i onclick="docMove('down', this)" role="button" class='bi bi-chevron-down btn-link'></i></td>`);
                             tr.append(`<td class="px-2" style="width: 1%;"><i onclick="docRemove(this)" role="button" class='bi bi-trash'></i></td>`);
                             tr.append(`<td class="px-2" style="width: 1%;"><input class="form-check-input" type="checkbox" checked></td>`);
 

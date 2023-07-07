@@ -52,7 +52,7 @@
     },
     {
       "name": "Calendar",
-      "icon": "bx-calendar",
+      "icon": .bi-calendar",
       "url": "app-calendar.html"
     },
     {

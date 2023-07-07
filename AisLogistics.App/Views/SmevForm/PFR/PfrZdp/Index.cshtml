@@ -215,18 +215,18 @@ option{
                                 <label class="d-block form-label mb-3">Пол</label>
                                 <div class="form-check form-check-inline mx-0">
                                     <input class="form-check-input" type="radio" asp-for="@request.Applicant.Gender" id="smevModel_Gender1" value="Male" checked="checked">
-                                    <label class="form-check-label" for="smevModel_Gender1"><i class="bx bx-male fs-3"></i>Мужской</label>
+                                    <label class="form-check-label" for="smevModel_Gender1"><i class="bi bi-gender-male fs-6"></i>Мужской</label>
                                 </div>
                                 <div class="form-check form-check-inline mx-0">
                                     <input class="form-check-input" type="radio" asp-for="@request.Applicant.Gender" id="smevModel_Gender2" value="Female">
-                                    <label class="form-check-label" for="smevModel_Gender2"><i class="bx bx-female fs-3"></i>Женский</label>
+                                    <label class="form-check-label" for="smevModel_Gender2"><i class="bi bi-gender-female fs-6"></i>Женский</label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <label class="form-label" asp-for="@request.Applicant.BirthDate">Дата Рождения</label>
                                 <div class="input-group input-group-merge">
                                     <span class="input-group-text">
-                                        <i class="bx bx-calendar"></i>
+                                        <i class="bi bi-calendar3"></i>
                                     </span>
                                     <input type="text" class="form-control pickdate required" placeholder="Дата рождения"
                                            asp-for="@request.Applicant.BirthDate" value="">
@@ -297,7 +297,7 @@ option{
                 <label class="form-label" asp-for="@request.Applicant.IdentityDoc.IssueDate">Дата выдачи</label>
                 <div class="input-group input-group-merge">
                     <span class="input-group-text">
-                        <i class="bx bx-calendar"></i>
+                        <i class="bi bi-calendar3"></i>
                     </span>
                     <input type="text" class="form-control pickdate required" placeholder="Дата выдачи"
                            asp-for="@request.Applicant.IdentityDoc.IssueDate" value="">
@@ -562,7 +562,7 @@ option{
                                     <div class="col-3">
                                         <label class="form-label" asp-for="@request.Representative.BirthDate">Дата рождения</label>
                                         <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                            <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                                             <input type="text" class="form-control pickdate required" placeholder="Дата рождения"
                                                    asp-for="@request.Representative.BirthDate" value="">
                                         </div>
@@ -602,7 +602,7 @@ option{
                                                 <label class="form-label" asp-for="@request.Representative.PowerAttorneyIssueDate">Дата выдачи</label>
                                                 <div class="input-group input-group-merge">
                                                     <span class="input-group-text">
-                                                        <i class="bx bx-calendar"></i>
+                                                        <i class="bi bi-calendar3"></i>
                                                     </span>
                                                     <input type="text" class="form-control pickdate required" placeholder="Дата выдачи"
                                                            asp-for="@request.Representative.PowerAttorneyIssueDate" value="">
@@ -612,7 +612,7 @@ option{
                                                 <label class="form-label" asp-for="@request.Representative.PowerAttorneyDateEnd">Дата окончания</label>
                                                 <div class="input-group input-group-merge">
                                                     <span class="input-group-text">
-                                                        <i class="bx bx-calendar"></i>
+                                                        <i class="bi bi-calendar3"></i>
                                                     </span>
                                                     <input type="text" class="form-control pickdate required" placeholder="Дата окончания"
                                                            asp-for="@request.Representative.PowerAttorneyDateEnd" value="">
@@ -654,7 +654,7 @@ option{
                                                 <label class="form-label" asp-for="@request.Representative.IdentityDoc.IssueDate">Дата выдачи</label>
                                                 <div class="input-group input-group-merge">
                                                     <span class="input-group-text">
-                                                        <i class="bx bx-calendar"></i>
+                                                        <i class="bi bi-calendar3"></i>
                                                     </span>
                                                     <input type="text" class="form-control pickdate required" placeholder="Дата выдачи"
                                                            asp-for="@request.Representative.IdentityDoc.IssueDate" value="">
@@ -918,7 +918,7 @@ option{
                         <label class="form-label" asp-for="@request.DeliveryInfo.DeliveryDateStart">Дата начала доставки пенсии</label>
                         <div class="input-group input-group-merge">
                             <span class="input-group-text">
-                                <i class="bx bx-calendar"></i>
+                                <i class="bi bi-calendar3"></i>
                             </span>
                             <input type="text" class="form-control pickdate required" placeholder="Дата начала доставки пенсии"
                                    asp-for="@request.DeliveryInfo.DeliveryDateStart" value="">

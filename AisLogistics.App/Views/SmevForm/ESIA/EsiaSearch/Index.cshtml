@@ -95,14 +95,14 @@
             <div class="col-3">
                 <label class="form-label" asp-for="@request.DocumentData.DocDate">Дата выдачи</label>
                 <div class="input-group input-group-merge">
-                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                    <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                     <input asp-for="@request.DocumentData.DocDate" type="text" class="form-control pickdate required" placeholder="Дата" value="">
                 </div>
             </div>
             <div class="col-3" id="docEndDate" data-disabled>
                 <label class="form-label" asp-for="@request.DocumentData.DocEndDate">Дата окончания срока действия </label>
                 <div class="input-group input-group-merge">
-                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                    <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                     <input asp-for="@request.DocumentData.DocEndDate" type="text" class="form-control pickdate" placeholder="Дата" value="">
                 </div>
             </div>

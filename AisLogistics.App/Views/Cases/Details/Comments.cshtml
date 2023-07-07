@@ -49,7 +49,7 @@
                             else
                             {
                                 <div class="pt-5">
-                                    <span class="bx bx-message chat-start-icon fs-1 p-3 mb-1"></span>
+                                    <span class="bi bi-chat-left chat-start-icon fs-1 p-3 mb-1"></span>
                                     <h4 class="d-none d-lg-block">Нет комментариев</h4>
                                 </div>
                             }
@@ -60,13 +60,13 @@
                         {
                             <form asp-action="CommentAdd" asp-controller="Cases" asp-route-id="@ViewBag.Id" id="chatSendingForm" class="d-flex align-items-center gap-2">
                                 <a asp-action="CommentEmployeesPick" asp-route-id="" id="chatPickEmployees" class="btn p-0 h-px-30" title="Выбор сотрудника">
-                                    <i class="bx bx-face cursor-pointer"></i>
+                                    <i class="bi bi-person-fill cursor-pointer"></i>
                                     <span class="badge badge-dot badge-notifications bg-danger rounded-pill d-none"></span>
                                 </a>
-                                <i class="bx bx-paperclip ms-1 cursor-pointer"></i>
+                                <i class="bi bi-menu-button-wide ms-1 cursor-pointer"></i>
                                 <input type="text" class="form-control chat-message-send mx-1" name="comment" required="" placeholder="Введите здесь Ваше сообщение...">
                                 <button type="submit" class="align-items-center btn btn-primary d-lg-flex gap-2" id="submitChatSendingForm">
-                                    <i class="bx bx-paper-plane"></i>
+                                    <i class="bi bi-send"></i>
                                     <span class="d-none d-lg-block ms-1">Отправить</span>
                                 </button>
                             </form>

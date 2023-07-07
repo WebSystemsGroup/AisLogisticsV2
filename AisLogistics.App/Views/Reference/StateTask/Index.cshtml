@@ -16,30 +16,30 @@
 }
 
 <div class="row directory_names" id="content-datatable">
-  <div class="col-12">
+    <div class="col-12">
         <div class="row justify-content-between align-items-center">
             <div class="col">
                 @if (Model.IsVisibleDescription)
                 {
-                 <div class="b-s-14">@Model.ViewDescription</div>
+                    <div class="b-s-14">@Model.ViewDescription</div>
                 }
             </div>
-                        @if (User.HasClaim(AccessKeyNames.ReferenceStateTask, AccessKeyValues.Add))
-                        {
-                <div class="col-md-2 text-md-end directory_search">
-                                <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
-                                    <i class="bi bi-plus"></i> Добавить
-                                </button>
-                            </div>
-                        }
-                    </div>
-
-                    <div class="table-responsive">
-            <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceStateTask" class="directory_names-items table"></table>
-                    </div>
+            @if (User.HasClaim(AccessKeyNames.ReferenceStateTask, AccessKeyValues.Add))
+            {
+                <div class="col-auto text-md-end directory_search">
+                    <button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
+                        <i class="bi bi-plus"></i> Добавить
+                    </button>
                 </div>
-            </div>
-       
+            }
+        </div>
+
+        <div class="table-responsive">
+            <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceStateTask" class="directory_names-items table"></table>
+        </div>
+    </div>
+</div>
+
 
 @section Scripts
     {
@@ -69,7 +69,7 @@
                         return json.data;
                     }
                 },
-                initComplete: function () { 
+                initComplete: function () {
                 },
                 columnDefs: [
                     {
@@ -144,13 +144,13 @@
         const EditBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="edit" data-bs-toggle="tooltip" title="Изменить" class="btn btn-sm btn-icon text-body">
-                    <i class="bi bi-pencil-square"></i></a>`;
+                            <i class="bi bi-pencil-square"></i></a>`;
         }
 
         const DeleteBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger">
-                    <i class="bi bi-trash"></i></a>`;
+                            <i class="bi bi-trash"></i></a>`;
         }
     </script>
 }

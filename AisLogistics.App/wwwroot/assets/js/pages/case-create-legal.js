@@ -327,7 +327,7 @@
                     title: 'Действия',
                     render: function (data, type, row) {
                         return `<button type="button" class="btn btn-sm btn-link btn-icon p-0 text-reset" data-toggle="sidebar">
-                        <i class="bx bx-info-circle cursor-pointer"></i></button>`;
+                        <i class="bi bi-info-circle cursor-pointer"></i></button>`;
                     }
                 }
             ]

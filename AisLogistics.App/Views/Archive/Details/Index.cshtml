@@ -38,12 +38,12 @@
                 </ul>
                 <small class="text-muted text-uppercase">Принял</small>
                 <ul class="list-unstyled mb-4">
-                    <li class="d-flex align-items-center"><i class="bx bx-user"></i><span>@firstStage.EmployeeCurrent.Name</span></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i><span>@firstStage.EmployeeCurrent.Name</span></li>
                     <li class="d-flex align-items-center"><span class="small text-muted">@firstStage.EmployeeCurrent.Job</span></li>
                 </ul>
                 <small class="text-muted text-uppercase">Исполнил</small>
                 <ul class="list-unstyled">
-                    <li class="d-flex align-items-center"><i class="bx bx-user"></i><span>@lastStage.EmployeeCurrent.Name</span></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i><span>@lastStage.EmployeeCurrent.Name</span></li>
                     <li class="d-flex align-items-center"><span class="small text-muted">@lastStage.EmployeeCurrent.Job</span></li>
                 </ul>
             </div>
@@ -54,9 +54,9 @@
             <div class="card-body">
                 <small class="text-muted text-uppercase">Overview</small>
                 <ul class="list-unstyled mt-3 mb-0">
-                    <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="b-s-16 mx-2">Task Compiled:</span> <span>13.5k</span></li>
-                    <li class="d-flex align-items-center mb-3"><i class='bx bx-customize'></i><span class="b-s-16 mx-2">Projects Compiled:</span> <span>146</span></li>
-                    <li class="d-flex align-items-center"><i class="bx bx-user"></i><span class="b-s-16 mx-2">Connections:</span> <span>897</span></li>
+                    <li class="d-flex align-items-center mb-3"><i class="bi bi-check2"></i><span class="b-s-16 mx-2">Task Compiled:</span> <span>13.5k</span></li>
+                    <li class="d-flex align-items-center mb-3"><i class='bi bi-funnel'></i><span class="b-s-16 mx-2">Projects Compiled:</span> <span>146</span></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i><span class="b-s-16 mx-2">Connections:</span> <span>897</span></li>
                 </ul>
             </div>
         </div>*@
@@ -67,7 +67,7 @@
             <div class="card accordion-item shadow active">
                 <h2 class="accordion-header d-flex align-items-center">
                     <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordionArchive-customer" aria-expanded="true">
-                        <i class="bx bx-user me-2"></i>
+                        <i class="bi bi-person me-2"></i>
                         Заявители
                     </button>
                 </h2>
@@ -138,7 +138,7 @@
             <div class="card accordion-item shadow">
                 <h2 class="accordion-header d-flex align-items-center">
                     <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionArchive-document" aria-expanded="false">
-                        <i class="bx bx-file me-2"></i>
+                        <i class="bi bi-file-earmark-text me-2"></i>
                         Документы
                     </button>
                 </h2>
@@ -186,7 +186,7 @@
                                                     <td class="text-end">
                                                         @if (item.IsViewing)
                                                         {
-                                                            <a asp-action="DownloadFile" asp-route-id="@item.Id" class="btn btn-sm btn-icon viewing-file" data-bs-toggle="tooltip" title="Просмотр" data-sub-html="@item.DocumentName</br>@item.Name"><i class="bx bx-show"></i></a>
+                                                            <a asp-action="DownloadFile" asp-route-id="@item.Id" class="btn btn-sm btn-icon viewing-file" data-bs-toggle="tooltip" title="Просмотр" data-sub-html="@item.DocumentName</br>@item.Name"><i class="bi bi-eye"></i></a>
                                                         }
                                                         <a asp-action="DownloadFile" asp-route-id="@item.Id" target="_blank" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" title="Скачать"><i class="bi bi-download"></i></a>
                                                     </td>
@@ -208,7 +208,7 @@
             <div class="card accordion-item shadow">
                 <h2 class="accordion-header d-flex align-items-center">
                     <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionArchive-result" aria-expanded="false">
-                        <i class="bx bx-task me-2"></i>
+                        <i class="bi bi-journal-check me-2"></i>
                         Результаты
                     </button>
                 </h2>
@@ -256,7 +256,7 @@
                                                     <td class="text-end">
                                                         @if (item.IsViewing)
                                                         {
-                                                            <a asp-action="DownloadFile" asp-route-id="@item.Id" class="btn btn-sm btn-icon viewing-file" data-bs-toggle="tooltip" title="Просмотр" data-sub-html="@item.DocumentName</br>@item.Name"><i class="bx bx-show"></i></a>
+                                                            <a asp-action="DownloadFile" asp-route-id="@item.Id" class="btn btn-sm btn-icon viewing-file" data-bs-toggle="tooltip" title="Просмотр" data-sub-html="@item.DocumentName</br>@item.Name"><i class="bi bi-eye"></i></a>
                                                         }
                                                         <a asp-action="DownloadFile" asp-route-id="@item.Id" target="_blank" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" title="Скачать"><i class="bi bi-download"></i></a>
                                                     </td>
@@ -278,7 +278,7 @@
             <div class="card accordion-item shadow">
                 <h2 class="accordion-header d-flex align-items-center">
                     <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionArchive-smev" aria-expanded="false">
-                        <i class="bx bx-globe me-2"></i>
+                        <i class="bi bi-globe2 me-2"></i>
                         СМЭВ
                     </button>
                 </h2>
@@ -324,7 +324,7 @@
                                                 </td>
                                                 <td class="text-end">
                                                     @*<a asp-controller="SmevBase" asp-action="GetArchiveSmevDetailsModal" asp-route-id="@item.Id" data-btn-type="modal" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" title="Подробнее">
-                                                        <i class="bx bx-info-circle"></i>
+                                                        <i class="bi bi-info-circle"></i>
                                                     </a>*@
                                                 </td>
                                             </tr>
@@ -345,7 +345,7 @@
             <div class="card accordion-item shadow">
                 <h2 class="accordion-header d-flex align-items-center">
                     <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionArchive-comment" aria-expanded="false">
-                        <i class="bx bx-comment me-2"></i>
+                        <i class="bi bi-chat-dots me-2"></i>
                         Комментарии
                     </button>
                 </h2>
@@ -398,7 +398,7 @@
             <div class="card accordion-item shadow">
                 <h2 class="accordion-header d-flex align-items-center">
                     <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionArchive-stage" aria-expanded="false">
-                        <i class="bx bx-git-compare me-2"></i>
+                        <i class="bi bi-shuffle me-2"></i>
                         Этапы
                     </button>
                 </h2>
@@ -462,7 +462,7 @@
             <div class="card accordion-item shadow">
                 <h2 class="accordion-header d-flex align-items-center">
                     <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionArchive-audit" aria-expanded="false">
-                        <i class="bx bx-git-branch me-2"></i>
+                        <i class="bi bi-git me-2"></i>
                         Действия
                     </button>
                 </h2>

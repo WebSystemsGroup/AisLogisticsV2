@@ -27,7 +27,7 @@
             <div class="col-4">
                 <label class="form-label" asp-for="@request.DateStart">Начало периода</label>
                 <div class="input-group input-group-merge">
-                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                    <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                     <input asp-for="@request.DateStart" type="text" class="form-control pickdate required" 
                            placeholder="Начало периода" value="@DateTime.Today.AddMonths(-6)" />
                 </div>
@@ -35,7 +35,7 @@
             <div class="col-4">
                 <label class="form-label" asp-for="@request.DateEnd">Окончание периода</label>
                 <div class="input-group input-group-merge">
-                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                    <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                     <input asp-for="@request.DateEnd" type="text" class="form-control pickdate required" 
                            placeholder="Окончание периода" value="@DateTime.Today" />
                 </div>
@@ -86,7 +86,7 @@
             <div class="col-4">
                 <label class="form-label" asp-for="@request.BirthDate">Дата рождения</label>
                 <div class="input-group input-group-merge">
-                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                    <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                     <input asp-for="@request.BirthDate" type="text" class="form-control pickdate required" placeholder="Дата" value="">
                 </div>
             </div>

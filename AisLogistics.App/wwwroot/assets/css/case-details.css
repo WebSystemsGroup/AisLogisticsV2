@@ -26120,7 +26120,7 @@ html[data-textdirection=rtl] .case-application .case-app-details .case-next .act
     box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
     border-radius: 3px;
 }
-.header_menu .bi {
+.header_menu .bi .bi-plus {
     color: #fff !important;
 }
 svg {

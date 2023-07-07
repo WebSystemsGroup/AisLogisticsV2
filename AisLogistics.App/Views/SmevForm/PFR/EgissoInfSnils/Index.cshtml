@@ -35,13 +35,13 @@
             <div class="row mb-2">
                 <div class="col-6">
                     <button type="button" class="btn btn-success w-100 px-0" id="chooseAllCustomer">
-                        <i class="bx bx-checkbox-checked"></i>
+                        <i class="bi bi-check2-square"></i>
                         Выбрать всех
                     </button>
                 </div>
                 <div class="col-6">
                     <button type="button" class="btn btn-danger w-100 px-0" id="removeAllCustomer">
-                        <i class="bx bx-checkbox"></i>
+                        <i class="bi bi-square"></i>
                         Убрать всех
                     </button>
                 </div>
@@ -65,14 +65,14 @@
                     <div class="row justify-content-center">
                         <div class="col-6">
                             <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                                 <input asp-for="@request[0].ReportPeriod.Begin" type="text" value="@DateTime.Today.AddYears(-1)"
                                        class="form-control pickadate required" placeholder="Дата начала">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                                 <input asp-for="@request[0].ReportPeriod.End" type="text" value="@DateTime.Today"
                                        class="form-control pickadate required" placeholder="Дата окончания">
                             </div>

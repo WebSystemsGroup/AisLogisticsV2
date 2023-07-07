@@ -11,6 +11,7 @@
 
     #caseStages .tbody-item {
         border-bottom: 1px solid #BEBEBE;
+        display:flex;
     }
 
     #caseStages .head-stage td{
@@ -22,6 +23,25 @@
         color: #1CB92B !important;
     }
 
+    #caseStages table{
+        position:relative;
+    }
+
+    #caseStages tbody{
+        position: absolute;
+        display: flex; 
+        max-height: 14rem;
+        overflow-y: auto;
+        flex-wrap: wrap;
+    }
+
+        #caseStages tbody td {
+            margin-right: auto;
+    }
+
+    #caseStages tr{
+       width:100%
+    }
 </style>
 @if (items.Any())
 {
@@ -34,7 +54,7 @@
                 <td class="m-s-12">Дата</td>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="scroller">
             @foreach (var item in items)
             {
                 <tr class="tbody-item">

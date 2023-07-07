@@ -7,38 +7,37 @@
 
             #navbarSupportedContent .bi {
                 color: #B5B5B5;
+                font-size: 1.2rem;
+                margin-right: 0.5rem;
             }
             .menu-icon {
                 color: #BEBEBE;
             }
 
-            .bx-list-service:before {
+            .bi-list-service:before {
                 content: url("/assets/svg/icons/list-service.svg");
             }
 
-            .bx-spravochniki:before {
+            .bi-spravochniki:before {
                 content: url("/assets/svg/icons/spravochniki.svg");
             }
 
-            .bx-list-service.active:before {
+            .bi-list-service.active:before {
                 content: url(/assets/svg/icons/list-service-active.svg) !important;
             }
 
-            .bx-spravochniki.active:before {
+            .bi-spravochniki.active:before {
                 content: url(/assets/svg/icons/spravochniki-active.svg) !important;
             }
 
-            .bx-cog.active {
+            .bi-cog.active {
                 color: #077EFA;
             }
 
             #navbarSupportedContent .menu-icon {
                 vertical-align: sub;
             }
-
-            .bi-file-earmark-bar-graph{
-                 font-size: 1.2rem;
-            }
+             
         </style>
         <button class="navbar-toggler ps-0 d-flex d-xl-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-list me-4"></i>
@@ -48,7 +47,7 @@
                 <!-- Cases -->
                 <li class="nav-item dropdown me-xxl-4 menu-text">
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="menu-icon bx bx-list-service"></i>
+                        <i class="menu-icon bi bi-list-service"></i>
                         <span class="spanText">Услуги</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -56,7 +55,7 @@
                         {
                             <li>
                                 <a asp-action="Index" asp-controller="Cases" class="dropdown-item">
-                                    <i class="menu-icon bx bx-folder"></i>
+                                    <i class="menu-icon bi bi-folder"></i>
                                     Реестр
                                 </a>
                             </li>
@@ -65,7 +64,7 @@
                         {
                             <li>
                                 <a asp-action="CasesIssued" asp-controller="Cases" class="dropdown-item">
-                                    <i class="menu-icon bx bx-folder"></i>
+                                    <i class="menu-icon bi bi-folder"></i>
                                     Реестр выдачи
                                 </a>
                             </li>
@@ -74,7 +73,7 @@
                         {
                             <li>
                                 <a asp-action="CasesReestrSmev" asp-controller="Cases" class="dropdown-item">
-                                    <i class="menu-icon bx bx-folder"></i>
+                                    <i class="menu-icon bi bi-folder"></i>
                                     Реестр СМЭВ
                                 </a>
                             </li>
@@ -83,7 +82,7 @@
                         {
                             <li>
                                 <a asp-action="Index" asp-controller="ReestrTransferDocuments" class="dropdown-item">
-                                    <i class="menu-icon bx bx-folder"></i>
+                                    <i class="menu-icon bi bi-folder"></i>
                                     Реестр передачи документов
                                 </a>
                             </li>
@@ -92,7 +91,7 @@
                         {
                             <li>
                                 <a asp-action="Index" asp-controller="ReestrUnclaimedDocuments" class="dropdown-item">
-                                    <i class="menu-icon bx bx-folder"></i>
+                                    <i class="menu-icon bi bi-folder"></i>
                                     Реестр невостребованных документов
                                 </a>
                             </li>
@@ -101,14 +100,14 @@
                         {
                             <li>
                                 <a asp-action="Index" asp-controller="ReestrSentMessage" class="dropdown-item">
-                                    <i class="menu-icon bx bx-folder"></i>
+                                    <i class="menu-icon bi bi-folder"></i>
                                     Реестр отправленных смс
                                 </a>
                             </li>
                         }
                         <li class="border-top">
                             <a asp-action="Index" asp-controller="Archive" class="dropdown-item">
-                                <i class="menu-icon bx bx-hourglass"></i>
+                                <i class="menu-icon bi bi-hourglass-bottom"></i>
                                 Архив
                             </a>
                         </li>
@@ -126,7 +125,7 @@
                 <!-- Statistics -->
                 <li class="nav-item me-xxl-4 menu-text">
                     <a asp-action="Index" asp-controller="Statistics" class="nav-link menu-text">
-                        <i class="menu-icon bx bx-stats"></i>
+                        <i class="bi bi-graph-up-arrow"></i>
                         <span class="spanText">  Аналитика</span>
                     </a>
                 </li>
@@ -134,7 +133,7 @@
                 <!-- Reference -->
                 <li class="nav-item dropdown me-xxl-4 menu-text">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="menu-icon bx bx-spravochniki"></i>
+                        <i class="menu-icon bi bi-spravochniki"></i>
                         <span class="spanText">   Справочники</span>
                     </a>
 
@@ -226,7 +225,7 @@
                         {
                             <li>
                                 <a asp-action="StateTask" asp-controller="Reference" class="dropdown-item">
-                                    <i class="menu-icon bx bx-task"></i>
+                                    <i class="menu-icon bi bi-journal-check"></i>
                                     Гос задание
                                 </a>
                             </li>
@@ -245,7 +244,7 @@
                 <!-- System -->
                 <li class="nav-item dropdown menu-text">
                     <a href="javascript:void(0)" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarDropdown3">
-                        <i class="menu-icon bx bx-cog"></i>
+                        <i class="menu-icon bi bi-gear"></i>
                         <span class="spanText"> Система</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
@@ -253,7 +252,7 @@
                         {
                             <li>
                                 <a asp-action="Roles" asp-controller="Systems" class="dropdown-item">
-                                    <i class="menu-icon bx bx-lock-open"></i>
+                                    <i class="menu-icon bi bi-unlock"></i>
                                     Роли доступа
                                 </a>
                             </li>

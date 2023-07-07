@@ -199,7 +199,8 @@
                     {
                        
                     },  
-                    { 
+                    {
+
                         data: "serviceName",
                         render: function (data, type, row) {
                             let contentBtn = "";
@@ -211,11 +212,11 @@
 
                             let service = data.length > 170 ? data.substring(0, 170) + ' ...' : data;
                             var content =`<div class=" col names-items align-items-center">
-                                                      <div  href="/Reference/Services/Details/${row.id}" class="b-s-14 p-2 py-0">${service}</div>
-                                                      ${row.officeName === null ? '' : '<span class="r-l-12 p-2 py-0 ms-auto">' + row.officeName + '</span>'}
-                                                      <div class="text-end editor-edit">${contentBtn}</div>
-                                                  </div>`;
-
+                                                                      <div  href="/Reference/Services/Details/${row.id}" class="b-s-14 p-2 py-0 ">
+                                                                       ${service}${row.officeName === null ? '' : '<div class="r-l-12 p-2 py-0 px-0 ms-auto">' + row.officeName + '</div>'}
+                                                                      </div>
+                                                                      <div class="text-end editor-edit ms-auto col">${contentBtn}</div>
+                                                  </div>`; 
                             return `<div class="d-flex">${content}</div>`;
                                   
                         },

@@ -316,11 +316,7 @@ label {
 
         .directory_names-items.block-view .names-items {
             box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.07);
-            border: none;
-            margin: 10px;
-            width: calc(100% / 4 - 20px);
-            flex-direction: column;
-            padding: 0;
+            margin-bottom: 10px;
         }
 
             .directory_names-items.block-view .names-items p {
@@ -332,6 +328,12 @@ label {
             .directory_names-items.block-view .names-items span {
                 padding: 20px 23px 0;
             }
+
+.block-view td{
+    display:flex;
+    height:100%;
+    margin-bottom:10px;
+}
 
 table .names-items p {
     padding: 10px;
@@ -1902,9 +1904,6 @@ r-s-18 {
     right: auto;
     left: 10px
 }
- 
-.form-control:not([type="search"]), select, textarea, .light-style .select2-container--default .select2-selection {
-    color: #172359 !important;
-    font-family: 'golos-regular' !important;
-    border: 1px solid rgba(93, 102, 250, 0.35);
+.paginate_button.page-item.active .page-link {
+    margin-right: 10px !important;
 }

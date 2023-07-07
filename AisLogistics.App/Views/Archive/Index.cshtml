@@ -25,7 +25,7 @@
                             <div class="card accordion-item active">
                                 <h2 class="accordion-header me-0">
                                     <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordionArchive-person" aria-expanded="true">
-                                        <i class="bx bx-user me-2"></i>
+                                        <i class="bi bi-person me-2"></i>
                                         Персональные данные
                                     </button>
                                 </h2>
@@ -127,7 +127,7 @@
                             @*<div class="accordion-item card">
                                 <h2 class="accordion-header d-flex align-items-center">
                                     <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionArchive-service" aria-expanded="false">
-                                        <i class="bx bx-briefcase me-2"></i>
+                                        <i class="bi bi-briefcase me-2"></i>
                                         Услуга
                                     </button>
                                 </h2>
@@ -302,9 +302,9 @@
                         render: function (data, type, row) {
                             let content = `<div>${row.archiveCasesMainDto.applicant.name}</div>`;
                             if (row.archiveCasesMainDto.applicant.address !== null)
-                                content += `<div class="small"><i class="bx bx-map me-1"></i>${row.archiveCasesMainDto.applicant.address}</div>`;
+                                content += `<div class="small"><i class="bi bi-geo-alt me-1"></i>${row.archiveCasesMainDto.applicant.address}</div>`;
                             if (row.archiveCasesMainDto.applicant.phone !== null)
-                                content += `<div class="small"><i class="bx bx-phone me-1"></i>${row.archiveCasesMainDto.applicant.phone}</div>`;
+                                content += `<div class="small"><i class="bi bi-telephone me-1"></i>${row.archiveCasesMainDto.applicant.phone}</div>`;
                             return content;
                         }
                     },
