@@ -188,7 +188,8 @@
                                                         {
                                                             <a asp-action="DownloadFile" asp-route-id="@item.Id" class="btn btn-sm btn-icon viewing-file" data-bs-toggle="tooltip" title="Просмотр" data-sub-html="@item.DocumentName</br>@item.Name"><i class="bi bi-eye"></i></a>
                                                         }
-                                                        <a asp-action="DownloadFile" asp-route-id="@item.Id" target="_blank" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" title="Скачать"><i class="bi bi-download"></i></a>
+
+                                                        <a asp-action="DownloadFile" asp-route-id="@item.Id" asp-route-type="@DocumentType.ServiceDocument" target="_blank" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" title="Скачать"><i class="bi bi-download"></i></a>
                                                     </td>
                                                 </tr>
                                             }
@@ -258,7 +259,8 @@
                                                         {
                                                             <a asp-action="DownloadFile" asp-route-id="@item.Id" class="btn btn-sm btn-icon viewing-file" data-bs-toggle="tooltip" title="Просмотр" data-sub-html="@item.DocumentName</br>@item.Name"><i class="bi bi-eye"></i></a>
                                                         }
-                                                        <a asp-action="DownloadFile" asp-route-id="@item.Id" target="_blank" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" title="Скачать"><i class="bi bi-download"></i></a>
+
+                                                        <a asp-action="DownloadFile" asp-route-id="@item.Id" asp-route-type="@DocumentType.ServiceDocumentResult" target="_blank" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" title="Скачать"><i class="bi bi-download"></i></a>
                                                     </td>
                                                 </tr>
                                             }
