@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <div class="table-responsive">
+            <div class="table-responsive mt-3">
                 <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceDocument" class="directory_names-items table"></table>
             </div>
         </div>
@@ -40,8 +40,7 @@
 
         $(document).ready(function () {
             $table.DataTable({
-                sDom: "<'row'<'col-md-6 'f><'col-md-5'l>>" +
-                    "<'row mb-3'<'col-sm-12 col-md-6'<'#providers'>><'col mt-3 ms-auto text-end'<'#btnCreate'>>>" +
+                sDom: "<'row align-items-center'<'col-md-4'f><'col-sm-12 col-md-4'<'#providers'>><'col-auto mt-3'l><'col mt-3 ms-auto text-end'<'#btnCreate'>>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 processing: true,

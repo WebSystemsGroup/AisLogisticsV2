@@ -4,25 +4,25 @@
         <div class="col-12">
             <h3 class="mb-2">Сегодня</h3>
             <div class="card">
-                <div class="card-body border border-2">
+                <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="text-center border-start w-100">
                             <h6>@Model.Info.ReceivedCount</h6>
                             <span>Принято</span>
                         </div>
-                        <div class="text-center border-start border-end w-100">
+                        <div class="text-center  w-100 text-muted text-muted">
                             <h6>@Model.Info.IssuedCount</h6>
                             <span>Выдано</span>
                         </div>
-                        <div class="text-center border-start border-end w-100">
+                        <div class="text-center  w-100 text-muted text-muted">
                             <h6>@Model.Info.ConsultationCount</h6>
                             <span>Консультация</span>
                         </div>
-                        <div class="text-center border-start border-end w-100">
+                        <div class="text-center  w-100 text-muted text-muted">
                             <h6>@Model.Info.ExecutionCount</h6>
                             <span>На Исполнение</span>
                         </div>
-                        <div class="text-center border-start border-end w-100">
+                        <div class="text-center  w-100 text-muted text-muted">
                             <h6>@Model.Info.ExpiredCount</h6>
                             <span>Просрочено</span>
                         </div>
@@ -30,11 +30,11 @@
                             <h6>@Model.Info.SmevRequestCount</h6>
                             <span>СМЭВ отправлено</span>
                         </div>
-                        <div class="text-center border-start border-end w-100">
+                        <div class="text-center  w-100 text-muted text-muted">
                             <h6>@Model.Info.SmevResponseCount</h6>
                             <span>СМЭВ получено</span>
                         </div>
-                        <div class="text-center border-start border-end w-100">
+                        <div class="text-center  w-100 text-muted text-muted">
                             <h6>@Model.Info.ServiceStateTaskCount %</h6>
                             <span>Гос задание</span>
                         </div>
@@ -47,7 +47,7 @@
         <div class="col-8">
             <h3 class="mb-2">Динамика по услугам</h3>
             <div class="card h-100">
-                <div class="card-body border border-2">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-12">
                             <form id="statisticsForm" asp-action="StatisticsGeneralGraphic" asp-controller="Statistics" method="get" role="form">
@@ -105,7 +105,7 @@
         <div class="col-4">
             <h3 class="mb-2">ТОП</h3>
             <div class="card h-100">
-                <div class="card-body border border-2">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-12 mb-3">
                             <table class="table">

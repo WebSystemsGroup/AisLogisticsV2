@@ -43,6 +43,10 @@
     #content-report .nav-link.active {
         border-color: none !important;
     }
+
+    .card{
+        border:none;
+    }
 </style>
 
 <section>
@@ -72,25 +76,25 @@
                             <div class="col-12">
                                 <h4 class="mb-2 b-s-18">Данные на сегодня</h4>
                                 <div class="card">
-                                    <div class="card-body border border-2">
+                                    <div class="card-body">
                                         <div class="d-flex justify-content-between">
                                             <div class="text-center border-start w-100">
                                                 <h5>@responseData?.InfoForTotay?.ReceivedCount</h5>
                                                 <span>Принято</span>
                                             </div>
-                                            <div class="text-center border-start border-end w-100">
+                                            <div class="text-center  w-100 text-muted text-muted">
                                                 <h5>@responseData?.InfoForTotay?.IssuedCount</h5>
                                                 <span>Выдано</span>
                                             </div>
-                                            <div class="text-center border-start border-end w-100">
+                                            <div class="text-center  w-100 text-muted text-muted">
                                                 <h5>@responseData?.InfoForTotay?.ConsultationCount</h5>
                                                 <span>Консультация</span>
                                             </div>
-                                            <div class="text-center border-start border-end w-100">
+                                            <div class="text-center  w-100 text-muted text-muted">
                                                 <h5>@responseData?.InfoForTotay?.ExecutionCount</h5>
                                                 <span>На Исполнение</span>
                                             </div>
-                                            <div class="text-center border-start border-end w-100">
+                                            <div class="text-center  w-100 text-muted text-muted">
                                                 <h5>@responseData?.InfoForTotay?.ExpiredCount</h5>
                                                 <span>Просрочено</span>
                                             </div>
@@ -98,11 +102,11 @@
                                                 <h5>@responseData?.InfoForTotay?.SmevRequestCount</h5>
                                                 <span>СМЭВ отправлено</span>
                                             </div>
-                                            <div class="text-center border-start border-end w-100">
+                                            <div class="text-center  w-100 text-muted text-muted">
                                                 <h5>@responseData?.InfoForTotay?.SmevResponseCount</h5>
                                                 <span>СМЭВ получено</span>
                                             </div>
-                                            <div class="text-center border-start border-end w-100">
+                                            <div class="text-center  w-100 text-muted text-muted">
                                                 <h5>@responseData?.InfoForTotay?.ServiceStateTaskCount %</h5>
                                                 <span>Гос задание</span>
                                             </div>
@@ -117,7 +121,7 @@
                             <div class="col-12">
                                 <h4 class="mb-2 b-s-18">Динамика по услугам</h4>
                                 <div class="card">
-                                    <div class="card-body border border-2">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <form id="statisticsForm" asp-action="StatisticsGeneralGraphic" asp-controller="Statistics" method="get" role="form">
@@ -207,7 +211,7 @@
                             <div class="col-12">
                                 <h4 class="mb-2 b-s-18">Данные по филиалам</h4>
                                 <div class="card">
-                                    <div class="card-body border border-2">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <form id="statisticsMfcForm" asp-action="PartialMfcDataJson" asp-controller="Statistics" method="get" role="form">
@@ -285,7 +289,7 @@
                             <div class="col-12">
                                 <h4 class="mb-2 b-s-18">Данные по сотрудникам</h4>
                                 <div class="card">
-                                    <div class="card-body border border-2">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <form id="statisticsEmployeeForm" asp-action="PartialEmployeeDataJson" asp-controller="Statistics" method="get" role="form">
@@ -341,7 +345,7 @@
                                         @*<hr>*@
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="table-responsive" id="dataEmployee">
+                                                <div class="table-responsive mt-3" id="dataEmployee">
                                                     <table id="dataTableEmployee" class="table table-bordered">
                                                         <thead>
                                                             <tr>
@@ -377,7 +381,7 @@
                             <div class="col-12">
                                 <h4 class="mb-2 b-s-18">Данные по ОИВ</h4>
                                 <div class="card">
-                                    <div class="card-body border border-2">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <form id="statisticsProviderForm" asp-action="PartialProviderDataJson" asp-controller="Statistics" method="get" role="form">
@@ -429,7 +433,7 @@
                                         @*<hr>*@
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="table-responsive" id="dataProvider">
+                                                <div class="table-responsive mt-3" id="dataProvider">
                                                     <table id="dataTableProvider" class="table table-bordered">
                                                         <thead>
                                                             <tr>
@@ -465,7 +469,7 @@
                             <div class="col-12">
                                 <h4 class="mb-2 b-s-18">Данные по услугам</h4>
                                 <div class="card">
-                                    <div class="card-body border border-2">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <form id="statisticsServiceForm" asp-action="PartialServiceDataJson" asp-controller="Statistics" method="get" role="form">
@@ -521,7 +525,7 @@
                                         @*<hr>*@
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="table-responsive" id="dataService">
+                                                <div class="table-responsive mt-3" id="dataService">
                                                     <table id="dataTableService" class="table table-bordered">
                                                         <thead>
                                                             <tr>
@@ -557,7 +561,7 @@
                             <div class="col-12">
                                 <h4 class="mb-2 b-s-18">Данные по типу заявителя</h4>
                                 <div class="card">
-                                    <div class="card-body border border-2">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <form id="statisticsCustomerTypeForm" asp-action="PartialCustomerTypeDataJson" asp-controller="Statistics" method="get" role="form">
@@ -613,7 +617,7 @@
                                         @*<hr>*@
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="table-responsive" id="dataCustomerType">
+                                                <div class="table-responsive mt-3" id="dataCustomerType">
                                                     <table id="dataTableCustomerType" class="table table-bordered">
                                                         <thead>
                                                             <tr>
@@ -649,7 +653,7 @@
                             <div class="col-12">
                                 <h4 class="mb-2 b-s-18">Данные по типу услуги</h4>
                                 <div class="card">
-                                    <div class="card-body border border-2">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <form id="statisticsServiceTypeForm" asp-action="PartialServiceTypeDataJson" asp-controller="Statistics" method="get" role="form">
@@ -705,7 +709,7 @@
                                         @*<hr>*@
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="table-responsive" id="dataServiceType">
+                                                <div class="table-responsive mt-3" id="dataServiceType">
                                                     <table id="dataTableServiceType" class="table table-bordered">
                                                         <thead>
                                                             <tr>
@@ -741,7 +745,7 @@
                             <div class="col-12">
                                 <h4 class="mb-2 b-s-18">Данные по типу взаимодействия</h4>
                                 <div class="card">
-                                    <div class="card-body border border-2">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <form id="statisticsInteractionTypeForm" asp-action="PartialInteractionTypeDataJson" asp-controller="Statistics" method="get" role="form">
@@ -797,7 +801,7 @@
                                         @*<hr>*@
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="table-responsive" id="dataInteractionType">
+                                                <div class="table-responsive mt-3" id="dataInteractionType">
                                                     <table id="dataTableInteractionType" class="table table-bordered">
                                                         <thead>
                                                             <tr>
@@ -833,7 +837,7 @@
                             <div class="col-12">
                                 <h4 class="mb-2 b-s-18">Динамика по запросам в СМЭВ</h4>
                                 <div class="card">
-                                    <div class="card-body border border-2">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <form id="statisticsSmevForm" asp-action="StatisticsSmevGraphic" asp-controller="Statistics" method="get" role="form">
@@ -895,7 +899,7 @@
                             <div class="col-12">
                                 <h4 class="mb-2 b-s-18">Данные по запросам в СМЭВ</h4>
                                 <div class="card">
-                                    <div class="card-body border border-2">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <form id="statisticsSmevDataForm" asp-action="PartialSmevDataJson" asp-controller="Statistics" method="get" role="form">
@@ -952,7 +956,7 @@
                             <div class="col-12">
                                 <h4 class="mb-2 b-s-18">Данные по запросам в СМЭВ в разрезе филиалов</h4>
                                 <div class="card">
-                                    <div class="card-body border border-2">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <form id="statisticsSmevMfcForm" asp-action="PartialSmevMfcDataJson" asp-controller="Statistics" method="get" role="form">
@@ -1005,7 +1009,7 @@
                             <div class="col-12">
                                 <h4 class="mb-2 b-s-18">Данные по запросам в СМЭВ в разрезе сотрудников</h4>
                                 <div class="card">
-                                    <div class="card-body border border-2">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <form id="statisticsSmevEmployeeForm" asp-action="PartialSmevEmployeeDataJson" asp-controller="Statistics" method="get" role="form">
