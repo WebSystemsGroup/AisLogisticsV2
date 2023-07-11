@@ -1,7 +1,7 @@
 ﻿{
   "processing": "Подождите...",
   "search": "<div class=\"form-label\">Поиск:</div>",
-  "lengthMenu": "<span class=\"me-1\">Показать</span> _MENU_ <span class=\"ms-1\">записей</span>",
+  "lengthMenu": "<span class=\"me-1 m-s-12\">Показать</span> _MENU_ <span class=\"ms-1 m-s-12\">записей</span>",
   "info": "Записи с _START_ до _END_ из _TOTAL_ записей",
   "infoEmpty": "Записи с 0 до 0 из 0 записей",
   "infoFiltered": "(отфильтровано из _MAX_ записей)",

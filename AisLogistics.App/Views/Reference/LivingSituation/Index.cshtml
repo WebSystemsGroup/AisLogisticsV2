@@ -21,7 +21,7 @@
             <div class="col">
                 @if (Model.IsVisibleDescription)
                 {
-                   <div class="b-s-14">@Model.ViewDescription</div>
+                    <div class="b-s-14">@Model.ViewDescription</div>
                 }
             </div>
             @if (User.HasClaim(AccessKeyNames.ReferenceFTP, AccessKeyValues.Add))
@@ -34,7 +34,7 @@
             }
         </div>
 
-        <div class="table-responsive mt-3">
+        <div class="table-responsive">
             <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceFTP" class="directory_names-items table"></table>
         </div>
     </div>
@@ -52,7 +52,7 @@
             //$('.dz-progress').hide();
 
             $table.DataTable({
-                sDom: "<'row me-5 pe-1'<'col-sm-12 col-md-8 'f>>" +
+                sDom: "<'row'<'col-sm-12 col-md-8 'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i>>",
                 processing: true,
@@ -102,7 +102,13 @@
                 ],
                 columns: [
                     {},
-                    { data: "situationName"},
+                    {
+                        data: "situationName",
+                        render: function (data, type, row) {
+                            return `<div class="b-s-14">${data}</div>`;
+                        }
+
+                    },
                     { data: "commentt" },
                     {
                         render: function (data, type, row) {
@@ -133,13 +139,13 @@
         const EditBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="edit" data-bs-toggle="tooltip" title="Изменить" class="btn btn-sm btn-icon text-body">
-                            <i class="bi bi-pencil-square"></i></a>`;
+                                    <i class="bi bi-pencil-square"></i></a>`;
         }
 
         const DeleteBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger">
-                            <i class="bi bi-trash"></i></a>`;
+                                    <i class="bi bi-trash"></i></a>`;
         }
     </script>
 }

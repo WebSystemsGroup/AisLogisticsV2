@@ -10,9 +10,7 @@
     int consultation = 0;
     int totalConsultation = 0;
 }
-
-<div class="card">
-    <div class="card-body mx-auto">
+ 
         @if(data != null && data.Any())
         {
             @foreach (IGrouping<string, ReportReestrCount> item in data.GroupBy(q => q.out_office_name))
@@ -86,6 +84,4 @@
         else 
         {
             <span class="text-muted">Нет данных</span>
-        }
-    </div>
-</div>
+        } 

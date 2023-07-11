@@ -11,8 +11,6 @@
     int totalError = 0;
 }
 
-<div class="card">
-    <div class="card-body mx-auto">
         @if(data != null && data.Any())
         {
             @foreach (IGrouping<string, ReestrSmevByRequest> item in data.GroupBy(q => q.out_smev_name))
@@ -83,6 +81,4 @@
         {
             <span class="text-muted">Нет данных</span>
         }
-    </div>
-</div>
 

@@ -35,7 +35,7 @@
 
         $(document).ready(function () {
             $table.DataTable({
-                sDom: "<'row align-items-center'<'col-md-3'f><'col-md-3'<'#types'>><'col-md-3'<'#providers'>><'col-md-2'<'#hashtags'>><'col-md-auto mt-3 ms-auto'<'#btnCreate'>>>" +
+                sDom: "<'row align-items-center'<'col-md-3'f><'col-md-3'<'#providers'>><'col-md-2'<'#types'>><'col-md-2'<'#hashtags'>><'col-md-auto mt-auto ms-auto'<'#changeBlock'>><'col-md-auto mt-auto ms-auto'<'#btnCreate'>>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 processing: true,
@@ -62,6 +62,14 @@
                                     </button>`);
                     }
 
+                    $('#changeBlock').append(`<div class="col row change_view_items align-items-end justify-content-end p-0">
+                        <div class= "col-auto d-flex justify-content-center align-items-center change_view change_view-inline active">
+                            <img src="/img/humburger.svg" alt="">
+                         </div>
+                         <div class="col-auto d-flex justify-content-center align-items-center change_view change_view-block">
+                                    <img src="/img/dots.svg" alt ="">
+                          </div>
+                     </div>`)
 
                     $('[name="mainDataTable_length"]')
                         .select2({ minimumResultsForSearch: Infinity })
@@ -161,17 +169,8 @@
                     }, 
                     {
                         targets: 1,
-                        orderable: false,
-                        title: `<div class="row">
-                                        <div class="col row change_view_items align-items-end justify-content-end p-0">
-                                            <div class= "col-auto d-flex justify-content-center align-items-center change_view change_view-inline active">
-                                                <img src="/img/humburger.svg" alt = "" >
-                                                    </div>
-                                                    <div class= "col-auto d-flex justify-content-center align-items-center change_view change_view-block">
-                                                        <img src="/img/dots.svg" alt = "" >
-                                                            </div>
-                                                            </div>
-                                                            </div>`,
+                        orderable: false, 
+                        title: '',
                     },
                     {
                         name: "providers",

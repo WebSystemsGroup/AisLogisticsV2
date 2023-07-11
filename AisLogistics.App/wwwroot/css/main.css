@@ -108,8 +108,7 @@ h1, h2, h3, h4, h5, h6 {
 }*/
 label {
     color: rgba(23, 35, 89, 0.6);
-    font-weight: 400;
-    font-size: 12px;
+    font-weight: 400; 
     letter-spacing: 0.035em;
 }
 
@@ -641,11 +640,7 @@ footer p, footer a {
     cursor: pointer;
     width: 100%;
 }
-
-label {
-    display: inline-block;
-}
-
+ 
 .directory_search .directory_sortby {
     width: 100%;
     max-width: 405px;
@@ -1446,6 +1441,7 @@ html:not([dir=rtl]) .border-end {
 
 .form-label {
     margin-bottom: 0 !important;
+    font-size:12px;
 }
 
 div.dataTables_wrapper div.dataTables_length label {
@@ -1479,12 +1475,7 @@ label:has([name="mainDataTable_length"]), label:has([name="reest-sentMessage-dat
 .paginate_button.page-item.active a {
     margin: 0px !important;
 }
-
-div.dataTables_wrapper div.dataTables_filter input {
-    display: block;
-    margin: 0;
-}
-
+ 
 .nav-tabs .nav-link {
     border-style: none !important;
 }
@@ -1932,3 +1923,39 @@ div.dataTables_wrapper div.dataTables_length, div.dataTables_wrapper div.dataTab
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
     background-color: #F9F9F9 !important;
 }
+.dataTables_wrapper .select2-container--default .select2-selection, .dataTables_wrapper .form-control, .select2-search.select2-search--dropdown, .select2-search__field {
+    background-color: #F2F2F2;
+    border: 1px solid #F2F2F2;
+}
+.select2-search__field:focus-within {
+    background-color: #FFF;
+}
+.dataTables_wrapper .form-label {
+  font-family:golos-medium;
+}
+label .form-label{
+    margin-top:7px;
+}
+#content-smev-requests .nav-link, #content-smev-services .nav-link {
+    font-family: golos-regular !important;
+    font-size: 14px !important;
+    color: rgba(23, 35, 89, 1) !important;
+}
+    #content-smev-requests .nav-link.active, #content-smev-services .nav-link.active {
+    font-family: golos-bold !important;
+    font-size: 14px !important;
+    color: rgba(23, 35, 89, 1) !important;
+}
+.light-style .select2-selection--multiple .select2-selection__rendered {
+    overflow: auto;
+}
+    .light-style .select2-selection--multiple .select2-selection__rendered::-webkit-scrollbar {
+        height: 3px; 
+        border-radius: 4px;
+    }
+
+    .light-style .select2-selection--multiple .select2-selection__rendered::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        height: 4px;
+        background-color: #077EFA;
+    }

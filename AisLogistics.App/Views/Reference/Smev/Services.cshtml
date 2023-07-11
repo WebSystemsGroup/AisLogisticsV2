@@ -3,31 +3,22 @@
     ViewBag.Title = Model.ViewTitle;
     ViewData["ActiveTabId"] = "services";
 }
-<div class="row directory_names" id="content-smev-services">
-    <div class="row">
-        <navtabs-top>
-            <nav-tab id="services" target="@Url.Action("SmevServices", "Reference")">Сервисы</nav-tab>
-            <nav-tab id="requests" target="@Url.Action("SmevRequests", "Reference")">Запросы</nav-tab>
-        </navtabs-top>
-        <div class="directory_names-items popup_container" id="navs-tabs-default">
 
-            <div class="row justify-content-between align-items-center">
-                <div class="col">
+<div class="row" id="content-smev-services">
 
-                    @if (Model.IsVisibleDescription)
-                    {
-                        <div class="b-s-14">@Model.ViewDescription</div>
-                    }
-                </div> 
-            </div>
+    <navtabs-top>
+        <nav-tab id="services" target="@Url.Action("SmevServices", "Reference")">СМЭВ Сервисы</nav-tab>
+        <nav-tab id="requests" target="@Url.Action("SmevRequests", "Reference")">СМЭВ Зпаросы</nav-tab>
+    </navtabs-top>
 
+    <div class="row directory_names" id="navs-tabs-default">
+        <div class="col-12"> 
             <div class="table-responsive mt-3">
                 <table asp-for="Model" asp-access-key-name="@AccessKeyNames.ReferenceDocument" class="directory_names-items table"></table>
             </div>
         </div>
     </div>
 </div>
-
 
 @section Scripts
     {
@@ -39,7 +30,7 @@
 
         $(document).ready(function () {
             $table.DataTable({
-                sDom: "<'row align-items-center'<'col-sm-12 col-md-6 'f><'col-auto mt-3'l><'col mt-3 ms-auto text-end'<'#btnCreate'>>>" +
+                sDom: "<'row align-items-center'<'col-sm-12 col-md-6 'f><'col-auto mt-auto'l><'col mt-3 ms-auto text-end'<'#btnCreate'>>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 processing: true,
@@ -59,8 +50,8 @@
                     $('[name="mainDataTable_length"]')
                         .select2({ minimumResultsForSearch: Infinity })
                     $('#btnCreate').append(`<button data-btn-params='{"actionType":"@ActionType.Add"}' data-btn-type="add" data-for-table="@Model.TableName" type="button" class="btn btn-primary">
-                                <i class="bi bi-plus"></i> Добавить
-                            </button>`);
+                                    <i class="bi bi-plus"></i> Добавить
+                               </button>`);
                 },
                 columnDefs: [
                     {
@@ -119,8 +110,8 @@
                     {},
                     {
                         render: function (data, type, row) {
-                            return `<span>${row.smevName}<span>
-                                    ${row.smevMnemo === null ? '' : '<br /><small>' + row.smevMnemo + '</small>'}`;
+                            return `<div class="b-s-14">${row.smevName}</div>
+                                                            ${row.smevMnemo === null ? '' : '<div class="r-l-14">' + row.smevMnemo + '</div>'}`;
                         }
                     },
                     { data: "smevProvider" },
@@ -162,12 +153,12 @@
         const EditBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="edit" data-bs-toggle="tooltip" title="Изменить" class="btn btn-sm btn-icon text-body">
-                    <i class="bi bi-pencil-square"></i></a>`;
+                            <i class="bi bi-pencil-square"></i></a>`;
         }
         const DeleteBtn = (data) => {
             const params = JSON.stringify(data);
             return `<a href="javascript:void(0);" data-btn-params='${params}' data-btn-type="remove" data-bs-toggle="tooltip" title="Удалить" class="btn btn-sm btn-icon text-danger">
-                    <i class="bi bi-trash"></i></a>`;
+                            <i class="bi bi-trash"></i></a>`;
         }
     </script>
 }
