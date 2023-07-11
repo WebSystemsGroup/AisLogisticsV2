@@ -11,6 +11,32 @@
 
 <link rel="stylesheet" href="~/assets/css/css-reestr.css" asp-append-version="true" />
 
+<section class="search-bar-wrapper">
+    <form id="services-search-form" class="mb-3">
+        <div class="row">
+            <div class="col-3">
+                @if (isView)
+                {
+                    <select class="form-select select select2-search" asp-for="@responseData.MfcId" asp-items="@responseData.MfcList" form="services-search-form">
+                        <option value="">ВСЕ</option>
+                    </select>
+                }
+                else
+                {
+                    <select class="form-select select select2-search" asp-for="@responseData.MfcId" asp-items="@responseData.MfcList" form="services-search-form" disabled></select>
+                }
+            </div>
+            <div class="col-7">
+                <div class="search-bar">
+                    <!-- input search -->
+                    <fieldset class="page-search-input input-group position-relative m-0">
+                        <input type="search" asp-for="@responseData.Query" class="form-control rounded-right ps-2" placeholder="Номер обращения, ПКПВД, ФИО, адрес или номер телефона" data-query>
+                    </fieldset>
+                    <!--/ input search -->
+                </div>
+            </div>
+        </div>
+    </form>
 <div class="card">
     <div class="card-body">
         <!-- datatable start -->
@@ -20,6 +46,7 @@
         <!-- datatable ends -->
     </div>
 </div>
+</section>
 
 
 @section Scripts
@@ -28,8 +55,15 @@
         const $table = $("#@(Model.TableName)");
 
         $(document).ready(function () {
+            $('select.select2-search').select2({});
+
+            $('#services-search-form select').change(function () {
+                $table.DataTable().ajax.reload();
+                return false;
+            });
+
             $table.DataTable({
-                sDom: "<'row justify-content-between mb-3'<'col-sm-12 col-md-4 padding-left-1'<'#officeFilter'>><'col-sm-12 col-md-6'><'col-sm-12 col-md-2 padding-right-1'<'#sortFilter'>>>" +
+                sDom: "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 processing: true,
@@ -41,23 +75,13 @@
                     url: $table.data('action-table'),
                     type: "POST",
                     datatype: "json",
-                    dataSrc: function (json) {
-                        return json.data;
-                    }
-                },
-
-                initComplete: function () {
-                    let officeSelectColumn = this.api().column(9);
-                    var $officeFilter = $('#officeFilter');
-                    if ('@isView' === 'True') {
-                        var $officeFilterSelect = $('<select id="selectOfficeFilter" class="form-select form-select-sm"><option value="@Guid.Empty">ВСЕ</option>@Html.Raw(ViewBag.Mfc)</select>')
-                            .appendTo($officeFilter)
-                            .select2({
-                                language: "ru",
-                            })
-                            .on('change', function () {
-                                officeSelectColumn.search($(this).val()).draw();
-                            });
+                    data: function (data) {
+                        let form = document.querySelector('#services-search-form');
+                        var formData = new FormData(form);
+                        for (var pair of formData.entries()) {
+                            let name = pair[0].split('.')[1];
+                            if (pair[1]) data[name] = pair[1];
+                        }
                     }
                 },
                 columns: [
@@ -135,25 +159,7 @@
                             let content = `<a href="javascript:void(0);" data-service-id="${row.service.id}" id="btnStageAdd" class="btn btn-success waves-effect waves-float waves-light" role="button">Выдать</a>`;
                             return content;
                         }
-                    },
-                    {
-                        name: "filterSelect",
-                        title: '',
-                        visible: false,
-                        orderable: false,
-                        render: function (data, type, row) {
-                            return "";
-                        }
-                    },
-                    {
-                        name: "officeFilterSelect",
-                        title: '',
-                        visible: false,
-                        orderable: false,
-                        render: function (data, type, row) {
-                            return "";
-                        }
-                    },
+                    }
                 ]
             }).on('click', 'tbody tr', function () {
                 var val = $(this).find('.case-number-column').text();

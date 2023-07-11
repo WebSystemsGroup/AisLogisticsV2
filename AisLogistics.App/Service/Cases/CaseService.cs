@@ -857,7 +857,7 @@ namespace AisLogistics.App.Service
         /// </summary>
         /// <param name="employeeId">id сотрудника</param>
         /// <returns></returns>
-        public async Task<(List<CasesDto>, int, int)> GetIssueCasesV2(IDataTablesRequest request, Guid? employeeId, Guid? office)
+        public async Task<(List<CasesDto>, int, int)> GetIssueCasesV2(IDataTablesRequest request, SearchCasesRequestData additionalRequest)
         {
             try
             {
@@ -865,15 +865,12 @@ namespace AisLogistics.App.Service
                 const int issueStage = 6;
                 var date = DateTime.Today;
 
-                var MfcIdColumn = request?.Columns?.Where(w => w.Name == "officeFilterSelect").Select(s => s.Search.Value).FirstOrDefault();
-                if (MfcIdColumn != null) office = new Guid(MfcIdColumn);
-
                 var cases = _context.DServices
                        .AsNoTracking()
                        .AsSplitQuery()
                        .Expressionify()
-                       .Where(w => (!employeeId.HasValue || w.SEmployeesIdCurrent == employeeId) &&
-                                  (!office.HasValue || (office.Value == Guid.Empty || w.SOfficesIdCurrent == office)) &&
+                       .Where(w => (!additionalRequest.EmployeeId.HasValue || w.SEmployeesIdCurrent == additionalRequest.EmployeeId) &&
+                                  (!additionalRequest.MfcId.HasValue || (additionalRequest.MfcId.Value == Guid.Empty || w.SOfficesIdCurrent == additionalRequest.MfcId)) &&
                                   w.SRoutesStageIdCurrent == issueStage &&
                                   statusId.Contains(w.SServicesStatusId)
                        );
@@ -888,6 +885,7 @@ namespace AisLogistics.App.Service
                 int filteredCount = filteredResult.Count();
 
                 var data = await filteredResult
+                       .Skip(request.Start).Take(request.Length)
                        .Select(s => new CasesDto
                        {
                            casesMainDto = new CasesMainDto

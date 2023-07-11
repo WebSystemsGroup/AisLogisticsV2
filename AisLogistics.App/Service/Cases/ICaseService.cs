@@ -36,7 +36,7 @@ namespace AisLogistics.App.Service
         Task<CasesDto> GetServicesByCaseIdAsyncV2(string id);
 
         (List<CasesDto>, int, int) GetIssueCases(IDataTablesRequest request, Guid? employeeId, Guid? office);
-        Task<(List<CasesDto>, int, int)> GetIssueCasesV2(IDataTablesRequest request, Guid? employeeId, Guid? office);
+        Task<(List<CasesDto>, int, int)> GetIssueCasesV2(IDataTablesRequest request, SearchCasesRequestData additionalRequest);
         (List<CasesReestrSmevDto>, int, int) GetCasesReestrSmev(IDataTablesRequest request, Guid? employeeId, Guid? office);
         Task<(List<CasesReestrSmevDto>, int, int)> GetCasesReestrSmevV2(IDataTablesRequest request, SearchCasesRequestData additionalRequest);
 
