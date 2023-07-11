@@ -1959,3 +1959,11 @@ label .form-label{
         height: 4px;
         background-color: #077EFA;
     }
+
+.table-no-border {
+    border: none !important;
+}
+
+    .table-no-border tbody, .table-no-border td, .table-no-border tfoot, .table-no-border th, .table-no-border thead, .table-no-border tr {
+        border: none !important;
+    }

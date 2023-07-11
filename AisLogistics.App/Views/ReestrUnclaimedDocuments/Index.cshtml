@@ -11,12 +11,16 @@
         cursor: pointer;
     }
 
+    .active_unclaimed {
+        border-left: 3px solid #5a8dee !important;
+    }
+
     .Unclaimed_Wrapper {
         height: 50rem;
     }
 
-    .Unclaimed-table_Wrapper {
-        height: 49rem;
+    .unclaimed-table_Wrapper {
+        height: 100%;
     }
 
     .casesUnclaimed_Wrapper {
@@ -27,6 +31,19 @@
         /*       width: 3.5em;
                     max-width: 3.5em;*/
     }
+
+    .table-unclaimed {
+        margin: 0 !important;
+    }
+
+        .table-unclaimed td {
+            padding: 0 !important;
+        }
+
+    table.dataTable {
+        margin-top: 0 !important;
+    }
+
 </style>
 
 <section>
@@ -34,27 +51,25 @@
         <div class="col-12">
             <div class="row">
                 <div class="col-4">
-                    <div class="card mb-3">
-                        <div class="card-body">
+                    <div class="mb-3">
+                        <div class="">
                             <div class="row">
-                                <div class="col-8">
-                                    @if (isView)
-                                    {
+                                @if (isView)
+                                {
+                                    <div class="col-8">
                                         <select id="selectOfficeFilter" class="form-select"><option value="@Guid.Empty">ВСЕ</option>@Html.Raw(ViewBag.Mfc)</select>
-                                    }
-                                </div>
-                                <div class="col-4 text-end">
-                                    <a asp-controller="ReestrUnclaimedDocuments" asp-action="UnclaimedDocumentsChangeModalAdd" class="btn btn-primary" data-btn-type="modal" data-bs-toggle="tooltip">Добавить</a>
+                                    </div>
+                                }
+                                <div class="@(isView ? "col-4" : "col-12")">
+                                    <a asp-controller="ReestrUnclaimedDocuments" asp-action="UnclaimedDocumentsChangeModalAdd" class="btn btn-primary w-100" data-btn-type="modal" data-bs-toggle="tooltip">Добавить</a>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                     <div class="Unclaimed_Wrapper" id="Unclaimed_Wrapper">
-                        @{
-                            await Html.RenderPartialAsync("_PartialReestrUnclaimedDocuments", data);
-                        }
+                        <div class="table-responsive">
+                            <table id="Unclaimed_Wrapper-table" data-action-table="@Model.TableMethodAction" class="table table-unclaimed table-no-border mt-0"></table>
+                        </div>
                     </div>
                 </div>
                 <div class="col-8">
@@ -66,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card Unclaimed-table_Wrapper d-none">
+                    <div class="card unclaimed-table_Wrapper d-none">
                         <div class="card-header">
                             <h5 class="card-title mb-0" id="card_title"></h5>
                         </div>
@@ -83,41 +98,169 @@
 
 @section Scripts {
     <script>
+        const $table = $("#Unclaimed_Wrapper-table");
         const showTable = () => {
             $("#empty-table").hide();
-            $(".Unclaimed-table_Wrapper").removeClass("d-none");
+            $(".unclaimed-table_Wrapper").removeClass("d-none");
         };
         const hiddenTable = () => {
             $("#empty-table").show();
-            $(".Unclaimed-table_Wrapper").addClass("d-none");
+            $(".unclaimed-table_Wrapper").addClass("d-none");
         };
 
         $(document).ready(function () {
 
-            new PerfectScrollbar("#Unclaimed_Wrapper");
+            $table.DataTable({
+                sDom: "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-12'p>>",
+                processing: true,
+                serverSide: true,
+                ordering: false,
+                filter: true,
+                searchDelay: 1500,
+                ajax: {
+                    url: $table.data('action-table'),
+                    type: "POST",
+                    datatype: "json",
+                    data: function (data) {
+                        data['officeId'] = $('#selectOfficeFilter').val();
+                    }
+                },
+                columns: [
+                    {
+                        title: '',
+                        name: 'unclaimed',
+                        render: function (data, type, row) {
+                            let departament = row.departementName !== null && row.departementName.length > 0 ? row.departementName : '-';
+                            let content = `<div data-unclaimed-id="${row.id}" class="card cursor-pointer mb-3">
+                                                        <div class="card-body">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <div id="unclaimed_text" data-reestr-number="${row.reestrNumber}" class="text-dark fw-bolder">№ ${row.reestrNumber}
+                                                                    <span>
+                                                                        <a href="javascript:void(0);"  data-edit-reestr class="btn btn-sm btn-icon text-body" title="Редактирование номера">
+                                                                            <i class="bi bi-pencil-square"></i>
+                                                                        </a>
+                                                                        <a href="javascript:void(0)" data-print-reestr class='btn btn-sm btn-icon text-primary'>
+                                                                            <i class="bi bi-printer"></i>
+                                                                        </a>
+                                                                        <a href="javascript:void(0)" data-download-reestr class='btn btn-sm btn-icon text-success'>
+                                                                            <i class='bi bi-download'></i>
+                                                                        </a>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="text-muted"><span class="text-body">Количество:</span>${row.countService}</div>
+                                                             </div>
+                                                                <div class="text-muted mb-1"><span class="text-body">Дата:</span>${row.dateAdd}</div>
+                                                                <div class="text-muted mb-1"><span class="text-body">Услуга:</span>${row.serviceName}</div>
+                                                                <div class="text-muted mb-1"><span class="text-body">Поставщик:</span>${row.providerName}</div>
+                                                                        <div class="text-muted mb-1"><span class="text-body">Департамент:</span>${departament}</div>
+                                                                <div class="text-muted mb-1"><span class="text-body">Сотрудник:</span>${row.employeeFioAdd}</div>
+                                                        </div>
+                                                    </div>`;
+
+
+
+
+                            return content;
+                        }
+                    },
+                ]
+            }).on('click', '[data-unclaimed-id]', function (e) { unclaimedView(e) })
+                .on('click', '[data-edit-reestr]', function (e) { unclaimedEdit(e) })
+                .on('click', '[data-print-reestr]', function (e) { trasferPrint(e) })
+                .on('click', '[data-download-reestr]', function (e) { unclaimedDownload(e) });
 
             $('#selectOfficeFilter').select2({
                 language: "ru",
             }).on('change', function () {
-                let id = $(this).val();
+                $table.DataTable().ajax.reload();
+                return false;
+            });
+
+            new PerfectScrollbar("#Unclaimed_Wrapper");
+
+            function unclaimedView(e) {
+                console.log(123214, $(this));
+                console.log(55555, $(e.currentTarget));
+                $('[data-unclaimed-id]').removeClass('active_unclaimed');
+                $(e.currentTarget).addClass('active_unclaimed');
+
+                let id = $(e.currentTarget).data('unclaimed-id');
+
+                let text = $(e.currentTarget).find('[data-reestr-number]').data('reestr-number');
+
+                $('#card_title').html("Реестр №" + text);
                 $.ajax({
-                    url: '/ReestrUnclaimedDocuments/GetReestrUnclaimedDocuments',
+                    url: '/ReestrUnclaimedDocuments/UnclaimedDocumentsChangeModalView',
                     type: 'POST',
-                    data: { officeId: id },
+                    data: { id: id },
                     beforeSend: () => {
                         $.pageBlock();
                     },
                     complete: () => {
                         $.unblockUI();
-                        hiddenTable();
+                        showTable();
                     },
                     success: function (content) {
-                        $('#Unclaimed_Wrapper').empty();
-                        $('#Unclaimed_Wrapper').html(content);
+                        $('#casesUnclaimed_Wrapper').empty();
+                        $('#casesUnclaimed_Wrapper').html(content);
                     }
                 });
-            });
+            };
 
-        })
+            function unclaimedEdit(e) {
+                let th = e.currentTarget;
+                e.stopPropagation();
+                let id = $(th).parents('[data-unclaimed-id]').data('unclaimed-id');
+
+                $.ajax({
+                    url: '/ReestrUnclaimedDocuments/UnclaimedDocumentsChangeModalEdit',
+                    type: 'POST',
+                    data: { id: id },
+                    beforeSend: () => {
+                        $.pageBlock();
+                    },
+                    complete: () => {
+                        $.unblockUI();
+                    },
+                    success: function (content) {
+                        $('#mainModal').html(content).modal('show');
+                    }
+                });
+            };
+
+            function trasferPrint(e) {
+                let th = e.currentTarget;
+                e.stopPropagation();
+                let id = $(th).parents('[data-unclaimed-id]').data('unclaimed-id');
+
+                $.ajax({
+                    url: '/ReestrUnclaimedDocuments/UnclaimedDocumentsPrint',
+                    type: 'POST',
+                    data: { id: id },
+                    beforeSend: () => {
+                        $.pageBlock();
+                    },
+                    complete: () => {
+                        $.unblockUI();
+                    },
+                    success: function (data) {
+                        printPDF(data);
+                    }
+                });
+            };
+
+            function unclaimedDownload(e) {
+                let th = e.currentTarget;
+                e.stopPropagation();
+                let id = $(th).parents('[data-unclaimed-id]').data('unclaimed-id');
+
+                let url = '@Url.Action("UnclaimedDocumentsDownload", "ReestrUnclaimedDocuments")/?id=' + id;
+                window.open(url, "_blank");
+            };
+
+        });
     </script>
 }
+
+

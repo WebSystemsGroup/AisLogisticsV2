@@ -47,8 +47,8 @@ namespace AisLogistics.App.Controllers
 
             var modelBuilder = new ViewModelBuilder()
                     .AddViewTitle("Реестр")
-                    .AddModel(model);
-                    //.AddTableMethodAction(Url.Action(nameof(GetReestrUnclaimedDocumentsDataJson)));
+                    .AddModel(model)
+                    .AddTableMethodAction(Url.Action(nameof(GetReestrUnclaimedDocumentsDataJson)));
             return View(modelBuilder);
         }
 
@@ -64,22 +64,28 @@ namespace AisLogistics.App.Controllers
             return PartialView("_PartialReestrUnclaimedDocuments", model);
         }
 
-        public async Task<IActionResult> GetEmployeeReestrUnclaimedDocumentsDataJson(IDataTablesRequest request)
+        public async Task<IActionResult> GetEmployeeReestrUnclaimedDocumentsDataJson(IDataTablesRequest request, Guid? officeId)
         {
-            var id = await _employeeManager.GetIdAsync();
-            var office = await _employeeManager.GetOfficeAsync();
+            if (officeId == null)
+            {
+                officeId = await _employeeManager.GetOfficeAsync();
+            }
 
-            (var responseData, int totalCount, int filteredCount) = await _caseReestr.GetReestrUnclaimedDocuments(request, office);
+            (var responseData, int totalCount, int filteredCount) = await _caseReestr.GetReestrUnclaimedDocuments(request, officeId);
 
             var response = DataTablesResponse.Create(request, totalCount, filteredCount, responseData);
 
             return new DataTablesJsonResult(response, true);
         }
 
-
-        public async Task<IActionResult> GetReestrUnclaimedDocumentsDataJson(IDataTablesRequest request, SearchCasesUnclaimedDocumentsRequestData requestData)
+        public async Task<IActionResult> GetReestrUnclaimedDocumentsDataJson(IDataTablesRequest request, Guid? officeId)
         {
-            (var responseData, int totalCount, int filteredCount) = await _caseReestr.GetReestrUnclaimedDocument(request, requestData);
+            if (officeId == null)
+            {
+                officeId = await _employeeManager.GetOfficeAsync();
+            }
+
+            (var responseData, int totalCount, int filteredCount) = await _caseReestr.GetReestrUnclaimedDocuments(request, officeId);
 
             var response = DataTablesResponse.Create(request, totalCount, filteredCount, responseData);
 

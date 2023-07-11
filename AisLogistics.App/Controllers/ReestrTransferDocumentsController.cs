@@ -45,8 +45,8 @@ namespace AisLogistics.App.Controllers
 
             var modelBuilder = new ViewModelBuilder()
                     .AddViewTitle("Реестр")
-                    .AddModel(model);
-                    //.AddTableMethodAction(Url.Action(nameof(GetEmployeeReestrTransferDocumentsDataJson)));
+                    .AddModel(model)
+                    .AddTableMethodAction(Url.Action(nameof(GetEmployeeReestrTransferDocumentsDataJson)));
                 return View(modelBuilder);
         }
 
@@ -62,12 +62,14 @@ namespace AisLogistics.App.Controllers
             return PartialView("_PartialReestrTransferDocuments", model);
         }
 
-        public async Task<IActionResult> GetEmployeeReestrTransferDocumentsDataJson(IDataTablesRequest request)
+        public async Task<IActionResult> GetEmployeeReestrTransferDocumentsDataJson(IDataTablesRequest request, Guid? officeId)
         {
-            var id = await _employeeManager.GetIdAsync();
-            var office = await _employeeManager.GetOfficeAsync(); 
+            if (officeId == null)
+            {
+                officeId = await _employeeManager.GetOfficeAsync();
+            }
 
-            (var responseData, int totalCount, int filteredCount) =await _caseReestr.GetReestrTransferDocuments(request, office);
+            (var responseData, int totalCount, int filteredCount) =await _caseReestr.GetReestrTransferDocuments(request, officeId);
 
             var response = DataTablesResponse.Create(request, totalCount, filteredCount, responseData);
 

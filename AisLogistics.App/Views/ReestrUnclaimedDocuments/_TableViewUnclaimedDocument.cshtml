@@ -1,8 +1,18 @@
 ﻿@using AisLogistics.App.Models.DTO.ReestrUnclaimedDocuments
 @model List<ReestrCasesUnclaimedDocumentsDTO>
 
+<style>
+    .unclaimed-table-cases {
+        width: 100% !important;
+    }
+
+    .unclaimed-table-cases th {
+        padding-left: 8px !important;
+    }
+</style>
+
 <div>
-    <table class="table w-100">
+    <table class="table unclaimed-table-cases">
         <thead>
             <tr>
                 <th><input type="checkbox" data-check-main id="checkSelectedRowMain"></th>
@@ -12,8 +22,8 @@
                 <th>Номер обращения</th>
                 <th>
                     <div class="dropdown">
-                        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                        <a class="nav-link" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
