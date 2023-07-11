@@ -1967,3 +1967,7 @@ label .form-label{
     .table-no-border tbody, .table-no-border td, .table-no-border tfoot, .table-no-border th, .table-no-border thead, .table-no-border tr {
         border: none !important;
     }
+
+ .select2-container--default.select2-container--focus .select2-selection, .select2-container--default.select2-container--open .select2-selection {
+     background-color:#fff;
+}

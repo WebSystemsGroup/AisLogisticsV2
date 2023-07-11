@@ -83,3 +83,15 @@
 .table td {
     vertical-align: middle;
 }
+
+ .select2-container--default .select2-selection, .form-control, .select2-search.select2-search--dropdown, .select2-search__field {
+    background-color: #F2F2F2 !important;
+    border: 1px solid #F2F2F2;
+}
+    .select2-search__field:focus-within {
+        background-color: #FFF !important;
+    }
+
+.select2-container--default.select2-container--focus .select2-selection, .select2-container--default.select2-container--open .select2-selection {
+    background-color: #fff !important;
+}
