@@ -21,8 +21,8 @@ namespace AisLogistics.App.Controllers.Queue
         private readonly IElectronicQueueServiceRegistrationClient _registration;
         private readonly ILogger<QueueController> _logger;
         private readonly IHubContext<NotificationHub> _hubContext;
-        private int debugMfcId = 4; // 
-        private string debugIp = "10.40.12.7"; //
+        private int debugMfcId = 1; // 
+        private string debugIp = "192.168.124.2"; //
 
         public QueueController(IElectronicQueueServiceClient queue, IElectronicQueueServiceRegistrationClient registration, IReferencesService referencesService,
             EmployeeManager employeeManager, ILogger<QueueController> logger, IHubContext<NotificationHub> hubContext) : base(employeeManager)

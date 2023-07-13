@@ -45,17 +45,17 @@
     }
 </style>
 
-<div class="col-sm-1 col-1 header_notification" id="electronicQueue">
+<div class="col-sm-auto col-auto header_notification" id="electronicQueue">
     <a class="dropdown-toggle hidden-arrow"
         href="javascript:void(0);"
         data-bs-toggle="dropdown"
         data-bs-auto-close="outside"
         aria-expanded="false">
-        <i class='bi bi-people-fill'></i>
-        <span class="badge rounded-pill badge-notifications bg-danger text-white" id="queueHeadCountAbon"></span>
+        <i class="bi bi-people header-icon"></i>
+        <span class="badge rounded-pill badge-notification bg-danger" id="queueHeadCountAbon"></span>
         <span class="fw-bold ms-2">
-            <span id="electronicQueueActiveNum"></span>
-            <span id="electronicQueueActiveTime"></span>
+            <span id="electronicQueueActiveNum">Л040</span>
+            <span id="electronicQueueActiveTime" class="is-countdown"><span class="countdown-row countdown-amount">36:45</span></span>
         </span>
     </a>
 
@@ -175,26 +175,26 @@
                     <div class="w-80 mx-auto mb-3">
                         <div class="d-flex justify-content-center align-content-center">
                             <div class="btn-group w-100" role="group">
-                                <button type="button" class="btn btn-success shadow-none border-end border-2 border-white flex-grow-0">
+                                <button type="button" class="btn btn-success shadow-none border-end border-2 border-white flex-grow-0 count-abon">
                                     <i class="bi bi-list-ul"></i>
                                 </button>
-                                <button type="button" class="btn btn-success shadow-none flex-grow-1">Вызвать</button>
+                                <button type="button" class="btn btn-success shadow-none flex-grow-1" data-queue-next="0">Вызвать</button>
                             </div>
                         </div>
                     </div>
                     <div class="w-80 mx-auto">
                         <div class="d-flex justify-content-around align-content-center">
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn shadow-none pe-0">
+                                <button type="button" class="btn shadow-none pe-0 redirect-abon">
                                     <i class="bi bi-box-arrow-right"></i>
                                 </button>
-                                <button type="button" class="btn shadow-none">Передать</button>
+                                <button type="button" class="btn shadow-none queue-redirect">Передать</button>
                             </div>
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn shadow-none pe-0">
+                                <button type="button" class="btn shadow-none pe-0 deferred-abon">
                                     <i class="bi bi-clock-history"></i>
                                 </button>
-                                <button type="button" class="btn shadow-none">Отложить</button>
+                                <button type="button" class="btn shadow-none queue-deferred">Отложить</button>
                             </div>
                         </div>
                     </div>
@@ -206,23 +206,16 @@
             <div class="col-12 mb-3">
                 <div class="queue_wrapper">
                     <div class="d-flex flex-column">
-                        <button type="button" class="btn shadow-none">Завершить</button>
+                        <button type="button" class="btn shadow-none" data-queue-next="1">Завершить</button>
                         <button type="button" class="btn shadow-none">Записать</button>
                         <button type="button" class="btn shadow-none">Отменить</button>
                     </div>
                 </div>
             </div>
             <div class="col-12">
-                <div class="queue_wrapper queue-list_wrapper">
+                <div id="scoreboard" class="queue_wrapper queue-list_wrapper" style="display: none;">
                     <div class="text-muted mb-2">Талоны</div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-primary ps-0">A102</li>
-                        <li class="list-group-item text-primary ps-0">A102</li>
-                        <li class="list-group-item text-primary ps-0">A102</li>
-                        <li class="list-group-item text-primary ps-0">A102</li>
-                        <li class="list-group-item text-primary ps-0">A102</li>
-                        <li class="list-group-item text-primary ps-0">A102</li>
-                    </ul>
+                    <ul class="list-group list-group-flush"></ul>
                 </div>
             </div>
         </div>

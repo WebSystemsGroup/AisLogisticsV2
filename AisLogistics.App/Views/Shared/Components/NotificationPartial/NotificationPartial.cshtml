@@ -28,19 +28,19 @@
         color: #fff !important;
     }
 
-    .header_notification .bi-bell::before {
+    .header_notification .header-icon {
         color: #172359 !important;
         font-size:29px !important;
     }
 </style>
 
 <div class="col-sm-1 col-1 header_notification">
-    <a class="dropdown-toggle hidden-arrow bell"
+    <a class="dropdown-toggle hidden-arrow"
        href="javascript:void(0);"
        data-bs-toggle="dropdown"
        data-bs-auto-close="outside"
        aria-expanded="false">
-        <i class="bi bi-bell"></i>
+        <i class="bi bi-bell header-icon"></i>
         @if (count > 0)
         {
             <span class="badge rounded-pill badge-notification bg-danger">@count</span>

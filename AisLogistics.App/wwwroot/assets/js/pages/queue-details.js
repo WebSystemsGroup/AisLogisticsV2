@@ -158,8 +158,11 @@ $('.queue-deferred').on('click', function () { //отложить заявите
         });
     }
 });
+
 $('.count-abon').on('click', function () { // список заявителей в очереди
-    var $target = $('#scoreboard-next ul');
+    var $target = $('#scoreboard ul');
+    $('#scoreboard').show();
+
     $.ajax({
         url: "/Queue/jsonListAbonInQueue",
         type: "GET",
@@ -168,45 +171,29 @@ $('.count-abon').on('click', function () { // список заявителей 
         },
         success: function (data) {
             if (data.errorCode === 500) {
-                $target.html('Ошибка получения списка');
+                $target.empty().append('<li class="text-center"><span class="text-muted">Ошибка получения списка</span></li>')
             }
             else if (data.abonents)
             {
-                 $target.empty();
-                 $.map(data.abonents, function (value, index) {
-                   $('<li>', {
-                        class: "d-flex justify-content-between align-items-center p-2 border-bottom",
-                        append: $('<b>', {
-                            text: `${value.num}`,
-                        }).add($('<button>', {
-                                class: "btn btn-success btn-sm waves-effect waves-light",
-                                "data-toggle": "tooltip",
-                                "data-placement": "left",
-                                "data-container": "#scoreboard-next",
-                                "data-next-abon": `${value.num}`,
-                                "title": "Вызвать",
-                                append: $('<i>', {
-                                    class: "md md-system-update-tv",
-                                }),
-                                on: {
-                                    click: function () {
-                                        nextAbon(`${value.num}`, 0);
-                                    }
-                                }
-                        }).tooltip())
-                   }).appendTo($target);
-                 });
-
-                new PerfectScrollbar('#scoreboard-next ul');
+                $target.empty();
+                $.map(data.abonents, function (value, index) {
+                    $('<li>', {
+                        class: "list-group-item text-primary ps-0",
+                        text: `${value.num}`,
+                    }).appendTo($target);
+                });
             }
             else {
-                $target.empty().append('<li class="d-flex justify-content-between align-items-center p-2 border-bottom"><span class="text-muted">Нет данных<span></li>')
+                $target.empty().append('<li class="text-center"><span class="text-muted">Нет данных</span></li>')
             }
         }
     });
 });
+
 $('.redirect-abon').on('click', function () { //список переданных заявителей
-    var $target = $('#scoreboard-redirect ul');
+    var $target = $('#scoreboard ul');
+    $('#scoreboard').show();
+
     $.ajax({
         url: "/Queue/jsonListAbonRedirect",
         type: "GET",
@@ -215,43 +202,25 @@ $('.redirect-abon').on('click', function () { //список переданны�
         },
         success: function (data) {
             if (data.errorCode === 500) {
-                $target.html('Ошибка получения списка');
+                $target.empty().append('<li class="text-center"><span class="text-muted">Ошибка получения списка</span></li>')
             } else if (data.abonents) {
                 $target.empty();
-                $.map(data.abonents, function (item, index) {
-                   $('<li>', {
-                        class: "d-flex justify-content-between align-items-center p-2 border-bottom",
-                        append: $('<b>', {
-                            text: `${item.num}`,
-                        }).add($('<button>', {
-                            class: "btn btn-success btn-sm waves-effect waves-light",
-                            "data-toggle": "tooltip",
-                            "data-placement": "left",
-                            "data-container": "#scoreboard-redirect",
-                            "data-next-redirect-abon": `${item.num}`,
-                            "title": "Вызвать",
-                            append: $('<i>', {
-                                class: "md md-system-update-tv",
-                            }),
-                            on: {
-                                click: function () {
-                                    nextRedirectAbon($(this).data('nextRedirectAbon'));
-                                }
-                            }
-                        }).tooltip())
-                   }).appendTo($target);
-                })
-
-                new PerfectScrollbar('#scoreboard-redirect ul');
-
+                $.map(data.abonents, function (value, index) {
+                    $('<li>', {
+                        class: "list-group-item text-primary ps-0",
+                        text: `${value.num}`,
+                    }).appendTo($target);
+                });
             } else {
-                $target.empty().append('<li class="d-flex justify-content-between align-items-center p-2 border-bottom"><span class="text-muted">Нет данных<span></li>')
+                $target.empty().append('<li class="text-center"><span class="text-muted">Ошибка получения списка</span></li>')
             }
         }
     });
 });
 $('.deferred-abon').on('click', function () { //список отложенных заявителей
-    var $target = $('#scoreboard-deferred ul');
+    var $target = $('#scoreboard ul');
+    $('#scoreboard').show();
+
     $.ajax({
         url: "/Queue/jsonListAbonDelay",
         type: "GET",
@@ -260,37 +229,18 @@ $('.deferred-abon').on('click', function () { //список отложенны�
         },
         success: function (data) {
             if (data.errorCode === 500) {
-                $target.html('Ошибка получения списка');
+                $target.empty().append('<li class="text-center"><span class="text-muted">Ошибка получения списка</span></li>')
             } else if (data.abonents) {
                 $target.empty();
-                $.map(data.abonents, function (item, index) {
-                   $('<li>', {
-                        class: "d-flex justify-content-between align-items-center p-2 border-bottom",
-                        append: $('<b>', {
-                            text: `${item.num}`,
-                        }).add($('<button>', {
-                            class: "btn btn-success btn-sm waves-effect waves-light",
-                            "data-toggle": "tooltip",
-                            "data-placement": "left",
-                            "data-container": "#scoreboard-deferred",
-                            "data-next-deferred-abon": `${item.num}`,
-                            "title": "Вызвать",
-                            append: $('<i>', {
-                                class: "md md-system-update-tv",
-                            }),
-                            on: {
-                                click: function () {
-                                    nextDeferredAbon($(this).data('nextDeferredAbon'));
-                                }
-                            }
-                        }).tooltip())
-                   }).appendTo($target);
-                })
-
-                new PerfectScrollbar('#scoreboard-deferred ul');
+                $.map(data.abonents, function (value, index) {
+                    $('<li>', {
+                        class: "list-group-item text-primary ps-0",
+                        text: `${value.num}`,
+                    }).appendTo($target);
+                });
 
             } else {
-                $target.empty().append('<li class="d-flex justify-content-between align-items-center p-2 border-bottom"><span class="text-muted">Нет данных<span></li>')
+                $target.empty().append('<li class="text-center"><span class="text-muted">Ошибка получения списка</span></li>')
             }
         }
     });
@@ -529,7 +479,7 @@ function RefreshDataQueue(divUI, data) {
     }
     else
     {
-        $('#scoreboard').show();
+       /* $('#scoreboard').show();*/
         $('#queueMyWindowNum').html(data.window_id == null ? '' : data.window_id)
         divUI.find('.line_text').html(data.num == null ? ' --- ' : data.num);
         $('#electronicQueueActiveNum').text(data.num == null ? '' : data.num);
