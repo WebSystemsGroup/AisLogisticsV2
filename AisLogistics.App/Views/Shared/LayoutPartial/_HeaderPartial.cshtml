@@ -1,19 +1,18 @@
 ﻿@using System.Resources
 <header class="d-flex align-items-lg-start align-items-xl-center mb-3">
-    <div class="col-xl-auto d-xl-inline-block d-none me-xl-5">
+    <div class="col-xl-auto d-xl-inline-block d-none me-xxl-5 me-lg-2">
         <a href="/">
             <img src="/img/logo.svg" alt="">
         </a>
     </div>
-    <nav class="col-7 col-xxl-7 col-xl-auto">
+    <nav class="col-7 col-xxl-7 col-md-4 col-xl-auto col-sm-auto">
         <partial name="LayoutPartial/_MainMenuPartial" />
     </nav>
-    <div class="col-sm col-xl-3 col-xxl-auto ms-auto pe-xl-5">
-        <div class="row align-items-center header_create justify-content-xl-between justify-content-end ms-xl-auto">
+    <div class="d-flex align-items-center col justify-content-end">
 
             @if (User.HasClaim(AccessKeyNames.DataCase, AccessKeyValues.Add))
             {
-                <div class="col-sm-6 btn-group">
+                <div class="col-sm-3 btn-group me-3">
                     <a asp-action="Create" asp-controller="Cases" role="button" class="btn btn-primary waves-effect waves-float waves-light shadow-none text-white">Создать</a>
                 </div>
             }
@@ -33,7 +32,6 @@
             @await Component.InvokeAsync("LoginPartial")
             <!--/ User -->
 
-        </div>
     </div>
 </header>
 
