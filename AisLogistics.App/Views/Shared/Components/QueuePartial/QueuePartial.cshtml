@@ -46,7 +46,7 @@
 </style>
 
 <div class="col-sm-auto col-auto header_notification me-4" id="electronicQueue">
-    <a class="dropdown-toggle hidden-arrow"
+    <a id="queueDropdown" class="dropdown-toggle hidden-arrow"
         href="javascript:void(0);"
         data-bs-toggle="dropdown"
         data-bs-auto-close="outside"
@@ -54,8 +54,8 @@
         <i class="bi bi-people header-icon"></i>
         <span class="badge rounded-pill badge-notification bg-danger" id="queueHeadCountAbon"></span>
         <span class="fw-bold ms-2">
-            <span id="electronicQueueActiveNum">Л040</span>
-            <span id="electronicQueueActiveTime" class="is-countdown"><span class="countdown-row countdown-amount">36:45</span></span>
+            <span id="electronicQueueActiveNum"></span>
+            <span id="electronicQueueActiveTime"></span>
         </span>
     </a>
 
@@ -226,6 +226,6 @@
 
 
 
-<script src="~/assets/vendor/libs/jquery/jquery.js"></script>
-@*<script src="~/assets/js/pages/queue-details.js"></script>*@
+@*<script src="~/assets/vendor/libs/jquery/jquery.js"></script>*@
+<script src="~/assets/js/pages/queue-details.js"></script>
 

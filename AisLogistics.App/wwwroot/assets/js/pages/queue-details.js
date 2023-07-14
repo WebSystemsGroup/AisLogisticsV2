@@ -52,18 +52,26 @@ $(document).ready(function () {
     });
 });
 
-function closeAllSubmenu(id = '#electronicQueueContent') {
-    let queuewidth = document.getElementById('electronicQueue');
-    queuewidth.classList.remove('dropdown-queue-max');
+function closeAllSubmenu() {
 
-    document.querySelectorAll(`${id} .scoreboard-submenu`).forEach(item => {
-        item.classList.remove('scoreboard-submenu--open');
+    const myDropdown = document.getElementById('queueDropdown')
+    myDropdown.addEventListener('hide.bs.dropdown', event => {
+        $('#scoreboard').hide();
+        $('#scoreboard ul').empty();
     })
 
-    document.querySelectorAll(`${id} .btn-submenu`).forEach(item => {
-        item.addEventListener('click', openSubmenu);
-        item.removeEventListener('click', closeSubmenu);
-    })
+
+    //let queuewidth = document.getElementById('electronicQueue');
+    //queuewidth.classList.remove('dropdown-queue-max');
+
+    //document.querySelectorAll(`${id} .scoreboard-submenu`).forEach(item => {
+    //    item.classList.remove('scoreboard-submenu--open');
+    //})
+
+    //document.querySelectorAll(`${id} .btn-submenu`).forEach(item => {
+    //    item.addEventListener('click', openSubmenu);
+    //    item.removeEventListener('click', closeSubmenu);
+    //})
 };
 
 
