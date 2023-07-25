@@ -10,8 +10,7 @@
     }
 
     #caseStages .tbody-item {
-        border-bottom: 1px solid #BEBEBE;
-        display:flex;
+        border-bottom: 1px solid #BEBEBE; 
     }
 
     #caseStages .head-stage td{
@@ -27,15 +26,7 @@
         position:relative;
     }
 
-    #caseStages tbody{
-        position: absolute;
-        display: flex; 
-        max-height: 14rem;
-        overflow-y: auto;
-        flex-wrap: wrap;
-    }
-
-        #caseStages tbody td {
+    #caseStages tbody td {
             margin-right: auto;
     }
 
@@ -57,35 +48,6 @@
         <tbody class="scroller">
             @foreach (var item in items)
             {
-                <tr class="tbody-item">
-                    <td>
-                        <div class="text-success">@item.Name</div>
-                        <div class="r-l-12"><days count="item.Days ?? 0" data-bs-toggle="tooltip" title="Дней на этапе"></days></div>
-                    </td>
-                    <td>
-                        <div class="r-s-12">@item.EmployeeCurrent.Name</div>
-                        <div class="r-l-12">@item.EmployeeCurrent.Job</div>
-                    </td>
-                    <td>
-                        <div class="r-s-12" data-bs-toggle="tooltip" title="Дата начала этапа">@item.DateAdd.ToShortDateString()</div>
-                        @if (item.DateFact.HasValue)
-                        {
-                            <div class="r-s-12" data-bs-toggle="tooltip" title="Фактическая дата окончания этапа">
-                                @(
-                        item.DateFact?.ToShortDateString() ?? "-"
-                                    )
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="r-s-12" data-bs-toggle="tooltip" title="Регламентная дата окончания этапа">
-                                @(
-                        item.DateReg?.ToShortDateString() ?? "-"
-                                    )
-                            </div>
-                        }
-                    </td>
-                </tr>
                 <tr class="tbody-item">
                     <td>
                         <div class="text-success">@item.Name</div>
