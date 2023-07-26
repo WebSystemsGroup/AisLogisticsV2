@@ -17,7 +17,7 @@
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <div class="accordion-header mb-2 d-flex align-items-center">
-                                        <div type="button" class="accordion-button pb-0 pt-0 collapsed r-s-14" data-bs-toggle="collapse" data-bs-target="#doc_@item.Id" aria-expanded="false">
+                                        <div type="button" class="accordion-button pb-0 pt-0 collapsed r-s-12" data-bs-toggle="collapse" data-bs-target="#doc_@item.Id" aria-expanded="false">
                                             @item.DocumentName
                                         </div>
                                     </div>
@@ -36,13 +36,13 @@
                                 <div class="col-sm-auto align-items-start justify-content-center me-3">
                                     <a class="r-l-12 d-block mb-2" asp-action="ServiceDocumentResultAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Desktop" title="Загрузить" class="text-muted mb-2 d-block" data-btn-type="modal" role="button">
                                         <i class="bi bi-upload me-1"></i>
-                                        ЗАГР
+                                        Загрузить
                                     </a>
                                     <a class="r-l-12 d-block" asp-action="ServiceDocumentResultAddModal" asp-route-id="@ViewBag.Id" asp-route-documentId="@item.Id" asp-route-fileAddType="Scan" title="Сканировать" class="text-muted d-block" data-btn-type="modal" role="button">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 13 14" fill="none" class="me-1">
                                             <path d="M12.6235 9.88777V13.3093H0.519531V9.88777H1.86442V11.9407H11.2786V9.88777H12.6235ZM0.519531 6.46627H12.6235V7.83487H0.519531V6.46627ZM12.6235 4.41338H11.2786V2.36048H1.86442V4.41338H0.519531V0.991882H12.6235V4.41338Z" fill="#B5B5B5" />
                                         </svg>
-                                        СКАН
+                                        Сканировать
                                     </a>
                                 </div>
                             </div>

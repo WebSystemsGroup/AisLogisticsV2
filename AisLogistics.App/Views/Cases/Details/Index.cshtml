@@ -71,8 +71,8 @@
                         <div id="case-app-details"></div>
                     </div>
                     <div class="col-lg-3 col-12 case-app-content">
-                        <div class="caseStages-wrapper o p-0">
-                            <div class="case-route-header d-flex justify-content-between px-4 pt-3">
+                        <div class="caseStages-wrapper">
+                            <div class="case-route-header d-flex justify-content-between pt-3">
                                 <div class="col-auto b-s-14">Этапы</div>
                                 <div class="col-auto">
                                     @if (User.HasClaim(AccessKeyNames.DataCaseServiceStage, AccessKeyValues.Add))
@@ -84,18 +84,18 @@
                                     }
                                 </div>
                             </div>
-                            <div class="px-4" id=caseStages>
+                            <div class="" id=caseStages>
                             </div>
                         </div>
                         <div class="blancs_and_files-wrapper mt-5 overflow-auto scroller">
                             <ul class="nav nav-custom nav-justified" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="blancs-tab" data-bs-toggle="tab" data-bs-target="#Expired" href="#" role="tab" aria-controls="Expired" aria-selected="true">
+                                    <a class="nav-link active m-s-12 pt-3 " id="blancs-tab" data-bs-toggle="tab" data-bs-target="#Expired" href="#" role="tab" aria-controls="Expired" aria-selected="true">
                                         Бланки
                                     </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="files-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="Lastday" aria-selected="false">
+                                    <a class="nav-link m-s-12 pt-3 " id="files-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="Lastday" aria-selected="false">
                                         Файлы
                                     </a>
                                 </li>

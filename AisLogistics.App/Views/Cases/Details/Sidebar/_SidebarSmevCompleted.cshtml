@@ -70,7 +70,7 @@
                                 @(item.Status == 3 ? "Получен ответ" : item.Status == 2 ? "Ошибка" : item.Status == 1 ? "На исполнении" : "")
                             </div>
                             <div class="col ms-4">
-                                <p class="r-s-14 mb-1">@item.Name</p>
+                                <p class="r-s-12 mb-1">@item.Name</p>
                                 <p class="r-l-12 mb-1">@item.Description</p>
                                 <div class="mb-1"><span class="r-s-12 me-2">@item.EmployeeAdd.Job:</span><span class="b-s-12 mb-0"> @item.EmployeeAdd.Name</span></div>
                                 <div><span class="r-l-12">@item.DateCreate.ToString("g")</span><span class="ms-4 r-l-12 mb-0">@item.DateResponse.ToString("g")</span></div>
