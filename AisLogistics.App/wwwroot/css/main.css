@@ -991,11 +991,7 @@ footer p, footer a {
 .modal-backdrop {
     z-index: 999 !important;
 }
-
-.accordion-header {
-    margin-right: 30px;
-}
-
+  
 .case-app-content .nav-justified .nav-item {
     flex-basis: auto;
     flex-grow: inherit;

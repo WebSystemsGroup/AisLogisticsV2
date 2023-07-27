@@ -272,8 +272,7 @@ $(function () {
     caseDetails.on('refresh', function () {
         sidebar._reload();
     });
-
-
+     
     function ServiceStages(id) {
         $.ajax({
             url: '/Cases/ServiceStages',

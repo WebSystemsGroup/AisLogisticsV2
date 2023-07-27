@@ -15,6 +15,7 @@
 
 <link rel="stylesheet" href="~/assets/css/case-create.css" asp-append-version="true" />
 
+
 <section class="w-75 m-auto">
     <div class="row">
         <div class="col-12 mb-4">
@@ -70,15 +71,15 @@
                             </div>
                             <div class="row g-3">
                                 <div class="pb-2">
-                                    <div id="service-content"> 
+                                    <div id="service-content">
                                         <div class="mb-4">
-                                             <div class="row mb-2">
+                                            <div class="row mb-2">
                                                 <div class="col-6">
                                                     <select id="services-table-customerTypes" asp-items='@ViewBag.CustomerTypes' class="form-control" placeholder="Тип заявителя">
                                                     </select>
                                                 </div>
-                                                 <div class="col-6">
-                                                    <select id="services-table-office" asp-items='@ViewBag.Providers' class="form-control"  placeholder="Орган власти">
+                                                <div class="col-6">
+                                                    <select id="services-table-office" asp-items='@ViewBag.Providers' class="form-control" placeholder="Орган власти">
                                                         <option value="">Не Выбрано</option>
                                                     </select>
                                                 </div>
@@ -93,7 +94,7 @@
                                             <div>
                                                 @foreach (var item in ViewBag.Hashtag as SelectList)
                                                 {
-                                                        <a href="javascript:void(0);" id="services-table-hashtag" class="btn btn-sm mb-2 bg-primary text-white border-0 rounded-3" role="button" data-hashtag-value="@("#"+@item.Value)">@("#" + @item.Value)</a>
+                                                    <a href="javascript:void(0);" id="services-table-hashtag" class="btn btn-sm mb-2 bg-primary text-white border-0 rounded-3" role="button" data-hashtag-value="@("#"+@item.Value)">@("#" + @item.Value)</a>
                                                 }
                                             </div>
                                         </div>
@@ -246,9 +247,9 @@
                                                 <input type="text" class="form-control" placeholder="Место рождения" asp-for="@customer.DocumentBirthPlace">
                                             </div>
                                         </div>
-                                        <div class="row mb-3" >
+                                        <div class="row mb-3">
                                             <div class="col-12">
-                                                 <label class="form-label" asp-for="@customer.CustomerAddress">Адрес регистрации<sup class="text-danger fs-6">*</sup></label>
+                                                <label class="form-label" asp-for="@customer.CustomerAddress">Адрес регистрации<sup class="text-danger fs-6">*</sup></label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" placeholder="Адрес регистрации" asp-for="@customer.CustomerAddress" aria-describedby="button-addon2">
                                                     <button type="button" class="btn border-outline waves-effect" id="button-addon2" data-bs-toggle="collapse" data-bs-target="#CustomerAddressDetails" aria-expanded="false" aria-controls="CustomerAddressDetails">
@@ -267,9 +268,9 @@
                                                         <label class="form-label" asp-for="@customer.AddressDetails.Region.ShortName">Тип</label>
                                                         <input type="text" class="form-control" placeholder="Тип" asp-for="@customer.AddressDetails.Region.ShortName" data-clean>
                                                     </div>
-                                                   <div class="col-4">
+                                                    <div class="col-4">
                                                         <label class="form-label" asp-for="@customer.AddressDetails.Region.Value">Регион</label>
-                                                       <input type="text" class="form-control" placeholder="Регион" asp-for="@customer.AddressDetails.Region.Value" data-clean>
+                                                        <input type="text" class="form-control" placeholder="Регион" asp-for="@customer.AddressDetails.Region.Value" data-clean>
                                                         <input type="hidden" class="form-control" asp-for="@customer.AddressDetails.Region.ObjectGuid" data-clean>
                                                     </div>
                                                     <div class="col-2">
@@ -287,19 +288,19 @@
                                                         <label class="form-label" asp-for="@customer.AddressDetails.CityAndRuralSettlements.ShortName">Тип</label>
                                                         <input type="text" class="form-control" placeholder="Тип" asp-for="@customer.AddressDetails.CityAndRuralSettlements.ShortName" data-clean>
                                                     </div>
-                                                   <div class="col-4">
+                                                    <div class="col-4">
                                                         <label class="form-label" asp-for="@customer.AddressDetails.CityAndRuralSettlements.Value">Поселение</label>
-                                                       <input type="text" class="form-control" placeholder="Поселение" asp-for="@customer.AddressDetails.CityAndRuralSettlements.Value" data-clean>
-                                                       <input type="hidden" class="form-control" asp-for="@customer.AddressDetails.CityAndRuralSettlements.ObjectGuid" data-clean>
+                                                        <input type="text" class="form-control" placeholder="Поселение" asp-for="@customer.AddressDetails.CityAndRuralSettlements.Value" data-clean>
+                                                        <input type="hidden" class="form-control" asp-for="@customer.AddressDetails.CityAndRuralSettlements.ObjectGuid" data-clean>
                                                     </div>
                                                     <div class="col-2">
                                                         <label class="form-label" asp-for="@customer.AddressDetails.City.ShortName">Тип</label>
                                                         <input type="text" class="form-control" placeholder="Тип" asp-for="@customer.AddressDetails.City.ShortName" data-clean>
                                                     </div>
-                                                   <div class="col-4">
+                                                    <div class="col-4">
                                                         <label class="form-label" asp-for="@customer.AddressDetails.City.Value">Город</label>
-                                                       <input type="text" class="form-control" placeholder="Город" asp-for="@customer.AddressDetails.City.Value" data-clean>
-                                                       <input type="hidden" class="form-control" asp-for="@customer.AddressDetails.City.ObjectGuid" data-clean>
+                                                        <input type="text" class="form-control" placeholder="Город" asp-for="@customer.AddressDetails.City.Value" data-clean>
+                                                        <input type="hidden" class="form-control" asp-for="@customer.AddressDetails.City.ObjectGuid" data-clean>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -327,10 +328,10 @@
                                                         <label class="form-label" asp-for="@customer.AddressDetails.Street.ShortName">Тип</label>
                                                         <input type="text" class="form-control" placeholder="Тип" asp-for="@customer.AddressDetails.Street.ShortName" data-clean>
                                                     </div>
-                                                   <div class="col-4">
-                                                       <label class="form-label" asp-for="@customer.AddressDetails.Street.Value">Улица</label>
-                                                       <input type="text" class="form-control" placeholder="Улица" asp-for="@customer.AddressDetails.Street.Value" data-clean>
-                                                       <input type="hidden" class="form-control" asp-for="@customer.AddressDetails.Street.ObjectGuid" data-clean>
+                                                    <div class="col-4">
+                                                        <label class="form-label" asp-for="@customer.AddressDetails.Street.Value">Улица</label>
+                                                        <input type="text" class="form-control" placeholder="Улица" asp-for="@customer.AddressDetails.Street.Value" data-clean>
+                                                        <input type="hidden" class="form-control" asp-for="@customer.AddressDetails.Street.ObjectGuid" data-clean>
                                                     </div>
                                                     <div class="col-2">
                                                         <label class="form-label" asp-for="@customer.AddressDetails.House.HouseNum">Дом</label>
@@ -354,9 +355,9 @@
                                                         <label class="form-label" asp-for="@customer.AddressDetails.House.PostalCode">Индекс</label>
                                                         <input type="text" class="form-control" placeholder="Индекс" asp-for="@customer.AddressDetails.House.PostalCode" data-clean>
                                                     </div>
-                                                     <div class="col-2">
-                                                         <label class="form-label" asp-for="@customer.AddressDetails.House.Okato">Окато</label>
-                                                         <input type="text" class="form-control" placeholder="Окато" asp-for="@customer.AddressDetails.House.Okato" data-clean>
+                                                    <div class="col-2">
+                                                        <label class="form-label" asp-for="@customer.AddressDetails.House.Okato">Окато</label>
+                                                        <input type="text" class="form-control" placeholder="Окато" asp-for="@customer.AddressDetails.House.Okato" data-clean>
                                                     </div>
                                                     <div class="col-2">
                                                         <label class="form-label" asp-for="@customer.AddressDetails.House.Oktmo">ОКТМО</label>
@@ -366,10 +367,10 @@
                                                         <label class="form-label" asp-for="@customer.AddressDetails.Room.FlatType">Тип</label>
                                                         <input type="text" class="form-control" placeholder="Тип" asp-for="@customer.AddressDetails.Room.FlatType" data-clean>
                                                     </div>
-                                                   <div class="col-2">
-                                                       <label class="form-label" asp-for="@customer.AddressDetails.Room.FlatNumber">Квартира</label>
+                                                    <div class="col-2">
+                                                        <label class="form-label" asp-for="@customer.AddressDetails.Room.FlatNumber">Квартира</label>
                                                         <input type="text" class="form-control" placeholder="Квартира" asp-for="@customer.AddressDetails.Room.FlatNumber" data-clean>
-                                                       <input type="hidden" class="form-control" asp-for="@customer.AddressDetails.Room.ObjectGuid" data-clean>
+                                                        <input type="hidden" class="form-control" asp-for="@customer.AddressDetails.Room.ObjectGuid" data-clean>
                                                     </div>
                                                 </div>
                                             </div>
@@ -377,10 +378,10 @@
                                         <div class="row mb-3">
                                             <div class="col-12">
                                                 <label class="form-label" asp-for="@customer.CustomerAddressResidence">Адрес проживания</label>
-                                                  <input class="form-check-input" type="checkbox" value="" id="customerAddressCoincide">
-                                                  <label class="form-check-label" for="customerAddressCoincide">
+                                                <input class="form-check-input" type="checkbox" value="" id="customerAddressCoincide">
+                                                <label class="form-check-label" for="customerAddressCoincide">
                                                     Совпадает с адресом регистрации
-                                                  </label>
+                                                </label>
                                                 <input type="text" class="form-control" placeholder="Адрес проживания" asp-for="@customer.CustomerAddressResidence">
                                             </div>
                                         </div>
@@ -571,7 +572,7 @@
                                             <input type="text" class="form-control" placeholder="Электронная почта" asp-for="@customerLegal.CustomerEmail">
                                         </div>
                                     </div>
-                                </div>      
+                                </div>
                             </div>
                             <!-- Representative Info -->
                             <div class="content-header mb-3">
@@ -605,7 +606,7 @@
                                         <div class="row mb-3">
                                             <div class="col-3">
                                                 <label class="form-label" asp-for="@representative.DocumentSerial">Серия<sup class="text-danger fs-6">*</sup></label>
-                                                <input type="text" class="form-control" placeholder="Серия" asp-for="@representative.DocumentSerial" disabled/>
+                                                <input type="text" class="form-control" placeholder="Серия" asp-for="@representative.DocumentSerial" disabled />
                                             </div>
                                             <div class="col-3">
                                                 <label class="form-label" asp-for="@representative.DocumentNumber">Номер<sup class="text-danger fs-6">*</sup></label>
@@ -681,7 +682,7 @@
                                                 <input type="text" class="form-control" placeholder="Место рождения" asp-for="@representative.DocumentBirthPlace" disabled />
                                             </div>
                                         </div>
-                                        <div class="row mb-3" >
+                                        <div class="row mb-3">
                                             <div class="col-12">
                                                 <label class="form-label" asp-for="@representative.CustomerAddress">Адрес регистрации<sup class="text-danger fs-6">*</sup></label>
                                                 <div class="input-group">
@@ -702,10 +703,10 @@
                                                         <label class="form-label" asp-for="@representative.AddressDetails.Region.ShortName">Тип</label>
                                                         <input type="text" class="form-control" placeholder="Тип" asp-for="@representative.AddressDetails.Region.ShortName" data-clean disabled>
                                                     </div>
-                                                   <div class="col-4">
-                                                       <label class="form-label" asp-for="@representative.AddressDetails.Region.Value">Регион</label>
-                                                       <input type="text" class="form-control" placeholder="Регион" asp-for="@representative.AddressDetails.Region.Value" data-clean disabled>
-                                                       <input type="hidden" class="form-control" asp-for="@representative.AddressDetails.Region.ObjectGuid" data-clean>
+                                                    <div class="col-4">
+                                                        <label class="form-label" asp-for="@representative.AddressDetails.Region.Value">Регион</label>
+                                                        <input type="text" class="form-control" placeholder="Регион" asp-for="@representative.AddressDetails.Region.Value" data-clean disabled>
+                                                        <input type="hidden" class="form-control" asp-for="@representative.AddressDetails.Region.ObjectGuid" data-clean>
                                                     </div>
                                                     <div class="col-2">
                                                         <label class="form-label" asp-for="@representative.AddressDetails.Area.ShortName">Тип</label>
@@ -722,19 +723,19 @@
                                                         <label class="form-label" asp-for="@representative.AddressDetails.CityAndRuralSettlements.ShortName">Тип</label>
                                                         <input type="text" class="form-control" placeholder="Тип" asp-for="@representative.AddressDetails.CityAndRuralSettlements.ShortName" data-clean disabled>
                                                     </div>
-                                                   <div class="col-4">
-                                                       <label class="form-label" asp-for="@representative.AddressDetails.CityAndRuralSettlements.Value">Поселение</label>
-                                                       <input type="text" class="form-control" placeholder="Поселение" asp-for="@representative.AddressDetails.CityAndRuralSettlements.Value" data-clean disabled>
-                                                       <input type="hidden" class="form-control" asp-for="@representative.AddressDetails.CityAndRuralSettlements.ObjectGuid" data-clean disabled>
+                                                    <div class="col-4">
+                                                        <label class="form-label" asp-for="@representative.AddressDetails.CityAndRuralSettlements.Value">Поселение</label>
+                                                        <input type="text" class="form-control" placeholder="Поселение" asp-for="@representative.AddressDetails.CityAndRuralSettlements.Value" data-clean disabled>
+                                                        <input type="hidden" class="form-control" asp-for="@representative.AddressDetails.CityAndRuralSettlements.ObjectGuid" data-clean disabled>
                                                     </div>
                                                     <div class="col-2">
                                                         <label class="form-label" asp-for="@representative.AddressDetails.City.ShortName">Тип</label>
                                                         <input type="text" class="form-control" placeholder="Тип" asp-for="@representative.AddressDetails.City.ShortName" data-clean disabled>
                                                     </div>
-                                                   <div class="col-4">
-                                                       <label class="form-label" asp-for="@representative.AddressDetails.City.Value">Город</label>
-                                                       <input type="text" class="form-control" placeholder="Город" asp-for="@representative.AddressDetails.City.Value" data-clean disabled>
-                                                       <input type="hidden" class="form-control" asp-for="@representative.AddressDetails.City.ObjectGuid" data-clean>
+                                                    <div class="col-4">
+                                                        <label class="form-label" asp-for="@representative.AddressDetails.City.Value">Город</label>
+                                                        <input type="text" class="form-control" placeholder="Город" asp-for="@representative.AddressDetails.City.Value" data-clean disabled>
+                                                        <input type="hidden" class="form-control" asp-for="@representative.AddressDetails.City.ObjectGuid" data-clean>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -762,10 +763,10 @@
                                                         <label class="form-label" asp-for="@representative.AddressDetails.Street.ShortName">Тип</label>
                                                         <input type="text" class="form-control" placeholder="Тип" asp-for="@representative.AddressDetails.Street.ShortName" data-clean disabled>
                                                     </div>
-                                                   <div class="col-4">
-                                                       <label class="form-label" asp-for="@representative.AddressDetails.Street.Value">Улица</label>
-                                                       <input type="text" class="form-control" placeholder="Улица" asp-for="@representative.AddressDetails.Street.Value" data-clean disabled>
-                                                       <input type="hidden" class="form-control" asp-for="@representative.AddressDetails.Street.ObjectGuid" data-clean disabled>
+                                                    <div class="col-4">
+                                                        <label class="form-label" asp-for="@representative.AddressDetails.Street.Value">Улица</label>
+                                                        <input type="text" class="form-control" placeholder="Улица" asp-for="@representative.AddressDetails.Street.Value" data-clean disabled>
+                                                        <input type="hidden" class="form-control" asp-for="@representative.AddressDetails.Street.ObjectGuid" data-clean disabled>
                                                     </div>
                                                     <div class="col-2">
                                                         <label class="form-label" asp-for="@representative.AddressDetails.House.HouseNum">Дом</label>
@@ -789,9 +790,9 @@
                                                         <label class="form-label" asp-for="@representative.AddressDetails.House.PostalCode">Индекс</label>
                                                         <input type="text" class="form-control" placeholder="Индекс" asp-for="@representative.AddressDetails.House.PostalCode" data-clean disabled>
                                                     </div>
-                                                     <div class="col-2">
-                                                         <label class="form-label" asp-for="@representative.AddressDetails.House.Okato">Окато</label>
-                                                         <input type="text" class="form-control" placeholder="Окато" asp-for="@representative.AddressDetails.House.Okato" data-clean disabled>
+                                                    <div class="col-2">
+                                                        <label class="form-label" asp-for="@representative.AddressDetails.House.Okato">Окато</label>
+                                                        <input type="text" class="form-control" placeholder="Окато" asp-for="@representative.AddressDetails.House.Okato" data-clean disabled>
                                                     </div>
                                                     <div class="col-2">
                                                         <label class="form-label" asp-for="@representative.AddressDetails.House.Oktmo">ОКТМО</label>
@@ -801,10 +802,10 @@
                                                         <label class="form-label" asp-for="@representative.AddressDetails.Room.FlatType">Тип</label>
                                                         <input type="text" class="form-control" placeholder="Тип" asp-for="@representative.AddressDetails.Room.FlatType" data-clean disabled>
                                                     </div>
-                                                   <div class="col-2">
-                                                       <label class="form-label" asp-for="@representative.AddressDetails.Room.FlatNumber">Квартира</label>
+                                                    <div class="col-2">
+                                                        <label class="form-label" asp-for="@representative.AddressDetails.Room.FlatNumber">Квартира</label>
                                                         <input type="text" class="form-control" placeholder="Квартира" asp-for="@representative.AddressDetails.Room.FlatNumber" data-clean disabled>
-                                                       <input type="hidden" class="form-control" asp-for="@representative.AddressDetails.Room.ObjectGuid" data-clean disabled>
+                                                        <input type="hidden" class="form-control" asp-for="@representative.AddressDetails.Room.ObjectGuid" data-clean disabled>
                                                     </div>
                                                 </div>
                                             </div>
@@ -813,7 +814,8 @@
 
                                         <div class="row mb-3">
                                             <div class="col-12">
-                                                <label class="form-label" asp-for="@representative.CustomerAddressResidence">Адрес проживания<sup class="text-danger fs-6">*</sup>
+                                                <label class="form-label" asp-for="@representative.CustomerAddressResidence">
+                                                    Адрес проживания<sup class="text-danger fs-6">*</sup>
                                                     <input class="form-check-input" type="checkbox" value="" id="representativeAddressCoincide" disabled>
                                                     <label class="form-check-label" for="representativeAddressCoincide">
                                                         Совпадает с адресом регистрации
@@ -846,7 +848,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
                                             <div class="col-6">
                                                 <label class="form-label" asp-for="@representative.CustomerInn">ИНН</label>
@@ -869,7 +871,7 @@
                                             <div class="divider-text fs-5 b-s-16">Контакты</div>
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
                                 <div class="col-8 mx-auto">
                                     <div class="row mb-3">
                                         <div class="col-4">
@@ -888,7 +890,7 @@
                                 </div>
                             </div>
                             <div class="col-8 mx-auto" id="wrapperCustomerAlert">
-                                 <div class="row mb-3">
+                                <div class="row mb-3">
                                     <label class="form-label" asp-for="@customer.SAlertCustomerId">Информирование</label>
                                     <div class="col-md mb-md-0 mb-2">
                                         <div class="form-check custom-option custom-option-basic h-100">
@@ -919,7 +921,7 @@
                                     <div class="col-md mb-md-0 mb-2">
                                         <div class="form-check custom-option custom-option-basic h-100">
                                             <label class="form-check-label custom-option-content" for="customer_SAlertCustomerId2">
-                                                <input asp-for="@customer.SAlertCustomerId" class="form-check-input" type="radio" value="2" id="customer_SAlertCustomerId2" >
+                                                <input asp-for="@customer.SAlertCustomerId" class="form-check-input" type="radio" value="2" id="customer_SAlertCustomerId2">
                                                 <span class="custom-option-header">
                                                     <span class="text-bold mb-0">СМС</span>
                                                 </span>
@@ -966,7 +968,7 @@
                                                     <span class="text-bold mb-0">СМС</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                   Сбор мнений получателя услуги с помощью бесплатного смс-опроса.
+                                                    Сбор мнений получателя услуги с помощью бесплатного смс-опроса.
                                                 </span>
                                             </label>
                                         </div>
@@ -984,7 +986,7 @@
                                                     <span class="text-bold mb-0">Не информировать</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                   Не информировать заявителя о ходе и результате предоставления услуги.
+                                                    Не информировать заявителя о ходе и результате предоставления услуги.
                                                 </span>
                                             </label>
                                         </div>
@@ -1026,7 +1028,7 @@
                                                     <span class="text-bold mb-0">Отказ</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                   Отказ от оценки качества предоставления услуги.
+                                                    Отказ от оценки качества предоставления услуги.
                                                 </span>
                                             </label>
                                         </div>
@@ -1039,7 +1041,7 @@
                                                     <span class="text-bold mb-0">Терминал</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                   Терминалы, расположенные в территориальных органах ведомств, а также в МФЦ.
+                                                    Терминалы, расположенные в территориальных органах ведомств, а также в МФЦ.
                                                 </span>
                                             </label>
                                         </div>
@@ -1052,7 +1054,7 @@
                                                     <span class="text-bold mb-0">СМС</span>
                                                 </span>
                                                 <span class="custom-option-body">
-                                                   Сбор мнений получателя услуги с помощью бесплатного смс-опроса.
+                                                    Сбор мнений получателя услуги с помощью бесплатного смс-опроса.
                                                 </span>
                                             </label>
                                         </div>
@@ -1083,7 +1085,7 @@
                                         <span class="d-sm-inline-block d-none">Сохранить</span>
                                         <i class="bi bi-chevron-right  me-sm-n2"></i>
                                     </button>
-                                </div>  
+                                </div>
                             </div>
                         </div>
                         <!-- Final -->
@@ -1092,9 +1094,95 @@
                                 <div class="col-lg-6">
                                     <dl class="row">
                                     </dl>
+                                    <div class="row">
+                                        <div class="accordion" id="accordionExample">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="headingOne">
+                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                        Заявление
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                        <div class="col-auto me-3 align-items-center" id="Print">
+                                                            <div class="row justify-content-between">
+                                                                <div class="col-auto">
+                                                                    <a href="/Cases/PrintConsultationService/" class="dropdown-item m-s-14 d-block" target="_blank" data-bs-toggle="tooltip" title="Открыть">Консультация</a>
+                                                                    <a href="/Cases/PrintProcessingPersonalData/" class="dropdown-item m-s-14  d-block" target="_blank" data-bs-toggle="tooltip" title="Открыть">Согласие на ОПД </a>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <a href="/Cases/DownloadConsultationService/" class="dropdown-item m-s-14  d-block" target="_blank" data-bs-toggle="tooltip" title="Скачать"><i class="bi bi-download me-1"></i> Консультация</a>
+                                                                    <a href="/Cases/DownloadProcessingPersonalData/" class="dropdown-item m-s-14  d-block" target="_blank" data-bs-toggle="tooltip" title="Скачать"><i class="bi bi-download me-1"></i> Согласие на ОПД </a>
+                                                                </div>
+                                                            </div>
+                                                            <a href="/Cases/ModalPrintAcceptDocuments/" class="dropdown-item m-s-14" data-btn-type="modal" data-bs-toggle="tooltip">Расписка о принятии документов</a>
+                                                            <a href="/Cases/ModalPrintIssuanceDocuments/" class="dropdown-item m-s-14" data-btn-type="modal" data-bs-toggle="tooltip">Расписка о выдаче документов</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="headingTwo">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                        Нормативы и бланки
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                        <div class="m-s-14 mt-3">Бланки</div>
+                                                        <div id="blanks">
+                                                        </div>
+                                                        <div class="m-s-14 mt-3">Файлы</div>
+                                                        <div id="files">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="headingThree">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                        Этапы
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                       @* <a href="javascript:void(0);" class="flex d-flex text-primary fs-14" data-service-stages title="Добавить">
+                                                            <strong class="me-2">+</strong>
+                                                            Добавить
+                                                        </a>*@
+                                                        <div class="row">
+                                                            <div class="col-auto">
+                                                                <a href="#" class="r-s-12 btn btn-primary text-white">
+                                                                    Консультация
+                                                                </a>
+                                                            </div> 
+                                                            <div class="col-auto">
+                                                                <a href="#" class="r-s-12 btn btn-primary text-white">
+                                                                   Обработка
+                                                                </a>
+                                                            </div> 
+                                                            <div class="col-auto">
+                                                                <a href="#" class="r-s-12 btn btn-primary text-white">
+                                                                    Ошибка
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6 d-flex align-items-center justify-content-center">
                                     <img src="~/assets/img/illustrations/boy-deal-review-light.png" class="img-fluid w-px-300 p-4" alt="shopping girl" data-app-light-img="illustrations/boy-deal-review-light.png" data-app-dark-img="illustrations/boy-deal-review-dark.png">
+                                </div>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-auto">
+                                    <a href="/Cases/Details?id=" class="r-s-16 btn btn-primary text-white" id="OpenDetails">
+                                        Открыть обращение
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -1106,6 +1194,6 @@
 </section>
 
 @section Scripts
-{
+    {
     <script src="~/assets/js/pages/case-create.js"></script>
 }

@@ -16,19 +16,28 @@ public partial class CasesController
         return PartialView("Details/Modals/_ModalBlanksList", modelBuilder);
 
     }
+    public Task<IActionResult> BlanksListModal2(string id)
+    {
+        return BlanksListModal(_caseService.GetServicesByCaseIdAsyncV2(id).Result.Services[0].Id);
+    }
+
 
     public async Task<IActionResult> FilesListModal(Guid id)
     {
-        var blanks = await _caseService.GetServiceFilesByCaseIdAsync(id) ?? new List<CaseServiceBlank>(); ;
-
+        var blanks = await _caseService.GetServiceFilesByCaseIdAsync(id) ?? new List<CaseServiceBlank>();  
         var modelBuilder = new ViewModelBuilder()
                .AddViewTitle("Файлы")
                .AddModel(blanks);
         return PartialView("Details/Modals/_ModalFilesList", modelBuilder);
     }
 
-    //TODO полностью переделать, временно 
-    public async Task<IActionResult> DownloadBlank(Guid id, Guid? serviceId)
+    public Task<IActionResult> FilesListModal2(string id)
+    {
+        return FilesListModal(_caseService.GetServicesByCaseIdAsyncV2(id).Result.Services[0].Id);
+    }
+
+        //TODO полностью переделать, временно 
+        public async Task<IActionResult> DownloadBlank(Guid id, Guid? serviceId)
     {
         try
         {

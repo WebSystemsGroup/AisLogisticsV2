@@ -29,7 +29,10 @@
         customerPhysicalWrapper = $('#wrapperCustomerPhysical'),
         customerLegalWrapper = $('#wrapperCustomerLegal'),
         representativeAlertForm = $('#wrapperRepresentativeAlert'),
-        customerPhysicalAlertWrapper = $('#wrapperCustomerAlert'),
+        customerPhysicalAlertWrapper = $('#wrapperCustomerAlert'), 
+        showBlancsSidebar = $('#blancs-tab'),
+        showFilesSidebar = $('#files-tab'),
+        showStagesSidebar = $('[data-service-stages]'),
         customer = {
             documentsIdentityId: $("#customer_SDocumentsIdentityId"),
             documentSerial: $("#customer_DocumentSerial"),
@@ -97,6 +100,7 @@
         FormValidation2 = null,
         FormValidation3 = null,
         CustomerInfo = null;
+      let caseId = null;
 
     const setGender = {
         identify: (type) => {
@@ -194,7 +198,7 @@
                         }
                     });
                 }
-                else return; 
+                else return;
             }
             else if (type == 2) {
                 if (representative.documentSerial.inputmask("isComplete") === true && representative.documentNumber.inputmask("isComplete") === true) {
@@ -230,7 +234,7 @@
                     });
                 }
                 else return;
-                
+
             }
             else if (type == 3) {
                 if (customerLegal.inn.inputmask("isComplete") === true) {
@@ -581,7 +585,7 @@
 
         selectCustomer(servicesTableCustomerTypes.val());
 
-        
+
         FormValidation3 = FormValidation.formValidation(createCaseWizardFormStep3, {
             plugins: {
                 trigger: new FormValidation.plugins.Trigger(),
@@ -826,7 +830,7 @@
             language: "ru",
             autoclose: true
         });
-       
+
 
         /*Adrress customer search Gar*/
         let Customeraddresses = new Map();
@@ -916,9 +920,9 @@
         /*inputmask*/
         pickadate.inputmask("99.99.9999", { clearIncomplete: true, showMaskOnHover: false });
         customer.documentSerial.inputmask("99 99", { clearIncomplete: true, showMaskOnHover: false, oncomplete: function () { findCustomerByDocument.load(1); customer.documentNumber.focus(); } });
-        customer.documentNumber.inputmask("999999", { clearIncomplete: true, showMaskOnHover: false, oncomplete: function () { findCustomerByDocument.load(1);} });
+        customer.documentNumber.inputmask("999999", { clearIncomplete: true, showMaskOnHover: false, oncomplete: function () { findCustomerByDocument.load(1); } });
         customer.documentCode.inputmask("999-999", { clearIncomplete: true, showMaskOnHover: false });
-        customer.snils.inputmask("999-999-999 99", { clearIncomplete: true, showMaskOnHover: false, oncomplete: function () {$(customer.isGetCustomerSnils).prop("checked", false) } });
+        customer.snils.inputmask("999-999-999 99", { clearIncomplete: true, showMaskOnHover: false, oncomplete: function () { $(customer.isGetCustomerSnils).prop("checked", false) } });
         customer.inn.inputmask("999999999999", { clearIncomplete: true, showMaskOnHover: false, oncomplete: function () { $(customer.isGetCustomerInn).prop("checked", false) } });
         customer.phone1.inputmask("+7(999) 999-99-99", { clearIncomplete: true, showMaskOnHover: false });
         customer.phone2.inputmask("+7(999) 999-99-99", { clearIncomplete: true, showMaskOnHover: false });
@@ -990,7 +994,7 @@
                     FormValidation2.disableValidator('customer.DocumentNumber');
                     FormValidation2.disableValidator('customer.DocumentCode');
                     FormValidation2.disableValidator('customer.DocumentIssueDate');
-                    FormValidation2.disableValidator('customer.DocumentIssueBody'); 
+                    FormValidation2.disableValidator('customer.DocumentIssueBody');
                     break;
             }
         });
@@ -1040,7 +1044,7 @@
                     FormValidation2.disableValidator('representative.DocumentNumber');
                     FormValidation2.disableValidator('representative.DocumentCode');
                     FormValidation2.disableValidator('representative.DocumentIssueDate');
-                    FormValidation2.disableValidator('representative.DocumentIssueBody'); 
+                    FormValidation2.disableValidator('representative.DocumentIssueBody');
                     break;
             }
         });
@@ -1109,11 +1113,11 @@
                                                ${createCaseWizardFormStep2.querySelector('#customerLegal_CustomerAddress').value}
                                                ${createCaseWizardFormStep2.querySelector('#customerLegal_CustomerInn').value}`;
                         }
-                    break;
+                        break;
 
                     case 2:
                         FormValidation3.validate();
-                    break;
+                        break;
                 };
                 window.scrollTo(0, 0);
             });
@@ -1152,10 +1156,10 @@
             if ($(e.currentTarget).hasClass('disabled')) {
                 return false;
             }
-            else { 
+            else {
                 visibliBlock(representativeWizardForm, representativeWizardForm.is(':visible'));
-                
-                
+
+
                 if (representativeWizardForm.is(':visible')) {
                     visibliBlock(representativeAlertForm, false);
                     visibliBlock(customerPhysicalAlertWrapper, true);
@@ -1235,7 +1239,7 @@
                     }
 
 
-                    var object = {};
+                    var object = {}; 
                     formData.forEach(function (value, key) {
                         object[key] = value;
                     });
@@ -1261,40 +1265,59 @@
                         },
                         success: function (data) {
                             var resultJson = JSON.parse(data);
+
                             if (resultJson.CreateCaseStatus.IsCreated) {
+                                caseId = resultJson.CaseId;
+                                $('#Print').find('a').each(function () {
+                                    $(this).attr('href', $(this).attr('href') + caseId);
+                                })
+
+                                $('#OpenDetails').attr('href', $('#OpenDetails').attr('href') + caseId);
+                                $('#Statement').attr('href', '/Cases/Statement?&caseId=' + caseId);
+                                $('#BlancsAndFiles').attr('href', '/Cases/BlancsAndFiles?&caseId=' + caseId);
+                                $('#Stage').attr('href', '/Cases/Stage?&caseId=' + caseId);
+                                ServiceBlancs_FilesAndStage(caseId);
+
                                 var tariff = resultJson.Tariff === 0 ? "<span>Бесплатно</span>" : `${numeral(resultJson.Tariff).format('0,0.00')} &#x20bd;`;
                                 var htmlContent = `<dd class="col-12 mb-0">
                                             <h3>Готово! 🚀</h3>
-                                            <p>Услуга <a href="/Cases/Details?id=${resultJson.CaseId}">#${resultJson.CaseId}</a> создана.</p>
+                                            <p>Услуга <a href="/Cases/Details?id=${caseId}">#${caseId}</a> создана.</p>
                                         </dd>
 
-                                        <dt class="col-sm-3">Услуга</dt>
-                                        <dd class="col-sm-9">${resultJson.Service}</dd>
+                                        <dt class="col-sm-4">Услуга</dt>
+                                        <dd class="col-sm-8">${resultJson.Service}</dd>
 
-                                        <dt class="col-sm-3">Стоимость</dt>
-                                        <dd class="col-sm-9">${tariff}</dd>
+                                        <dt class="col-sm-4">Стоимость</dt>
+                                        <dd class="col-sm-8">${tariff}</dd>
 
-                                        <dt class="col-sm-3">Заявитель</dt>
-                                        <dd class="col-sm-9">${resultJson.Customer}</dd>
+                                        <dt class="col-sm-4">Заявитель</dt>
+                                        <dd class="col-sm-8">${resultJson.Customer}</dd>
 
-                                        <dt class="col-sm-3">Сотрудник</dt>
-                                        <dd class="col-sm-9">${resultJson.Employee}</dd>
+                                        <dt class="col-sm-4">Сотрудник</dt>
+                                        <dd class="col-sm-8">${resultJson.Employee}</dd>
 
-                                        <dt class="col-sm-3">Регламентная дата</dt>
-                                        <dd class="col-sm-9"><span class="b-s-16">${moment(resultJson.DataReg).format("DD.MM.yyyy")}</span></dd>`;
+                                        <dt class="col-sm-4">Регламентная дата</dt>
+                                        <dd class="col-sm-8"><span class="b-s-16">${moment(resultJson.DataReg).format("DD.MM.yyyy")}</span></dd>`;
                                 createCaseWizardFormStep5.querySelector('dl').insertAdjacentHTML("beforeend", htmlContent);
                                 validationStepper.next();
                                 createCaseWizardFormStep1.remove();
                                 createCaseWizardFormStep2.remove();
                                 createCaseWizardFormStep3.remove();
+                              
                             }
                             else {
                                 $.unblockUI();
                                 btnFormSubmit.spinnerBtn("stop");
                             }
                         }
-                    });
-                } 
+                    }); 
+                    
+                    if (showStagesSidebar.length) {
+                        showStagesSidebar.on('click', function (e) {
+                            ServiceStageAddModal(caseId);
+                        });
+                    }
+                }
             });
         });
     };
@@ -1305,6 +1328,38 @@
 
     initMain();
 });
+
+function ServiceBlancs_FilesAndStage(id) {
+    $.ajax({
+        url: '/Cases/BlanksListModal2',
+        type: 'GET',
+        data: { id: id },
+        beforeSend: () => {
+            $("#blanks").empty();
+            $("#blanks").append('<div class="h-75 w-100 d-flex align-items-center justify-content-center"><div class="spinner-grow text-primary" role="status"></div></div>');
+        },
+        success: (content) => { 
+            $("#blanks").empty();
+            $("#blanks").append(content); 
+        }
+    });
+
+    $.ajax({
+        url: '/Cases/FilesListModal2',
+        type: 'GET',
+        data: { id: id },
+        beforeSend: () => {
+            $("#files").empty();
+            $("#files").append('<div class="h-75 w-100 d-flex align-items-center justify-content-center"><div class="spinner-grow text-primary" role="status"></div></div>');
+        },
+        success: (content) => { 
+            $("#files").empty();
+            $("#files").append(content); 
+        }
+    }); 
+}
+
+
 
 function Select2Build() {
     $('select.select2-search').select2({
@@ -1605,17 +1660,29 @@ function visibliBlock(wrapper, property) {
                 $(this).prop('disabled', true);
                 $(this).removeClass('is-invalid')
             });
-         
-        break;
+
+            break;
         case false:
             wrapper.find('input, select').each(function () {
-                $(this).prop('disabled', false); 
+                $(this).prop('disabled', false);
                 $(this).removeClass('is-invalid')
             });
             wrapper.show();
-        break;
+            break;
     }
 }
+ 
 
+function ServiceStageAddModal(id) {
+    $.ajax({
+        url: '/Cases/ServiceStageAddModal2',
+        type: 'Post',
+        data: { id: id },
+        beforeSend: () => {
 
-
+        },
+        success: (content) => {
+            $("#mainModal").html(content).modal('show');
+        }
+    });
+}

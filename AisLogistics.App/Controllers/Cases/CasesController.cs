@@ -418,6 +418,11 @@ namespace AisLogistics.App.Controllers.Cases
                 .AddModel(stages);
             return PartialView("Details/Sidebar/_SidebarStages", modelBuilder);
         }
+         
+        public Task<IActionResult> ServiceStageAddModal2(string id)
+        {
+            return ServiceStageAddModal(_caseService.GetServicesByCaseIdAsyncV2(id).Result.Services[0].Id);
+        }
 
         public async Task<IActionResult> ServiceStageAddModal(Guid id)
         {
@@ -445,6 +450,10 @@ namespace AisLogistics.App.Controllers.Cases
             if (stageModelAdd.Stages.Any() == false) modelBuilder.HideSubmitButton();
 
             return ModalLayoutView(modelBuilder);
+        }
+        public Task<IActionResult> ServiceStageAddModal(string id)
+        {
+            return ServiceStageAddModal(_caseService.GetServicesByCaseIdAsyncV2(id).Result.Services[0].Id);
         }
 
         public async Task<IActionResult> ServicesStageAddModal(List<Guid> id)
@@ -987,7 +996,35 @@ namespace AisLogistics.App.Controllers.Cases
 
             return ModalLayoutView(modelBuilder);
         }
+        public async Task<IActionResult> Statement(string caseId)
+        {
+            var modelBuilder = new ModalViewModelBuilder()
+               .AddModalType(ModalType.LARGE)
+               .AddModalViewPath("Create/Modals/Statement")
+               .AddModalTitle("Заявление")
+               .AddModel(caseId);
+            return ModalLayoutView(modelBuilder);
+        }
 
+        public async Task<IActionResult> BlancsAndFiles(string caseId)
+        {
+            var modelBuilder = new ModalViewModelBuilder()
+               .AddModalType(ModalType.LARGE)
+               .AddModalViewPath("Create/Modals/BlancsAndFiles")
+               .AddModalTitle("Нормативы и бланки")
+               .AddModel(caseId);
+            return ModalLayoutView(modelBuilder);
+        }
+
+        public async Task<IActionResult> Stage(string caseId)
+        {
+            var modelBuilder = new ModalViewModelBuilder()
+               .AddModalType(ModalType.LARGE)
+               .AddModalViewPath("Create/Modals/Stage")
+               .AddModalTitle("Этапы")
+               .AddModel(caseId);
+            return ModalLayoutView(modelBuilder);
+        }
 
         [HttpPost]
         public async Task ServiceNotesSave(NotesAddSaveDto request, ActionType actionType)
