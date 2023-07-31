@@ -92,3 +92,14 @@ h1, h2, h3, h4, h5, h6 {
         background: #b2d7ff;
         color:#fff !important;
     }
+
+#sendingForm label,
+#additional-data-step label {
+    text-transform:uppercase;
+}
+.modal {
+    z-index:1000;
+}
+    #sendingForm .select2-container {
+    z-index: 1000000000000;
+}
