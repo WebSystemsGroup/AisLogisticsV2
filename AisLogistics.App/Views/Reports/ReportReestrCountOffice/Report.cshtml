@@ -9,53 +9,53 @@
 }
 
 
-        @if (data != null && data.Any())
-        {
-            <div class="pt-3 pb-3">
-                <table class="table table-bordered fs-12" style="page-break-after: always;">
-                    <thead>
-                        <tr style="vertical-align: middle;">
-                            <th rowspan="2" style="padding: 5px; width: 35px;">№</th>
-                            <th rowspan="2" style="padding: 5px;">МФЦ</th>
-                            <th colspan="4" style="padding: 5px; text-align: center;">Количество</th>
-                        </tr>
-                        <tr>
-                            <th style="padding: 5px; text-align:center; width: 80px;">Принято</th>
-                            <th style="padding: 5px; text-align:center; width: 80px;">Выдано</th>
-                            <th style="padding: 5px; text-align:center; width: 80px;">Консул</th>
-                            <th style="padding: 5px; text-align:center; width: 80px;">Всего</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                         @foreach (var item in data)
-                        {
-                            <tr>
-                                <td style="padding: 5px;" scope="row">@(++i)</td>
-                                <td style="padding: 5px;">@item.out_office_name</td>
-                                <td style="padding: 5px; text-align:center;">@(item.out_received_count)</td>
-                                <td style="padding: 5px; text-align:center;">@(item.out_issued_count)</td>
-                                <td style="padding: 5px; text-align:center;">@(item.out_consultation_count)</td>
-                                <td style="padding: 5px; text-align:center;">@(item.out_received_count + item.out_issued_count + item.out_consultation_count)</td>
-                            </tr>
+@if (data != null && data.Any())
+{
+    <div class="pt-3 pb-3">
+        <table class="table table-bordered fs-12" style="page-break-after: always;">
+            <thead>
+                <tr style="vertical-align: middle;">
+                    <th rowspan="2" style="padding: 5px; width: 35px;">№</th>
+                    <th rowspan="2" style="padding: 5px;">МФЦ</th>
+                    <th colspan="4" style="padding: 5px; text-align: center;">Количество</th>
+                </tr>
+                <tr>
+                    <th style="padding: 5px; text-align:center; width: 80px;">Принято</th>
+                    <th style="padding: 5px; text-align:center; width: 80px;">Выдано</th>
+                    <th style="padding: 5px; text-align:center; width: 80px;">Консул</th>
+                    <th style="padding: 5px; text-align:center; width: 80px;">Всего</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in data)
+                {
+                    <tr>
+                        <td style="padding: 5px;" scope="row">@(++i)</td>
+                        <td style="padding: 5px;">@item.out_office_name</td>
+                        <td style="padding: 5px; text-align:center;">@(item.out_received_count)</td>
+                        <td style="padding: 5px; text-align:center;">@(item.out_issued_count)</td>
+                        <td style="padding: 5px; text-align:center;">@(item.out_consultation_count)</td>
+                        <td style="padding: 5px; text-align:center;">@(item.out_received_count + item.out_issued_count + item.out_consultation_count)</td>
+                    </tr>
 
-                            {
-                            received += item.out_received_count; issued += item.out_issued_count; consultation += item.out_consultation_count;
-                            }
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="2" style="padding: 5px;"><strong>ИТОГО</strong></td>
-                            <td style="padding: 5px; text-align:center;"><strong>@received</strong></td>
-                            <td style="padding: 5px; text-align:center;"><strong>@issued</strong></td>
-                            <td style="padding: 5px; text-align:center;"><strong>@consultation</strong></td>
-                            <td style="padding: 5px; text-align:center;"><strong>@(received + issued + consultation)</strong></td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        }
-        else
-        {
-            <span class="text-muted">Нет данных</span>
-        }
+                    {
+                        received += item.out_received_count; issued += item.out_issued_count; consultation += item.out_consultation_count;
+                    }
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2" style="padding: 5px;"><strong>ИТОГО</strong></td>
+                    <td style="padding: 5px; text-align:center;"><strong>@received</strong></td>
+                    <td style="padding: 5px; text-align:center;"><strong>@issued</strong></td>
+                    <td style="padding: 5px; text-align:center;"><strong>@consultation</strong></td>
+                    <td style="padding: 5px; text-align:center;"><strong>@(received + issued + consultation)</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+}
+else
+{
+    <div class="text-muted text-center">Нет данных</div>
+}

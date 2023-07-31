@@ -13,8 +13,7 @@
 
 $(document).ready(function () {
    
-    $('select.select2-search').select2({});
-
+    $('select.select2-search').select2({}); 
     $('select.select2-nosearch').select2({
         minimumResultsForSearch: Infinity
     });
@@ -60,22 +59,19 @@ $(document).ready(function () {
 
 
     if (services.length) {
-        providers.change(function (e) {
-
+        providers.change(function (e) { 
             let isAll = false;
             let guidEmpty = '00000000-0000-0000-0000-000000000000';
             let arr = [];
 
             $.each($(e.target).val(), function (index, val) {
                 if (val === guidEmpty) {
-                    isAll = true;
-
+                    isAll = true; 
                 }
                 arr.push({ name: 'providersId', value: val });
             })
-
-            
-            if (isAll) {
+             
+            if (isAll && services.find('option[value="00000000-0000-0000-0000-000000000000"]').length == 0) {
                 services.append($("<option></option>")
                 .attr("value", guidEmpty)
                 .text("Все")
@@ -163,7 +159,7 @@ $(document).ready(function () {
                 arr.push({ name: 'employeeId', value: val });
             })
 
-            if (isAll) {
+            if (isAll && employees.find('option[value="00000000-0000-0000-0000-000000000000"]').length == 0) {
                 employees.append($("<option></option>")
                 .attr("value", guidEmpty)
                 .text("Все")
@@ -172,7 +168,6 @@ $(document).ready(function () {
                 employees.prop("disabled", false);
             }
             else {
-
                 $.ajax({
                     type: 'Get',
                     url: 'GetEmployeesForMfcDataJson',
@@ -252,7 +247,7 @@ $(document).ready(function () {
                 arr.push({ name: 'smevId', value: val });
             })
 
-            if (isAll) {
+            if (isAll && smevRequest.find('option[value="0"]').length == 0) {
                 smevRequest.append($("<option></option>")
                 .attr("value", 0)
                 .text("Все")
