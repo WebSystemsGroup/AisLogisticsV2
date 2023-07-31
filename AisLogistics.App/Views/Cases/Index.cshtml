@@ -313,7 +313,75 @@
                                               <small class="text-muted">${row.service.serivesStage.office}</small>
                                        </div>`;
                             }
-                        } 
+                        },
+                        {
+                            title: `Этап`,
+                            name: 'stageId',
+                            render: function (data, type, row) {
+                                let colorDay = row.service.serivesStage.days < 0 ? "danger" : row.service.serivesStage.days <= 3 ? "warning" : "success";   
+                                let colorStage = "";
+                                switch (row.service.serivesStage.stage.name) {
+                                    case 'Принято':
+                                        colorStage = "warning";
+                                        break;
+                                    case 'Обработка':
+                                        colorStage = "success";
+                                        break;
+                                    case 'Курьер':
+                                        colorStage = "warning";
+                                        break;
+                                    case 'Передано в ОИВ':
+                                        colorStage = "success";
+                                        break;
+                                    case 'На выдачу':
+                                        colorStage = "warning";
+                                        break;
+                                    case 'Выдано':
+                                        colorStage = "success";
+                                        break;
+                                    case 'Ошибка':
+                                        colorStage = "warning";
+                                        break;
+                                    case 'Прекращено заявителем':
+                                        colorStage = "success";
+                                        break;
+                                    case 'Архив':
+                                        colorStage = "warning";
+                                        break;
+                                    case 'Исполнено':
+                                        colorStage = "success";
+                                        break;
+                                    case 'Приостановка':
+                                        colorStage = "warning";
+                                        break;
+                                    case 'Ожидание':
+                                        colorStage = "success";
+                                        break;
+                                    case 'Отказ ОИВ':
+                                        colorStage = "warning";
+                                        break;
+                                    case 'Оператор':
+                                        colorStage = "success";
+                                        break;
+                                    case 'Возврат ОИВ':
+                                        colorStage = "warning";
+                                        break;
+                                    case 'Невостребованный':
+                                        colorStage = "success";
+                                        break;
+                                    case 'Выдано в ОИВ':
+                                        colorStage = "success";
+                                        break;
+                                    case 'Консультация':
+                                        colorStage = "success";
+                                        break;
+                                };
+                                        return `<div>
+                                                  ${row.service.serivesStage.days === null ? '' : `<div class= "${colorDay} m-auto d-inline">${row.service.serivesStage.days}</div>`}
+                                                  <div class="${colorStage} m-auto d-inline">${row.service.serivesStage.stage.name}</div>
+                                               </div>`;
+                            }
+                        }
                     ]
                 }).on('click', 'tbody tr', function () {
                     var val = $(this).find('td.case-number-column #caseIdNumber').text();
