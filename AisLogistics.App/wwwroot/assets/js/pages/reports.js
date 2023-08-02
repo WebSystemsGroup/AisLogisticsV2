@@ -109,7 +109,7 @@ $(document).ready(function () {
     if (mfc.length) {
         $.ajax({
             type: 'Get',
-            url: 'GetMfcDataJson',
+            url: '/Reports/GetMfcDataJson',
             data: { isAll: $(mfc).data("all") },
             beforeSend: () => {
                 mfc.empty();

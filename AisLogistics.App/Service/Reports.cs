@@ -142,6 +142,9 @@ namespace AisLogistics.App.Service
                 cmd = _context.Database.GetDbConnection().CreateCommand();
                 cmd.CommandText = connection;
 
+                int dateDelta = (DateTime.Parse(requestModel.DateStop).Date - DateTime.Parse(requestModel.DateStart).Date).Days;
+                cmd.CommandTimeout = dateDelta > 15 ? dateDelta * 3 : 30;
+
                 var parameters = GetParametrs(cmd, requestModel);
 
                 cmd.Parameters.AddRange(parameters);
