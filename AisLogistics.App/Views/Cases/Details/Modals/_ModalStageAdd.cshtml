@@ -14,12 +14,12 @@
                 
                 <div class="col-12 mb-4">
                    @* <input type="hidden" name="serviceId" value="@ViewBag.Id" />*@
-                    <label for="officeId" class="form-label">Офис</label>
+                    <label asp-for="OfficeId" class="form-label">Офис</label>
                     <select asp-for="OfficeId" asp-items="@ViewBag.Offices " class="select2 form-select form-select-lg"></select>
                 </div>
                 <div class="col-12 mb-4">
                     <label for="employeeId" class="form-label">Сотрудник</label>
-                    <select id="employeeId" name="employeeId" class="select2 form-select form-select-lg" data-allow-clear="true"></select>
+                    <select id="employeeId" name="employeeId" class="select2 form-select form-select-lg"></select>
                 </div>
                 <label class="form-label">Этапы</label>
                 @foreach (var item in Model.Stages)
@@ -55,7 +55,7 @@
 
 <script>
     $(function () {
-        $(".select2").select2({
+        $("#sendingForm .select2").select2({
             dropdownParent: $("#mainModal")
         });
 

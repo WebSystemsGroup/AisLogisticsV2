@@ -376,9 +376,9 @@
                                         colorStage = "success";
                                         break;
                                 };
-                                        return `<div>
-                                                  ${row.service.serivesStage.days === null ? '' : `<div class= "${colorDay} m-auto d-inline">${row.service.serivesStage.days}</div>`}
-                                                  <div class="${colorStage} m-auto d-inline">${row.service.serivesStage.stage.name}</div>
+                                return `<div class="d-flex">
+                                                          ${row.service.serivesStage.days === null ? '' : `<div class= "${colorDay} m-1 col-auto">${row.service.serivesStage.days}</div>`}
+                                                          <div class="${colorStage} m-1 col-auto">${row.service.serivesStage.stage.name}</div>
                                                </div>`;
                             }
                         }
