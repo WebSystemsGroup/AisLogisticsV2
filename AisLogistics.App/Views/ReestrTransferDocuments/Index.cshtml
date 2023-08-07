@@ -150,17 +150,15 @@
                                                         </div>
                                                         <div class="text-muted"><span class="text-body">Количество:</span>${row.countService}</div>
                                                      </div>
-                                                        <div class="text-muted mb-1"><span class="text-body">Дата:</span>${row.dateAdd}</div>
-                                                        <div class="text-muted mb-1"><span class="text-body">Услуга:</span>${row.serviceName}</div>
-                                                        <div class="text-muted mb-1"><span class="text-body">Поставщик:</span>${row.providerName}</div>
-                                                                <div class="text-muted mb-1"><span class="text-body">Департамент:</span>${departament}</div>
-                                                        <div class="text-muted mb-1"><span class="text-body">Сотрудник:</span>${row.employeeFioAdd}</div>
+                                                         <dl class="row">
+                                                            <dt class="col text-body">Дата:</dt><dd class="col-sm-9 text-muted">${row.dateAdd}</dd>
+                                                            <dt class="col text-body">Услуга:</dt><dd class="col-sm-9 text-muted">${row.serviceName}</dd>
+                                                            <dt class="col text-body">Поставщик:</dt><dd class="col-sm-9 text-muted">${row.providerName}</dd>
+                                                            <dt class="col text-body">Департамент:</dt><dd class="col-sm-9 text-muted">${departament}</dd>
+                                                            <dt class="col text-body">Сотрудник:</dt><dd class="col-sm-9 text-muted">${row.employeeFioAdd}</dd>
+                                                         </dl>
                                                 </div>
                                             </div>`;
-
-
-
-
                             return content;
                         }
                     },
