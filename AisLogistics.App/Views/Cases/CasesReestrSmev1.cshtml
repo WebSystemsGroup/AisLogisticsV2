@@ -241,10 +241,11 @@
                                 content += `<small class="text-muted">${row.employeeAdd.job}</small>`
                                 return content;
                             }
-                        }, 
+                        },
                         {
                             title: `Заявитель`,
                             name: 'customer',
+                            className: "case-number-column",
                             render: function (data, type, row) {
                                 let str = row.service.name.length > 90 ? row.service.name.slice(0, 90) + "..." : row.service.name
                                 let content = `<a href="javascript:void(0);" data-case-id="${row.caseId}" data-smev-id="${row.id}" id="caseNumber">${row.caseId}</a>`;
@@ -314,6 +315,8 @@
                     let th = e.currentTarget;
                     let td = $(th).find('td.case-number-column a');
                     let id = $(td).data('smev-id');
+
+                    console.log(th, td, id)
                     $.ajax({
                         url: '/SmevBase/GetSmevDetailsModal',
                         type: 'POST',
