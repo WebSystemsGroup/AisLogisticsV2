@@ -385,7 +385,7 @@ html:not([dir=rtl]) .select2-container--default .select2-selection--multiple .se
     box-shadow: 0 .25rem 1rem rgba(147,158,170,.45);
     background-clip: padding-box;
     border-color: transparent;
-    z-index: 1000
+    z-index: 1069;
 }
 
 .light-style .select2-container--default .select2-selection {

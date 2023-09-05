@@ -32,6 +32,21 @@ namespace AisLogistics.App.Controllers.Smev.RosReestr
             var response = SmevClient.RequestRosReestrEgrnObjectInfo(request);
             return SmevResponse(response);
         }
+
+        /// <summary>
+        /// Регистрация сделки об ограничении (обременении) права (регистрация договора участия в долевом строительстве и регистрация договора аренды)
+        /// </summary>
+        /// <param name="serviceId"></param>
+        /// <param name="smevId"></param>
+        /// <param name="request">428</param>
+        /// <returns></returns>
+        public async Task<ActionResult<string>> RequesDealsRegistrationRightRestriction(Guid serviceId, int smevId, GetDealsRegistrationRightRestrictionRequestData request)
+        {
+            request.DataServicesRequestSmevId = await _smevService.CreateNewSmevRequestAsync(serviceId, smevId, $"{request.StatementDetails.StatementType}");
+            var response = SmevClient.DealsRegistrationRightRestrictionQuery(request);
+            return SmevResponse(response);
+        }
+
         /// <summary>
         /// Запрос на предоставление сведений, содержащихся в ЕГРН, об объектах недвижимости
         /// </summary>
